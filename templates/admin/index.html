@@ -1,0 +1,23 @@
+    {% include "admin/header.html" %}
+    <main style="position:relative;margin-top:50px;min-width:60%" >
+       <div class="p-5 mb-4 bg-light rounded-3 ">
+        <div class="container-fluid py-5 " >
+          <h1 class="display-5 fw-bold">Administrador </h1>
+          {% if  'login' in session %}
+          <p class="col-md-8 fs-4">
+            Using a series of utilities, you can create this jumbotron, just
+            like the one in previous versions of Bootstrap. Check out the
+            examples below for how you can remix and restyle it to your liking.
+          </p>
+          <a name="" id="" class="btn btn-primary" href="admin/publicaciones" role="button">Adminstrar publicaciones</a>
+          {% else %}
+          <p class="col-md-8 fs-4">
+            No esta logeado
+          </p>
+          {% endif %}
+        </div>
+       </div>
+       
+    </main>
+    {% include "admin/footer.html"%}
+    

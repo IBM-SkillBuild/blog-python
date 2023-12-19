@@ -1,0 +1,4 @@
+proyectomrhouston@gmail.com
+Aprendiz.1968.clevercloud
+
+https://api.clever-cloud.com/v2/sessions/login

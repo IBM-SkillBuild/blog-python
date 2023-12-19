@@ -1,0 +1,119 @@
+{% include "admin/header.html" %}
+
+<main>
+  <div class="container margin-sup">
+    <div class="row">
+      <div class="col-md-5">
+        <div class="card text-white bg-primary mb-3">
+          <div class="card-header">
+            Datos del nuevo Post
+          </div>
+          <div class="card-body">
+            <form action="/admin/publicaciones/guardar" method="post" enctype="multipart/form-data">
+              <div class="mb-3">
+                <label for="name_libro" class="form-label">Nombre del Post</label>
+                <input type="text" class="form-control" name="name_post" id="name_post" placeholder="Ingresa nombre">
+              </div>
+              <div class="mb-3">
+                <label for="name_imagen_post" class="form-label">Imagen de la publicación</label>
+                <input type="file" class="form-control" name="name_imagen_post" id="name_imagen_post"
+                  placeholder="Ingresa archivo imagen">
+              </div>
+              <div class="mb-3">
+                <label for="html_publicacion" class="form-label">Plantilla html de la publicación</label>
+                <input type="file" class="form-control" name="html_publicacion" id="html_publicacion"
+                  placeholder="Ingresa Archivo html">
+              </div>
+              <div class="d-flex justify-content-center" style="margin-top:60px">
+                <button type="submit" class="btn btn-primary">
+                  Update Post
+                </button>
+              </div>
+
+            </form>
+          </div>
+          <div class="card-footer">
+
+          </div>
+        </div>
+
+
+      </div>
+
+
+      <div class="col-md-7">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12">
+
+              {% if publicaciones %}
+              <h2 class="text-center">
+                Tabla listado de publicaciones
+              </h2>
+              {% endif %}
+            </div>
+            <div id="no-table">
+              {% if publicaciones %}
+              <table BORDERCOLOR=black class="col-sm-12 table-bordered table-striped table-condensed cf">
+                <thead class="cf">
+                  <tr style="color:white">
+                    <th>id</th>
+                    <th>nombre</th>
+                    <th>imagen</th>
+                    <th>plantilla html</th>
+                    <th>acciones</th>
+                  </tr>
+                </thead>
+                <tbody>
+
+                  {% for post in publicaciones %}
+                  <tr>
+
+                    <td id="tabla-id" data-title="ID">{{post[0]}}</th>
+
+                    <td id="tabla-nombre" data-title="nombre">{{post[1]}}</th>
+                    <td class="tabla-imagen" data-title="imagen" style="overflow:hidden">
+
+                      <img class="zoom " src="/img/{{post[2]}}" class="img-fluid rounded-top" alt="imagen post" />
+
+
+
+                    <td id="tabla-descarga" data-title="url descarga">{{post[3]}}</th>
+                    <td data-title="acciones">
+                      <form action="/admin/publicaciones/borrar" method="post">
+                        <input style="display:none" value="{{post[0]}}" type="text" name="id_borrar" id="id_borrar">
+
+                        <button type="submit" class="btn btn-danger" style="min-width:140px;margin:10px">
+                          Borrar Post
+                        </button>
+
+                      </form>
+
+                      <form action="/admin/publicaciones/editar" method="post">
+                        <input style="display:none" value="{{post[0]}}" type="text" name="id_editar" id="id_editar">
+
+                        <button type="submit" class="btn btn-secondary" style="min-width:140px;margin:10px">
+                          Editar Post
+                        </button>
+
+                      </form>
+
+
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+              {% else %}
+              <img src="{{ url_for('static', filename='img/toxic.jpg' ) }}" class="img-fluid rounded-top" alt="" />
+
+              {% endif %}
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+</main>
+{% include "admin/footer.html"%}

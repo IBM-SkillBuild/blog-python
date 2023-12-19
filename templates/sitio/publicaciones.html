@@ -1,0 +1,44 @@
+{% include "sitio/header.html" %}
+    <main>
+   <div class="container margin-sup" >
+    
+      <div class="row" style="margin-bottom:150px">
+        {% for post in publicaciones%}
+         {% if  loop.length>1 %}
+        <div class="col-md-3" >
+         <div class="card"  style="height: 80vh">
+          <div class="embed-responsive embed-responsive-16by9">
+          <img class="card-img-top" src="/img/{{post[2]}}" alt="post" />
+        </div>
+          
+         
+
+          <div class="card-body" style="position: relative">
+            <h4 class="card-title">{{post[1]}}</h4>
+            <p class="card-text"><strong>Url de este post</strong> </p>
+            <p class="card-text">/publicaciones_portitulo/{{post[1]}}</p>
+            
+            <a name="" id="" class="btn btn-primary" style="position:absolute;bottom:10px;" onclick="publicacion('/post/{{post[5]}}')" role="button"  >Ver publicación</a>
+            
+          </div>
+         </div>
+       
+        </div>
+             {% else %}
+               <embed id="publicacion" src="/post/{{post[5]}}" style="width:100%; height:6000px" frameborder="0" ></embed>
+
+            {% endif %}
+          {% endfor %}
+        
+      </div>
+       <embed id="publicacion" style="display:none"src="" style="width:100%;height:6000px" frameborder="0" ></embed>
+
+  </div>
+    {% if not publicaciones %}
+    <h1 style="text-align:center; margin-top:60px">no existen publicaciones</h1>
+    {% endif %}
+       {% include "sitio/footer.html"%}
+    </main>
+ 
+    
+  

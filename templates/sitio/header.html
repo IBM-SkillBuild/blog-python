@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>El Blog de Edu</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    
+  <meta name="description" content="Flask, responsive Blog Edu">
+  <meta name="author" content="Eduardo Cabrera">
+  <meta name="HandheldFriendly" content="True">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta http-equiv="Expires" content="0">
+  <meta http-equiv="Last-Modified" content="0">
+  <meta http-equiv="Cache-Control" content="no-cache, mustrevalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="El Blog de Edu">
+  <meta name="twitter:description" content="Flask, responsive Blog Edu">
+  <meta name="twitter:creator" content="CabreraBlazquez">
+  <meta name="twitter:image" content="{{ url_for('static', filename='img/favicon-100x100.png') }}">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Flask-Edu Blog">
+  <meta property="og:description" content="Flask, responsive Blog Edu">
+  <meta property="og:image" content="{{ url_for('static', filename='img/favicon-100x100.png') }}" />
+    
+    <link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon.ico') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.min.css' ) }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css' ) }}">
+    
+  </head>
+
+   <body class="container" id="contenedor">
+     <header>
+      <!-- place navbar here -->
+      <nav class="navbar navbar-expand-lg bg-primary "  style=" border: solid 3px black" data-bs-theme="dark">
+        <ul class="nav navbar-nav  menu_navegador ">
+          <li class="nav-item">
+            <a class="nav-link active" href="/" aria-current="page"
+              >Home <span class="visually-hidden">(current)</span></a
+            >
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/about">About</a>
+          </li>
+           <li class="nav-item">
+            <a class="nav-link" href="/publicaciones">Publicaciones</a>
+          </li>
+           <li class="nav-item">
+            <a class="nav-link" id="owner" href="/admin">Zona Owner</a>
+          </li>
+        </ul>
+      </nav>
+      
+    </header>

@@ -1,0 +1,27 @@
+#####################################################################
+############### rellena y renombra este archivo a config.py #########
+
+# configuracion desarrollo
+class ConfigDev():
+  DEBUG=True
+  TESTING=True
+  SECRET_KEY="" # palabra secreta
+  MYSQL_HOST="localhost"
+  MYSQL_PORT=3306
+  MYSQL_USER = ""
+  MYSQL_PASSWORD = ""
+  MYSQL_DB = ""
+  
+# configuracion produccion
+class ConfigPro():
+  DEBUG = False
+  TESTING = False
+  SECRET_KEY=""  # palabra secreta
+
+  MYSQL_HOST=""
+  MYSQL_PORT=
+  MYSQL_USER = ""
+  MYSQL_PASSWORD = ""
+  MYSQL_DB = ""
+  
+  

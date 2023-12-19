@@ -1,0 +1,24 @@
+{% include "sitio/header.html" %}
+    <main>
+     <div class="p-5 mb-4 bg-light rounded-3" style="position:relative;margin-top:50px;min-width:60%">
+      <div class="container-fluid py-5">
+        <h1 class="display-5 fw-bold">Sobre mi</h1>
+        <p class="col-md-8 fs-4">
+          Using a series of utilities, you can create this jumbotron, just
+          like the one in previous versions of Bootstrap. Check out the
+          examples below for how you can remix and restyle it to your liking.
+        </p>
+        <a class="btn btn-primary btn-lg" type="button" href="/ultima_publicacion">
+         Ver última publicación
+        </a>
+       
+          <img id="foto_about" width=120 src="{{url_for('static', filename='/img/eduardo.jpg')}}" alt="Eduardo Cabrera" />
+         
+        
+        
+      </div>
+     </div>
+    </main>
+ {% if valores.footer == True %}
+       {% include "sitio/footer.html"%}
+    {% endif %}

@@ -1,0 +1,9 @@
+tabla publicaciones
+
+00 id
+01 nombre
+02 imgen
+03 descripcion
+04 categoria
+05 archivo
+06 habilitado
