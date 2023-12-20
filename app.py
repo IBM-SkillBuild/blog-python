@@ -205,7 +205,7 @@ def admin_log_out():
   
 
 # inicio app derarrollo
-#if __name__=="__main__":
+if __name__=="__main__":
   # app.run(debug=True) NO NECESARIO 
   # -- SE LEE DESDE ARCHIVO CONFIG-- (cambiar para produccion a otra clase)
- # app.run()
+  app.run()
