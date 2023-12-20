@@ -9,13 +9,14 @@ from flask_mysqldb import MySQL
 from flask import send_from_directory
 from datetime import datetime
 
+
 # instancias
 app=Flask(__name__)
 mis_valores=Valores()
 
 #configurar parametros App y conexion BBDD en desarrollo 
 # (para produccion hay que cambiar a otra clase de archivo config)
-app.config.from_object("config.ConfigDevClever")
+app.config.from_object("config.ConfigPro")
 mysql = MySQL(app)
 
 
