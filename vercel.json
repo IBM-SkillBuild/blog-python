@@ -1,14 +1,15 @@
 {
+  "version": 2,
   "builds": [
     {
-      "src": "blog-python/app.py",
+      "src": "./app.py",
       "use": "@vercel/python"
     }
   ],
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "blog-python/app.py"
+      "dest": "/"
     }
   ]
 }
