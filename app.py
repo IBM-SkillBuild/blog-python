@@ -6,6 +6,7 @@ from flask import Flask
 from flask import render_template,redirect,request,session
 from valores import Valores
 from flask_mysqldb import MySQL
+import MySQLdb
 import pymysql
 from flask import send_from_directory
 from datetime import datetime
@@ -20,7 +21,10 @@ mis_valores=Valores()
 app.config.from_object("config.ConfigPro")
 mysql = MySQL(app)
 
-
+db = MySQLdb.connect(host=mis_valores.MYSQL_HOST,    # your host, usually localhost
+                     user=mis_valores.MYSQL_USER,         # your username
+                     passwd=mis_valores.MYSQL_PASSWORD,  # your password
+                     db=mis_valores.MYSQL_DB)        # name of the data bas
 def connection():
     s = mis_valores.MYSQL_HOST
     u = mis_valores.MYSQL_USER
@@ -33,16 +37,21 @@ def connection():
 #rutas
 @app.route("/")
 def index():
- 
+  try:
+      cursor = db.cursor()
+      cursor.execute("SELECT * from publicaciones WHERE id=1")
+      errordb="(buena conexion)"
+  except:
+      errordb="(no se conecta)"   
   mis_valores.footer=True
-  return render_template("sitio/index.html",valores=mis_valores)
+  return render_template("sitio/index.html",valores=mis_valores,mensaje=errordb)
 
 
 @app.route("/publicaciones")
 def publicaciones():
    mis_valores.footer=False
    conn = connection()
-   cursor = conn.cursor()
+   cursor=db.cursor()
    sql = "SELECT * FROM `publicaciones`ORDER BY  fecha DESC"
    cursor.execute(sql)
    publicaciones=cursor.fetchall()
@@ -53,7 +62,7 @@ def publicaciones():
 def ultima_publicacion():
    mis_valores.footer=False
    conn = connection()
-   cursor = conn.cursor()
+   cursor = db.cursor()
    sql = "SELECT * FROM `publicaciones` ORDER BY fecha DESC LIMIT 1 "
    cursor.execute(sql)
    publicaciones=cursor.fetchall()
@@ -66,7 +75,7 @@ def ultima_publicacion():
 def publicaciones_portitulo(titulo):
    mis_valores.footer = False
    conn = connection()
-   cursor = conn.cursor()
+   cursor = db.cursor()
    cursor.execute("SELECT * FROM `publicaciones` WHERE nombre=%s", (titulo,))
    publicaciones = cursor.fetchall()
    cursor.close()
@@ -81,15 +90,20 @@ def about():
 
 @app.route("/admin")
 def admin_index():
-   
-   return render_template("admin/index.html")
+   try:
+      cursor = db.cursor()
+      cursor.execute("SELECT * from publicaciones WHERE id=1")
+      errordb="(buena conexion)"
+   except:
+      errordb="(no se conecta)"   
+   return render_template("admin/index.html",mensaje=errordb)
  
 
 @app.route("/admin/publicaciones")
 def admin_publicaciones():
   if session['usuario']=="Admin":
       conn = connection()
-      cursor = conn.cursor()
+      cursor = db.cursor()
       sql = "SELECT * FROM `publicaciones` ORDER BY fecha DESC"
       cursor.execute(sql)
       publicaciones=cursor.fetchall()
@@ -122,7 +136,7 @@ def admin_guardar_publicaciones():
     categoria=""
     habilitado=True   
     conn = connection()
-    cursor = conn.cursor()
+    cursor = db.cursor()
     sql = "INSERT INTO `publicaciones` (`id`, `nombre`, `descripcion`, `categoria`,`imagen`,`archivo`,`fecha`,`habilitado`) VALUES (NULL, %s,%s,%s,%s,%s,%s,%s);"
     datos = (nombre, descripcion,categoria,nombre_imagen_nuevo, html_publicacion_nuevo,fecha,habilitado)
     cursor.execute(sql,datos)
@@ -153,7 +167,7 @@ def admin_update_publicaciones():
     categoria=""
     habilitado=True   
     conn = connection()
-    cursor = conn.cursor()
+    cursor = db.cursor()
     sql = "UPDATE `publicaciones` SET  `nombre`=%s, `descripcion`=%s, `categoria`=%s,`imagen`=%s,`archivo`=%s,`fecha`=%s,`habilitado`=%s where id=%s"
     datos = (nombre, descripcion,categoria,nombre_imagen_nuevo, html_publicacion_nuevo,fecha,habilitado,id_post)
     cursor.execute(sql,datos)
@@ -167,7 +181,7 @@ def admin_borrar_publicaciones():
    if session['usuario']=="Admin":
       id_borrar=request.form['id_borrar']
       conn = connection()
-      cursor = conn.cursor()
+      cursor = db.cursor()
       cursor.execute("DELETE from publicaciones WHERE id=%s",(id_borrar,))
       conn.commit()
       cursor.close()
@@ -178,7 +192,7 @@ def admin_borrar_publicaciones():
 def editar():
      if session['usuario']=="Admin":
         id_editar=request.form['id_editar']
-        cursor = mysql.connection.cursor()
+        cursor = db.cursor()
         cursor.execute("SELECT * from publicaciones WHERE id=%s",(id_editar,))
         publicaciones=cursor.fetchall()
         cursor.close()
