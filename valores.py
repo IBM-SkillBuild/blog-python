@@ -2,11 +2,10 @@
 
 class Valores():
   footer=False
-  MYSQL_HOST = "bosodwapbqiuwcmr4zq3-mysql.services.clever-cloud.com"
+  MYSQL_HOST = "db4free.net"
   MYSQL_PORT = 3306
-  MYSQL_USER = "uep1zkomcvvfxz4n"
-  MYSQL_PASSWORD = "qbt3U3B4zbHfM7H1cTlK"
-  MYSQL_DB = "bosodwapbqiuwcmr4zq3"
-  
+  MYSQL_USER = "blog_edu_user"
+  MYSQL_PASSWORD = "1.6180339"
+  MYSQL_DB = "blog_edu"
 
 

@@ -27,13 +27,7 @@ db = MySQLdb.connect(host=mis_valores.MYSQL_HOST,    # your host, usually localh
                      user=mis_valores.MYSQL_USER,         # your username
                      passwd=mis_valores.MYSQL_PASSWORD,  # your password
                      db=mis_valores.MYSQL_DB)        # name of the data bas
-def connection():
-    s = mis_valores.MYSQL_HOST
-    u = mis_valores.MYSQL_USER
-    p = mis_valores.MYSQL_PASSWORD
-    d= mis_valores.MYSQL_DB
-    conn = pymysql.connect(host=s, user=u, password=p, database=d)
-    return conn
+
 
 
 #rutas
@@ -58,7 +52,7 @@ def publicaciones():
    except:
       errordb="(no se conecta)"  
    mis_valores.footer=False
-   conn = connection()
+  
    cursor=db.cursor()
    sql = "SELECT * FROM `publicaciones`ORDER BY  fecha DESC"
    cursor.execute(sql)
@@ -75,7 +69,7 @@ def ultima_publicacion():
    except:
       errordb="(no se conecta)"  
    mis_valores.footer=False
-   conn = connection()
+
    cursor = db.cursor()
    sql = "SELECT * FROM `publicaciones` ORDER BY fecha DESC LIMIT 1 "
    cursor.execute(sql)
@@ -94,7 +88,7 @@ def publicaciones_portitulo(titulo):
       errordb="(buena conexion)"
    except:
       errordb="(no se conecta)"  
-   conn = connection()
+   
    cursor = db.cursor()
    cursor.execute("SELECT * FROM `publicaciones` WHERE nombre=%s", (titulo,))
    publicaciones = cursor.fetchall()
@@ -128,7 +122,7 @@ def admin_publicaciones():
         errordb="(buena conexion)"
       except:
          errordb="(no se conecta)"  
-      conn = connection()
+      
       cursor = db.cursor()
       sql = "SELECT * FROM `publicaciones` ORDER BY fecha DESC"
       cursor.execute(sql)
@@ -171,12 +165,12 @@ def admin_guardar_publicaciones():
       errordb="(buena conexion)"
     except:
       errordb="(no se conecta)"  
-    conn = connection()
+    
     cursor = db.cursor()
     sql = "INSERT INTO `publicaciones` (`id`, `nombre`, `descripcion`, `categoria`,`imagen`,`archivo`,`fecha`,`habilitado`) VALUES (NULL, %s,%s,%s,%s,%s,%s,%s);"
     datos = (nombre, descripcion,categoria,nombre_imagen_nuevo, html_publicacion_nuevo,fecha,habilitado)
     cursor.execute(sql,datos)
-    conn.commit()
+    db.commit()
     cursor.close()
     return redirect("/admin/publicaciones")
   return redirect("/login")
@@ -210,12 +204,12 @@ def admin_update_publicaciones():
       errordb="(buena conexion)"
     except:
       errordb="(no se conecta)"  
-    conn = connection()
+    
     cursor = db.cursor()
     sql = "UPDATE `publicaciones` SET  `nombre`=%s, `descripcion`=%s, `categoria`=%s,`imagen`=%s,`archivo`=%s,`fecha`=%s,`habilitado`=%s where id=%s"
     datos = (nombre, descripcion,categoria,nombre_imagen_nuevo, html_publicacion_nuevo,fecha,habilitado,id_post)
     cursor.execute(sql,datos)
-    conn.commit()
+    db.commit()
     cursor.close()
     return redirect("/admin/publicaciones")
   return redirect("/login")
@@ -230,10 +224,10 @@ def admin_borrar_publicaciones():
         errordb="(buena conexion)"
       except:
        errordb="(no se conecta)"  
-      conn = connection()
+      
       cursor = db.cursor()
       cursor.execute("DELETE from publicaciones WHERE id=%s",(id_borrar,))
-      conn.commit()
+      db.commit()
       cursor.close()
       return redirect("/admin/publicaciones")
    return redirect("/login")

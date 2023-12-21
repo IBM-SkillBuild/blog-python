@@ -6,4 +6,5 @@ tabla publicaciones
 03 descripcion
 04 categoria
 05 archivo
-06 habilitado
+06 fecha
+07 habilitado
