@@ -1,4 +1,5 @@
-lazyload();
+
+
 
 function publicacion(source) {
   $('#publicacion').attr('src', source);
