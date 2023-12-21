@@ -250,6 +250,12 @@ def ver_imagen_libro(imagen):
 
 @app.route("/post/<archivo>")
 def ver_post_html(archivo):
+  try:
+      cursor = db.cursor()
+      cursor.execute("SELECT * from publicaciones WHERE id=1")
+      errordb="(buena conexion)"
+  except:
+      errordb="(no se conecta)" 
   return send_from_directory(os.path.join("templates/sitio/posts/"), archivo)
 
   
