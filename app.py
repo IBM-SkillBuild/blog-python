@@ -20,6 +20,8 @@ mis_valores=Valores()
 # (para produccion hay que cambiar a otra clase de archivo config)
 app.config.from_object("config.ConfigPro")
 mysql = MySQL(app)
+basedir = os.path.abspath(os.path.dirname(__file__))
+
 
 db = MySQLdb.connect(host=mis_valores.MYSQL_HOST,    # your host, usually localhost
                      user=mis_valores.MYSQL_USER,         # your username
@@ -150,10 +152,16 @@ def admin_guardar_publicaciones():
     tiempo=datetime.now()
     hora=tiempo.strftime("%Y%H%M%S")
     fecha=tiempo.strftime('%Y-%m-%d %H:%M:%S')
-    nombre_imagen_nuevo=hora+"_"+nombre_imagen.filename
-    nombre_imagen.save("templates/sitio/img/"+ nombre_imagen_nuevo)
-    html_publicacion_nuevo = hora+"_"+ html_publicacion.filename
-    html_publicacion.save("templates/sitio/posts/" + html_publicacion_nuevo)
+    if nombre_imagen.filename !="":
+      nombre_imagen_nuevo=hora+"_"+nombre_imagen.filename
+      # nombre_imagen.save("templates/sitio/img/"+ nombre_imagen_nuevo)
+      nombre_imagen.save(os.path.join(
+          basedir, app.config['UPLOAD_FOLDER'], nombre_imagen_nuevo))
+    if html_publicacion.filename != "":
+       html_publicacion_nuevo = hora+"_"+ html_publicacion.filename
+       #html_publicacion.save("templates/sitio/posts/" + html_publicacion_nuevo)
+       html_publicacion.save(os.path.join(
+          basedir, app.config['UPLOAD_POST'], html_publicacion_nuevo))
     descripcion=""
     categoria=""
     habilitado=True   
@@ -243,9 +251,11 @@ def editar():
   
 @app.route("/img/<imagen>")
 def ver_imagen_libro(imagen):
-  return send_from_directory(os.path.join("templates/sitio/img/"),imagen)
+  return send_from_directory( app.config['UPLOAD_FOLDER'], imagen)
 
 
+
+  
 @app.route("/post/<archivo>")
 def ver_post_html(archivo):
   try:
@@ -254,8 +264,9 @@ def ver_post_html(archivo):
       errordb="(buena conexion)"
   except:
       errordb="(no se conecta)" 
-  return send_from_directory(os.path.join("templates/sitio/posts/"), archivo)
-
+  if archivo !="":
+        return send_from_directory( app.config['UPLOAD_POST'], archivo)
+  return False
   
 @app.route("/login")
 def admin_login():
