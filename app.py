@@ -195,10 +195,12 @@ def admin_update_publicaciones():
     fecha=tiempo.strftime('%Y-%m-%d %H:%M:%S')
     if nombre_imagen.filename !="":
       nombre_imagen_nuevo=hora+"_"+nombre_imagen.filename
-      nombre_imagen.save("templates/sitio/img/"+ nombre_imagen_nuevo)
+      nombre_imagen.save(os.path.join(
+          basedir, app.config['UPLOAD_FOLDER'], nombre_imagen_nuevo))
     if html_publicacion.filename != "":
        html_publicacion_nuevo = hora+"_"+ html_publicacion.filename
-       html_publicacion.save("templates/sitio/posts/" + html_publicacion_nuevo)
+       html_publicacion.save(os.path.join(
+           basedir, app.config['UPLOAD_POST'], html_publicacion_nuevo))
     descripcion=""
     categoria=""
     habilitado=True   
