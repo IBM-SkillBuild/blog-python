@@ -150,12 +150,10 @@ def admin_guardar_publicaciones():
     tiempo=datetime.now()
     hora=tiempo.strftime("%Y%H%M%S")
     fecha=tiempo.strftime('%Y-%m-%d %H:%M:%S')
-    if nombre_imagen.filename !="":
-      nombre_imagen_nuevo=hora+"_"+nombre_imagen.filename
-      nombre_imagen.save("templates/sitio/img/"+ nombre_imagen_nuevo)
-    if html_publicacion.filename != "":
-       html_publicacion_nuevo = hora+"_"+ html_publicacion.filename
-       html_publicacion.save("templates/sitio/posts/" + html_publicacion_nuevo)
+    nombre_imagen_nuevo=hora+"_"+nombre_imagen.filename
+    nombre_imagen.save("templates/sitio/img/"+ nombre_imagen_nuevo)
+    html_publicacion_nuevo = hora+"_"+ html_publicacion.filename
+    html_publicacion.save("templates/sitio/posts/" + html_publicacion_nuevo)
     descripcion=""
     categoria=""
     habilitado=True   
