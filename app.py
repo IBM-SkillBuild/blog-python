@@ -49,6 +49,12 @@ def index():
 
 @app.route("/publicaciones")
 def publicaciones():
+   try:
+      cursor = db.cursor()
+      cursor.execute("SELECT * from publicaciones WHERE id=1")
+      errordb="(buena conexion)"
+   except:
+      errordb="(no se conecta)"  
    mis_valores.footer=False
    conn = connection()
    cursor=db.cursor()
@@ -60,6 +66,12 @@ def publicaciones():
 
 @app.route("/ultima_publicacion")
 def ultima_publicacion():
+   try:
+      cursor = db.cursor()
+      cursor.execute("SELECT * from publicaciones WHERE id=1")
+      errordb="(buena conexion)"
+   except:
+      errordb="(no se conecta)"  
    mis_valores.footer=False
    conn = connection()
    cursor = db.cursor()
@@ -74,6 +86,12 @@ def ultima_publicacion():
 @app.route("/publicaciones_portitulo/<titulo>")
 def publicaciones_portitulo(titulo):
    mis_valores.footer = False
+   try:
+      cursor = db.cursor()
+      cursor.execute("SELECT * from publicaciones WHERE id=1")
+      errordb="(buena conexion)"
+   except:
+      errordb="(no se conecta)"  
    conn = connection()
    cursor = db.cursor()
    cursor.execute("SELECT * FROM `publicaciones` WHERE nombre=%s", (titulo,))
@@ -102,6 +120,12 @@ def admin_index():
 @app.route("/admin/publicaciones")
 def admin_publicaciones():
   if session['usuario']=="Admin":
+      try:
+        cursor = db.cursor()
+        cursor.execute("SELECT * from publicaciones WHERE id=1")
+        errordb="(buena conexion)"
+      except:
+         errordb="(no se conecta)"  
       conn = connection()
       cursor = db.cursor()
       sql = "SELECT * FROM `publicaciones` ORDER BY fecha DESC"
@@ -135,6 +159,12 @@ def admin_guardar_publicaciones():
     descripcion=""
     categoria=""
     habilitado=True   
+    try:
+      cursor = db.cursor()
+      cursor.execute("SELECT * from publicaciones WHERE id=1")
+      errordb="(buena conexion)"
+    except:
+      errordb="(no se conecta)"  
     conn = connection()
     cursor = db.cursor()
     sql = "INSERT INTO `publicaciones` (`id`, `nombre`, `descripcion`, `categoria`,`imagen`,`archivo`,`fecha`,`habilitado`) VALUES (NULL, %s,%s,%s,%s,%s,%s,%s);"
@@ -166,6 +196,12 @@ def admin_update_publicaciones():
     descripcion=""
     categoria=""
     habilitado=True   
+    try:
+      cursor = db.cursor()
+      cursor.execute("SELECT * from publicaciones WHERE id=1")
+      errordb="(buena conexion)"
+    except:
+      errordb="(no se conecta)"  
     conn = connection()
     cursor = db.cursor()
     sql = "UPDATE `publicaciones` SET  `nombre`=%s, `descripcion`=%s, `categoria`=%s,`imagen`=%s,`archivo`=%s,`fecha`=%s,`habilitado`=%s where id=%s"
@@ -180,6 +216,12 @@ def admin_update_publicaciones():
 def admin_borrar_publicaciones():
    if session['usuario']=="Admin":
       id_borrar=request.form['id_borrar']
+      try:
+        cursor = db.cursor()
+        cursor.execute("SELECT * from publicaciones WHERE id=1")
+        errordb="(buena conexion)"
+      except:
+       errordb="(no se conecta)"  
       conn = connection()
       cursor = db.cursor()
       cursor.execute("DELETE from publicaciones WHERE id=%s",(id_borrar,))
