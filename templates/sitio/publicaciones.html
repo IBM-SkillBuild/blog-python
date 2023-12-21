@@ -6,7 +6,7 @@
         {% for post in publicaciones%}
          {% if  loop.length>1 %}
         <div class="col-md-3" >
-         <div class="card" onclick="publicacion('/post/{{post[5]}}')" style="height: 60vh;cursor:pointer">
+         <div class="card"  style="height: 60vh;">
         
           
          
@@ -14,7 +14,7 @@
           <div class="card-body" style="position: relative">
             <h4 class="card-title">{{post[1]}}</h4>
             <p class="card-text"><strong>Url de este post</strong> </p>
-            <p class="card-text">/publicaciones_portitulo/{{post[1]}}</p>
+            <p class="card-text" style="color:blue">https://blog-edu-fqhi.onrender.com/publicaciones_portitulo/{{post[1]}}</p>
               <div class="embed-responsive embed-responsive-16by9">
           <img  class="card-img-top" src="/img/{{post[2]}}" alt="post" />
         </div>
@@ -26,7 +26,7 @@
        
         </div>
              {% else %}
-               <embed id="publicacion" src="/post/{{post[5]}}" style="width:100%; height:6000px" frameborder="0" ></embed>
+               <embed id="publicacion"  onclick="publicacion('/post/{{post[5]}}')" src="/post/{{post[5]}}" style="width:100%; height:6000px" frameborder="0" ></embed>
 
             {% endif %}
           {% endfor %}
