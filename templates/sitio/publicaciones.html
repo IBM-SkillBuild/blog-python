@@ -13,8 +13,8 @@
 
           <div class="card-body" style="position: relative">
             <h4 class="card-title">{{post[1]}}</h4>
-            <p class="card-text"><strong>Url de este post</strong> </p>
-            <p class="card-text" style="color:blue">https://blog-edu-fqhi.onrender.com/publicaciones_portitulo/{{post[1]}}</p>
+            <p id="{{valores.URL}}/publicaciones_portitulo/{{post[1]}}" class="card-text url-clip"><strong>Copy Url de este post</strong> </p>
+            <p id="url-clip"class="card-text" style="color:blue">{{valores.URL}}/publicaciones_portitulo/{{post[1]}}</p>
               <div class="embed-responsive embed-responsive-16by9">
           <img onclick="publicacion('/post/{{post[5]}}')" class="card-img-top" src="/img/{{post[2]}}" alt="post" />
         </div>

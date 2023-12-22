@@ -1,5 +1,18 @@
 
-
+$(document).ready(function() {
+  $("p").click(function(event) {
+    let text = document.getElementById('url-clip').innerHTML;
+    const copyContent = async () => {
+      try {
+        await navigator.clipboard.writeText(text);
+        console.log('Content copied to clipboard');
+      } catch (err) {
+        console.error('Failed to copy: ', err);
+      }
+    }
+     
+  });
+});
 
 function publicacion(source) {
   $('#publicacion').attr('src', source);

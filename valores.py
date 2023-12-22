@@ -7,5 +7,6 @@ class Valores():
   MYSQL_USER = "blog_edu_user"
   MYSQL_PASSWORD = "1.6180339"
   MYSQL_DB = "blog_edu"
+  URL="https://blog-edu-tech.koyeb.app"
 
 
