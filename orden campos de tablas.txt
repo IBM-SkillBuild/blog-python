@@ -2,7 +2,7 @@ tabla publicaciones
 
 00 id
 01 nombre
-02 imgen
+02 imagen
 03 descripcion
 04 categoria
 05 archivo
