@@ -10,7 +10,7 @@
     border-radius: 30px;
   }
   .margin-sup{
-  margin-top:300px;
+  margin-top:50px;
 }
  #owner{
   display: none;
@@ -134,7 +134,7 @@ z-index:9999;
 
 
 .margin-sup{
-  margin-top: 100px;
+  margin-top: 20px;
  
 }
 
@@ -146,4 +146,9 @@ z-index:9999;
   
 }
 
-
+.caard-body{
+  width: 230px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
