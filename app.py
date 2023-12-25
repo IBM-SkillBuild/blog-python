@@ -50,24 +50,14 @@ cursor = db.cursor()
 #rutas
 @app.route("/")
 def index():
-  try:
-      cursor = db.cursor()
-      cursor.execute("SELECT * from publicaciones WHERE id=1")
-      errordb="(buena conexion)"
-  except:
-      errordb="(no se conecta)"   
+ 
   mis_valores.footer=True
-  return render_template("sitio/index.html",valores=mis_valores,mensaje=errordb)
+  return render_template("sitio/index.html",valores=mis_valores)
 
 
 @app.route("/publicaciones")
 def publicaciones():
-   try:
-      cursor = db.cursor()
-      cursor.execute("SELECT * from publicaciones WHERE id=1")
-      errordb="(buena conexion)"
-   except:
-      errordb="(no se conecta)"  
+  
    mis_valores.footer=False
   
    cursor=db.cursor()
@@ -79,12 +69,7 @@ def publicaciones():
 
 @app.route("/ultima_publicacion")
 def ultima_publicacion():
-   try:
-      cursor = db.cursor()
-      cursor.execute("SELECT * from publicaciones WHERE id=1")
-      errordb="(buena conexion)"
-   except:
-      errordb="(no se conecta)"  
+ 
    mis_valores.footer=False
 
    cursor = db.cursor()
@@ -99,12 +84,7 @@ def ultima_publicacion():
 @app.route("/publicaciones_portitulo/<titulo>")
 def publicaciones_portitulo(titulo):
    mis_valores.footer = False
-   try:
-      cursor = db.cursor()
-      cursor.execute("SELECT * from publicaciones WHERE id=1")
-      errordb="(buena conexion)"
-   except:
-      errordb="(no se conecta)"  
+  
    
    cursor = db.cursor()
    cursor.execute("SELECT * FROM publicaciones WHERE nombre=%s", (titulo,))
@@ -121,24 +101,14 @@ def about():
 
 @app.route("/admin")
 def admin_index():
-   try:
-      cursor = db.cursor()
-      cursor.execute("SELECT * from publicaciones WHERE id=1")
-      errordb="(buena conexion)"
-   except:
-      errordb="(no se conecta)"   
-   return render_template("admin/index.html",mensaje=errordb)
+   
+   return render_template("admin/index.html")
  
 
 @app.route("/admin/publicaciones")
 def admin_publicaciones():
   if session['usuario']=="Admin":
-      try:
-        cursor = db.cursor()
-        cursor.execute("SELECT * from publicaciones WHERE id=1")
-        errordb="(buena conexion)"
-      except:
-         errordb="(no se conecta)"  
+     
       
       cursor = db.cursor()
       sql = "SELECT * FROM publicaciones ORDER BY fecha DESC"
@@ -215,12 +185,7 @@ def admin_update_publicaciones():
     descripcion=""
     categoria=""
     habilitado=True   
-    try:
-      cursor = db.cursor()
-      cursor.execute("SELECT * from publicaciones WHERE id=1")
-      errordb="(buena conexion)"
-    except:
-      errordb="(no se conecta)"  
+    
     
     cursor = db.cursor()
     sql = "UPDATE publicaciones SET  nombre=%s, descripcion=%s, categoria=%s,imagen=%s,archivo=%s,fecha=%s,habilitado=%s where id=%s"
@@ -235,12 +200,7 @@ def admin_update_publicaciones():
 def admin_borrar_publicaciones():
    if session['usuario']=="Admin":
       id_borrar=request.form['id_borrar']
-      try:
-        cursor = db.cursor()
-        cursor.execute("SELECT * from publicaciones WHERE id=1")
-        errordb="(buena conexion)"
-      except:
-       errordb="(no se conecta)"  
+      
       
       cursor = db.cursor()
       cursor.execute("DELETE from publicaciones WHERE id=%s",(id_borrar,))
@@ -271,12 +231,7 @@ def ver_imagen_libro(imagen):
   
 @app.route("/post/<archivo>")
 def ver_post_html(archivo):
-  try:
-      cursor = db.cursor()
-      cursor.execute("SELECT * from publicaciones WHERE id=1")
-      errordb="(buena conexion)"
-  except:
-      errordb="(no se conecta)" 
+  
   if archivo !="":
         return send_from_directory( app.config['UPLOAD_POST'], archivo)
   return False
