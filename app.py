@@ -7,6 +7,7 @@ from flask import render_template,redirect,request,session
 from valores import Valores
 from flask_mysqldb import MySQL
 import MySQLdb
+import psycopg2
 import pymysql
 from flask import send_from_directory
 from datetime import datetime
@@ -22,12 +23,28 @@ app.config.from_object("config.ConfigPro")
 mysql = MySQL(app)
 basedir = os.path.abspath(os.path.dirname(__file__))
 
+db = psycopg2.connect(
+        host=mis_valores.HOST,
+        database=mis_valores.DB,
+        user=mis_valores.USER,
+        password=mis_valores.PASSWORD,
+        sslmode= 'require')
 
-db = MySQLdb.connect(host=mis_valores.MYSQL_HOST,    # your host, usually localhost
-                     user=mis_valores.MYSQL_USER,         # your username
-                     passwd=mis_valores.MYSQL_PASSWORD,  # your password
-                     db=mis_valores.MYSQL_DB)        # name of the data bas
+cursor = db.cursor()
 
+
+#cursor.execute("""DROP TABLE IF EXISTS publicaciones   """)
+
+#cursor.execute("""CREATE TABLE IF NOT EXISTS publicaciones(
+          #  id    SERIAL PRIMARY KEY,
+          #  nombre varchar (250),
+          #  imagen varchar (250) ,
+          #  descripcion varchar (250) ,
+          #  categoria varchar (250) ,
+          #  archivo varchar (250) ,
+          #  fecha date ,
+         #   habilitado boolean);
+          #  """)
 
 
 #rutas
@@ -54,7 +71,7 @@ def publicaciones():
    mis_valores.footer=False
   
    cursor=db.cursor()
-   sql = "SELECT * FROM `publicaciones`ORDER BY  fecha DESC"
+   sql = "SELECT * FROM publicaciones ORDER BY  fecha DESC"
    cursor.execute(sql)
    publicaciones=cursor.fetchall()
    cursor.close()
@@ -71,7 +88,7 @@ def ultima_publicacion():
    mis_valores.footer=False
 
    cursor = db.cursor()
-   sql = "SELECT * FROM `publicaciones` ORDER BY fecha DESC LIMIT 1 "
+   sql = "SELECT * FROM publicaciones ORDER BY fecha DESC LIMIT 1 "
    cursor.execute(sql)
    publicaciones=cursor.fetchall()
    cursor.close()
@@ -90,7 +107,7 @@ def publicaciones_portitulo(titulo):
       errordb="(no se conecta)"  
    
    cursor = db.cursor()
-   cursor.execute("SELECT * FROM `publicaciones` WHERE nombre=%s", (titulo,))
+   cursor.execute("SELECT * FROM publicaciones WHERE nombre=%s", (titulo,))
    publicaciones = cursor.fetchall()
    cursor.close()
    return render_template("sitio/publicaciones.html", valores=mis_valores, publicaciones=publicaciones)
@@ -124,7 +141,7 @@ def admin_publicaciones():
          errordb="(no se conecta)"  
       
       cursor = db.cursor()
-      sql = "SELECT * FROM `publicaciones` ORDER BY fecha DESC"
+      sql = "SELECT * FROM publicaciones ORDER BY fecha DESC"
       cursor.execute(sql)
       publicaciones=cursor.fetchall()
       cursor.close()
@@ -167,7 +184,7 @@ def admin_guardar_publicaciones():
       errordb="(no se conecta)"  
     
     cursor = db.cursor()
-    sql = "INSERT INTO `publicaciones` (`id`, `nombre`, `descripcion`, `categoria`,`imagen`,`archivo`,`fecha`,`habilitado`) VALUES (NULL, %s,%s,%s,%s,%s,%s,%s);"
+    sql = "INSERT INTO publicaciones(nombre, descripcion, categoria,imagen,archivo,fecha,habilitado) VALUES ( %s,%s,%s,%s,%s,%s,%s);"
     datos = (nombre, descripcion,categoria,nombre_imagen_nuevo, html_publicacion_nuevo,fecha,habilitado)
     cursor.execute(sql,datos)
     db.commit()
@@ -206,7 +223,7 @@ def admin_update_publicaciones():
       errordb="(no se conecta)"  
     
     cursor = db.cursor()
-    sql = "UPDATE `publicaciones` SET  `nombre`=%s, `descripcion`=%s, `categoria`=%s,`imagen`=%s,`archivo`=%s,`fecha`=%s,`habilitado`=%s where id=%s"
+    sql = "UPDATE publicaciones SET  nombre=%s, descripcion=%s, categoria=%s,imagen=%s,archivo=%s,fecha=%s,habilitado=%s where id=%s"
     datos = (nombre, descripcion,categoria,nombre_imagen_nuevo, html_publicacion_nuevo,fecha,habilitado,id_post)
     cursor.execute(sql,datos)
     db.commit()

@@ -8,11 +8,11 @@ class Valores():
   #MYSQL_PASSWORD = "1.6180339"
   #MYSQL_DB = "blog_edu"
   
-  MYSQL_HOST = "sql8.freemysqlhosting.net"
-  MYSQL_PORT = 3306
-  MYSQL_USER = "sql8672421"
-  MYSQL_PASSWORD = "q7QAai4Eze"
-  MYSQL_DB = "sql8672421"
+  HOST = "ep-noisy-silence-21789047.eu-central-1.aws.neon.tech"
+  PORT = 3306
+  USER = "koyeb-adm"
+  PASSWORD = "RIghWyKm4Tt5"
+  DB = "koyebdb"
   URL="https://blog-edu-tech.koyeb.app"
 
-
+ 

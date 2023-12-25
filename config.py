@@ -11,6 +11,7 @@ class ConfigDev():
   MYSQL_PASSWORD = "1.6180339"
   MYSQL_DB = "blog_edu"
   
+  
 # con BBDD Prueba
 class ConfigDevClever():
   DEBUG=True
