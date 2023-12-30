@@ -10,7 +10,9 @@ import MySQLdb
 import psycopg2
 import pymysql
 from flask import send_from_directory
+from firebase import firebase
 from datetime import datetime
+import requests
 
 
 # instancias
@@ -22,6 +24,13 @@ mis_valores=Valores()
 app.config.from_object("config.ConfigPro")
 mysql = MySQL(app)
 basedir = os.path.abspath(os.path.dirname(__file__))
+firebase=firebase.FirebaseApplication("https://eduardo-cabrera.firebaseio.com/",None)
+#recibido=firebase.delete("/datos",None)
+#recibido=firebase.get("/datos",None)
+# print(recibido)
+#for clave,valores in recibido.items():
+#  print (clave,valores)
+
 
 db = psycopg2.connect(
         host=mis_valores.HOST,
@@ -159,6 +168,15 @@ def admin_guardar_publicaciones():
     cursor.execute(sql,datos)
     db.commit()
     cursor.close()
+    data={
+          "nombre":nombre,
+          "descripcion":descripcion,
+          "categoria":categoria,
+          "imagen":nombre_imagen_nuevo,
+          "archivo":html_publicacion_nuevo,
+          "fecha":fecha,
+          "habilitado":habilitado}
+    enviado=firebase.post("/datos",data)
     return redirect("/admin/publicaciones")
   return redirect("/login")
 
