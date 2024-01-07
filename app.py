@@ -76,28 +76,30 @@ def index():
 def publicaciones():
   
    mis_valores.footer=False
-  
-   cursor=db.cursor()
-   sql = "SELECT * FROM publicaciones ORDER BY  fecha DESC"
-   cursor.execute(sql)
-   publicaciones=cursor.fetchall()
-   """ recibido = firebase.get("/datos", None)
-   lista=[]
-   registro=[]
-   for key, valores in recibido.items():
-      registro.append(valores['id'])
-      registro.append(valores['nombre'])
-      registro.append(valores['imagen'])
-      registro.append(valores['descripcion'])
-      registro.append(valores['categoria'])
-      registro.append(valores['archivo'])
-      registro.append(valores['habilitado'])
-      registro.append(key)
-      
-      lista.append(registro) """
-   
-   
-   cursor.close()
+   try:
+    
+    sql = "SELECT * FROM publicaciones ORDER BY  fecha DESC"
+    cursor.execute(sql)
+    publicaciones=cursor.fetchall()
+    """ recibido = firebase.get("/datos", None)
+    lista=[]
+    registro=[]
+    for key, valores in recibido.items():
+        registro.append(valores['id'])
+        registro.append(valores['nombre'])
+        registro.append(valores['imagen'])
+        registro.append(valores['descripcion'])
+        registro.append(valores['categoria'])
+        registro.append(valores['archivo'])
+        registro.append(valores['habilitado'])
+        registro.append(key)
+        
+        lista.append(registro) """
+    
+    
+    cursor.close()
+   except:
+     pass
    return render_template("sitio/publicaciones.html", valores=mis_valores,publicaciones=publicaciones)
 
 @app.route("/ultima_publicacion")
