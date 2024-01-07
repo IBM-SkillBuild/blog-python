@@ -99,7 +99,7 @@ def publicaciones():
     
     cursor.close()
    except:
-     pass
+     publicaciones=""
    return render_template("sitio/publicaciones.html", valores=mis_valores,publicaciones=publicaciones)
 
 @app.route("/ultima_publicacion")
