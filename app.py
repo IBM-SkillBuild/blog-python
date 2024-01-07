@@ -3,6 +3,7 @@
 #importaciones.
 import os
 from flask import Flask
+import json
 from flask import render_template,redirect,request,session
 from valores import Valores
 from flask_mysqldb import MySQL
@@ -21,15 +22,22 @@ mis_valores=Valores()
 
 #configurar parametros App y conexion BBDD en desarrollo 
 # (para produccion hay que cambiar a otra clase de archivo config)
-app.config.from_object("config.ConfigPro")
+app.config.from_object("config.ConfigDev")
 mysql = MySQL(app)
 basedir = os.path.abspath(os.path.dirname(__file__))
 firebase=firebase.FirebaseApplication("https://eduardo-cabrera.firebaseio.com/",None)
 #recibido=firebase.delete("/datos",None)
-#recibido=firebase.get("/datos",None)
-# print(recibido)
-#for clave,valores in recibido.items():
-#  print (clave,valores)
+tiempo=datetime.now()
+fecha=tiempo.strftime('%Y-%m-%d %H:%M:%S')
+data = {'id': 3, 
+        'nombre': "mi visita",
+        'imagen': "2023075934_huawei-3.jpg",
+        'descripcion':"",
+        'categoria': "",
+        'archivo': "2023133116_HUAWEI.html",
+        'fecha':fecha,
+        'habilitado':True}
+emviado = firebase.post("/datos", data)
 
 
 db = psycopg2.connect(
@@ -73,8 +81,24 @@ def publicaciones():
    sql = "SELECT * FROM publicaciones ORDER BY  fecha DESC"
    cursor.execute(sql)
    publicaciones=cursor.fetchall()
+   recibido = firebase.get("/datos", None)
+   lista=[]
+   registro=[]
+   for key, valores in recibido.items():
+      registro.append(valores['id'])
+      registro.append(valores['nombre'])
+      registro.append(valores['imagen'])
+      registro.append(valores['descripcion'])
+      registro.append(valores['categoria'])
+      registro.append(valores['archivo'])
+      registro.append(valores['habilitado'])
+      registro.append(key)
+      
+      lista.append(registro)
+   
+   
    cursor.close()
-   return render_template("sitio/publicaciones.html", valores=mis_valores,publicaciones=publicaciones)
+   return render_template("sitio/publicaciones.html", valores=mis_valores,lista=lista,publicaciones=publicaciones)
 
 @app.route("/ultima_publicacion")
 def ultima_publicacion():
