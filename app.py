@@ -98,7 +98,7 @@ def publicaciones():
    
    
    cursor.close()
-   return render_template("sitio/publicaciones.html", valores=mis_valores,lista=lista,publicaciones=publicaciones)
+   return render_template("sitio/publicaciones.html", valores=mis_valores,publicaciones=publicaciones)
 
 @app.route("/ultima_publicacion")
 def ultima_publicacion():
