@@ -25,7 +25,7 @@ mis_valores=Valores()
 app.config.from_object("config.ConfigDev")
 mysql = MySQL(app)
 basedir = os.path.abspath(os.path.dirname(__file__))
-firebase=firebase.FirebaseApplication("https://eduardo-cabrera.firebaseio.com/",None)
+#firebase=firebase.FirebaseApplication("https://eduardo-cabrera.firebaseio.com/",None)
 #recibido=firebase.delete("/datos",None)
 tiempo=datetime.now()
 fecha=tiempo.strftime('%Y-%m-%d %H:%M:%S')
@@ -37,7 +37,7 @@ data = {'id': 3,
         'archivo': "2023133116_HUAWEI.html",
         'fecha':fecha,
         'habilitado':True}
-emviado = firebase.post("/datos", data)
+#emviado = firebase.post("/datos", data)
 
 
 db = psycopg2.connect(
@@ -179,12 +179,12 @@ def admin_guardar_publicaciones():
     descripcion=""
     categoria=""
     habilitado=True   
-    try:
+    """  try:
       cursor = db.cursor()
       cursor.execute("SELECT * from publicaciones WHERE id=1")
       errordb="(buena conexion)"
     except:
-      errordb="(no se conecta)"  
+      errordb="(no se conecta)"   """
     
     cursor = db.cursor()
     sql = "INSERT INTO publicaciones(nombre, descripcion, categoria,imagen,archivo,fecha,habilitado) VALUES ( %s,%s,%s,%s,%s,%s,%s);"
