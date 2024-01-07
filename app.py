@@ -81,7 +81,7 @@ def publicaciones():
    sql = "SELECT * FROM publicaciones ORDER BY  fecha DESC"
    cursor.execute(sql)
    publicaciones=cursor.fetchall()
-   recibido = firebase.get("/datos", None)
+   """ recibido = firebase.get("/datos", None)
    lista=[]
    registro=[]
    for key, valores in recibido.items():
@@ -94,7 +94,7 @@ def publicaciones():
       registro.append(valores['habilitado'])
       registro.append(key)
       
-      lista.append(registro)
+      lista.append(registro) """
    
    
    cursor.close()
