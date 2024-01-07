@@ -4,6 +4,10 @@
   #contenedor{
     min-width:100%;
   }
+  .card{
+    background-color: chocolate;
+    min-width: 300px
+  }
   .menu_navegador{
     margin-left: 40px;
     margin-top: 40px;
@@ -140,15 +144,18 @@ z-index:9999;
 
 .card-img-top {
   width: 100%;
-  max-height: 12vw;
+  height: 12vw;
   object-fit: contain;
   cursor: pointer;
+  position: absolute;
+  bottom: 10px;
   
 }
 
-.caard-body{
-  width: 230px;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow: hidden;
+.card-body{
+  background-color: aqua;
+  
+}
+.card{
+  background-color: chocolate;
 }
