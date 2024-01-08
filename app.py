@@ -108,7 +108,7 @@ def ultima_publicacion():
    mis_valores.footer=False
 
    cursor = db.cursor()
-   sql = "SELECT * FROM publicaciones ORDER BY fecha DESC LIMIT 1 "
+   sql = "SELECT * FROM publicaciones  LIMIT 1 "
    cursor.execute(sql)
    publicaciones=cursor.fetchall()
    cursor.close()
@@ -202,7 +202,7 @@ def admin_guardar_publicaciones():
           "archivo":html_publicacion_nuevo,
           "fecha":fecha,
           "habilitado":habilitado}
-    enviado=firebase.post("/datos",data)
+    #enviado=firebase.post("/datos",data)
     return redirect("/admin/publicaciones")
   return redirect("/login")
 
