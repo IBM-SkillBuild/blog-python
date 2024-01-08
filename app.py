@@ -109,7 +109,6 @@ def ultima_publicacion():
    cursor = db.cursor()
    mis_valores.footer=False
    try:
-    cursor = db.cursor()
     sql = "SELECT * FROM publicaciones  LIMIT 1 "
     cursor.execute(sql)
     publicaciones=cursor.fetchall()
