@@ -146,7 +146,7 @@ def admin_publicaciones():
      
       
       cursor = db.cursor()
-      sql = "SELECT * FROM publicaciones ORDER BY fecha DESC"
+      sql = "SELECT * FROM publicaciones "
       cursor.execute(sql)
       publicaciones=cursor.fetchall()
       cursor.close()
