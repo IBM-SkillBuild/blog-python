@@ -78,7 +78,7 @@ def publicaciones():
    mis_valores.footer=False
    try:
     
-    sql = "SELECT * FROM publicaciones ORDER BY  fecha DESC"
+    sql = "SELECT * FROM publicaciones "
     cursor.execute(sql)
     publicaciones=cursor.fetchall()
     """ recibido = firebase.get("/datos", None)
