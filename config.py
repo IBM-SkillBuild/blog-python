@@ -32,8 +32,8 @@ class ConfigPro():
   DEBUG = False
   TESTING = False
   SECRET_KEY="MyApp"
-  UPLOAD_FOLDER = 'static/uploads'
-  UPLOAD_POST = 'static/posts'
+  UPLOAD_FOLDER = '/static/uploads'
+  UPLOAD_POST = '/static/posts'
   MYSQL_HOST = "db4free.net"
   MYSQL_PORT = 3306
   MYSQL_USER = "blog_edu_user"

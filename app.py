@@ -47,7 +47,7 @@ db = psycopg2.connect(
         password=mis_valores.PASSWORD,
         sslmode= 'require')
 
-cursor = db.cursor()
+
 
 
 #cursor.execute("""DROP TABLE IF EXISTS publicaciones   """)
@@ -74,10 +74,11 @@ def index():
 
 @app.route("/publicaciones")
 def publicaciones():
-  
+   
    mis_valores.footer=False
+   cursor = db.cursor()
    try:
-    
+   
     sql = "SELECT * FROM publicaciones "
     cursor.execute(sql)
     publicaciones=cursor.fetchall()
@@ -97,20 +98,23 @@ def publicaciones():
         lista.append(registro) """
     
     
-    cursor.close()
+   
    except:
      publicaciones=""
+   cursor.close()  
    return render_template("sitio/publicaciones.html", valores=mis_valores,publicaciones=publicaciones)
 
 @app.route("/ultima_publicacion")
 def ultima_publicacion():
- 
-   mis_valores.footer=False
-
    cursor = db.cursor()
-   sql = "SELECT * FROM publicaciones  LIMIT 1 "
-   cursor.execute(sql)
-   publicaciones=cursor.fetchall()
+   mis_valores.footer=False
+   try:
+    cursor = db.cursor()
+    sql = "SELECT * FROM publicaciones  LIMIT 1 "
+    cursor.execute(sql)
+    publicaciones=cursor.fetchall()
+   except:
+    publicaciones=""
    cursor.close()
    return render_template("sitio/publicaciones.html", valores=mis_valores,publicaciones=publicaciones)
 
@@ -119,11 +123,12 @@ def ultima_publicacion():
 @app.route("/publicaciones_portitulo/<titulo>")
 def publicaciones_portitulo(titulo):
    mis_valores.footer = False
-  
-   
    cursor = db.cursor()
-   cursor.execute("SELECT * FROM publicaciones WHERE nombre=%s", (titulo,))
-   publicaciones = cursor.fetchall()
+   try:
+    cursor.execute("SELECT * FROM publicaciones WHERE nombre=%s", (titulo,))
+    publicaciones = cursor.fetchall()
+   except:
+    publicaciones=""  
    cursor.close()
    return render_template("sitio/publicaciones.html", valores=mis_valores, publicaciones=publicaciones)
 
@@ -143,14 +148,15 @@ def admin_index():
 @app.route("/admin/publicaciones")
 def admin_publicaciones():
   if session['usuario']=="Admin":
-     
-      
-      cursor = db.cursor()
+     cursor = db.cursor()
+     try:
       sql = "SELECT * FROM publicaciones "
       cursor.execute(sql)
       publicaciones=cursor.fetchall()
-      cursor.close()
-      return render_template("admin/publicaciones.html", publicaciones=publicaciones)
+     except:
+       publicaciones="" 
+     cursor.close()
+     return render_template("admin/publicaciones.html", publicaciones=publicaciones)
   return redirect("/login")
 
 
