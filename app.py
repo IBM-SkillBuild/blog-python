@@ -101,7 +101,9 @@ def publicaciones():
    
    except:
      publicaciones=""
-   cursor.close()  
+   finally:
+         cursor.close()  
+   cursor.close()
    return render_template("sitio/publicaciones.html", valores=mis_valores,publicaciones=publicaciones)
 
 @app.route("/ultima_publicacion")
@@ -114,6 +116,8 @@ def ultima_publicacion():
     publicaciones=cursor.fetchall()
    except:
     publicaciones=""
+   finally:
+         cursor.close()  
    cursor.close()
    return render_template("sitio/publicaciones.html", valores=mis_valores,publicaciones=publicaciones)
 
@@ -128,6 +132,8 @@ def publicaciones_portitulo(titulo):
     publicaciones = cursor.fetchall()
    except:
     publicaciones=""  
+   finally:
+         cursor.close()  
    cursor.close()
    return render_template("sitio/publicaciones.html", valores=mis_valores, publicaciones=publicaciones)
 
@@ -154,6 +160,8 @@ def admin_publicaciones():
       publicaciones=cursor.fetchall()
      except:
        publicaciones="" 
+     finally:
+         cursor.close()
      cursor.close()
      return render_template("admin/publicaciones.html", publicaciones=publicaciones)
   return redirect("/login")
