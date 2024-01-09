@@ -103,7 +103,7 @@ def publicaciones():
      publicaciones=""
    finally:
          cursor.close()  
-   cursor.close()
+   
    return render_template("sitio/publicaciones.html", valores=mis_valores,publicaciones=publicaciones)
 
 @app.route("/ultima_publicacion")
@@ -118,7 +118,7 @@ def ultima_publicacion():
     publicaciones=""
    finally:
          cursor.close()  
-   cursor.close()
+   
    return render_template("sitio/publicaciones.html", valores=mis_valores,publicaciones=publicaciones)
 
 
@@ -134,7 +134,7 @@ def publicaciones_portitulo(titulo):
     publicaciones=""  
    finally:
          cursor.close()  
-   cursor.close()
+   
    return render_template("sitio/publicaciones.html", valores=mis_valores, publicaciones=publicaciones)
 
 
@@ -162,7 +162,7 @@ def admin_publicaciones():
        publicaciones="" 
      finally:
          cursor.close()
-     cursor.close()
+     
      return render_template("admin/publicaciones.html", publicaciones=publicaciones)
   return redirect("/login")
 
