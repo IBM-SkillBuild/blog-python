@@ -1,24 +1,23 @@
 {% include "sitio/header.html" %}
-    <main>
-   <div class="container margin-sup" >
+    <main >
+   <div  class="container margin-sup" >
     
       <div class="row" style="margin-bottom:50px">
         {% if publicaciones %}
         {% for post in publicaciones %}
          {% if  loop.length>1 %}
-        <div class="col-md-3" >
-         <div class="card"  style="height: 60vh;">
+        <div class="col-md-4" >
+         <div class="card"  style="height: 60vh;margin-bottom:5vh">
         
           
          
 
           <div class="card-body" style="position: relative">
             <h4 class="card-title">{{post[1]}}</h4>
-            <p id="{{valores.URL}}/publicaciones_portitulo/{{post[1]}}" class="card-text url-clip"><strong>Copy Url de este post</strong> </p>
-            <p id="url-clip"class="card-text" style="color:blue">{{valores.URL}}/publicaciones_portitulo/{{post[1]}}</p>
-              <div class="embed-responsive embed-responsive-16by9">
-          <img onclick="publicacion('/post/{{post[5]}}')" class="card-img-top" src="/img/{{post[2]}}" alt="post" />
-        </div>
+            <p id="{{valores.URL}}/publicaciones_portitulo/{{post[1]}}" onclick="portapapeles(this.id)" class="card-text url-clip"><strong>Copy Url de este post</strong> </p>
+                         
+          <img onclick="publicacion('/post/{{post[5]}}')" class="card-img-top img-responsive center-block" src="/img/{{post[2]}}" alt="post" />
+        
             
             <a name="" id="" class="btn btn-primary" style="position:absolute;bottom:10px;display:none"  role="button"  >Ver publicación</a>
             

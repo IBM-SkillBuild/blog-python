@@ -14,6 +14,17 @@ $(document).ready(function() {
   });
 });
 
+function portapapeles(id) {
+  navigator.clipboard
+    .writeText(id)
+    .then(() => {
+      console.log('Texto copiado al portapapeles');
+    })
+    .catch((err) => {
+      console.error('Error al copiar al portapapeles:', err);
+    });
+}
+
 function publicacion(source) {
   $('#publicacion').attr('src', source);
   $('#publicacion').css('overflow', 'hidden');

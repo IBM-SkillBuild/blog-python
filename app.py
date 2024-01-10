@@ -28,7 +28,7 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 #firebase=firebase.FirebaseApplication("https://eduardo-cabrera.firebaseio.com/",None)
 #recibido=firebase.delete("/datos",None)
 tiempo=datetime.now()
-fecha=tiempo.strftime('%Y-%m-%d %H:%M:%S')
+fecha=tiempo
 data = {'id': 3, 
         'nombre': "mi visita",
         'imagen': "2023075934_huawei-3.jpg",
@@ -79,7 +79,7 @@ def publicaciones():
    cursor = db.cursor()
    try:
    
-    sql = "SELECT * FROM publicaciones "
+    sql = "SELECT * FROM publicaciones ORDER BY id DESC "
     cursor.execute(sql)
     publicaciones=cursor.fetchall()
     """ recibido = firebase.get("/datos", None)
@@ -110,9 +110,10 @@ def publicaciones():
 def ultima_publicacion():
    
    mis_valores.footer=False
+   cursor = db.cursor()
    try:
-    cursor = db.cursor()
-    sql = "SELECT * FROM publicaciones  LIMIT 1 "
+   
+    sql = "SELECT * FROM publicaciones ORDER BY id DESC LIMIT 1 "
     cursor.execute(sql)
     publicaciones=cursor.fetchall()
    except:
@@ -156,7 +157,7 @@ def admin_publicaciones():
   if session['usuario']=="Admin":
      cursor = db.cursor()
      try:
-      sql = "SELECT * FROM publicaciones "
+      sql = "SELECT * FROM publicaciones ORDER BY id DESC "
       cursor.execute(sql)
       publicaciones=cursor.fetchall()
      except:
@@ -181,7 +182,7 @@ def admin_guardar_publicaciones():
     html_publicacion_nuevo=""
     tiempo=datetime.now()
     hora=tiempo.strftime("%Y%H%M%S")
-    fecha=tiempo.strftime('%Y-%m-%d %H:%M:%S')
+    fecha=tiempo
     if nombre_imagen.filename !="":
       nombre_imagen_nuevo=hora+"_"+nombre_imagen.filename
       # nombre_imagen.save("templates/sitio/img/"+ nombre_imagen_nuevo)
@@ -231,7 +232,7 @@ def admin_update_publicaciones():
     html_publicacion_nuevo=""
     tiempo=datetime.now()
     hora=tiempo.strftime("%Y%H%M%S")
-    fecha=tiempo.strftime('%Y-%m-%d %H:%M:%S')
+    fecha=tiempo
     if nombre_imagen.filename !="":
       nombre_imagen_nuevo=hora+"_"+nombre_imagen.filename
       nombre_imagen.save(os.path.join(

@@ -3,11 +3,20 @@
 @media only screen and (max-width: 1200px) {
   #contenedor{
     min-width:100%;
+   
   }
+ 
   .card{
     background-color: chocolate;
-    min-width: 300px
+    margin-bottom: 10vh;
+    
   }
+ .card-img-top {
+   
+  height: 75vh;
+  max-width: 80%;
+  
+ }
   .menu_navegador{
     margin-left: 40px;
     margin-top: 40px;
@@ -85,15 +94,27 @@ table tbody tr:nth-child(odd) {
 table tbody tr:nth-child(even) {
 	background: #fdf8ef;
 }
-html,body,main,.container{
-  background-color:  #1B75CE;
+html{
+ 
+ 
+    background-image: url("/static/img/fondo.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+   
+    
+    
   
+}
+body{
+  background-color: transparent;
 }
   header{
     position: sticky;
     top:0px;
     left:0px;
-border:10px solid #1B75CE;
+border:10px solid transparent;
+ background-color: transparent;
 display:inline-block;
 width: 100%;
 z-index:9999;
@@ -104,9 +125,10 @@ z-index:9999;
 
   #foto_about{
     position: absolute;
-    top:20px;
-    right:50px;
-    border-radius:150px;
+    top:3vh;
+    right:3vw;
+    width:15vw;
+    border-radius:50%;
   }
 
   #no-table td {
@@ -143,19 +165,43 @@ z-index:9999;
 }
 
 .card-img-top {
-  width: 100%;
-  height: 12vw;
-  object-fit: contain;
+  
+  height: 35vh;
+  object-fit:contain;
+  max-width:92% ;
   cursor: pointer;
   position: absolute;
   bottom: 10px;
+  margin: auto;
   
 }
 
-.card-body{
-  background-color: aqua;
+
+.card{
+  background-color: whitesmoke;
+  opacity: 0.7;
+}
+.card:hover{
+    opacity:1;
+  transition: opacity .4s ease-out;
+  -moz-transition: opacity .4s ease-out;
+  -webkit-transition: opacity .4s ease-out;
+  -o-transition: opacity .4s ease-out;
+}
+.url-clip{
+  cursor: pointer;
+  color: #1B75CE;
+}
+ 
+.mynav{
+  background-color: rgb(92, 90, 88);
   
 }
-.card{
-  background-color: chocolate;
+h1{
+  color: black;
+  font-weight: bold;
+}
+
+.fondo{
+  background-color: transparent;
 }
