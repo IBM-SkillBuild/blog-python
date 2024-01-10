@@ -304,4 +304,4 @@ def admin_log_out():
 if __name__=="__main__":
   # app.run(debug=True) NO NECESARIO 
   # -- SE LEE DESDE ARCHIVO CONFIG-- (cambiar para produccion a otra clase)
-  app.run(debug=True)
+  app.run()
