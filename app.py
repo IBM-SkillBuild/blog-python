@@ -1,5 +1,4 @@
 #modulo principal
-
 #importaciones.
 import os
 from flask import Flask
