@@ -40,3 +40,20 @@ function publicacion(source) {
     1000,
   );
 }
+
+
+function div_contenido(url, reset) {
+  if (url != '/')
+    alert(url)
+    $.ajax({
+      type: 'GET',
+      url: url,
+      data: { modo: reset },
+      contentType: 'application/json; charset=utf-8',
+      dataType: 'json',
+      cache: false,
+      success: function (result) {
+        console.log("ok")
+      },
+    });
+}

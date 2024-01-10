@@ -71,7 +71,7 @@ def index():
   return render_template("sitio/index.html",valores=mis_valores)
 
 
-@app.route("/publicaciones")
+@app.route("/publicaciones" )
 def publicaciones():
    
    mis_valores.footer=False
