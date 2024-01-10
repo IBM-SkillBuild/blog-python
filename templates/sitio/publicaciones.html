@@ -26,15 +26,18 @@
        
         </div>
              {% elif post[5] !="" %}
-               <embed id="publicacion"  onclick="publicacion('/post/{{post[5]}}')" src="/post/{{post[5]}}" style="width:100%; height:6000px" frameborder="0" ></embed>
-
+              <div class="contenedor-iframe">
+               <iframe class="responsive-iframe"id="publicacion"  onclick="publicacion('/post/{{post[5]}}')" src="/post/{{post[5]}}" style="width:100%; height:6000px" frameborder="0" ></iframe>
+              </div>
             {% endif %}
           {% endfor %}
           {% endif %}
         
       </div>
-       <embed id="publicacion" style="display:none"src="" style="width:100%;height:6000px" frameborder="0" ></embed>
-
+      <div class="contenedor-iframe">
+<iframe class="responsive-iframe"id="publicacion" style="display:none"src=""  frameborder="0" height="100%" width="100%">
+</iframe>
+ </div>
   </div>
     {% if not publicaciones %}
     <h1 style="text-align:center; margin-top:60px">no existen publicaciones</h1>
