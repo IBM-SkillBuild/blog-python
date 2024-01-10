@@ -299,7 +299,6 @@ def admin_log_out():
    session.clear()
    return redirect("/admin")
   
-
 # inicio app derarrollo
 if __name__=="__main__":
   # app.run(debug=True) NO NECESARIO 
