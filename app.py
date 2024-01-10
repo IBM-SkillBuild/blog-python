@@ -68,7 +68,7 @@ db = psycopg2.connect(
 def index():
  
   mis_valores.footer=True
-  return render_template("sitio/index.html",valores=mis_valores)
+  return render_template("/sitio/index.html",valores=mis_valores)
 
 
 @app.route("/publicaciones" )
@@ -81,29 +81,13 @@ def publicaciones():
     sql = "SELECT * FROM publicaciones ORDER BY id DESC "
     cursor.execute(sql)
     publicaciones=cursor.fetchall()
-    """ recibido = firebase.get("/datos", None)
-    lista=[]
-    registro=[]
-    for key, valores in recibido.items():
-        registro.append(valores['id'])
-        registro.append(valores['nombre'])
-        registro.append(valores['imagen'])
-        registro.append(valores['descripcion'])
-        registro.append(valores['categoria'])
-        registro.append(valores['archivo'])
-        registro.append(valores['habilitado'])
-        registro.append(key)
-        
-        lista.append(registro) """
     
-    
-   
    except:
      publicaciones=""
    finally:
-         cursor.close()  
+     cursor.close()  
    
-   return render_template("sitio/publicaciones.html", valores=mis_valores,publicaciones=publicaciones)
+   return render_template("/sitio/publicaciones.html", valores=mis_valores,publicaciones=publicaciones)
 
 @app.route("/ultima_publicacion")
 def ultima_publicacion():
@@ -120,7 +104,7 @@ def ultima_publicacion():
    finally:
          cursor.close()  
    
-   return render_template("sitio/publicaciones.html", valores=mis_valores,publicaciones=publicaciones)
+   return render_template("/sitio/publicaciones.html", valores=mis_valores,publicaciones=publicaciones)
 
 
 
@@ -136,19 +120,19 @@ def publicaciones_portitulo(titulo):
    finally:
          cursor.close()  
    
-   return render_template("sitio/publicaciones.html", valores=mis_valores, publicaciones=publicaciones)
+   return render_template("/sitio/publicaciones.html", valores=mis_valores, publicaciones=publicaciones)
 
 
 @app.route("/about")
 def about():
   mis_valores.footer=True
-  return render_template("sitio/about.html", valores=mis_valores)
+  return render_template("/sitio/about.html", valores=mis_valores)
 
 
 @app.route("/admin")
 def admin_index():
    
-   return render_template("admin/index.html")
+   return render_template("/admin/index.html")
  
 
 @app.route("/admin/publicaciones")
@@ -164,7 +148,7 @@ def admin_publicaciones():
      finally:
          cursor.close()
      
-     return render_template("admin/publicaciones.html", publicaciones=publicaciones)
+     return render_template("/admin/publicaciones.html", publicaciones=publicaciones)
   return redirect("/login")
 
 
@@ -296,7 +280,7 @@ def ver_post_html(archivo):
   
 @app.route("/login")
 def admin_login():
-  return render_template("admin/login.html")
+  return render_template("/admin/login.html")
 
 
 @app.route("/login", methods=['POST'])

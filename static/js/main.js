@@ -44,7 +44,6 @@ function publicacion(source) {
 
 function div_contenido(url, reset) {
   if (url != '/')
-    alert(url)
     $.ajax({
       type: 'GET',
       url: url,
@@ -53,7 +52,8 @@ function div_contenido(url, reset) {
       dataType: 'json',
       cache: false,
       success: function (result) {
-        console.log("ok")
+       if (reset == 'reset') $('#contenido').html(result);
+       $('#contenido').append(result.htmlresponse);
       },
     });
 }
