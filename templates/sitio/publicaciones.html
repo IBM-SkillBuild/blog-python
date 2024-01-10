@@ -27,7 +27,7 @@
         </div>
              {% elif post[5] !="" %}
               <div class="contenedor-iframe">
-               <iframe class="responsive-iframe"id="publicacion"  onclick="publicacion('/post/{{post[5]}}')" src="/post/{{post[5]}}" style="width:100%; height:6000px" frameborder="0" ></iframe>
+               <iframe class="responsive-iframe"id="publicacion"  onclick="publicacion('/post/{{post[5]}}')" src="/post/{{post[5]}}"  frameborder="0" height="auto" width="100%" ></iframe>
               </div>
             {% endif %}
           {% endfor %}
@@ -35,7 +35,7 @@
         
       </div>
       <div class="contenedor-iframe">
-<iframe class="responsive-iframe"id="publicacion" style="display:none"src=""  frameborder="0" height="100%" width="100%">
+<iframe class="responsive-iframe"id="publicacion" style="display:none" src=""  frameborder="0" height="auto" width="100%">
 </iframe>
  </div>
   </div>
