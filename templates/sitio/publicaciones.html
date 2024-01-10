@@ -26,14 +26,14 @@
        
         </div>
              {% elif post[5] !="" %}
-               <iframe id="publicacion"  onclick="publicacion('/post/{{post[5]}}')" src="/post/{{post[5]}}" style="width:100%; height:6000px" frameborder="0" ></iframe>
+               <iframe id="publicacion" onclick="publicacion('/post/{{post[5]}}')" src="/post/{{post[5]}}" style="width:100%; height:6000px" frameborder="0" ></iframe>
 
             {% endif %}
           {% endfor %}
           {% endif %}
         
       </div>
-<iframe id="publicacion" style="display:none"src=""  frameborder="0" height="100%" width="100%">
+<iframe id="publicacion"  style="display:none"src=""  frameborder="0" height="100%" width="100%">
 </iframe>
   </div>
     {% if not publicaciones %}

@@ -30,7 +30,7 @@ function publicacion(source) {
   $('#publicacion').css('overflow', 'hidden');
   $('#publicacion').show();
   $('#publicacion').css('width', '100%');
-  $('#publicacion').css('height', '2000');
+  $('#publicacion').css('height', '6000');
   $('#publicacion').css('margin-top', 200);
   let reducir = 200;
   $('html, body').animate(
@@ -39,6 +39,7 @@ function publicacion(source) {
     },
     1000,
   );
+  
 }
 
 
@@ -57,3 +58,4 @@ function div_contenido(url, reset) {
       },
     });
 }
+
