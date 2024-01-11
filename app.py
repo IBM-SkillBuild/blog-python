@@ -293,7 +293,6 @@ def admin_login_post():
   return redirect("/admin")
   
   
-  
 @app.route("/log-out")
 def admin_log_out():
    session.clear()
