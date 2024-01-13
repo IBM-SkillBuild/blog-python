@@ -125,6 +125,12 @@ def ultima_publicacion():
 @app.route("/publicaciones_portitulo/<titulo>",methods = ['POST', 'GET'])
 def publicaciones_portitulo(titulo):
    mis_valores.footer = False
+   db = psycopg2.connect(
+       host=mis_valores.HOST,
+       database=mis_valores.DB,
+       user=mis_valores.USER,
+       password=mis_valores.PASSWORD,
+       sslmode='require')
    cursor = db.cursor()
    try:
     cursor.execute("SELECT * FROM publicaciones WHERE nombre=%s", (titulo,))
@@ -152,6 +158,12 @@ def admin_index():
 @app.route("/admin/publicaciones")
 def admin_publicaciones():
   if session['usuario']=="Admin":
+     db = psycopg2.connect(
+       host=mis_valores.HOST,
+       database=mis_valores.DB,
+       user=mis_valores.USER,
+       password=mis_valores.PASSWORD,
+       sslmode='require')
      cursor = db.cursor()
      try:
       sql = "SELECT * FROM publicaciones ORDER BY id DESC "
@@ -193,13 +205,13 @@ def admin_guardar_publicaciones():
     descripcion=""
     categoria=""
     habilitado=True   
-    """  try:
-      cursor = db.cursor()
-      cursor.execute("SELECT * from publicaciones WHERE id=1")
-      errordb="(buena conexion)"
-    except:
-      errordb="(no se conecta)"   """
     
+    db = psycopg2.connect(
+        host=mis_valores.HOST,
+        database=mis_valores.DB,
+        user=mis_valores.USER,
+        password=mis_valores.PASSWORD,
+        sslmode='require')
     cursor = db.cursor()
     sql = "INSERT INTO publicaciones(nombre, descripcion, categoria,imagen,archivo,fecha,habilitado) VALUES ( %s,%s,%s,%s,%s,%s,%s);"
     datos = (nombre, descripcion,categoria,nombre_imagen_nuevo, html_publicacion_nuevo,fecha,habilitado)
@@ -242,7 +254,12 @@ def admin_update_publicaciones():
     categoria=""
     habilitado=True   
     
-    
+    db = psycopg2.connect(
+        host=mis_valores.HOST,
+        database=mis_valores.DB,
+        user=mis_valores.USER,
+        password=mis_valores.PASSWORD,
+        sslmode='require')
     cursor = db.cursor()
     sql = "UPDATE publicaciones SET  nombre=%s, descripcion=%s, categoria=%s,imagen=%s,archivo=%s,fecha=%s,habilitado=%s where id=%s"
     datos = (nombre, descripcion,categoria,nombre_imagen_nuevo, html_publicacion_nuevo,fecha,habilitado,id_post)
@@ -257,7 +274,12 @@ def admin_borrar_publicaciones():
    if session['usuario']=="Admin":
       id_borrar=request.form['id_borrar']
       
-      
+      db = psycopg2.connect(
+          host=mis_valores.HOST,
+          database=mis_valores.DB,
+          user=mis_valores.USER,
+          password=mis_valores.PASSWORD,
+          sslmode='require')
       cursor = db.cursor()
       cursor.execute("DELETE from publicaciones WHERE id=%s",(id_borrar,))
       db.commit()
@@ -269,6 +291,12 @@ def admin_borrar_publicaciones():
 def editar():
      if session['usuario']=="Admin":
         id_editar=request.form['id_editar']
+        db = psycopg2.connect(
+            host=mis_valores.HOST,
+            database=mis_valores.DB,
+            user=mis_valores.USER,
+            password=mis_valores.PASSWORD,
+            sslmode='require')
         cursor = db.cursor()
         cursor.execute("SELECT * from publicaciones WHERE id=%s",(id_editar,))
         publicaciones=cursor.fetchall()
