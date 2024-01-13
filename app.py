@@ -75,6 +75,12 @@ def index():
 def publicaciones():
    
    mis_valores.footer=False
+   db = psycopg2.connect(
+       host=mis_valores.HOST,
+       database=mis_valores.DB,
+       user=mis_valores.USER,
+       password=mis_valores.PASSWORD,
+       sslmode='require')
    cursor = db.cursor()
    try:
    
@@ -95,6 +101,12 @@ def publicaciones():
 def ultima_publicacion():
    
    mis_valores.footer=False
+   db = psycopg2.connect(
+       host=mis_valores.HOST,
+       database=mis_valores.DB,
+       user=mis_valores.USER,
+       password=mis_valores.PASSWORD,
+       sslmode='require')
    cursor = db.cursor()
    try:
    
