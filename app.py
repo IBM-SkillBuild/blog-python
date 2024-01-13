@@ -100,7 +100,7 @@ def publicaciones():
 @app.route("/ultima_publicacion",methods = ['POST', 'GET'])
 def ultima_publicacion():
    
-   mis_valores.footer=False
+   mis_valores.footer=True
    db = psycopg2.connect(
        host=mis_valores.HOST,
        database=mis_valores.DB,
@@ -124,7 +124,7 @@ def ultima_publicacion():
 
 @app.route("/publicaciones_portitulo/<titulo>",methods = ['POST', 'GET'])
 def publicaciones_portitulo(titulo):
-   mis_valores.footer = False
+   mis_valores.footer = True
    db = psycopg2.connect(
        host=mis_valores.HOST,
        database=mis_valores.DB,
