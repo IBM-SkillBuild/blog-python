@@ -329,7 +329,7 @@ def admin_login():
 def admin_login_post():
   user = request.form['user']
   password = request.form['pass']
-  if user=="admin" and password=="123":
+  if user=="edugoyo" and password=="edugoyo.@1968":
     session['login']=True
     session['usuario']="Admin"
   return redirect("/admin")
