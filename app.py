@@ -44,6 +44,7 @@ db = psycopg2.connect(
         database=mis_valores.DB,
         user=mis_valores.USER,
         password=mis_valores.PASSWORD,
+        port=5434,
         sslmode= 'require')
 
 

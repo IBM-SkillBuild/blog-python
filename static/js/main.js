@@ -43,8 +43,8 @@ function publicacion(source) {
 }
 
 
-function div_contenido(url, reset) {
-  if (url != '/')
+function datos() {
+  url="/publicaciones"
     $.ajax({
       type: 'GET',
       url: url,
