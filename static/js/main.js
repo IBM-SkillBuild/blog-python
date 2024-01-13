@@ -10,7 +10,7 @@ $(document).ready(function() {
         console.error('Failed to copy: ', err);
       }
     }
-     
+   
   });
 });
 
@@ -42,20 +42,4 @@ function publicacion(source) {
   
 }
 
-
-function datos() {
-  url="/publicaciones"
-    $.ajax({
-      type: 'GET',
-      url: url,
-      data: { modo: reset },
-      contentType: 'application/json; charset=utf-8',
-      dataType: 'json',
-      cache: false,
-      success: function (result) {
-       if (reset == 'reset') $('#contenido').html(result);
-       $('#contenido').append(result.htmlresponse);
-      },
-    });
-}
 

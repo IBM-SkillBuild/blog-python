@@ -3,7 +3,7 @@
 import os
 from flask import Flask
 import json
-from flask import render_template,redirect,request,session
+from flask import render_template,redirect,request,session,jsonify
 from valores import Valores
 from flask_mysqldb import MySQL
 import MySQLdb
@@ -71,7 +71,7 @@ def index():
   return render_template("/sitio/index.html",valores=mis_valores)
 
 
-@app.route("/publicaciones" )
+@app.route("/publicaciones", methods=['POST', 'GET'])
 def publicaciones():
    
    mis_valores.footer=False
@@ -88,8 +88,10 @@ def publicaciones():
      cursor.close()  
    
    return render_template("/sitio/publicaciones.html", valores=mis_valores,publicaciones=publicaciones)
+ 
 
-@app.route("/ultima_publicacion")
+
+@app.route("/ultima_publicacion",methods = ['POST', 'GET'])
 def ultima_publicacion():
    
    mis_valores.footer=False
@@ -108,7 +110,7 @@ def ultima_publicacion():
 
 
 
-@app.route("/publicaciones_portitulo/<titulo>")
+@app.route("/publicaciones_portitulo/<titulo>",methods = ['POST', 'GET'])
 def publicaciones_portitulo(titulo):
    mis_valores.footer = False
    cursor = db.cursor()
