@@ -24,6 +24,10 @@
       h1{
          font-weight: bolder;
       }
+       h5{
+         margin-top:25px;
+         margin-bottom: 25px;
+      }
     html,body {
       background-color: transparent;
       font-family: 'Montserrat';
@@ -34,19 +38,23 @@
     html::-webkit-scrollbar { display: none; }
     .imagen-publicacion{
         border:solid 4px whitesmoke;
-      
-        margin:5px;
-        margin-bottom: 10px;}
+       display: block;
+      margin:auto;
+       margin-top:20px;
+  margin-bottom: 20px;
+   width: 90%;
+    }
 
 @media only screen and (max-width: 1200px) {
 .imagen-publicacion{
-   width: 80%;
+   width: 90%;
   display: block;
   margin-left: auto;
   margin-right: auto;
-  margin-top:10px;
-  margin-bottom: 10px;
+  margin-top:20px;
+  margin-bottom: 20px;
 }
+
 }
   </style>
   </head>
@@ -72,12 +80,11 @@
          Un gran ambiente tecnolçogico y una buena acogida, fueron el preludio
        a un Speech muy completo sobre la ciberseguridad aplicada por el fabricante. 
       </h5>
-       <img
+       <img class="imagen-publicacion"
         src="/static/img/huawei-3.jpg"
         data-src="huawei-3.jpg"
         class="img-fluid rounded-top imagen-publicacion lazyload"
         alt=""
-        width=400
         style="margin-bottom:10px;margin-top:10px"
         loading="lazy"
       />
@@ -90,7 +97,6 @@
         class="img-fluid rounded-top imagen-publicacion "
         loading="lazy"
         alt=""
-        width=400
         style="margin-bottom:10px;margin-top:10px"
       />
        <h5>
@@ -105,13 +111,12 @@
         </div>
      </div>
         <div class="col-md-5 " style="margin-bottom:10px;" >
-      <h5 style="margin-left:25px">Fotografias tomadas el día de la entrevista</h5>
+      <h5 style="text-align: center;">Fotografias tomadas el día de la entrevista</h5>
       <img
         src="/static/img/huawei-2.jpg"
         data-src="huawei-2.jpg"
         class="img-fluid rounded-top imagen-publicacion "
         alt=""
-        width=600
         style="margin-bottom:10px;margin-top:10px"
         loading="lazy"
       />
