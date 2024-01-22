@@ -30,28 +30,48 @@
     
   </head>
 
-   <body class="container fondo" id="contenedor">
-     <header>
-      <!-- place navbar here -->
-      <nav class="navbar navbar-expand-lg mynav"  style=" border: solid 3px black" data-bs-theme="dark">
+   <body class="container fondo" >
+     <div class="header-holder" >
+  <header class="header" style="background-color:transparent" >
+    
+    <div class="search-mobile" style="display: block;">
+      <a rel="nofollow">
+        <i class="icon_search"></i>
       
-        <ul class="nav navbar-nav  menu_navegador ">
-           <h1 style="margin-left:20px;margin-right:20px">El blog de Edu</h1>
-          <li class="nav-item">
-            <a class="nav-link active" href="/" aria-current="page"
-              >Home <span class="visually-hidden">(current)</span></a
-            >
+      </a>
+    </div>
+    
+    <nav class="header-nav" >
+      <div class="header-nav__inner" >
+        <ul class="header-menu-list" >
+          <li class="header-menu-item">
+            <a href="/">HOME</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/about">About</a>
+          <li class="header-menu-item">
+            <a rel="nofollow" href="/about">ABOUT</a>
           </li>
-           <li class="nav-item">
-            <a class="nav-link" href="/publicaciones">Publicaciones</a>
+          <li class="header-menu-item">
+            <a href="/publicaciones">PUBLICACIONES</a>
           </li>
-           <li class="nav-item">
-            <a class="nav-link" id="owner" href="/admin">Zona Owner</a>
+           <li class="header-menu-item">
+            <a href="/admin">ZONA OWNER</a>
           </li>
+          
         </ul>
-      </nav>
-      
-    </header>
+        </div>
+    </nav>
+    
+    <a href="/about" 
+       
+        title="About Me" class="logo"></a>
+     <img id="blog" title="Menú de opciones" onclick="mostrar_menu()" src="{{url_for('static', filename='/img/blog.png')}}" alt="El Blog de Eduardo Cabrera" />
+    <a href="#" class="device-menu">
+      <div class="device-menu__inner">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </a>
+  </header>
+ 
+</div>

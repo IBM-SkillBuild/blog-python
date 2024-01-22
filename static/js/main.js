@@ -43,3 +43,40 @@ function publicacion(source) {
 }
 
 
+const openMobileMenuBtn = document.querySelector('.device-menu');
+const headerMenu = document.querySelector('.header-nav');
+
+openMobileMenuBtn.addEventListener('click', () => {
+  if (openMobileMenuBtn.classList.contains('open')) {
+    openMobileMenuBtn.classList.remove('open');
+    headerMenu.classList.remove('active');
+  } else {
+    headerMenu.classList.add('active');
+    openMobileMenuBtn.classList.add('open');
+  }
+});
+
+ 
+
+function mostrar_menu() {
+ 
+   if (openMobileMenuBtn.classList.contains('open')) {
+     openMobileMenuBtn.classList.remove('open');
+     headerMenu.classList.remove('active');
+   } else {
+     headerMenu.classList.add('active');
+     openMobileMenuBtn.classList.add('open');
+   }
+ }
+
+$(window).scroll(function () {
+  if ($(this).scrollTop() > 300) {
+    $('a.scroll-top').fadeIn('slow');
+  } else {
+    $('a.scroll-top').fadeOut('slow');
+  }
+});
+$('a.scroll-top').click(function (event) {
+  event.preventDefault();
+  $('html, body').animate({ scrollTop: 0 }, 600);
+});
