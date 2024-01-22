@@ -2,17 +2,11 @@
 #importaciones.
 import os
 from flask import Flask
-import json
-from flask import render_template,redirect,request,session,jsonify
+from flask import render_template, redirect, request, session, send_from_directory
 from valores import Valores
-from flask_mysqldb import MySQL
-import MySQLdb
 import psycopg2
-import pymysql
-from flask import send_from_directory
-from firebase import firebase
 from datetime import datetime
-import requests
+
 
 
 # instancias
@@ -22,7 +16,6 @@ mis_valores=Valores()
 #configurar parametros App y conexion BBDD en desarrollo 
 # (para produccion hay que cambiar a otra clase de archivo config)
 app.config.from_object("config.ConfigPro")
-mysql = MySQL(app)
 basedir = os.path.abspath(os.path.dirname(__file__))
 #firebase=firebase.FirebaseApplication("https://eduardo-cabrera.firebaseio.com/",None)
 #recibido=firebase.delete("/datos",None)
