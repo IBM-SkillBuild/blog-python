@@ -12,8 +12,13 @@
   }
  .texto-entrada{
   font-size: 16px !important;
+  padding-top: 3vh;
   
  }
+  #foto_about{
+     top:1vh !important;
+  }
+  
   .card{
     background-color: chocolate;
     margin-bottom: 10vh;
@@ -96,6 +101,12 @@
 
 }
 
+@media only screen and (max-width: 500px) {
+  #foto_about{
+    width: 20vw !important;
+  }
+}
+
 table tbody tr:nth-child(odd) {
 	background: #fff5e0;
 }
@@ -137,6 +148,7 @@ z-index:9999;
     right:3vw;
     width:15vw;
     border-radius:50%;
+    cursor:pointer
   }
 
   #no-table td {
