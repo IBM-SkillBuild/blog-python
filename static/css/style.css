@@ -2,10 +2,18 @@
 
 @media only screen and (max-width: 1200px) {
   #contenedor{
-    min-width:100%;
+    min-width:95%;
    
   }
- 
+  .presentacion{
+   
+   min-width: 100% !important;
+   margin-top: 3vh !important;
+  }
+ .texto-entrada{
+  font-size: 16px !important;
+  
+ }
   .card{
     background-color: chocolate;
     margin-bottom: 10vh;
@@ -223,3 +231,10 @@ h1{
   padding-top: 56.25%; /* 16:9 Aspect Ratio (divide 9 by 16 = 0.5625) */
 }
 
+.texto-entrada{
+  font-size: 20px;
+  text-align: justify;
+ }
+ .presentacion{
+  margin-top: 10vh;
+ }
