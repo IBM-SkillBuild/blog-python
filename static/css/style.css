@@ -5,18 +5,14 @@
     min-width:95%;
    
   }
-  .presentacion{
-   
-   min-width: 100% !important;
-   margin-top: 3vh !important;
-  }
+ 
  .texto-entrada{
   font-size: 16px !important;
   padding-top: 3vh;
   
  }
   #foto_about{
-     top:1vh !important;
+     top:0vh !important;
   }
   
   .card{
@@ -101,9 +97,21 @@
 
 }
 
+@media only screen and (max-width: 700px) {
+  #foto_about{
+    width: 23vw !important;
+     top:0vh !important;
+  }
+   .presentacion{
+   
+   min-width: 100% !important;
+   margin-top: 3vh !important;
+  }
+}
 @media only screen and (max-width: 500px) {
   #foto_about{
-    width: 20vw !important;
+    width: 25vw !important;
+     top:3vh !important;
   }
 }
 
@@ -146,9 +154,8 @@ z-index:9999;
   #foto_about{
     position: absolute;
     top:3vh;
-    right:3vw;
-    width:15vw;
-    border-radius:50%;
+    right:5vw;
+    width:20vw;
     cursor:pointer
   }
 

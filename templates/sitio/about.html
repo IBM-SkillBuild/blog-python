@@ -3,25 +3,28 @@
   <div   
     style="position: relative; margin-top: 50px; min-width: 60%"
   >
-    <div class="container-fluid py-5">
+    <div class="container-fluid py-5 presentacion" style="max-width:70vw">
       <h1 class="display-5 fw-bold">Sobre mi</h1>
-      <p class="col-md-8 fs-4 texto-entrada">
-        Soy un apasionado del desarrollo web, con un poco de arte, Flask se
+      <p class="col-md-8 fs-4 texto-entrada" style="padding-top:7vh">
+        Soy un apasionado del desarrollo web. En este caso Flask Python se
         encargará tanto del front como del back-end
       </p>
       <a
         class="btn btn-primary btn-lg"
+        style="margin-top:7vh"
         type="button"
         href="/ultima_publicacion"
+        
       >
         Ver última publicación
       </a>
 
       <img
         id="foto_about"
-        src="{{url_for('static', filename='/img/eduardo.jpg')}}"
+        src="{{url_for('static', filename='/img/perfil-edu-bueno.png')}}"
         onclick="window.open('https://www.linkedin.com/in/e-cabrera-blazquez/','_blank')"
         alt="Eduardo Cabrera"
+        title="Ver mi pefil LinkedIn"
       />
     </div>
   </div>
