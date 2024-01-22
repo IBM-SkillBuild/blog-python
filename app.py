@@ -8,7 +8,6 @@ import psycopg2
 from datetime import datetime
 
 
-
 # instancias
 app=Flask(__name__)
 mis_valores=Valores()
