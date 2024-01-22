@@ -8,7 +8,7 @@
         <div class="col-md-5">
           <div class="card text-white bg-primary mb-3">
             <div class="card-header">
-              Datos del nuevo Post
+              Editar datos de este post
             </div>
             <div class="card-body">
              <form action="/admin/publicaciones/update" method="post" enctype="multipart/form-data">
@@ -19,13 +19,16 @@
                     <input type="text" class="form-control" value="{{post[1]}}" name="name_post" id="name_post" placeholder="Ingresa nombre">
                  </div>
                   <div class="mb-3">
-                    <label for="name_imagen_post" class="form-label">Imagen de la publicación</label>
-                    <input type="file" class="form-control"  name="name_imagen_post" id="name_imagen_post" placeholder="Ingresa archivo imagen">
-                 </div>
+                    <label for="name_imagen_post" class="form-label">Imagen de la publicación {{post[2]}}</label>
+                    <input type="file" class="form-control"   name="name_imagen_post" id="name_imagen_post" placeholder="Ingresa archivo imagen">
+                    <input type="text" style="display:none" class="form-control" value="{{post[2]}}" name="old_name_imagen_post" id="old_name_imagen_post" >
+                  </div>
                   <div class="mb-3">
-                    <label for="html_publicacion" class="form-label">Plantilla html de la publicación</label>
-                    <input type="file"  class="form-control" name="html_publicacion" id="html_publicacion" placeholder="Ingresa Archivo html">
-                 </div>
+                    <label for="html_publicacion" class="form-label">Plantilla html de la publicación  {{post[5]}}</label>
+                    <input type="file"  class="form-control"  name="html_publicacion" id="html_publicacion" placeholder="Ingresa Archivo html">
+                    <input type="text" style="display:none" class="form-control" value="{{post[5]}}" name="old_html_publicacion" id="old_html_publicacion" >
+
+                  </div>
                   <div class="d-flex justify-content-center" style="margin-top:60px">
                  <button
                   type="submit"

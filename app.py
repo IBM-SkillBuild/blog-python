@@ -223,10 +223,10 @@ def admin_guardar_publicaciones():
 @app.route("/admin/publicaciones/update", methods=['POST'])
 def admin_update_publicaciones():
   if session['usuario']=="Admin":
-    id_post=(request.form['id_post'])
-    nombre=(request.form['name_post'])
-    nombre_imagen=(request.files['name_imagen_post']) 
-    html_publicacion = (request.files['html_publicacion'])
+    id_post=request.form['id_post']
+    nombre=request.form['name_post']
+    nombre_imagen=request.files['name_imagen_post'] 
+    html_publicacion = request.files['html_publicacion']
     nombre_imagen_nuevo=""
     html_publicacion_nuevo=""
     tiempo=datetime.now()
@@ -236,10 +236,14 @@ def admin_update_publicaciones():
       nombre_imagen_nuevo=hora+"_"+nombre_imagen.filename
       nombre_imagen.save(os.path.join(
           basedir, app.config['UPLOAD_FOLDER'], nombre_imagen_nuevo))
+    else:
+      nombre_imagen_nuevo = request.form['old_name_imagen_post']
     if html_publicacion.filename != "":
        html_publicacion_nuevo = hora+"_"+ html_publicacion.filename
        html_publicacion.save(os.path.join(
            basedir, app.config['UPLOAD_POST'], html_publicacion_nuevo))
+    else:
+      html_publicacion_nuevo = request.form['old_html_publicacion']
     descripcion=""
     categoria=""
     habilitado=True   

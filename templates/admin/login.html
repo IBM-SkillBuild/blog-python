@@ -14,16 +14,18 @@
           </p>
           {% else %}
             <div class="card">
-              <div class="card-header">Inicio de sesion</div>
+              <div class="card-header">Inicio de sesión solo Admin</div>
               <div class="card-body">
                 <form action="/login" method="post">
-                  <div class="mb-3">
+                  <div class="mb-3 form-floating">
+                     <input type="text" class="form-control" name="user" id="user" autofocus>
                     <label for="user" class="form-label">usuario</label>
-                    <input type="text" class="form-control" name="user" id="user" autofocus>
+                   
                  </div>
-                  <div class="mb-3">
+                  <div class="mb-3 form-floating">
+                  <input type="password" class="form-control" name="pass" id="pass" placeholder="escriba contraseña">
                  <label for="pass"class="form-label">contraseña</label>
-                 <input type="password" class="form-control" name="pass" id="pass" placeholder="escriba contraseña">
+                
                   </div>
                   <div class="d-flex justify-content-center" style="margin-top:60px">
                   <button type="submit" class="btn btn-success" style="width: 120px;">Enviar</button>
