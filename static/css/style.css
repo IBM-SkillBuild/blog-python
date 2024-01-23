@@ -116,7 +116,11 @@
     width: 25vw !important;
      top:3vh !important;
   }
-  #blog{
+ 
+}
+
+@media only screen and (max-width: 400px) {
+   #blog{
     display: none;
   }
 }
