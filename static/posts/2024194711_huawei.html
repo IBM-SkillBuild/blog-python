@@ -17,6 +17,8 @@
       crossorigin="anonymous"
     />
    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+       <link href="https://cdn.jsdelivr.net/gh/StephanWagner/jBox@v1.3.3/dist/jBox.all.min.css" rel="stylesheet">
+
 <!--    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/style_publicaciones.css' ) }}">
  -->   
     <style>
@@ -77,7 +79,7 @@
         Isabel Colbrand de Madrid por invitación de la 
          Fundación Universidad Empresa (FUE). Se trataba de un 
          Proceso de selección y Assesment center en las instalaciones de HUAWEI.
-         Un gran ambiente tecnolçogico y una buena acogida, fueron el preludio
+         Un gran ambiente tecnologico y una buena acogida, fueron el preludio
        a un Speech muy completo sobre la ciberseguridad aplicada por el fabricante. 
       </h5>
        <img class="imagen-publicacion"
@@ -87,6 +89,7 @@
         alt=""
         style="margin-bottom:10px;margin-top:10px"
         loading="lazy"
+       
       />
       </div>
         <div class="col-md-6" style="margin-bottom:10px;margin-top:10px;text-align: justify;
@@ -119,6 +122,7 @@
         alt=""
         style="margin-bottom:10px;margin-top:10px"
         loading="lazy"
+       
       />
       
       
@@ -143,6 +147,15 @@
       integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
       crossorigin="anonymous"
     ></script>
+     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/gh/StephanWagner/jBox@v1.3.3/dist/jBox.all.min.js"></script>
+     <script>
+      $(document).ready(function() {
+       console.log( "ready!" );
+       new jBox('Image');
+      });
+     
+     </script>
   
   </body>
 </html>
