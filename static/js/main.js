@@ -30,9 +30,8 @@ function publicacion(source) {
   $('#publicacion').css('overflow', 'hidden');
   $('#publicacion').show();
   $('#publicacion').css('width', '100%');
-  $('#publicacion').css('height', '6000');
   $('#publicacion').css('margin-top', 200);
-  let reducir = 200;
+  let reducir = 100;
   $('html, body').animate(
     {
       scrollTop: $('#publicacion').offset().top - reducir,
@@ -93,7 +92,8 @@ document.querySelectorAll('.my-lightbox-toggle').forEach((el) =>
  
 
 
- function resizeIframe(obj) {
+function resizeIframe(obj) {
+  alert("dd")
    obj.style.height =
      obj.contentWindow.document.documentElement.scrollHeight + 135+'px';
  }

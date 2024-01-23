@@ -208,15 +208,7 @@ def admin_guardar_publicaciones():
     cursor.execute(sql,datos)
     db.commit()
     cursor.close()
-    data={
-          "nombre":nombre,
-          "descripcion":descripcion,
-          "categoria":categoria,
-          "imagen":nombre_imagen_nuevo,
-          "archivo":html_publicacion_nuevo,
-          "fecha":fecha,
-          "habilitado":habilitado}
-    #enviado=firebase.post("/datos",data)
+   
     return redirect("/admin/publicaciones")
   return redirect("/login")
 
