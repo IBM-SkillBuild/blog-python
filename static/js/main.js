@@ -80,3 +80,20 @@ $('a.scroll-top').click(function (event) {
   event.preventDefault();
   $('html, body').animate({ scrollTop: 0 }, 600);
 });
+
+document.querySelectorAll('.my-lightbox-toggle').forEach((el) =>
+  
+   el.addEventListener('click', (e) => {
+     e.preventDefault();
+     const lightbox = new Lightbox(el, options);
+     lightbox.show();
+   }),
+
+);
+ 
+
+
+ function resizeIframe(obj) {
+   obj.style.height =
+     obj.contentWindow.document.documentElement.scrollHeight + 135+'px';
+ }

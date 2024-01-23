@@ -17,7 +17,6 @@
       crossorigin="anonymous"
     />
    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
-       <link href="https://cdn.jsdelivr.net/gh/StephanWagner/jBox@v1.3.3/dist/jBox.all.min.css" rel="stylesheet">
 
 <!--    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/style_publicaciones.css' ) }}">
  -->   
@@ -82,26 +81,27 @@
          Un gran ambiente tecnologico y una buena acogida, fueron el preludio
        a un Speech muy completo sobre la ciberseguridad aplicada por el fabricante. 
       </h5>
+      <a href="/static/img/huawei-3.jpg" data-toggle="lightbox" data-caption="This describes the image" >
        <img class="imagen-publicacion"
         src="/static/img/huawei-3.jpg"
         data-src="huawei-3.jpg"
         class="img-fluid rounded-top imagen-publicacion lazyload"
         alt=""
         style="margin-bottom:10px;margin-top:10px"
-        loading="lazy"
-       
-      />
+        loading="lazy"/>
+      </a>
       </div>
         <div class="col-md-6" style="margin-bottom:10px;margin-top:10px;text-align: justify;
         text-justify: inter-word;">
+       <a href="/static/img/huawei-1.jpg" data-toggle="lightbox" data-caption="This describes the image" > 
       <img
         src="/static/img/huawei-1.jpg"
         data-src="huawei-1.jpg"
         class="img-fluid rounded-top imagen-publicacion "
         loading="lazy"
         alt=""
-        style="margin-bottom:10px;margin-top:10px"
-      />
+        style="margin-bottom:10px;margin-top:10px" />
+        </a> 
        <h5>
         Seguidamente nos ofrecieron no cejar en nuestras formaciones, añadiendo las
         multiples certificaciones de los más conocidos actores del panorama.
@@ -115,15 +115,15 @@
      </div>
         <div class="col-md-5 " style="margin-bottom:10px;" >
       <h5 style="text-align: center;">Fotografias tomadas el día de la entrevista</h5>
+       <a href="/static/img/huawei-2.jpg" data-toggle="lightbox" data-caption="This describes the image" > 
       <img
         src="/static/img/huawei-2.jpg"
         data-src="huawei-2.jpg"
         class="img-fluid rounded-top imagen-publicacion "
         alt=""
         style="margin-bottom:10px;margin-top:10px"
-        loading="lazy"
-       
-      />
+        loading="lazy"/>
+        </a>
       
       
       </div>
@@ -148,14 +148,9 @@
       crossorigin="anonymous"
     ></script>
      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-      <script src="https://cdn.jsdelivr.net/gh/StephanWagner/jBox@v1.3.3/dist/jBox.all.min.js"></script>
-     <script>
-      $(document).ready(function() {
-       console.log( "ready!" );
-       new jBox('Image');
-      });
-     
-     </script>
+<script src="https://cdn.jsdelivr.net/npm/bs5-lightbox@1.8.3/dist/index.bundle.min.js"></script>
+ <script src="/static/js/main.js"></script>
+    
   
   </body>
 </html>
