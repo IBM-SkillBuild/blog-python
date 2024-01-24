@@ -2,7 +2,8 @@
 @media only screen and (max-width: 1200px) {
   #contenedor{
     min-width:95%;
-   
+  
+}
   }
  
  .texto-entrada{
@@ -12,11 +13,13 @@
  }
   #foto_about{
      top:0vh !important;
+     
   }
   
   .card{
     background-color: chocolate;
     margin-bottom: 10vh;
+     
     
   }
  .card-img-top {
@@ -101,6 +104,7 @@
     width: 23vw !important;
      top:0vh !important;
   }
+ 
   .device-menu {
    right: 10px;
   }
@@ -115,7 +119,7 @@
     width: 25vw !important;
      top:3vh !important;
   }
- 
+
 }
 
 @media only screen and (max-width: 400px) {
@@ -138,6 +142,8 @@ html{
     background-position: center;
     background-size: cover;
     min-height: 100vh;
+      animation: fadeIn; /* referring directly to the animation's @keyframe declaration */
+  animation-duration: 2s; /* don't forget to set a duration! */
    
     
     
@@ -352,6 +358,8 @@ header {
   opacity: 1;
   -webkit-transition: opacity 0.6s linear;
   transition: opacity 0.6s linear;
+   animation: fadeIn; /* referring directly to the animation's @keyframe declaration */
+  animation-duration: 1s; /* don't forget to set a duration! */
 }
 
 .header-nav.active .header-nav__inner {
