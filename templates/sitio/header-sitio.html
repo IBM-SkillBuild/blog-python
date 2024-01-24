@@ -55,14 +55,14 @@
   <body class="container fondo">
     <div class="header-holder">
       <header class="header" style="background-color: transparent">
-        <div class="search-mobile" style="display: block">
+        <div class="search-mobile">
           <a rel="nofollow">
             <i class="icon_search"></i>
           </a>
         </div>
 
-        <nav class="header-nav">
-          <div class="header-nav__inner">
+        <nav class="header-nav" >
+          <div class="header-nav__inner" >
             <ul class="header-menu-list">
               <li class="header-menu-item">
                 <a href="/">HOME</a>
@@ -73,9 +73,14 @@
               <li class="header-menu-item">
                 <a href="/publicaciones">PUBLICACIONES</a>
               </li>
+              
               <li class="header-menu-item">
                 <a href="/admin">ZONA OWNER</a>
               </li>
+              <li class="header-menu-item">
+                <a href="#" onclick="mostrar_menu()">- CLOSE THIS MENU -</a>
+              </li>
+              
             </ul>
           </div>
         </nav>
@@ -84,7 +89,7 @@
         <img
           id="blog"
           title="Menú de opciones"
-          onclick="mostrar_menu()"
+          onmouseover="mostrar_menu()"
           src="{{url_for('static', filename='/img/blog.png')}}"
           alt="El Blog de Eduardo Cabrera"
         />

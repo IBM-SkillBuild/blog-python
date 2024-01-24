@@ -15,7 +15,9 @@
      top:0vh !important;
      
   }
-  
+  iframe{
+    overflow: hidden;
+  }
   .card{
     background-color: chocolate;
     margin-bottom: 10vh;
@@ -34,7 +36,7 @@
     border-radius: 30px;
   }
   .margin-sup{
-  margin-top:50px;
+  margin-top:10px;
 }
  #owner{
   display: none;
@@ -97,21 +99,23 @@
 
 
 
-}
+
 
 @media only screen and (max-width: 700px) {
   #foto_about{
     width: 23vw !important;
      top:0vh !important;
   }
- 
+
   .device-menu {
    right: 10px;
+  
   }
+
    .presentacion{
    
    min-width: 100% !important;
-   margin-top: 3vh !important;
+ 
   }
 }
 @media only screen and (max-width: 500px) {
@@ -126,7 +130,7 @@
    #blog{
     display: none;
   }
-}
+   }
 
 table tbody tr:nth-child(odd) {
 	background: #fff5e0;
@@ -153,6 +157,9 @@ body{
   background-color: transparent;
 }
  
+#publicacion{
+  min-width: 100%;
+ }
 
   #foto_about{
     position: absolute;
@@ -191,7 +198,7 @@ body{
 
 
 .margin-sup{
-  margin-top: 20px;
+  margin-top: 10px;
  
 }
 
@@ -235,7 +242,7 @@ h1{
  #blog{
     cursor: pointer;
     height: 100px;
-    padding-top: 2vh;
+   
   }
 .fondo{
   background-color: transparent;
@@ -264,7 +271,7 @@ h1{
   text-align: justify;
  }
  .presentacion{
-  margin-top: 10vh;
+  margin-top: 2vh;
  }
  
 
@@ -321,6 +328,7 @@ header {
   width: 100px;
   height: 60px;
   position: relative;
+ 
 }
 
 
@@ -334,6 +342,7 @@ header {
   transition: -webkit-transform .4s ease;
   transition: transform .4s ease;
   transition: transform .4s ease, -webkit-transform .4s ease;
+  
 }
 
 
@@ -342,9 +351,7 @@ header {
   order: 2;
 }
 
-.header-nav {
-  display: none; 
-}
+
 
 .header-nav.active {
   display: block;
@@ -386,12 +393,12 @@ nav.active ul {
 }
 
 nav.active ul li {
-  padding: 10px 0;
+  padding: 20px 0;
 }
 
 nav ul {
   padding: 8px 0 0 0;
-  display: flex;
+  display: none;
 }
 
 nav ul li {
@@ -402,7 +409,7 @@ nav ul li {
 nav ul li a {
   display: inline-block;
   font-family: "BrandonText", Helvetica, Arial, sans-serif;
-  font-size: 14px;
+  font-size: 24px;
   line-height: 17px;
   color: white;
   text-transform: uppercase;
@@ -428,7 +435,7 @@ nav ul li a:hover {
   background-color: rgba(0,0,0,0.6);
   width: 45px;
   height: 40px;
-  display: block;
+ 
 }
 
 
