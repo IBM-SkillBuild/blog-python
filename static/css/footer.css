@@ -1,0 +1,18 @@
+.footer {
+  position: fixed;
+  
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 0.8rem;
+  background: rgb(139, 138, 139);
+  color: white;
+  font-weight: 500;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.2rem;
+  
+}
+
+}

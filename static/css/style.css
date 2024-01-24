@@ -309,6 +309,14 @@ header {
   
 }
 
+.sociales{
+   position: absolute;
+  top: -5px;
+  right: 50px;
+  z-index: 6;
+}
+
+
 .search-mobile {
   /*     display: none; */
   position: absolute;
