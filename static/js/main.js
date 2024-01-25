@@ -3,17 +3,7 @@ const headerMenu = document.querySelector('.header-nav');
  
 $(document).ready(function () {
    $('.device-menu').css('display', 'none');
-  $('p').click(function (event) {
-    let text = document.getElementById('url-clip').innerHTML;
-    const copyContent = async () => {
-      try {
-        await navigator.clipboard.writeText(text);
-        console.log('Content copied to clipboard');
-      } catch (err) {
-        console.error('Failed to copy: ', err);
-      }
-    };
-  });
+ 
 });
 
 function portapapeles(id) {
@@ -21,6 +11,7 @@ function portapapeles(id) {
     .writeText(id)
     .then(() => {
       console.log('Texto copiado al portapapeles');
+      console.log(id);
     })
     .catch((err) => {
       console.error('Error al copiar al portapapeles:', err);

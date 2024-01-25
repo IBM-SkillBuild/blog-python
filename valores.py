@@ -25,6 +25,6 @@ class Valores():
   USER = "telsafdd"
   PASSWORD = "gbgMJqP64hVtYzePuHyOucywfeMhQPpg"
   DB = "telsafdd"
-  URL = "postgres://telsafdd:gbgMJqP64hVtYzePuHyOucywfeMhQPpg@kandula.db.elephantsql.com/telsafdd"
+  URL = "https://blog-edu-tech.koyeb.app"
 
  
