@@ -8,11 +8,23 @@ class Valores():
   #MYSQL_PASSWORD = "1.6180339"
   #MYSQL_DB = "blog_edu"
   
-  HOST = "ep-noisy-silence-21789047.eu-central-1.aws.neon.tech"
+  # koyeb
+  
+  """ HOST = "ep-noisy-silence-21789047.eu-central-1.aws.neon.tech"
   PORT = 3306
   USER = "koyeb-adm"
   PASSWORD = "RIghWyKm4Tt5"
   DB = "koyebdb"
-  URL="https://blog-edu-tech.koyeb.app"
+  URL="https://blog-edu-tech.koyeb.app" """
+  
+  
+  # elefhant sql
+
+  HOST = "kandula.db.elephantsql.com"
+  PORT = 3306
+  USER = "telsafdd"
+  PASSWORD = "gbgMJqP64hVtYzePuHyOucywfeMhQPpg"
+  DB = "telsafdd"
+  URL = "postgres://telsafdd:gbgMJqP64hVtYzePuHyOucywfeMhQPpg@kandula.db.elephantsql.com/telsafdd"
 
  

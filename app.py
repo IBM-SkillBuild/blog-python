@@ -40,10 +40,13 @@ db = psycopg2.connect(
           #  fecha date ,
          #   habilitado boolean);
           #  """)
-
+#db.commit()
+#cursor.close()
+#db.close() """
 
 #rutas
 @app.route("/")
+
 def index():
  
   mis_valores.footer=True
@@ -52,7 +55,8 @@ def index():
 
 @app.route("/publicaciones", methods=['POST', 'GET'])
 def publicaciones():
-   
+   per_page=3
+   start_index=0
    mis_valores.footer=False
    db = psycopg2.connect(
        host=mis_valores.HOST,
