@@ -1,24 +1,23 @@
 {% include "sitio/header-sitio.html" %}
-    <main>
-      <div class="container-fluid py-5 presentacion" style="max-width:60vw">
-        
-        <h2 class="display-5 fw-bold">Trabajando con Postgresql {{mensaje}}</h2>
-        <p class="col-md-12 texto-entrada" >
-          He creado este sitio web con el framework
-          Flask de Python, reuniendo tanto el "front", como el "back" en un único proyecto sencillo y minimalista.
-          Manejo un "CRUD" de posts desde mi perfil de administrador, y lo muestro en producción.
-        </p>
-       
-        <a class="btn btn-primary btn-lg" type="button" href="/publicaciones" style="margin-top:5vh">
-         ver todas las publicaciones {{valores.saludo}}
-                 </a>
-             
-     
-     </div>
+<main>
+  <div class="container-fluid py-5 presentacion" style="max-width: 60vw">
+    <h2 class="display-5 fw-bold">Trabajando con Postgresql {{mensaje}}</h2>
+    <p class="col-md-12 texto-entrada">
+      He creado este sitio web con el framework Flask de Python, reuniendo tanto
+      el "front", como el "back" en un único proyecto sencillo y minimalista.
+      Manejo un "CRUD" de posts desde mi perfil de administrador, y lo muestro
+      en producción.
+    </p>
 
-    </main>
- 
-{% if valores.footer == True %}
-       {% include "sitio/footer.html"%}
-    {% endif %}
-    
+    <a
+      class="btn btn-primary btn-lg"
+      type="button"
+      href="/publicaciones"
+      style="margin-top: 5vh"
+    >
+      ver todas las publicaciones {{valores.saludo}}
+    </a>
+  </div>
+</main>
+
+{% if valores.footer == True %} {% include "sitio/footer.html"%} {% endif %}
