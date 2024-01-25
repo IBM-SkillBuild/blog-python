@@ -20,7 +20,7 @@
   }
   .card{
     background-color: chocolate;
-    margin-bottom: 10vh;
+    margin-bottom: 1vh;
      
     
   }
@@ -36,7 +36,7 @@
     border-radius: 30px;
   }
   .margin-sup{
-  margin-top:10px;
+  margin-top:5px;
 }
  #owner{
   display: none;
@@ -163,7 +163,7 @@ body{
 
   #foto_about{
     position: absolute;
-    top:3vh;
+    top:1vh;
     right:5vw;
     width:20vw;
     cursor:pointer
@@ -198,7 +198,7 @@ body{
 
 
 .margin-sup{
-  margin-top: 10px;
+  margin-top: 5px;
  
 }
 
@@ -241,7 +241,7 @@ h1{
 }
  #blog{
     cursor: pointer;
-    height: 100px;
+    height: 80px;
    
   }
 .fondo{
@@ -271,7 +271,7 @@ h1{
   text-align: justify;
  }
  .presentacion{
-  margin-top: 2vh;
+  margin-top: 1vh;
  }
  
 
@@ -537,5 +537,12 @@ a.scroll-top {
 a.scroll-top svg {
     display: block;
     fill: #fff; /** Color del icono **/
+}
+
+.paginacion{
+  margin-bottom: 60px;
+ display: flex;
+  align-items: center;
+  justify-content: center;
 }
 

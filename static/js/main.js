@@ -33,7 +33,7 @@ function publicacion(source) {
   $('#publicacion').show();
   $('#publicacion').css('width', '100%');
   $('#publicacion').css('margin-top', 200);
-  let reducir = 100;
+  let reducir =10;
   $('html, body').animate(
     {
       scrollTop: $('#publicacion').offset().top - reducir,

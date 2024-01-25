@@ -3,6 +3,7 @@
 import os
 from flask import Flask
 from flask import render_template, redirect, request, session, send_from_directory
+from flask_paginate import Pagination #Importando paquete de paginación
 from valores import Valores
 import psycopg2
 from datetime import datetime
@@ -14,19 +15,8 @@ mis_valores=Valores()
 # (para produccion hay que cambiar a otra clase de archivo config)
 app.config.from_object("config.ConfigPro")
 basedir = os.path.abspath(os.path.dirname(__file__))
-#firebase=firebase.FirebaseApplication("https://eduardo-cabrera.firebaseio.com/",None)
-#recibido=firebase.delete("/datos",None)
 tiempo=datetime.now()
 fecha=tiempo
-data = {'id': 3, 
-        'nombre': "mi visita",
-        'imagen': "2023075934_huawei-3.jpg",
-        'descripcion':"",
-        'categoria': "",
-        'archivo': "2023133116_HUAWEI.html",
-        'fecha':fecha,
-        'habilitado':True}
-#emviado = firebase.post("/datos", data)
 
 
 db = psycopg2.connect(
@@ -73,17 +63,41 @@ def publicaciones():
        sslmode='require')
    cursor = db.cursor()
    try:
-   
-    sql = "SELECT * FROM publicaciones ORDER BY id DESC "
+    # Contar el número total de registros
+    sql = "SELECT count(*) FROM publicaciones"
+    data = []
+    cursor.execute(sql,data)
+    results = cursor.fetchone()
+    for r in results: 
+     count=r
+
+    # Obtener el número de página actual y la cantidad de resultados por página
+    page_num = request.args.get('page', 1, type=int)
+    per_page = 3
+    # Calcular el índice del primer registro y limitar la consulta a un rango de registros
+    start_index = (page_num - 1) * per_page + 1
+    sql = "SELECT * FROM publicaciones ORDER BY id DESC LIMIT {} OFFSET {}".format(str(per_page),str(start_index-1))
+    
     cursor.execute(sql)
     publicaciones=cursor.fetchall()
+    # Calcular el índice del último registro
+    end_index = min(start_index + per_page, count)
+    # end_index = start_index + per_page - 1
+    if end_index > count:
+        end_index = count
+    # Crear objeto paginable
+    pagination = Pagination(page=page_num, total=count, per_page=per_page,
+                            display_msg=f"Mostrando registros {start_index} - {end_index} de un total de <strong>({count})</strong>" )   
     
    except:
      publicaciones=""
+     pagination=""
+     sql = "SELECT * FROM publicaciones ORDER BY id DESC LIMIT {} OFFSET {}".format(str(per_page),str(start_index))
+
    finally:
      cursor.close()  
    
-   return render_template("/sitio/publicaciones.html", valores=mis_valores,publicaciones=publicaciones)
+   return render_template("/sitio/publicaciones.html", valores=mis_valores,publicaciones=publicaciones,pagination=pagination)
  
 
 

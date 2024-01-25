@@ -2,11 +2,13 @@
     <main >
       
    <div  class="container margin-sup animate__animated animate__fadeIn animate__delay-6s" >
-    
-      <div class="row" style="margin-bottom:50px">
+   
+      <div class="row" style="margin-bottom:20px">
         {% if publicaciones %}
+      
         {% for post in publicaciones %}
          {% if  loop.length>1 %}
+         
         <div class="col-md-4" >
          <div class="card"  style="height: 55vh;margin-bottom:5vh">
         
@@ -26,17 +28,28 @@
          </div>
        
         </div>
+            
+
              {% elif post[5] !="" %}
              <div class="container-fluid" style="text-align: center;">
                <iframe id="publicacion"   onclick="publicacion('/post/{{post[5]}}')" src="/post/{{post[5]}}"  width="100%" onload='resizeIframe(this)' frameborder="0" ></iframe>
              </div>  
             {% endif %}
           {% endfor %}
+           {% if  publicaciones|length > 1 %}
+                 
+       <div class="row justify-content-md-center ">
+        <div class="paginacion">
+          
+          {{ pagination.links }}
+        </div>
+      </div>
           {% endif %}
+           {% endif %}
         
       </div>
         <div class="container-fluid"style="text-align: center;">
-<iframe id="publicacion"  align = "middle"  style="display:none"src=""  frameborder="0"  width="100%" onload='resizeIframe(this)'>
+<iframe id="publicacion"   style="display:none"src=""  frameborder="0"  width="100%" onload='resizeIframe(this)'>
 </iframe>
 </div>
   </div>
