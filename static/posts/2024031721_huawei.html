@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    <!-- Bootstrap CSS v5.2.1 -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Montserrat"
+      rel="stylesheet"
+    />
+
+    <!--    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/style_publicaciones.css' ) }}">
+ -->
+    <style>
+      h1 {
+        font-weight: bolder;
+      }
+      h5 {
+        margin-top: 25px;
+        margin-bottom: 25px;
+      }
+      html,
+      body {
+        background-color: transparent;
+        font-family: 'Montserrat';
+        font-weight: bold;
+        color: black;
+      }
+
+      html::-webkit-scrollbar {
+        display: none;
+      }
+      .imagen-publicacion {
+        border: solid 4px whitesmoke;
+        display: block;
+        margin: auto;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        width: 90%;
+      }
+
+      @media only screen and (max-width: 1200px) {
+        .imagen-publicacion {
+          width: 90%;
+          display: block;
+          margin-left: auto;
+          margin-right: auto;
+          margin-top: 20px;
+          margin-bottom: 20px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <!-- place navbar here -->
+    </header>
+    <main class="main">
+      <div class="container-fluid"></div>
+      <div class="row">
+        <h1 style="text-align: center; margin-top: 20px; margin-bottom: 60px">
+          Mi visita a Huawei
+        </h1>
+
+        <div class="col-md-7" style="margin-bottom: 10px; margin-top: 10px">
+          <div class="row">
+            <div
+              class="col-md-6"
+              style="
+                margin-bottom: 10px;
+                margin-top: 10px;
+                text-align: justify;
+                text-justify: inter-word;
+              "
+            >
+              <h5>
+                El pasado 12 de diciembre de 2023 acudí a la calle Isabel
+                Colbrand de Madrid por invitación de la Fundación Universidad
+                Empresa (FUE). Se trataba de un Proceso de selección y Assesment
+                center en las instalaciones de HUAWEI. Un gran ambiente
+                tecnologico y una buena acogida, fueron el preludio a un Speech
+                muy completo sobre la ciberseguridad aplicada por el fabricante.
+              </h5>
+              <a
+                href="/static/img/huawei-3.jpg"
+                data-toggle="lightbox"
+                data-caption="This describes the image"
+              >
+                <img
+                  class="imagen-publicacion"
+                  src="/static/img/huawei-3.jpg"
+                  data-src="huawei-3.jpg"
+                  class="img-fluid rounded-top imagen-publicacion lazyload"
+                  alt=""
+                  style="margin-bottom: 10px; margin-top: 10px"
+                  loading="lazy"
+                />
+              </a>
+            </div>
+            <div
+              class="col-md-6"
+              style="
+                margin-bottom: 10px;
+                margin-top: 10px;
+                text-align: justify;
+                text-justify: inter-word;
+              "
+            >
+              <a
+                href="/static/img/huawei-1.jpg"
+                data-toggle="lightbox"
+                data-caption="This describes the image"
+              >
+                <img
+                  src="/static/img/huawei-1.jpg"
+                  data-src="huawei-1.jpg"
+                  class="img-fluid rounded-top imagen-publicacion"
+                  loading="lazy"
+                  alt=""
+                  style="margin-bottom: 10px; margin-top: 10px"
+                />
+              </a>
+              <h5>
+                Seguidamente nos ofrecieron no cejar en nuestras formaciones,
+                añadiendo las multiples certificaciones de los más conocidos
+                actores del panorama. Nos presentamos cerca de 40 candidatos que
+                bien contabamos con formación en Ciberseguridad y/o programación
+                en Python gracias a nuestra participación en la escuela de
+                talento del Ayto de de Madrid.
+              </h5>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-5" style="margin-bottom: 10px">
+          <h5 style="text-align: center">
+            Fotografias tomadas el día de la entrevista
+          </h5>
+          <a
+            href="/static/img/huawei-2.jpg"
+            data-toggle="lightbox"
+            data-caption="This describes the image"
+          >
+            <img
+              src="/static/img/huawei-2.jpg"
+              data-src="huawei-2.jpg"
+              class="img-fluid rounded-top imagen-publicacion"
+              alt=""
+              style="margin-bottom: 10px; margin-top: 10px"
+              loading="lazy"
+            />
+          </a>
+        </div>
+      </div>
+      <div
+        class="row"
+        style="
+          text-align: center;
+          margin-top: 30px;
+          margin-bottom: 60px;
+          font-size: 30px;
+        "
+      >
+        <a
+          href="https://digitalizateplus.fundae.es/digitalizate/1/44?categoria=193"
+          target="_blank"
+          >Acceso a certificaciones Huawei</a
+        >
+      </div>
+    </main>
+    <footer>
+      <!-- place footer here -->
+    </footer>
+    <!-- Bootstrap JavaScript Libraries -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+      integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+      crossorigin="anonymous"
+    ></script>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+      integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bs5-lightbox@1.8.3/dist/index.bundle.min.js"></script>
+    <script src="/static/js/main.js"></script>
+  </body>
+</html>
