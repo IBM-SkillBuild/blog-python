@@ -109,11 +109,13 @@
  <script src="/static/js/main.js"></script>
     
     <script>
-    $(document).ready(function() {
-   $('html, body').animate({
+     $(document).ready(function() {
+      setTimeout(function(){
+    $('html, body').animate({
         scrollTop: $(".footer").offset().top
     }, 2000);
       });
+}, 1000);
     
   </script>
   </body>

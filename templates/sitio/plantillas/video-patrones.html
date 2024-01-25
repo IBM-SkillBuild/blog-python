@@ -110,10 +110,13 @@
     
      <script>
     $(document).ready(function() {
-   $('html, body').animate({
+      setTimeout(function(){
+    $('html, body').animate({
         scrollTop: $(".footer").offset().top
     }, 2000);
       });
+}, 1000);
+  
     
   </script>
   </body>

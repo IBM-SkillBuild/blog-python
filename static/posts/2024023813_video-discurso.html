@@ -24,8 +24,6 @@
      .mivideo{
       width: 800px !important;
       margin: 0 auto;
-      border: 5px solid black;
-      padding: 2px;
      }
       h1{
          font-weight: bolder;
@@ -81,7 +79,7 @@
        <div class="container-fluid" ></div>
       <div class="row">
        
-        <h1 style="text-align:center;margin-top:20px;margin-bottom:30px">Escuela de talento</h1>
+        <h1 style="text-align:center;margin-top:20px;margin-bottom:30px">Patrones</h1>
         <video class="w-100 mivideo" controls autoplay >
   <source src="https://res.cloudinary.com/dquxfl0fe/video/upload/v1680626696/pruebas/discurso_75_megas_umvjbo.mp4" type="video/mp4" />
 
@@ -111,11 +109,13 @@
  <script src="/static/js/main.js"></script>
     
     <script>
-    $(document).ready(function() {
-   $('html, body').animate({
+     $(document).ready(function() {
+      setTimeout(function(){
+    $('html, body').animate({
         scrollTop: $(".footer").offset().top
     }, 2000);
       });
+}, 1000);
     
   </script>
   </body>
