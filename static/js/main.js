@@ -87,7 +87,7 @@ document.querySelectorAll('.my-lightbox-toggle').forEach((el) =>
 
 function resizeIframe(obj) {
   obj.style.height =
-    obj.contentWindow.document.documentElement.scrollHeight + 135 + 'px';
+    obj.contentWindow.document.documentElement.scrollHeight + 155 + 'px';
 }
 
 $(window).resize(function () {

@@ -176,15 +176,16 @@
         <a
           href="https://digitalizateplus.fundae.es/digitalizate/1/44?categoria=193"
           target="_blank"
-          >Acceso a certificaciones Huawei</a
-        >
+          >Acceso a certificaciones Huawei</a >
       </div>
-      
+       <a href='#' class='scroll-top'>
+    <svg height='35' viewBox='0 0 24 24' width='35' xmlns='http://www.w3.org/2000/svg'>
+       <path d='M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z'/>
+       <path d='M0 0h24v24H0z' fill='none'/>
+    </svg>
+</a>
     </main>
-    <footer>
-      <!-- place footer here -->
-    </footer>
-    <!-- Bootstrap JavaScript Libraries -->
+    
     <script
       src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
       integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
@@ -198,6 +199,22 @@
     ></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bs5-lightbox@1.8.3/dist/index.bundle.min.js"></script>
-    <script src="/static/js/main.js"></script>
+   
+    <script>
+      $(window).scroll(function () {
+  if ($(this).scrollTop() > 300) {
+    $('a.scroll-top').fadeIn('slow');
+     $('.device-menu').css('display', 'block');
+  } else {
+    $('a.scroll-top').fadeOut('slow');
+   
+  }
+});
+$('a.scroll-top').click(function (event) {
+  event.preventDefault();
+  $('html, body').animate({ scrollTop: 0 }, 600);
+});
+
+    </script>  
   </body>
 </html>
