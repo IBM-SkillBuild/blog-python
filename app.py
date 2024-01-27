@@ -1,12 +1,15 @@
 #modulo principal
 #importaciones.
 import os
-from flask import Flask
-from flask import render_template, redirect, request, session, send_from_directory
+from os import remove
+from flask import Flask, current_app
+from flask import render_template, redirect, request, session, send_from_directory,jsonify
 from flask_paginate import Pagination #Importando paquete de paginación
 from valores import Valores
 import psycopg2
+import json
 from datetime import datetime
+import logging
 # instancias
 app=Flask(__name__)
 mis_valores=Valores()
@@ -25,24 +28,22 @@ db = psycopg2.connect(
         password=mis_valores.PASSWORD,
         sslmode= 'require')
 
+""" cursor = db.cursor()
+cursor.execute("DROP TABLE IF EXISTS publicaciones   ")
 
-
-
-#cursor.execute("""DROP TABLE IF EXISTS publicaciones   """)
-
-#cursor.execute("""CREATE TABLE IF NOT EXISTS publicaciones(
-          #  id    SERIAL PRIMARY KEY,
-          #  nombre varchar (250),
-          #  imagen varchar (250) ,
-          #  descripcion varchar (250) ,
-          #  categoria varchar (250) ,
-          #  archivo varchar (250) ,
-          #  fecha date ,
-         #   habilitado boolean);
-          #  """)
-#db.commit()
-#cursor.close()
-#db.close() """
+cursor.execute("CREATE TABLE IF NOT EXISTS publicaciones(
+            id    SERIAL PRIMARY KEY,
+           nombre varchar (250),
+           imagen varchar (250) ,
+           descripcion varchar (250) ,
+           categoria varchar (250) ,
+           archivo varchar (250) ,
+           fecha date ,
+           habilitado boolean);
+ ")
+db.commit()
+cursor.close()
+db.close() """
 
 #rutas
 @app.route("/")
@@ -79,7 +80,8 @@ def publicaciones():
     per_page = 3
     # Calcular el índice del primer registro y limitar la consulta a un rango de registros
     start_index = (page_num - 1) * per_page + 1
-    sql = "SELECT * FROM publicaciones ORDER BY id DESC LIMIT {} OFFSET {}".format(str(per_page),str(start_index-1))
+    sql = "SELECT * FROM publicaciones  ORDER BY id DESC LIMIT {} OFFSET {}".format(
+        str(per_page), str(start_index-1))
     
     cursor.execute(sql)
     publicaciones=cursor.fetchall()
@@ -99,9 +101,46 @@ def publicaciones():
 
    finally:
      cursor.close()  
+     db.close()
    
    return render_template("/sitio/publicaciones.html", valores=mis_valores,publicaciones=publicaciones,pagination=pagination)
  
+
+@app.route("/consulta-categorias", methods=['POST', 'GET'])
+def consulta():
+   if request.args.get('mibusqueda'):
+    busqueda = "'%"+ request.args.get('mibusqueda')+ "%'"
+    busqueda=busqueda.lower()
+   else:
+     return "busqueda sin contenido" 
+   
+   mis_valores.footer = False
+   db = psycopg2.connect(
+       host=mis_valores.HOST,
+       database=mis_valores.DB,
+       user=mis_valores.USER,
+       password=mis_valores.PASSWORD,
+       sslmode='require')
+   cursor = db.cursor()
+   try:
+    
+    sql = "SELECT * FROM publicaciones WHERE lower(categoria) LIKE " + \
+        busqueda + " OR lower(nombre) LIKE " + busqueda + " ORDER BY id DESC "
+
+    cursor.execute(sql)
+    publicaciones = cursor.fetchall()
+   
+   
+   except:
+     publicaciones = ""
+     pagination = ""
+     sql = sql
+
+   finally:
+     cursor.close()
+     db.close()
+
+   return jsonify({'htmlresponse': render_template("/sitio/busqueda.html", valores=mis_valores, publicaciones=publicaciones, busqueda=request.args.get('mibusqueda'))})
 
 
 @app.route("/ultima_publicacion",methods = ['POST', 'GET'])
@@ -194,6 +233,7 @@ def admin_guardar_publicaciones():
     nombre=(request.form['name_post'])
     nombre_imagen=(request.files['name_imagen_post']) 
     html_publicacion = (request.files['html_publicacion'])
+    categoria =(request.form['tags'])
     nombre_imagen_nuevo=""
     html_publicacion_nuevo=""
     tiempo=datetime.now()
@@ -210,7 +250,7 @@ def admin_guardar_publicaciones():
        html_publicacion.save(os.path.join(
           basedir, app.config['UPLOAD_POST'], html_publicacion_nuevo))
     descripcion=""
-    categoria=""
+    
     habilitado=True   
     
     db = psycopg2.connect(
@@ -236,6 +276,7 @@ def admin_update_publicaciones():
     nombre=request.form['name_post']
     nombre_imagen=request.files['name_imagen_post'] 
     html_publicacion = request.files['html_publicacion']
+    categoria = (request.form['tags'])
     nombre_imagen_nuevo=""
     html_publicacion_nuevo=""
     tiempo=datetime.now()
@@ -254,7 +295,7 @@ def admin_update_publicaciones():
     else:
       html_publicacion_nuevo = request.form['old_html_publicacion']
     descripcion=""
-    categoria=""
+    
     habilitado=True   
     
     db = psycopg2.connect(
@@ -275,8 +316,21 @@ def admin_update_publicaciones():
 @app.route("/admin/publicaciones/borrar", methods=['POST'])
 def admin_borrar_publicaciones():
    if session['usuario']=="Admin":
+     
       id_borrar=request.form['id_borrar']
-      
+      try:
+        borrar_imagen= request.form['borrar_imagen']
+        borrar="static/uploads/"+borrar_imagen
+        remove(borrar)
+      except:
+        pass 
+      try: 
+       borrar_html = request.form['borrar_html']
+       borrar=("/static/posts/"+ borrar_html)
+       remove(borrar)
+      except:
+        pass
+     
       db = psycopg2.connect(
           host=mis_valores.HOST,
           database=mis_valores.DB,
@@ -347,4 +401,4 @@ def admin_log_out():
 if __name__=="__main__":
   # app.run(debug=True) NO NECESARIO 
   # -- SE LEE DESDE ARCHIVO CONFIG-- (cambiar para produccion a otra clase)
-  app.run()
+  app.run(debug=True)

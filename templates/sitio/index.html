@@ -1,6 +1,14 @@
 {% include "sitio/header-sitio.html" %}
 <main>
+    <img
+          id="blog"
+          title="Menú de opciones"
+          onclick="mostrar_menu()"
+          src="{{url_for('static', filename='/img/blog.png')}}"
+          alt="El Blog de Eduardo Cabrera"
+        />
   <div class="container-fluid py-5 presentacion" style="max-width: 60vw">
+   
     <h2 class="display-5 fw-bold">Trabajando con Postgresql {{mensaje}}</h2>
     <p class="col-md-12 texto-entrada">
       He creado este sitio web con el framework Flask de Python, reuniendo tanto

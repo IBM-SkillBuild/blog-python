@@ -24,6 +24,18 @@
                 <input type="file" class="form-control" name="html_publicacion" id="html_publicacion"
                   placeholder="Ingresa Archivo html">
               </div>
+              <select id="categorias" class="categorias form-control"  multiple="multiple">
+            
+            <option value="Eduardo">Eduardo</option>
+            <option value="Ofertas">Ofertas</option>
+            <option value="Python">Python</option>
+            <option value="Flask">Flask</option>
+            <option value="Javascript">Javascript</option>
+            <option value="Html">Html</option>                        
+            <option value="LinkedIn">LinkedIn</option>                                    
+            <option value="Youtube">Youtube</option>                                                
+          </select>
+          <input type="hidden" name="tags" id="tags"></input>
               <div class="d-flex justify-content-center" style="margin-top:60px">
                 <button type="submit" class="btn btn-primary">
                   Save Post
@@ -61,6 +73,7 @@
                     <th>nombre</th>
                     <th>imagen</th>
                     <th>plantilla html</th>
+                     <th>categorias</th>
                     <th>acciones</th>
                   </tr>
                 </thead>
@@ -69,16 +82,17 @@
                   {% for post in publicaciones %}
                   <tr>
 
-                    <td id="tabla-id" data-title="ID">{{post[0]}}</th>
+                    <td id="tabla-id" data-title="ID">{{post[0]}}</td>
 
-                    <td id="tabla-nombre" data-title="nombre">{{post[1]}}</th>
+                    <td id="tabla-nombre" data-title="nombre">{{post[1]}}</td>
                     <td class="tabla-imagen" data-title="imagen" style="overflow:hidden">
 
                       <img class="zoom " src="/img/{{post[2]}}" class="img-fluid rounded-top" alt="imagen post" />
 
 
 
-                    <td id="tabla-descarga" data-title="url descarga">{{post[3]}}</th>
+                    <td id="tabla-descarga" data-title="url descarga">{{post[3]}}</td>
+                    <td id="categorias" data-title="categorias">{{post[4]}}</td>
                     <td data-title="acciones">
                       <form action="/admin/publicaciones/borrar" method="post">
                         <input style="display:none" value="{{post[0]}}" type="text" name="id_borrar" id="id_borrar">
@@ -116,4 +130,5 @@
 
 
 </main>
+ 
 {% include "admin/footer.html"%}

@@ -1,30 +1,6 @@
-{% include "sitio/header-sitio.html" %}
-
-  <img
-          id="blog"
-          title="Menú de opciones"
-          onclick="mostrar_menu()"
-          src="{{url_for('static', filename='/img/blog.png')}}"
-          alt="El Blog de Eduardo Cabrera"
-        />
-        {% if publicaciones %}
-       
-    <div id="barra-busqueda" class="search-bar-container"  >
-      
-		<img src="https://cdn4.iconfinder.com/data/icons/evil-icons-user-interface/64/magnifier-256.png" alt="magnifier" class="magnifier" />
-		<input id="search" autocomplete="off" type="text" class="input" placeholder="Search..." />
-		<img   src="https://cdn1.iconfinder.com/data/icons/google-s-logo/150/Google_Icons-25-256.png"  alt="mic-icon" class="mic-icon" />
-  	
-  
-  </div>
-    {% endif %}
-    <main id="contenido">
-      
-     
-   <div  class="container margin-sup animate__animated animate__fadeIn animate__delay-6s" >
+ <div  class="container margin-sup animate__animated animate__fadeIn animate__delay-6s" >
    
-      <div class="row" >
-        {% if publicaciones %}
+      <div class="row" style="margin-bottom:20px">
        
          
         {% for post in publicaciones %}
@@ -57,16 +33,8 @@
              </div>  
             {% endif %}
           {% endfor %}
-           {% if  publicaciones|length > 1 %}
-                 
-       <div class="row justify-content-md-center ">
-        <div class="paginacion">
+         
           
-          {{ pagination.links }}
-        </div>
-      </div>
-          {% endif %}
-           {% endif %}
         
       </div>
         <div class="container-fluid"style="text-align: center;">
@@ -74,13 +42,14 @@
 </iframe>
 </div>
   </div>
+  
     {% if not publicaciones %}
     <h1 style="text-align:center; margin-top:60px">Consulta sin contenido</h1>
-     <div style="text-align:center; margin-top:60px">
+    <div style="text-align:center; margin-top:60px">
       <a href="/publicaciones">  <button  type="button" class="btn btn-dark" data-mdb-ripple-init>Ver todo</button></a>
       
     </div>
-   
+    
     {% endif %}
        {% include "sitio/footer.html"%}
         <a href='#' class='scroll-top'>
@@ -89,8 +58,4 @@
        <path d='M0 0h24v24H0z' fill='none'/>
     </svg>
 </a>
-    </main>
- 
-   
-  
- 
+
