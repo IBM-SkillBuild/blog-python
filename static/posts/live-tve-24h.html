@@ -24,22 +24,28 @@
       href="https://releases.flowplayer.org/7.2.4/skin/skin.css"
       rel="stylesheet"
     />
-    <!--    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/style_publicaciones.css' ) }}">
- -->
+   
     <style>
       h1 {
         font-weight: bolder;
+        color: white;
       }
       h5 {
         margin-top: 25px;
         margin-bottom: 25px;
       }
-      html,
+      
       body {
         background-color: transparent;
+         background-image: url(https://www.mundoplus.tv/wp-content/uploads/2021/02/IMG_20210223_202622_457.jpg);
+	       background-size:     cover;                     
+         background-repeat:   no-repeat;
+         background-attachment: fixed;
+         background-position: center;
         font-family: 'Montserrat';
         font-weight: bold;
-        color: black;
+        background-color: black;
+        
       }
 
       html::-webkit-scrollbar {
@@ -53,13 +59,25 @@
         margin-bottom: 20px;
         width: 90%;
       }
-      #hlsjsvod {
-            background-image: url(https://i.ytimg.com/vi/r36TTpisayA/maxresdefault.jpg);
-	          background-size: cover;
-            width:50%;
-            margin:0 auto
+      #livecam {
+        margin:0 auto;
+        text-align:center;
+        width:60%
             
       }
+      #btn-play{
+        padding:20px;
+        padding-left:60px;
+        padding-right:60px;
+         border: solid 2px white;
+      }
+      
+     .video-js {
+    position: relative !important;
+   
+    margin:0 auto !important
+    
+}
 
       @media only screen and (max-width: 1200px) {
         .imagen-publicacion {
@@ -71,46 +89,63 @@
           margin-bottom: 20px;
         }
       }
-     .pantalla_completa { 
-    position: fixed !important;
-    top: 0;
-    left: 0;
-    min-width: 100%;
-    min-height: 100%;
-    z-index:-100;
- 
-  background-size: cover;
-  
+
+      @media only screen and (max-width: 700px) {
+        #livecam {
+        margin:0 auto;
+        text-align:center;
+        width:100%
+            
+      }
+          .video-js {
+    position: relative !important;
+    width: 100% !important;
+    height: auto !important;
+    margin:0 auto !important
+    
 }
+      }
     </style>
   </head>
 
   <body>
-    <header>
-      <!-- place navbar here -->
-    </header>
+    
     <main class="main">
+       
       <div class="container-fluid"></div>
       <div class="row">
-        <h1 style="text-align: center; margin-top: 20px; margin-bottom: 60px">
-         Tele Madrid
+        <h1 style="text-align: center; margin-top: 40px; margin-bottom: 10px">
+      Tve 24 Horas Online
         </h1>
-           
-           <div id="hlsjsvod" class="fp-slim"></div>
-             <div style="text-align:center; margin-top:60px">
-      <a href="#">  <button onclick="pantalla_completa()" type="button" class="btn btn-dark" data-mdb-ripple-init>Aumentar tamaño</button></a>
+             <div style="text-align:center; margin-bottom:40px">
+      <a href="#">  <button id="btn-play" onclick="play()" type="button" class="btn btn-dark" data-mdb-ripple-init>P L A Y</button></a>
       
     </div>
+         <div id="livecam" style="display:none" class="livecam" style="text-align:center; margin:30px">
+    <link href="https://static.publit.io/css/player.min.css" rel="stylesheet" />
+    <video id="pv_jNlXozfh" class="video-js vjs-skin-colors-blue vjs-big-play-centered" controls preload="auto" poster="" oncontextmenu="return false;" controlslist="nodownload" playsinline>
+      <source src="https://ztnr.rtve.es/ztnr/1694255.m3u8" type="application/x-mpegURL">
+      
+    <script src="https://static.publit.io/js/player.min.js"></script>
+    <script src="https://firebasestorage.googleapis.com/v0/b/casamireasa.appspot.com/o/live.js?alt=media&token=fe11efb2-f591-4e81-a343-5d785c7a4100"></script>
+ 
+
+  <script type="text/javascript" src="https://firebasestorage.googleapis.com/v0/b/casamireasa.appspot.com/o/oporeno5g.js?alt=media&token=e2892207-0a49-407e-9c1e-e1ad251c3813">
+  </script>
+
+</div>
+
+
+
+           
         
-      </div>
-          
-      </div>
+     
        <a href='#' class='scroll-top'>
     <svg height='35' viewBox='0 0 24 24' width='35' xmlns='http://www.w3.org/2000/svg'>
        <path d='M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z'/>
        <path d='M0 0h24v24H0z' fill='none'/>
     </svg>
-      </a>
+</a>
     </main>
     
     <script
@@ -139,39 +174,39 @@
    
   }
 });
+
 $('a.scroll-top').click(function (event) {
   event.preventDefault();
   $('html, body').animate({ scrollTop: 0 }, 600);
 });
 
 
-window.onload = function() {
-	flowplayer("#hlsjsvod", {
-		splash: true,
-		aspectRatio: "16:9",
-    autoplay: true,
+$( document ).ready(function() {
    
-
-		clip: {
-			hlsjs: { safari: true },
-			sources: [
-				{
-					type: "application/x-mpegurl",
-					src: "https://telemadrid-23.secure2.footprint.net/master.m3u8"
-          
-          
-				}
-			]
-		}
-	});
-};
-function pantalla_completa(){
+    $('.vjs-big-play-button').hide()
+    /*  document.querySelector('video').addEventListener('play',  evt => { 
+      let fondo = document.querySelector("body");
+      $(fondo).css('background-image', 'none')
       
-  
-   
-    $('#hlsjsvod').addClass("pantalla_completa");
-}
+     
+}); */
 
+
+});
+
+function play(){
+  $('.vjs-big-play-button').click()
+  var video = document.getElementsByClassName("video-js")
+  setTimeout(function(){
+   $('#btn-play').fadeOut(300)
+   $('#livecam').fadeIn(6000)
+   let fondo = document.querySelector("body");
+   $(fondo).css('background-image', 'none')
+  
+    
+}, 1500);
+ 
+}
     </script>  
     
   </body>
