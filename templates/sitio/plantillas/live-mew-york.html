@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    <!-- Bootstrap CSS v5.2.1 -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Montserrat"
+      rel="stylesheet"
+    />
+    <link
+      href="https://releases.flowplayer.org/7.2.4/skin/skin.css"
+      rel="stylesheet"
+    />
+   
+    <style>
+      h1 {
+        font-weight: bolder;
+        color: white;
+      }
+      h5 {
+        margin-top: 25px;
+        margin-bottom: 25px;
+      }
+      
+      body {
+        background-color: transparent;
+         background-image: url(https://www.civitatis.com/blog/wp-content/uploads/2016/05/Estatua-de-la-Libertad.jpg);
+	       background-size:     cover;                     
+         background-repeat:   no-repeat;
+         background-attachment: fixed;
+         background-position: center;
+        font-family: 'Montserrat';
+        font-weight: bold;
+        background-color: black;
+        
+      }
+
+      html::-webkit-scrollbar {
+        display: none;
+      }
+      .imagen-publicacion {
+        border: solid 4px whitesmoke;
+        display: block;
+        margin: auto;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        width: 90%;
+      }
+      #livecam {
+        margin:0 auto;
+        text-align:center;
+        width:60%
+            
+      }
+      #btn-play{
+        padding:20px;
+        padding-left:60px;
+        padding-right:60px;
+       
+      }
+      
+     .video-js {
+    position: relative !important;
+   
+    margin:0 auto !important
+    
+}
+
+      @media only screen and (max-width: 1200px) {
+        .imagen-publicacion {
+          width: 90%;
+          display: block;
+          margin-left: auto;
+          margin-right: auto;
+          margin-top: 20px;
+          margin-bottom: 20px;
+        }
+      }
+
+      @media only screen and (max-width: 700px) {
+        #livecam {
+        margin:0 auto;
+        text-align:center;
+        width:100%
+            
+      }
+          .video-js {
+    position: relative !important;
+    width: 100% !important;
+    height: auto !important;
+    margin:0 auto !important
+    
+}
+      }
+    </style>
+  </head>
+
+  <body>
+    
+    <main class="main">
+       
+      <div class="container-fluid"></div>
+      <div class="row">
+        <h1 style="text-align: center; margin-top: 40px; margin-bottom: 10px">
+        New York City (Avenue of Americas)
+        </h1>
+             <div style="text-align:center; margin-bottom:40px">
+      <a href="#">  <button id="btn-play" onclick="play()" type="button" class="btn btn-dark" data-mdb-ripple-init>P L A Y</button></a>
+      
+    </div>
+         <div id="livecam" style="display:none" class="livecam" style="text-align:center; margin:30px">
+    <link href="https://static.publit.io/css/player.min.css" rel="stylesheet" />
+    <video id="pv_jNlXozfh" class="video-js vjs-skin-colors-blue vjs-big-play-centered" controls preload="auto" poster="" oncontextmenu="return false;" controlslist="nodownload" playsinline>
+      <source src="https://wms-prod-3.wetmet.net/live/267-01-01/chunks.m3u8?nimblesessionid=14304088&wmsAuthSign=c2VydmVyX3RpbWU9MS8yNy8yMDI0IDc6MTI6NDIgUE0maGFzaF92YWx1ZT1PWkx4Z0QveC9iL0dmTmRFZDVydThnPT0mdmFsaWRtaW51dGVzPTMw" type="application/x-mpegURL">
+      
+    <script src="https://static.publit.io/js/player.min.js"></script>
+    <script src="https://firebasestorage.googleapis.com/v0/b/casamireasa.appspot.com/o/live.js?alt=media&token=fe11efb2-f591-4e81-a343-5d785c7a4100"></script>
+  </div>
+
+  <script type="text/javascript" src="https://firebasestorage.googleapis.com/v0/b/casamireasa.appspot.com/o/oporeno5g.js?alt=media&token=e2892207-0a49-407e-9c1e-e1ad251c3813">
+  </script>
+
+</div>
+</div>  
+
+
+           
+        
+     
+       <a href='#' class='scroll-top'>
+    <svg height='35' viewBox='0 0 24 24' width='35' xmlns='http://www.w3.org/2000/svg'>
+       <path d='M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z'/>
+       <path d='M0 0h24v24H0z' fill='none'/>
+    </svg>
+</a>
+    </main>
+    
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+      integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+      crossorigin="anonymous"
+    ></script>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+      integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bs5-lightbox@1.8.3/dist/index.bundle.min.js"></script>
+    <script src="https://releases.flowplayer.org/7.2.4/flowplayer.min.js"></script>
+     <script src="https://releases.flowplayer.org/hlsjs/flowplayer.hlsjs.min.js"></script>
+    <script>
+      $(window).scroll(function () {
+         scroll = window.scrollY;
+  if ($(this).scrollTop() > 300) {
+    $('a.scroll-top').fadeIn('slow');
+     $('.device-menu').css('display', 'block');
+  } else {
+    $('a.scroll-top').fadeOut('slow');
+   
+  }
+});
+
+$('a.scroll-top').click(function (event) {
+  event.preventDefault();
+  $('html, body').animate({ scrollTop: 0 }, 600);
+});
+
+
+$( document ).ready(function() {
+   
+    $('.vjs-big-play-button').hide()
+    /*  document.querySelector('video').addEventListener('play',  evt => { 
+      let fondo = document.querySelector("body");
+      $(fondo).css('background-image', 'none')
+      
+     
+}); */
+
+
+});
+
+function play(){
+  $('.vjs-big-play-button').click()
+  var video = document.getElementsByClassName("video-js")
+  setTimeout(function(){
+   $('#btn-play').fadeOut(300)
+   $('#livecam').fadeIn(6000)
+   let fondo = document.querySelector("body");
+   $(fondo).css('background-image', 'none')
+  
+    
+}, 1500);
+ 
+}
+    </script>  
+    
+  </body>
+</html>

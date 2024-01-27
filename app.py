@@ -276,7 +276,10 @@ def admin_update_publicaciones():
     nombre=request.form['name_post']
     nombre_imagen=request.files['name_imagen_post'] 
     html_publicacion = request.files['html_publicacion']
-    categoria = (request.form['tags'])
+    try:
+      categoria = (request.form['tags'])
+    except:
+      categoria=""  
     nombre_imagen_nuevo=""
     html_publicacion_nuevo=""
     tiempo=datetime.now()
