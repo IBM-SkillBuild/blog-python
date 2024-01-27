@@ -240,12 +240,11 @@ def admin_guardar_publicaciones():
     hora=tiempo.strftime("%Y%H%M%S")
     fecha=tiempo
     if nombre_imagen.filename !="":
-      nombre_imagen_nuevo=hora+"_"+nombre_imagen.filename
-      # nombre_imagen.save("templates/sitio/img/"+ nombre_imagen_nuevo)
+      nombre_imagen_nuevo=nombre_imagen.filename
       nombre_imagen.save(os.path.join(
           basedir, app.config['UPLOAD_FOLDER'], nombre_imagen_nuevo))
     if html_publicacion.filename != "":
-       html_publicacion_nuevo = hora+"_"+ html_publicacion.filename
+       html_publicacion_nuevo =  html_publicacion.filename
        #html_publicacion.save("templates/sitio/posts/" + html_publicacion_nuevo)
        html_publicacion.save(os.path.join(
           basedir, app.config['UPLOAD_POST'], html_publicacion_nuevo))
@@ -286,13 +285,13 @@ def admin_update_publicaciones():
     hora=tiempo.strftime("%Y%H%M%S")
     fecha=tiempo
     if nombre_imagen.filename !="":
-      nombre_imagen_nuevo=hora+"_"+nombre_imagen.filename
+      nombre_imagen_nuevo=nombre_imagen.filename
       nombre_imagen.save(os.path.join(
           basedir, app.config['UPLOAD_FOLDER'], nombre_imagen_nuevo))
     else:
       nombre_imagen_nuevo = request.form['old_name_imagen_post']
     if html_publicacion.filename != "":
-       html_publicacion_nuevo = hora+"_"+ html_publicacion.filename
+       html_publicacion_nuevo = html_publicacion.filename
        html_publicacion.save(os.path.join(
            basedir, app.config['UPLOAD_POST'], html_publicacion_nuevo))
     else:
