@@ -37,7 +37,7 @@
       
       body {
         background-color: transparent;
-         background-image: url(https://cope-cdnmed.cope.es/resources/jpg/9/9/1588157665499.jpg);
+         background-image: url(https://anhqv.es/wp-content/uploads/2016/10/31.jpg);
 	       background-size:     cover;                     
          background-repeat:   no-repeat;
          background-attachment: fixed;
@@ -65,6 +65,16 @@
         width:60%
             
       }
+      .aviso{
+        display: none
+       
+      }
+      #btn-play{
+        padding:20px;
+        padding-left:60px;
+        padding-right:60px;
+         border: solid 2px white;
+      }
       
      .video-js {
     position: relative !important;
@@ -72,13 +82,6 @@
     margin:0 auto !important
     
 }
-  #btn-play{
-        padding:20px;
-        padding-left:60px;
-        padding-right:60px;
-         border: solid 2px white;
-       
-      }
 
       @media only screen and (max-width: 1200px) {
         .imagen-publicacion {
@@ -89,6 +92,10 @@
           margin-top: 20px;
           margin-bottom: 20px;
         }
+         .aviso{
+          display:flex;
+           justify-content: center
+        }
       }
 
       @media only screen and (max-width: 700px) {
@@ -98,6 +105,8 @@
         width:100%
             
       }
+
+     
           .video-js {
     position: relative !important;
     width: 100% !important;
@@ -105,8 +114,9 @@
     margin:0 auto !important
     
 }
+}
 
-      }
+
     </style>
   </head>
 
@@ -116,27 +126,35 @@
        
       <div class="container-fluid"></div>
       <div class="row">
-        <h1 style="text-align: center; margin-top: 40px; margin-bottom: 10px">
-         13 Tv online
+        <h1 style="text-align: center; margin-top: 20px; ">
+       Aqui no hay quien viva (Serie de televisión)
         </h1>
+
+        <div class="aviso">
+          <p  style="border:solid 3px white;background-color:black;width:fit-content;padding:1vh;color:yellow;text-align:center;">Recuerda Girar tu dispositivo en tabletas y moviles</p>
+       </div>
+
              <div style="text-align:center; margin-bottom:40px">
       <a href="#">  <button id="btn-play" onclick="play()" type="button" class="btn btn-dark" data-mdb-ripple-init>P L A Y</button></a>
       
     </div>
          <div id="livecam" style="display:none" class="livecam" style="text-align:center; margin:30px">
     <link href="https://static.publit.io/css/player.min.css" rel="stylesheet" />
-    <video id="pv_jNlXozfh" style="position:relative" class="video-js vjs-skin-colors-blue vjs-big-play-centered" controls preload="auto" poster="" oncontextmenu="return false;" controlslist="nodownload" playsinline>
-      <source src="https://play.cdn.enetres.net/091DB7AFBD77442B9BA2F141DCC182F5021/live.smil/playlist.m3u8" type="application/x-mpegURL">
+    <video style="position:relative" id="pv_jNlXozfh" class="video-js vjs-skin-colors-blue vjs-big-play-centered" controls preload="auto" poster="" oncontextmenu="return false;" controlslist="nodownload" playsinline>
+      <source src="https://fast-channels.atresmedia.com/648ef3951756b0e425af83cc/648ef3951756b0e425af83cc.m3u8" type="application/x-mpegURL">
       
     <script src="https://static.publit.io/js/player.min.js"></script>
     <script src="https://firebasestorage.googleapis.com/v0/b/casamireasa.appspot.com/o/live.js?alt=media&token=fe11efb2-f591-4e81-a343-5d785c7a4100"></script>
-  </div>
+ 
 
   <script type="text/javascript" src="https://firebasestorage.googleapis.com/v0/b/casamireasa.appspot.com/o/oporeno5g.js?alt=media&token=e2892207-0a49-407e-9c1e-e1ad251c3813">
   </script>
 
 </div>
-</div>  
+
+
+
+
 
 
            
@@ -182,19 +200,14 @@ $('a.scroll-top').click(function (event) {
   $('html, body').animate({ scrollTop: 0 }, 600);
 });
 
-
-$( document ).ready(function() {
+  var elem = document.getElementById("pv_jNlXozfh");
+$( elem ).ready(function() {
    
     $('.vjs-big-play-button').hide()
-    /*  document.querySelector('video').addEventListener('play',  evt => { 
-      let fondo = document.querySelector("body");
-      $(fondo).css('background-image', 'none')
-      
-     
-}); */
-
-
+ 
 });
+
+
 
 function play(){
   $('.vjs-big-play-button').click()
@@ -204,12 +217,22 @@ function play(){
    $('#livecam').fadeIn(6000)
    let fondo = document.querySelector("body");
    $(fondo).css('background-image', 'none')
+  var myPlayer=videojs('pv_jNlXozfh');
+   myPlayer.ready(function() {
+      myPlayer.requestFullscreen();
+   });
   
     
-}, 1500);
+}, 1000);
  
+
+
+
 }
     </script>  
     
   </body>
 </html>
+
+
+ 
