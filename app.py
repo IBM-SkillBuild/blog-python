@@ -25,10 +25,10 @@ db = psycopg2.connect(
         password=mis_valores.PASSWORD,
         sslmode= 'require')
 
-cursor = db.cursor()
-cursor.execute("""DROP TABLE IF EXISTS publicaciones  """)
+""" cursor = db.cursor()
+cursor.execute("DROP TABLE IF EXISTS publicaciones   ")
 
-cursor.execute("""CREATE TABLE IF NOT EXISTS publicaciones(
+cursor.execute("CREATE TABLE IF NOT EXISTS publicaciones(
             id    SERIAL PRIMARY KEY,
            nombre varchar (250),
            imagen varchar (250) ,
@@ -37,10 +37,10 @@ cursor.execute("""CREATE TABLE IF NOT EXISTS publicaciones(
            archivo varchar (250) ,
            fecha date ,
            habilitado boolean);
- """)
+ ")
 db.commit()
 cursor.close()
-db.close()
+db.close() """
 
 #rutas
 @app.route("/")
