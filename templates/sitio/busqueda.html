@@ -1,11 +1,23 @@
  <div  class="container margin-sup animate__animated animate__fadeIn animate__delay-6s" >
-   
+    
+      
+       <button class="info info-busqueda">Su consulta ofrece {{count}} resultado/s</button>
       <div class="row" style="margin-bottom:20px">
-       
+         
+        
+          <div style="text-align: center;">
+        <a href="/publicaciones">
+       <button type="button" class="btn btn-outline-secondary" style="width: fit-content;margin-bottom:40px" >
+        Ver todas las publicaciones
+       </button>
+       </a>
+       </div>
+      
          
         {% for post in publicaciones %}
+       
           {% if  publicaciones|length > 1 %}
-         
+       
         <div class="col-md-4" >
          <div class="card"  style="height: 55vh;margin-bottom:5vh">
         
@@ -45,12 +57,26 @@
   
     {% if not publicaciones %}
     <h1 style="text-align:center; margin-top:60px">Consulta sin contenido</h1>
-    <div style="text-align:center; margin-top:60px">
-      <a href="/publicaciones">  <button  type="button" class="btn btn-dark" data-mdb-ripple-init>Ver todo</button></a>
-      
-    </div>
+ 
     
     {% endif %}
+     {% if  publicaciones %}
+      <div style="text-align:center;">
+        <a href="/publicaciones">
+       <button type="button" class="btn btn-outline-secondary" style="width: fit-content;" >
+        Ver todas las publicaciones
+       </button>
+       </a>
+       <br>
+        <br>
+         <br>
+          <br>
+          <br>
+          <br>
+       </div>
+      
+       {%endif%}
+      
        {% include "sitio/footer.html"%}
         <a href='#' class='scroll-top'>
     <svg height='35' viewBox='0 0 24 24' width='35' xmlns='http://www.w3.org/2000/svg'>

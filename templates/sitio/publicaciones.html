@@ -1,5 +1,18 @@
 {% include "sitio/header-sitio.html" %}
-
+ {% if publicaciones %}
+        {% if  publicaciones|length > 1 %}
+       
+       <button class="info info-total">Total: {{count}} publicaciones</button>
+       {%else%}
+       <div style="text-align: center;">
+        <a href="/publicaciones">
+       <button type="button" class="btn btn-outline-secondary" style="width: fit-content;margin-bottom:40px" >
+        Ver todas las publicaciones
+       </button>
+       </a>
+       </div>
+       
+       {%endif%}
   <img
           id="blog"
           title="Menú de opciones"
@@ -19,31 +32,27 @@
   </div>
     {% endif %}
     <main id="contenido">
-      
+       
      
    <div  class="container margin-sup animate__animated animate__fadeIn animate__delay-6s" >
-   
+        
       <div class="row" >
-        {% if publicaciones %}
-       
+      
          
         {% for post in publicaciones %}
           {% if  publicaciones|length > 1 %}
          
         <div class="col-md-4" >
          <div class="card"  style="height: 55vh;margin-bottom:5vh">
-        
-          
-       
+            
 
           <div class="card-body" style="position: relative">
             <h4 class="card-title">{{post[1]}}</h4>
             <p id="{{valores.URL}}/publicaciones_portitulo/{{post[1]}}" onclick="portapapeles(this.id)" class="card-text url-clip"><strong>Copy Url de este post</strong> </p>
-                         
-          <img   onclick="publicacion('/post/{{post[5]}}')" class="card-img-top img-responsive center-block" src="/img/{{post[2]}}" alt="post" />
-        
+              <div class="centrar_imgen_card">          
+          <img   onclick="publicacion('/post/{{post[5]}}')" class="card-img-top " src="/img/{{post[2]}}" alt="post" />
+                </div> 
             
-            <a name="" id="" class="btn btn-primary" style="position:absolute;bottom:10px;display:none"  role="button"  >Ver publicación</a>
             
           </div>
          </div>
@@ -57,14 +66,17 @@
              </div>  
             {% endif %}
           {% endfor %}
+          
            {% if  publicaciones|length > 1 %}
-                 
+                
        <div class="row justify-content-md-center ">
         <div class="paginacion">
           
           {{ pagination.links }}
         </div>
       </div>
+      
+      
           {% endif %}
            {% endif %}
         
@@ -84,11 +96,12 @@
     {% endif %}
        {% include "sitio/footer.html"%}
         <a href='#' class='scroll-top'>
-    <svg height='35' viewBox='0 0 24 24' width='35' xmlns='http://www.w3.org/2000/svg'>
+    <svg height='30' viewBox='0 0 24 24' width='30' xmlns='http://www.w3.org/2000/svg'>
        <path d='M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z'/>
        <path d='M0 0h24v24H0z' fill='none'/>
     </svg>
 </a>
+ 
     </main>
  
    

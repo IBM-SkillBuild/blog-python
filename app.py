@@ -1,15 +1,13 @@
 #modulo principal
 #importaciones.
 import os
-from os import remove
-from flask import Flask, current_app
+from flask import Flask
 from flask import render_template, redirect, request, session, send_from_directory,jsonify
 from flask_paginate import Pagination #Importando paquete de paginación
 from valores import Valores
 import psycopg2
-import json
 from datetime import datetime
-import logging
+
 # instancias
 app=Flask(__name__)
 mis_valores=Valores()
@@ -17,8 +15,7 @@ mis_valores=Valores()
 # (para produccion hay que cambiar a otra clase de archivo config)
 app.config.from_object("config.ConfigPro")
 basedir = os.path.abspath(os.path.dirname(__file__))
-tiempo=datetime.now()
-fecha=tiempo
+
 
 
 db = psycopg2.connect(
@@ -103,7 +100,7 @@ def publicaciones():
      cursor.close()  
      db.close()
    
-   return render_template("/sitio/publicaciones.html", valores=mis_valores,publicaciones=publicaciones,pagination=pagination)
+   return render_template("/sitio/publicaciones.html", valores=mis_valores,publicaciones=publicaciones,pagination=pagination,count=count)
  
 
 @app.route("/consulta-categorias", methods=['POST', 'GET'])
@@ -129,6 +126,7 @@ def consulta():
 
     cursor.execute(sql)
     publicaciones = cursor.fetchall()
+    count = len(publicaciones)
    
    
    except:
@@ -140,7 +138,7 @@ def consulta():
      cursor.close()
      db.close()
 
-   return jsonify({'htmlresponse': render_template("/sitio/busqueda.html", valores=mis_valores, publicaciones=publicaciones, busqueda=request.args.get('mibusqueda'))})
+   return jsonify({'htmlresponse': render_template("/sitio/busqueda.html", valores=mis_valores, publicaciones=publicaciones,count=count, busqueda=request.args.get('mibusqueda'))})
 
 
 @app.route("/ultima_publicacion",methods = ['POST', 'GET'])
@@ -164,7 +162,7 @@ def ultima_publicacion():
    finally:
          cursor.close()  
    
-   return render_template("/sitio/publicaciones.html", valores=mis_valores,publicaciones=publicaciones)
+   return render_template("/sitio/publicaciones.html", valores=mis_valores,publicaciones=publicaciones,count=1)
 
 
 
@@ -319,19 +317,7 @@ def admin_update_publicaciones():
 def admin_borrar_publicaciones():
    if session['usuario']=="Admin":
      
-      id_borrar=request.form['id_borrar']
-      try:
-        borrar_imagen= request.form['borrar_imagen']
-        borrar="static/uploads/"+borrar_imagen
-        remove(borrar)
-      except:
-        pass 
-      try: 
-       borrar_html = request.form['borrar_html']
-       borrar=("/static/posts/"+ borrar_html)
-       remove(borrar)
-      except:
-        pass
+     
      
       db = psycopg2.connect(
           host=mis_valores.HOST,

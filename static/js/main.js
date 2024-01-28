@@ -64,10 +64,12 @@ $(window).scroll(function () {
     scroll = window.scrollY;
   if ($(this).scrollTop() > 100) {
     $('a.scroll-top').fadeIn('slow');
-     $('.device-menu').css('display', 'block');
+    $('.device-menu').css('display', 'block');
+     $('.info').css('display', 'none');
   } else {
     $('a.scroll-top').fadeOut('slow');
-   
+    $('.info').css('display', 'block');
+    
   }
 });
 $('a.scroll-top').click(function (event) {
@@ -79,13 +81,16 @@ document.querySelectorAll('.my-lightbox-toggle').forEach((el) =>
   el.addEventListener('click', (e) => {
     e.preventDefault();
     const lightbox = new Lightbox(el, options);
-    lightbox.show();
+    if (window.screen.width > 1100) {
+      lightbox.show();
+    }
+    
   }),
 );
 
 function resizeIframe(obj) {
   obj.style.height =
-    obj.contentWindow.document.documentElement.scrollHeight + 155 + 'px';
+    obj.contentWindow.document.documentElement.scrollHeight + 5 + 'px';
 }
 
 $(window).resize(function () {
