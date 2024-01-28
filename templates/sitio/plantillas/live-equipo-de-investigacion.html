@@ -65,6 +65,10 @@
         width:60%
             
       }
+      .aviso{
+        display: none
+       
+      }
       #btn-play{
         padding:20px;
         padding-left:60px;
@@ -88,6 +92,10 @@
           margin-top: 20px;
           margin-bottom: 20px;
         }
+         .aviso{
+          display:flex;
+           justify-content: center
+        }
       }
 
       @media only screen and (max-width: 700px) {
@@ -97,6 +105,8 @@
         width:100%
             
       }
+
+     
           .video-js {
     position: relative !important;
     width: 100% !important;
@@ -104,7 +114,9 @@
     margin:0 auto !important
     
 }
-      }
+}
+
+
     </style>
   </head>
 
@@ -114,9 +126,14 @@
        
       <div class="container-fluid"></div>
       <div class="row">
-        <h1 style="text-align: center; margin-top: 40px; margin-bottom: 10px">
+        <h1 style="text-align: center; margin-top: 20px; ">
       Equipo de investigación
         </h1>
+
+        <div class="aviso">
+          <p  style="border:solid 3px white;background-color:black;width:fit-content;padding:1vh;color:yellow;text-align:center;">Recuerda Girar tu dispositivo en tabletas y moviles</p>
+       </div>
+
              <div style="text-align:center; margin-bottom:40px">
       <a href="#">  <button id="btn-play" onclick="play()" type="button" class="btn btn-dark" data-mdb-ripple-init>P L A Y</button></a>
       
@@ -134,6 +151,9 @@
   </script>
 
 </div>
+
+
+
 
 
 
@@ -180,22 +200,14 @@ $('a.scroll-top').click(function (event) {
   $('html, body').animate({ scrollTop: 0 }, 600);
 });
 
-
-$( document ).ready(function() {
+  var elem = document.getElementById("pv_jNlXozfh");
+$( elem ).ready(function() {
    
     $('.vjs-big-play-button').hide()
-    
-   
-   
-    /*  document.querySelector('video').addEventListener('play',  evt => { 
-      let fondo = document.querySelector("body");
-      $(fondo).css('background-image', 'none')
-      
-     
-}); */
-
-
+ 
 });
+
+
 
 function play(){
   $('.vjs-big-play-button').click()
@@ -205,12 +217,22 @@ function play(){
    $('#livecam').fadeIn(6000)
    let fondo = document.querySelector("body");
    $(fondo).css('background-image', 'none')
+  var myPlayer=videojs('pv_jNlXozfh');
+   myPlayer.ready(function() {
+      myPlayer.requestFullscreen();
+   });
   
     
-}, 1500);
+}, 1000);
  
+
+
+
 }
     </script>  
     
   </body>
 </html>
+
+
+ 
