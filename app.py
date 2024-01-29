@@ -316,7 +316,8 @@ def admin_update_publicaciones():
 @app.route("/admin/publicaciones/borrar", methods=['POST'])
 def admin_borrar_publicaciones():
    if session['usuario']=="Admin":
-     
+
+      id_borrar=request.form['id_borrar']
      
      
       db = psycopg2.connect(

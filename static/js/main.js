@@ -69,7 +69,7 @@ $(window).scroll(function () {
   } else {
     $('a.scroll-top').fadeOut('slow');
     $('.info').css('display', 'block');
-    
+    $('.device-menu').css('display', 'none');
   }
 });
 $('a.scroll-top').click(function (event) {
