@@ -174,9 +174,9 @@ html{
     background-position: center;
     background-size: cover;
     min-height: 100vh;
-      animation: fadeIn; /* referring directly to the animation's @keyframe declaration */
-  animation-duration: 2s; /* don't forget to set a duration! */
-   
+   /*  animation: fadeIn; 
+    animation-duration: 2s; 
+    */
     
     
   
@@ -251,8 +251,10 @@ body{
 .card{
   background-color: whitesmoke;
   opacity: 0.7;
-  min-width: 20vw 
-}
+  min-width: 20vw ;
+  animation: fadeIn; 
+  animation-duration: 2s; 
+    }
 .card:hover{
     opacity:1;
   transition: opacity .4s ease-out;
@@ -412,9 +414,10 @@ header {
   opacity: 1;
   -webkit-transition: opacity 0.6s linear;
   transition: opacity 0.6s linear;
-   animation: fadeIn; /* referring directly to the animation's @keyframe declaration */
-  animation-duration: 1s; /* don't forget to set a duration! */
-}
+   animation: fadeIn; 
+  animation-duration: 1s; 
+} 
+
 
 .header-nav.active .header-nav__inner {
   display: -webkit-box;
