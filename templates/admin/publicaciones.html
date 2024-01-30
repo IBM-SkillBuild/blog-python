@@ -25,16 +25,8 @@
                   placeholder="Ingresa Archivo html">
               </div>
               <select id="categorias" class="categorias form-control"  multiple="multiple">
-            
-            <option value="Eduardo">Eduardo</option>
-            <option value="Ofertas">Ofertas</option>
-            <option value="Python">Python</option>
-            <option value="Flask">Flask</option>
-            <option value="Javascript">Javascript</option>
-            <option value="Html">Html</option>                        
-            <option value="LinkedIn">LinkedIn</option>                                    
-            <option value="Youtube">Youtube</option>                                                
-          </select>
+                                                             
+               </select>
           <input type="hidden" name="tags" id="tags"></input>
               <div class="d-flex justify-content-center" style="margin-top:60px">
                 <button type="submit" class="btn btn-primary">
@@ -132,3 +124,34 @@
 </main>
  
 {% include "admin/footer.html"%}
+  <script>
+document.addEventListener('readystatechange', () => {    
+  if (document.readyState == 'complete') {
+  todas_las_categorias_lectura()
+  }
+  })
+
+   function todas_las_categorias_lectura() {
+  
+    $.ajax({
+      type: 'GET',
+      url: '/todas_las_categorias',
+      contentType: 'application/json; charset=utf-8',
+      dataType: 'json',
+      cache: false,
+      success: function (result) {
+        for (item of result) {
+          if ($('#categorias').find("option[value='" + item + "']").length) {
+            console.log('ya existe');
+          } else {
+            // Create a DOM Option and pre-select by default
+            var newOption = new Option(item, item, false, false);
+            // Append it to the select
+            $('#categorias').append(newOption).trigger('change');
+          }
+        }
+       
+      },
+    });
+  }
+</script>

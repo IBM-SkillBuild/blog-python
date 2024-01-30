@@ -7,6 +7,7 @@ from flask_paginate import Pagination #Importando paquete de paginación
 from valores import Valores
 import psycopg2
 from datetime import datetime
+from tkinter import messagebox as MessageBox
 
 # instancias
 app=Flask(__name__)
@@ -15,18 +16,18 @@ mis_valores=Valores()
 # (para produccion hay que cambiar a otra clase de archivo config)
 app.config.from_object("config.ConfigPro")
 basedir = os.path.abspath(os.path.dirname(__file__))
+todas_las_categorias=""
 
 
-
-db = psycopg2.connect(
+"""db = psycopg2.connect(
         host=mis_valores.HOST,
         database=mis_valores.DB,
         user=mis_valores.USER,
         password=mis_valores.PASSWORD,
-        sslmode= 'require')
+        sslmode= 'require')"""
 
-""" cursor = db.cursor()
-cursor.execute("DROP TABLE IF EXISTS publicaciones   ")
+#cursor = db.cursor()
+"""cursor.execute("DROP TABLE IF EXISTS publicaciones   ")
 
 cursor.execute("CREATE TABLE IF NOT EXISTS publicaciones(
             id    SERIAL PRIMARY KEY,
@@ -37,10 +38,15 @@ cursor.execute("CREATE TABLE IF NOT EXISTS publicaciones(
            archivo varchar (250) ,
            fecha date ,
            habilitado boolean);
- ")
-db.commit()
-cursor.close()
-db.close() """
+ ")"""
+ 
+"""cursor.execute("CREATE TABLE IF NOT EXISTS categorias(
+           id    SERIAL PRIMARY KEY,
+           categorias TEXT);
+ ")"""
+#db.commit()
+#cursor.close()
+#db.close() 
 
 #rutas
 @app.route("/")
@@ -51,8 +57,31 @@ def index():
   return render_template("/sitio/index.html",valores=mis_valores)
 
 
+
+
+@app.route("/todas_las_categorias", methods=['POST', 'GET'])
+def categorias():
+   global todas_las_categorias
+   db=psycopg2.connect(
+       host=mis_valores.HOST,
+       database=mis_valores.DB,
+       user=mis_valores.USER,
+       password=mis_valores.PASSWORD,
+       sslmode='require')
+   cursor = db.cursor()
+   sql = "SELECT categorias FROM categorias"
+   cursor.execute(sql)
+   cat=cursor.fetchall()
+   categorias = list(cat[0])
+   todas_las_categorias=categorias
+   categorias = categorias[0].split(",")
+   cursor.close()
+   db.close()
+   return jsonify(categorias)
+
 @app.route("/publicaciones", methods=['POST', 'GET'])
 def publicaciones():
+   global categorias
    per_page=3
    start_index=0
    mis_valores.footer=False
@@ -69,8 +98,7 @@ def publicaciones():
     data = []
     cursor.execute(sql,data)
     results = cursor.fetchone()
-    for r in results: 
-     count=r
+    count = results[-1]
 
     # Obtener el número de página actual y la cantidad de resultados por página
     page_num = request.args.get('page', 1, type=int)
@@ -100,7 +128,7 @@ def publicaciones():
      cursor.close()  
      db.close()
    
-   return render_template("/sitio/publicaciones.html", valores=mis_valores,publicaciones=publicaciones,pagination=pagination,count=count)
+   return render_template("/sitio/publicaciones.html", valores=mis_valores,publicaciones=publicaciones,pagination=pagination,count=count,categorias=categorias)
  
 
 @app.route("/consulta-categorias", methods=['POST', 'GET'])
@@ -310,6 +338,7 @@ def admin_update_publicaciones():
     cursor.execute(sql,datos)
     db.commit()
     cursor.close()
+    update_categorias(categoria)
     return redirect("/admin/publicaciones")
   return redirect("/login")
  
@@ -385,6 +414,64 @@ def admin_login_post():
 def admin_log_out():
    session.clear()
    return redirect("/admin")
+ 
+@app.route("/aside_categorias", methods=['POST', 'GET'])
+def aside_categorias():
+  
+   db = psycopg2.connect(
+       host=mis_valores.HOST,
+       database=mis_valores.DB,
+       user=mis_valores.USER,
+       password=mis_valores.PASSWORD,
+       sslmode='require')
+   cursor = db.cursor()
+   try:
+    
+        sql = "SELECT categorias FROM categorias"
+        cursor.execute(sql)
+        cat=cursor.fetchall()
+        categorias = list(cat[0])
+        categorias = categorias[0].split(",")
+        categorias=list(set(categorias))
+        
+        cursor.close()
+        db.close()
+
+         
+   
+   
+   except:
+      MessageBox.showinfo("error")
+     
+
+   finally:
+     cursor.close()
+     db.close()
+
+   return jsonify({'htmlresponse': render_template("/sitio/aside-contenido.html", valores=mis_valores,categorias=categorias)})
+
+
+ 
+def update_categorias(dato):
+    global todas_las_categorias
+    nueva_lista=dato.split(",")
+    todas_las_categorias=todas_las_categorias+nueva_lista
+    todas_las_categorias=list(set(todas_las_categorias))
+        
+    categorias = ', '.join(todas_las_categorias) 
+    db = psycopg2.connect(
+        host=mis_valores.HOST,
+        database=mis_valores.DB,
+        user=mis_valores.USER,
+        password=mis_valores.PASSWORD,
+        sslmode='require')
+    cursor = db.cursor()
+    sql = "UPDATE categorias SET  categorias=%s where id=%s"
+    datos = (todas_las_categorias,1)
+    cursor.execute(sql,datos)
+    db.commit()
+    cursor.close() 
+    return True
   
 # inicio app derarrollo
 if __name__=="__main__":

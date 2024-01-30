@@ -634,6 +634,9 @@ a.scroll-top svg {
 	
 	
 }
+
+
+
 .info-total{
   top:3vh;
   right:10vw;
@@ -687,4 +690,8 @@ a.scroll-top svg {
 
 .active .mic-icon {
 	width: 30px;
+}
+
+#categorias{
+  min-width: 200px;
 }

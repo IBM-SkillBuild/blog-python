@@ -3,17 +3,18 @@
     <main>
       {% for post in publicaciones%}
       {% if  loop.length==1 %}
-      <span onload='somefunction({{post[4] | tojson}})'</span>
+      
+      <span id="jinja-ready" onclick='alerta(event,{{post[4] | tojson}})'</span>
    
      <div class="container margin-sup">
       <div class="row">
         <div class="col-md-5">
           <div class="card text-white bg-primary mb-3">
             <div class="card-header">
-              Editar datos de este post
+              Editar datos de este post 
             </div>
             <div class="card-body">
-             <form action="/admin/publicaciones/update" method="post" enctype="multipart/form-data">
+             <form id="update-form" action="/admin/publicaciones/update" method="post" enctype="multipart/form-data">
                   <div class="mb-3">
                     <input type="text" style="display: none;" class="form-control" value="{{post[0]}}" name="id_post" id="id_post">
 
@@ -31,23 +32,20 @@
                     <input type="text" style="display:none" class="form-control" value="{{post[5]}}" name="old_html_publicacion" id="old_html_publicacion" >
 
                   </div>
-                  <p> {{post[4]}} </p>
-                 <select id="categorias" class="categorias form-control"  value="{{post[4]}}"   multiple="multiple">>
+                  <p id="anterior_seleccion_categorias"> {{post[4]}} </p>
+                 
+                 <select id="categorias"name="categorias"class="categorias form-control"  tags="true"  multiple="multiple">>
             
-           <option value="Eduardo">Eduardo</option>
-            <option value="Ofertas">Ofertas</option>
-            <option value="Python">Python</option>
-            <option value="Flask">Flask</option>
-            <option value="Javascript">Javascript</option>
-            <option value="Html">Html</option>                        
-            <option value="LinkedIn">LinkedIn</option>                                    
-            <option value="Youtube">Youtube</option>                                            
+           
+            <option selected="selected">Todo</option>
+                                                       
           </select>
                    <input type="hidden" name="tags" id="tags"></input>
                   <div class="d-flex justify-content-center" style="margin-top:60px">
                  <button
                   type="submit"
                   class="btn btn-primary"
+                  
                  >
                   Update  Post
                  </button>
@@ -150,9 +148,66 @@
         <h1>no hay nada que editar</h1>
 
         {% endfor %}
-        
+     
     </main>
    
     
 
     {% include "admin/footer.html"%}
+       <script>
+     $( document ).ready(function() {
+           todas_las_categorias_lectura()
+         });
+        
+   
+
+function todas_las_categorias_lectura() {
+  
+    $.ajax({
+      type: 'GET',
+      url: '/todas_las_categorias',
+      contentType: 'application/json; charset=utf-8',
+      dataType: 'json',
+      cache: false,
+      success: function (result) {
+        for (item of result) {
+          if ($('#categorias').find("option[value='" + item + "']").length) {
+            console.log('ya existe');
+          } else {
+            // Create a DOM Option and pre-select by default
+            var newOption = new Option(item, item, false, false);
+            // Append it to the select
+            $('#categorias').append(newOption).trigger('change');
+          }
+        }
+       
+      },
+    });
+    $( document ).ready(function() {
+       
+         array=$('#anterior_seleccion_categorias').text()
+         array=array.split(",")
+      
+        
+         for (item of array) {
+        var newOption = new Option(item, item, true, true);
+            // Append it to the select
+            $('#categorias').append(newOption).trigger('change');   
+             
+             
+   
+        }
+        
+
+     });
+    
+  }
+  
+ 
+
+  
+
+
+
+
+ </script>
