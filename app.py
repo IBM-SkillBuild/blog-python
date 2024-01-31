@@ -1,5 +1,3 @@
-#modulo principal
-#importaciones.
 import os
 from flask import Flask
 from flask import render_template, redirect, request, session, send_from_directory,jsonify
@@ -7,6 +5,8 @@ from flask_paginate import Pagination #Importando paquete de paginación
 from valores import Valores
 import psycopg2
 from datetime import datetime
+import pickle
+
 
 
 # instancias
@@ -40,10 +40,7 @@ cursor.execute("CREATE TABLE IF NOT EXISTS publicaciones(
            habilitado boolean);
  ")"""
  
-"""cursor.execute("CREATE TABLE IF NOT EXISTS categorias(
-           id    SERIAL PRIMARY KEY,
-           categorias TEXT);
- ")"""
+
 #db.commit()
 #cursor.close()
 #db.close() 
@@ -61,23 +58,13 @@ def index():
 
 @app.route("/todas_las_categorias", methods=['POST', 'GET'])
 def categorias():
-   global todas_las_categorias
-   db=psycopg2.connect(
-       host=mis_valores.HOST,
-       database=mis_valores.DB,
-       user=mis_valores.USER,
-       password=mis_valores.PASSWORD,
-       sslmode='require')
-   cursor = db.cursor()
-   sql = "SELECT categorias FROM categorias"
-   cursor.execute(sql)
-   cat=cursor.fetchall()
-   categorias = list(cat[0])
-   todas_las_categorias=categorias
-   categorias = categorias[0].split(",")
-   cursor.close()
-   db.close()
-   return jsonify(categorias)
+
+   try:
+    with open("categorias.pickle", "rb") as f:
+        todas_las_categorias = pickle.load(f)
+   except EOFError:
+       todas_las_categorias =["error o vacio"]
+   return jsonify(todas_las_categorias)
 
 @app.route("/publicaciones", methods=['POST', 'GET'])
 def publicaciones():
@@ -417,60 +404,37 @@ def admin_log_out():
  
 @app.route("/aside_categorias", methods=['POST', 'GET'])
 def aside_categorias():
-  
-   db = psycopg2.connect(
-       host=mis_valores.HOST,
-       database=mis_valores.DB,
-       user=mis_valores.USER,
-       password=mis_valores.PASSWORD,
-       sslmode='require')
-   cursor = db.cursor()
    try:
-    
-        sql = "SELECT categorias FROM categorias"
-        cursor.execute(sql)
-        cat=cursor.fetchall()
-        categorias = list(cat[0])
-        categorias = categorias[0].split(",")
-        categorias=list(set(categorias))
-        
-        cursor.close()
-        db.close()
-
-         
-   
-   
-   except:
-     pass
-     
-
-   finally:
-     cursor.close()
-     db.close()
-
+      with open("categorias.pickle", "rb") as f:
+          categorias = pickle.load(f)
+   except EOFError:
+       categorias =["error o vacio"]
+       
    return jsonify({'htmlresponse': render_template("/sitio/aside-contenido.html", valores=mis_valores,categorias=categorias)})
 
 
  
 def update_categorias(dato):
-    global todas_las_categorias
-    nueva_lista=dato.split(",")
-    todas_las_categorias=todas_las_categorias+nueva_lista
-    todas_las_categorias=list(set(todas_las_categorias))
-        
-    categorias = ', '.join(todas_las_categorias) 
-    db = psycopg2.connect(
-        host=mis_valores.HOST,
-        database=mis_valores.DB,
-        user=mis_valores.USER,
-        password=mis_valores.PASSWORD,
-        sslmode='require')
-    cursor = db.cursor()
-    sql = "UPDATE categorias SET  categorias=%s where id=%s"
-    datos = (todas_las_categorias,1)
-    cursor.execute(sql,datos)
-    db.commit()
-    cursor.close() 
+   
+    
+    dato=dato.split(",")
+    
+    
+    try:
+      with open("categorias.pickle", "rb") as f:
+        todas_las_categorias = pickle.load(f)
+    except EOFError:
+      todas_las_categorias = []
+      return False
+     
+    todas_las_categorias.extend(dato)
+    todas_las_categorias = list(set(todas_las_categorias))
+    
+    with open("categorias.pickle", "wb") as f:
+      pickle.dump(todas_las_categorias, f)
+  
+   
+    
     return True
   
 # inicio app derarrollo

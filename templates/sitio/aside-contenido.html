@@ -1,9 +1,8 @@
 <h5 style="margin:10px">Category Tags</h5>
 {% if categorias %}
 {% for categoria in categorias %}
+
 <button class="tags-categorias"  onclick='buscar_tag({{categoria | tojson}})'> {{categoria}} </button>
 
-
-
-{% endfor %}}
+{% endfor %}
 {% endif %}
