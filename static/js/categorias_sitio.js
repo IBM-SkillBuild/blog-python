@@ -35,7 +35,8 @@ function cargar_aside_tags() {
 }
 
 function buscar_tag(tag) {
-  $('#search').val(tag.toLowerCase().trim().replace('{"', ''));
-   $('#aside-ctrl').click()
+  $('#search').val(tag.toLowerCase().trim().replace('{"', '').replace('}"', '').replace('"', ''));
+  $('#aside-ctrl').click()
   buscar()
+ 
 }
