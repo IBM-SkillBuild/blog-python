@@ -3,7 +3,12 @@ $( document ).ready(function() {
  
   $("#aside-ctrl").click(function () {
     if ($('#aside-ctrl').is(':checked')) {
-    cargar_aside_tags()
+   
+          cargar_aside_tags();
+   
+           
+    
+       
     }
 });
  
@@ -37,6 +42,7 @@ function cargar_aside_tags() {
 function buscar_tag(tag) {
   $('#search').val(tag.toLowerCase().trim().replace('{"', '').replace('}"', '').replace('"', ''));
   $('#aside-ctrl').click()
+  
   buscar()
  
 }
