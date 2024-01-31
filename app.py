@@ -7,7 +7,7 @@ from flask_paginate import Pagination #Importando paquete de paginación
 from valores import Valores
 import psycopg2
 from datetime import datetime
-from tkinter import messagebox as MessageBox
+
 
 # instancias
 app=Flask(__name__)
@@ -441,7 +441,7 @@ def aside_categorias():
    
    
    except:
-      MessageBox.showinfo("error")
+     pass
      
 
    finally:
