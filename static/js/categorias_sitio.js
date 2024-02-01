@@ -3,8 +3,15 @@ $( document ).ready(function() {
  
   $("#aside-ctrl").click(function () {
     if ($('#aside-ctrl').is(':checked')) {
-        
-          cargar_aside_tags();
+        $('html, body').css({
+          overflow: 'hidden',
+          height: '100%',
+        });
+      cargar_aside_tags();
+      $('html, body').css({
+        overflow: 'auto',
+        height: 'auto',
+      });
  
            
     
@@ -33,6 +40,7 @@ function cargar_aside_tags() {
       console.log(result)
       $('#aside-contenido').html('');
       $('#aside-contenido').append(result.htmlresponse);
+      $(document.activeElement).filter(':input:focus').blur();
       
     },
   });
