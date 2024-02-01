@@ -200,6 +200,7 @@ html{
     min-height: 100vh;
     max-width: 100% !important;
     min-width: 100% !important;
+    max-width: 100% !important;
    /*  animation: fadeIn; 
     animation-duration: 2s; 
     */
