@@ -88,7 +88,7 @@ const magnifier = document.querySelector('.magnifier');
       $('#publicacion').css('overflow', 'hidden');
       $('#publicacion').show();
       $('#publicacion').css('width', '100%');
-      $('#publicacion').css('margin-top', 200);
+      //$('#publicacion').css('margin-top', 200);
       let reducir = 10;
       $('html, body').animate(
         {
