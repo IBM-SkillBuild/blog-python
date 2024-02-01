@@ -41,7 +41,7 @@ function cargar_aside_tags() {
       console.log(result)
       $('#aside-contenido').html('');
       $('#aside-contenido').append(result.htmlresponse);
-      $(document.activeElement).filter(':input:focus').blur();
+      $(document).click()
       
     },
   });
