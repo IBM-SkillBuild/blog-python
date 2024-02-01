@@ -27,6 +27,7 @@
   transition: transform .3s;
   border-radius: 5%;
   margin-top: 2vh;
+ 
   
 }
 
@@ -70,6 +71,7 @@
   visibility: hidden;
   background-color: #000;
   transition: all .3s;
+   overflow-x: hidden !important;
 }
 
 #aside-ctrl:checked ~ .aside-ctrl--reset {
