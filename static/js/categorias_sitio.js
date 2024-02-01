@@ -50,7 +50,7 @@ function cargar_aside_tags() {
 
 function buscar_tag(tag) {
   $('#search').val(tag.toLowerCase().trim().replace('{"', '').replace('}"', '').replace('"', ''));
-  $(document).click();
+  $('.magnifier').click();
   buscar()
  
 }
