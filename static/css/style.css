@@ -206,6 +206,7 @@ html{
     max-width: 100% !important;
     min-width: 100% !important;
     max-width: 100% !important;
+    overflow-x: hidden !important;
    /*  animation: fadeIn; 
     animation-duration: 2s; 
     */
@@ -216,9 +217,11 @@ html{
 body{
   background-color: transparent;
   width: 100vw !important;
+  overflow-x: hidden !important;
 }
 .ancho-total{
   width: 100vw !important;
+   overflow-x: hidden !important;
 }
 #publicacion{
   min-width: 100% !important;
