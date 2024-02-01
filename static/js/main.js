@@ -102,7 +102,8 @@ const magnifier = document.querySelector('.magnifier');
 
   
 
-    $(window).scroll(function () {
+$(window).scroll(function () {
+     
       scroll = window.scrollY;
       if ($(this).scrollTop() > 100) {
         $('a.scroll-top').fadeIn('slow');
