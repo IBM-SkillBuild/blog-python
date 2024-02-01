@@ -160,7 +160,6 @@ $(window).scroll(function () {
           $('#contenido').html('');
           $('#contenido').append(result.htmlresponse);
           $('#search').val("");
-          $('#search').focus();
           var el = document.getElementById('search');
           if (typeof el.selectionStart == 'number') {
             el.selectionStart = el.selectionEnd = el.value.length;

@@ -212,7 +212,9 @@ body{
   background-color: transparent;
   width: 100vw !important;
 }
-
+.ancho-total{
+  width: 100vw !important;
+}
 #publicacion{
   min-width: 100% !important;
   margin-left: 0% !important;
