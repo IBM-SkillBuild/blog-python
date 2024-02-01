@@ -2,6 +2,7 @@ $( document ).ready(function() {
  
  
   $("#aside-ctrl").click(function () {
+    window.scrollTo(0, 0);
     if ($('#aside-ctrl').is(':checked')) {
         $('html, body').css({
           overflow: 'hidden',
