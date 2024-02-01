@@ -41,8 +41,7 @@ function cargar_aside_tags() {
       console.log(result)
       $('#aside-contenido').html('');
       $('#aside-contenido').append(result.htmlresponse);
-       $('#aside-ctrl').prop('readonly', false);
-       $('#search').prop('readonly', false);
+       
       
     },
   });
@@ -51,8 +50,7 @@ function cargar_aside_tags() {
 
 function buscar_tag(tag) {
   $('#search').val(tag.toLowerCase().trim().replace('{"', '').replace('}"', '').replace('"', ''));
-  $('#aside-ctrl').prop('readonly', true);
-  $('#search').prop('readonly', true);
+  
   buscar()
  
 }
