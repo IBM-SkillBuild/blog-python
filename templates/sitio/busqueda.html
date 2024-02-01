@@ -14,6 +14,14 @@
        </div>
       
          
+       <input class="sr-only" id="aside-ctrl" type="checkbox" />
+
+<label class="aside-ctrl--reset" for="aside-ctrl"></label>
+<aside id="aside" class="aside">
+  <label class="aside-ctrl--label" for="aside-ctrl"></label>
+  <div id="aside-contenido">
+  </div>
+</aside>
         {% for post in publicaciones %}
        
           {% if  publicaciones|length > 1 %}
@@ -76,8 +84,10 @@
        </div>
       
        {%endif%}
+         {% include "sitio/footer.html"%}
+
       
-       {% include "sitio/footer.html"%}
+     
         <a href='#' class='scroll-top'>
     <svg height='35' viewBox='0 0 24 24' width='35' xmlns='http://www.w3.org/2000/svg'>
        <path d='M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z'/>

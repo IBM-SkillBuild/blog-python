@@ -1,8 +1,8 @@
   
 
 
-var search = document.querySelector('.search-bar-container');
-var magnifier = document.querySelector('.magnifier');
+const search = document.querySelector('.search-bar-container');
+const magnifier = document.querySelector('.magnifier');
    window.onload = function() {
    
       document.body.addEventListener('click', (e) => {

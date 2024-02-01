@@ -20,7 +20,7 @@
    background-image: url("/static/img/fondo.jpg");
     background-repeat: no-repeat;
     background-size: cover;
-    max-height: 85vh;
+    max-height: 85vh !important;
       animation: fadeIn; /* referring directly to the animation's @keyframe declaration */
   animation-duration: 2s; /* don't forget to set a duration! */
   transform: translateX(100%);

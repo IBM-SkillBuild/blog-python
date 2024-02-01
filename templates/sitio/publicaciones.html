@@ -31,24 +31,24 @@
   
   </div>
     {% endif %}
-    <main id="contenido">
+    <main id="contenido" >
        
      
-   <div   class="container-fluid  margin-sup " >
+   <div   class="container-fluid  margin-sup "  >
         
-      <div class="row" style="margin-left:30px;margin-right:30px">
+      <div id="loop" class="row" style="text-align: center;margin-left:30px;margin-right:30px">
       
        
         {% for post in publicaciones %}
           {% if  publicaciones|length > 1 %}
          
-        <div class="col-md-4" >
-         <div class="card"  style="height: 55vh;margin-bottom:5vh">
+        <div class="col-md-4 "  >
+         <div class="card "  style="height: 55vh;margin-bottom:3vh">
             
 
-          <div class="card-body" style="position: relative">
+          <div class="card-body fit" style="position: relative">
             <h4 class="card-title">{{post[1]}}</h4>
-            <p id="{{valores.URL}}/publicaciones_portitulo/{{post[1]}}" onclick="portapapeles(this.id)" class="card-text url-clip"><strong>Copy Url de este post</strong> </p>
+            <p class"indice-mayor" id="{{valores.URL}}/publicaciones_portitulo/{{post[1]}}" onclick="portapapeles(this.id)" class="card-text url-clip"><strong>Copy Url de este post</strong> </p>
               <div class="centrar_imgen_card">          
           <img   onclick="publicacion('/post/{{post[5]}}')" class="card-img-top " src="/img/{{post[2]}}" alt="post" />
                 </div> 
@@ -61,7 +61,7 @@
             
 
              {% elif post[5] !="" %}
-             <div class="container-fluid" style="text-align: center;">
+             <div  class="container-fluid ancho-movil" style="text-align: center;">
                <iframe id="publicacion"   onclick="publicacion('/post/{{post[5]}}')" src="/post/{{post[5]}}"  width="100%" onload='resizeIframe(this)' frameborder="0" ></iframe>
              </div>  
             {% endif %}
@@ -81,7 +81,7 @@
            {% endif %}
         
       </div>
-        <div class=""style="text-align: center;">
+        <div class="ancho-movil"style="text-align: center;">
 <iframe id="publicacion"   style="display:none;"src=""  frameborder="0"  width="100%" onload='resizeIframe(this)'>
 </iframe>
 </div>
@@ -113,6 +113,6 @@
 </aside>
     </main>
  
-   
+ {% include "sitio/footer.html"%}
   
  
