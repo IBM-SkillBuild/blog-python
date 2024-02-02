@@ -6,7 +6,13 @@ const magnifier = document.querySelector('.magnifier');
    window.onload = function() {
     $('.aside-ctrl--reset').css({
       witdh: '0%',
+      
     });
+     
+       $('html, body').css({
+         overflowX: 'hidden',
+         height: 'auto',
+       });
        
      
       document.body.addEventListener('click', (e) => {
@@ -165,7 +171,7 @@ $(window).scroll(function () {
           $('#contenido').append(result.htmlresponse);
           $('#search').val("");
           $('html, body').css({
-            overflow: 'auto',
+            overflowX: 'auto',
             height: 'auto',
           });
           var el = document.getElementById('search');

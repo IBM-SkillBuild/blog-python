@@ -9,7 +9,7 @@ $(document).ready(function () {
     window.scrollTo(0, 0);
     if ($('#aside-ctrl').is(':checked')) {
         $('html, body').css({
-          overflow: 'hidden',
+          overflowX: 'hidden',
           height: '100%',
         });
       // aqui se quita el ancho del aside para cuando esté oculto
@@ -22,7 +22,7 @@ $(document).ready(function () {
       // e inyeccion de codigo para motrar contenido del aside
       cargar_aside_tags();
       $('html, body').css({
-        overflow: 'auto',
+        overflowX: 'auto',
         height: 'auto',
       });
         
