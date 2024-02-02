@@ -4,7 +4,9 @@
 const search = document.querySelector('.search-bar-container');
 const magnifier = document.querySelector('.magnifier');
    window.onload = function() {
-   
+    $('.aside-ctrl--reset').css({
+      witdh: '0%',
+    });
       document.body.addEventListener('click', (e) => {
         if (!search.contains(e.target)) {
           search.classList.remove('active');
