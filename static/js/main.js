@@ -7,6 +7,8 @@ const magnifier = document.querySelector('.magnifier');
     $('.aside-ctrl--reset').css({
       witdh: '0%',
     });
+       
+     
       document.body.addEventListener('click', (e) => {
         if (!search.contains(e.target)) {
           search.classList.remove('active');
@@ -162,6 +164,10 @@ $(window).scroll(function () {
           $('#contenido').html('');
           $('#contenido').append(result.htmlresponse);
           $('#search').val("");
+          $('html, body').css({
+            overflow: 'auto',
+            height: 'auto',
+          });
           var el = document.getElementById('search');
           if (typeof el.selectionStart == 'number') {
             el.selectionStart = el.selectionEnd = el.value.length;
