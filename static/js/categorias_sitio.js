@@ -8,11 +8,19 @@ $( document ).ready(function() {
           overflow: 'hidden',
           height: '100%',
         });
+        $('.aside-ctrl--reset').css({
+          with: '50%',
+        });
+      
       cargar_aside_tags();
       $('html, body').css({
         overflow: 'auto',
         height: 'auto',
       });
+        $('aside-ctrl--reset').css({
+          overflow: 'hidden',
+          with: '100%',
+        });
  
            
     
