@@ -1,6 +1,8 @@
 // javascript para el comportamiento del aside
 $(document).ready(function () {
- 
+   $('.aside-ctrl--reset').css({
+     witdh: '0%',
+   });
  // en el caso de pusar el boton flecha para abrir aside
   $("#aside-ctrl").click(function () {
     window.scrollTo(0, 0);
