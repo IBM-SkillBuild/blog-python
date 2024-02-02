@@ -9,7 +9,7 @@ $( document ).ready(function() {
           height: '100%',
         });
         $('.aside-ctrl--reset').css({
-          with: '0%',
+          witdh: '0%',
         });
       
       cargar_aside_tags();
@@ -17,14 +17,15 @@ $( document ).ready(function() {
         overflow: 'auto',
         height: 'auto',
       });
-        $('aside-ctrl--reset').css({
-          overflow: 'hidden',
-          with: '100%',
-        });
+       
  
            
     
        
+    } else {
+        $('.aside-ctrl--reset').css({
+          witdh: '0%',
+        });
     }
 });
  
@@ -49,6 +50,10 @@ function cargar_aside_tags() {
       console.log(result)
       $('#aside-contenido').html('');
       $('#aside-contenido').append(result.htmlresponse);
+       $('aside-ctrl--reset').css({
+         overflow: 'hidden',
+         with: '0%',
+       });
        
       
     },
