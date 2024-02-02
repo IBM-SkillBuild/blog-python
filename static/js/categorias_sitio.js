@@ -9,7 +9,7 @@ $( document ).ready(function() {
           height: '100%',
         });
         $('.aside-ctrl--reset').css({
-          with: '50%',
+          with: '0%',
         });
       
       cargar_aside_tags();
