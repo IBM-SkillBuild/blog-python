@@ -10,8 +10,11 @@ const magnifier = document.querySelector('.magnifier');
     });
      
        $('html, body').css({
-         overflowX: 'hidden',
+         overflowX: 'hidden !important',
          height: 'auto',
+       });
+       $('.aside-ctrl--reset').css({
+         witdh: '0% !important',
        });
        
      
