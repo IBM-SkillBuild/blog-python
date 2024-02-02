@@ -72,6 +72,7 @@
   background-color: #000;
   transition: all .3s;
    overflow-x: hidden !important;
+   width: 0%;
 }
 
 #aside-ctrl:checked ~ .aside-ctrl--reset {
