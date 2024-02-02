@@ -1,4 +1,5 @@
 {% include "sitio/header-sitio.html" %}
+<div style="width:100%;overflow-x:hidden">
 <div class="ancho-total">
  {% if publicaciones %}
         {% if  publicaciones|length > 1 %}
@@ -82,7 +83,7 @@
            {% endif %}
         
       </div>
-        <div class="ancho-movil"style="text-align: center;">
+ <div class="ancho-movil"style="text-align: center;">
 <iframe id="publicacion"   style="display:none;"src=""  frameborder="0"  width="100%" onload='resizeIframe(this)'>
 </iframe>
 </div>
@@ -103,7 +104,7 @@
     </svg>
 </a>
  
-
+ 
 <input class="sr-only" id="aside-ctrl" type="checkbox" />
 
 <label class="aside-ctrl--reset" for="aside-ctrl"></label>
@@ -112,9 +113,10 @@
   <div id="aside-contenido">
   </div>
 </aside>
+
 </div>
     </main>
- 
+ </div>
  {% include "sitio/footer.html"%}
   
  
