@@ -114,6 +114,9 @@
 .card{
   max-width: 25%;
 }
+ #blog{
+    display: flex;
+  }
 }
 
 
