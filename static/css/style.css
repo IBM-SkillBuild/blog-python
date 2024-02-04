@@ -16,7 +16,7 @@
      
   }
   iframe{
-    overflow: hidden;
+    overflow-x: hidden;
     min-height: 100vh !important;
     min-width: 100vw !important;
     margin-left: 0 !important;
@@ -200,7 +200,7 @@ table tbody tr:nth-child(even) {
 }
 html{
  
- 
+    position: relative;
     background-image: url("/static/img/fondo.jpg");
     background-repeat: no-repeat;
     background-position: center;
@@ -210,6 +210,7 @@ html{
     min-width: 100% !important;
     max-width: 100% !important;
     overflow-x: hidden !important;
+    overflow-y: auto !important;
    /*  animation: fadeIn; 
     animation-duration: 2s; 
     */
@@ -218,9 +219,12 @@ html{
   
 }
 body{
+  position: relative;
   background-color: transparent;
   width: 100vw !important;
   overflow-x: hidden !important;
+  overflow-y: auto !important;
+  
 }
 .ancho-total{
   width: 100vw !important;
