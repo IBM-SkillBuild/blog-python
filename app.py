@@ -262,7 +262,7 @@ def admin_guardar_publicaciones():
        html_publicacion.save(os.path.join(
           basedir, app.config['UPLOAD_POST'], html_publicacion_nuevo))
     descripcion=""
-    
+  
     habilitado=True   
     
     db = psycopg2.connect(
