@@ -177,6 +177,7 @@ $(window).scroll(function () {
             overflowX: 'auto',
             height: 'auto',
           });
+         
           var el = document.getElementById('search');
           if (typeof el.selectionStart == 'number') {
             el.selectionStart = el.selectionEnd = el.value.length;
@@ -185,7 +186,7 @@ $(window).scroll(function () {
             range.collapse(false);
             range.select();
           }
-     
+          
     
 
         },

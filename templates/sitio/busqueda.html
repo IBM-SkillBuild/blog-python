@@ -35,11 +35,18 @@
        
 
           <div class="card-body" style="position: relative">
-            <h4 class="card-title">{{post[1]}}</h4>
-            <p id="{{valores.URL}}/publicaciones_portitulo/{{post[1]}}" onclick="portapapeles(this.id)" class="card-text url-clip"><strong>Copy Url de este post</strong> </p>
-                         
+          <h4 onclick="publicacion('/post/{{post[5]}}')" class="url-clip">{{post[1]}}</h4>
+          <img  id="{{valores.URL}}/publicaciones_portitulo/{{post[1]}}" onclick="portapapeles(this.id)" src="/static/img/vinculado.png" class="arriba" alt="post" />
+
           <img   onclick="publicacion('/post/{{post[5]}}')" class="card-img-top img-responsive center-block" src="/img/{{post[2]}}" alt="post" />
-        
+          <div id="card-cat" style="max-width:350px;text-align:center;margin-left:40px;margin-right:40px">  
+          {% set categorias = post[4].split(',') %}
+                 {% for cat in categorias %}  
+               
+                 <button id="{{cat}}" onclick="buscar_tag(this.id)"class="info-tags " ">{{cat}}</button>   
+               
+                  {% endfor %}  
+                    </div>
             
             <a name="" id="" class="btn btn-primary" style="position:absolute;bottom:10px;display:none"  role="button"  >Ver publicación</a>
             

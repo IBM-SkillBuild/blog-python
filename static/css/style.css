@@ -4,6 +4,10 @@
     min-width:95%;
   
 }
+#card-cat{
+  display: none;
+}
+
   }
  
  .texto-entrada{
@@ -117,6 +121,7 @@
  #blog{
     display: flex;
   }
+  
 }
 
 
@@ -283,7 +288,7 @@ body{
   position: absolute;
   bottom: 10px;
   margin: 0 auto;
- z-index: 0 !important;
+ z-index: 1 !important;
  
   
 }
@@ -291,7 +296,7 @@ body{
 
 .card{
   background-color: whitesmoke;
-  
+  max-height: 70vh;
   opacity: 0.7;
   min-width: 20vw ;
   animation: fadeIn; 
@@ -304,6 +309,7 @@ body{
   -webkit-transition: opacity .4s ease-out;
   -o-transition: opacity .4s ease-out;
 }
+
 .url-clip{
   cursor: pointer;
   color: #1B75CE;
@@ -675,7 +681,50 @@ a.scroll-top svg {
 	
 	
 }
+.info-tags{
+position: relative;
+ width:fit-content;
+margin: 5px;
+ height: fit-content;
+  align-items: center;
+  cursor:pointer;
+	background-color: rgb(228, 228, 233);
+	z-index: 2 !important;
+  
+	border-radius: 50px;
+	box-shadow: 6px 6px 10px rgba(0, 0, 0, 0.2),
+		-6px -6px 10px rgba(255, 255, 255, 0.6);
+	
+	
+	
+}
 
+.info-title{
+position: relative;
+ width:fit-content;
+padding-left: 59px;
+padding-right: 59px;
+ height: fit-content;
+  align-items: center;
+  cursor:pointer;
+	background-color: rgb(228, 228, 233);
+	z-index: 2 !important;
+  
+	border-radius: 50px;
+	box-shadow: 6px 6px 10px rgba(0, 0, 0, 0.2),
+		-6px -6px 10px rgba(255, 255, 255, 0.6);
+	
+	
+	
+}
+
+.arriba{
+  transform: scale(0.5);
+  cursor:pointer;
+  position: absolute;
+  top:40px;
+  right: 0px;
+}
 .card-cool{
 
   align-items: center;
@@ -689,6 +738,9 @@ a.scroll-top svg {
 	
 	
 	
+}
+#card-cat{
+max-height: 50px !important;
 }
 
 .info-total{
@@ -754,6 +806,6 @@ a.scroll-top svg {
   width: 100% !important;
 }
 .indice-mayor{
-  z-index: 9999999 !important;
+  z-index: 999 !important;
   padding-bottom: 190px !important;
 }
