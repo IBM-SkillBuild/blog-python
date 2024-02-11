@@ -103,6 +103,17 @@ a.panel-button {
     } 
 } 
 
+@media screen and (max-device-width: 991px) and (orientation: landscape) {
+    .card {
+        margin-top: 20px;
+        margin-bottom: 20px;
+        max-width: 50%;
+    } 
+} 
+
+
+
+
 @media (max-width: 768px) {
   .card {
     min-height: 300px;

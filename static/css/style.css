@@ -630,7 +630,7 @@ a.scroll-top svg {
   align-items: center;
   cursor: pointer;
   background-color: rgb(228, 228, 233);
-  z-index: 2 !important;
+  z-index: 2;
 
   border-radius: 50px;
   box-shadow: 6px 6px 10px rgba(0, 0, 0, 0.2),
@@ -736,6 +736,6 @@ a.scroll-top svg {
   width: 100% !important;
 }
 .indice-mayor {
-  z-index: 999 !important;
+/*   z-index: 999 !important; */
   padding-bottom: 190px !important;
 }
