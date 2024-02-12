@@ -5,7 +5,7 @@
   #card-cat {
     display: none;
   }
- /*  .card {
+  /*  .card {
    max-width: 50% !important;
   } */
 }
@@ -117,7 +117,7 @@ iframe {
     top: 0vh !important;
     display: flex !important;
   }
- /*  .card {
+  /*  .card {
     height: fit-content !important;
     object-fit: contain;
     max-width: 50% !important;
@@ -163,6 +163,7 @@ iframe {
     width: 80% !important;
   }
 }
+
 @media only screen and (max-width: 500px) {
   #foto_about {
     width: 25vw !important;
@@ -736,6 +737,6 @@ a.scroll-top svg {
   width: 100% !important;
 }
 .indice-mayor {
-/*   z-index: 999 !important; */
+  /*   z-index: 999 !important; */
   padding-bottom: 190px !important;
 }

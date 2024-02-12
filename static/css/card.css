@@ -124,3 +124,11 @@ a.panel-button {
     padding: 0px 5px;
   }
 } 
+
+@media screen and (orientation: landscape) {
+  .card {
+    width: 50% !important;
+    margin: 0 auto !important;
+    margin-bottom: 15px !important;
+  }
+}
