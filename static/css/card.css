@@ -107,9 +107,11 @@ a.panel-button {
     .card {
         margin-top: 20px;
         margin-bottom: 20px;
-        max-width: 50%;
+        min-width: 60%;
     } 
 } 
+
+
 
 
 
@@ -117,6 +119,7 @@ a.panel-button {
 @media (max-width: 768px) {
   .card {
     min-height: 300px;
+
   }
   .panel-body {
     max-height: 200px;
@@ -125,19 +128,12 @@ a.panel-button {
   }
 } 
 
-@media screen and (orientation: landscape) {
+@media screen and (orientation: portrait) {
   .card {
-    width: 50% !important;
+    width: 80% !important;
     margin: 0 auto !important;
     margin-bottom: 15px !important;
   }
 }
 
-@media screen and (orientation: portrait) {
-  .card {
    
-    margin: 0 auto !important;
-    margin-bottom: 15px !important;
-   height: 100px !important;
-  }
-}
