@@ -5,9 +5,9 @@
   #card-cat {
     display: none;
   }
-  /*  .card {
+   .card {
    max-width: 50% !important;
-  } */
+  } 
 }
 
 .texto-entrada {
@@ -24,12 +24,13 @@ iframe {
   margin-left: 0 !important;
   padding-left: 0 !important;
 }
-/* .card {
+ .card {
   background-color: chocolate;
-  margin-bottom: 1vh;
-  min-width: 20vw;
+  min-width: 30vw;
   max-width: 40vw;
-} */
+  margin: 0 auto;
+  margin-bottom: 1vh;
+} 
 
 .card-img-top {
   height: 75vh;
