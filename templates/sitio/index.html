@@ -1,20 +1,16 @@
 {% include "sitio/header-sitio.html" %}
 <main>
-    <img
-          id="blog"
-          title="Menú de opciones"
-          onclick="mostrar_menu()"
-          src="{{url_for('static', filename='/img/blog.png')}}"
-          alt="El Blog de Eduardo Cabrera"
-        />
+  <img
+    id="blog"
+    title="Menú de opciones"
+    onclick="mostrar_menu()"
+    src="{{url_for('static', filename='/img/blog.png')}}"
+    alt="El Blog de Eduardo Cabrera"
+  />
   <div class="container-fluid py-5 presentacion" style="max-width: 60vw">
-   
-    <h2 class="display-5 fw-bold">Trabajando con Postgresql {{mensaje}}</h2>
+    <h2 class="display-5 fw-bold">Compartiendo mis cosas {{mensaje}}</h2>
     <p class="col-md-12 texto-entrada">
-      He creado este sitio web con el framework Flask de Python, reuniendo tanto
-      el "front", como el "back" en un único proyecto sencillo y minimalista.
-      Manejo un "CRUD" de posts desde mi perfil de administrador, y lo muestro
-      en producción.
+      He creado un proyecto sencillo y minimalista. Tanto el servidor web (alojado en un data center de Frankfurt), como el servidor de BBDD, pertenecen a un plan gratuito. Disfuten del contenido, pero no esperen que la velocidad sea la seña de identidad para este proyecto.
     </p>
 
     <a
