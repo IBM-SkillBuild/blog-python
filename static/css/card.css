@@ -132,3 +132,12 @@ a.panel-button {
     margin-bottom: 15px !important;
   }
 }
+
+@media screen and (orientation: portrait) {
+  .card {
+   
+    margin: 0 auto !important;
+    margin-bottom: 15px !important;
+   height: 100px !important;
+  }
+}
