@@ -108,7 +108,8 @@ a.panel-button {
     .card {
         margin-top: 20px;
         margin-bottom: 20px;
-        min-width: 60%;
+        min-width: 80%;
+        min-height: 70vh !important;
         
     } 
 } 
