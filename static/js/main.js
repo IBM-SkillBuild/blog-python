@@ -198,7 +198,7 @@ $(window).scroll(function () {
             range.select();
           }
           
-    
+      window.scrollTo({ top: 0, behavior: 'smooth' });
 
         },
       });

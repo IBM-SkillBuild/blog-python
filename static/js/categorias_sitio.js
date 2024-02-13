@@ -65,7 +65,7 @@ function cargar_aside_tags() {
          overflow: 'hidden',
          witdh: '100%',
        });
-       
+      
       
     },
   });
