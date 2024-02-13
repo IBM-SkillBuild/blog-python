@@ -96,22 +96,33 @@ const magnifier = document.querySelector('.magnifier');
         });
     }
 
-    function publicacion(source) {
+function publicacion(source) {
+     
       $('#publicacion').attr('src', source);
       $('#publicacion').css('overflow', 'hidden');
+      $('#loop').css('display', 'none');
       $('#publicacion').show();
+     
+       $('#volver').show();
       $('#publicacion').css('width', '100%');
       //$('#publicacion').css('margin-top', 200);
-      let reducir = 10;
+     /*  let reducir = 40;
       $('html, body').animate(
         {
           scrollTop: $('#publicacion').offset().top - reducir,
         },
         1000,
-      );
+      ); */
+  
+  window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-   
+function mostrarOculto(){
+   $('#loop').show();
+  $('#volver').hide();
+  $('iframe').attr('src', "");
+   $('#publicacion').hide();
+   }
 
   
 

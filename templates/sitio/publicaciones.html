@@ -76,7 +76,7 @@
 
              {% elif post[5] !="" %}
              <div  class="container-fluid ancho-movil" style="text-align: center;">
-               <iframe id="publicacion"   onclick="publicacion('/post/{{post[5]}}')" src="/post/{{post[5]}}"  width="100%" onload='resizeIframe(this)' frameborder="0" ></iframe>
+               <iframe id="publicacion" class="animate__animated animate__fadeIn animate"  onclick="publicacion('/post/{{post[5]}}')" src="/post/{{post[5]}}"  width="100%" onload='resizeIframe(this)' frameborder="0" ></iframe>
              </div>  
             {% endif %}
           {% endfor %}
@@ -96,7 +96,12 @@
         
       </div>
  <div class="ancho-movil"style="text-align: center;">
-<iframe id="publicacion"   style="display:none;"src=""  frameborder="0"  width="100%" onload='resizeIframe(this)'>
+   <div id="volver" style="text-align: center; display:none">
+          <button type="button" onclick="mostrarOculto()" class="btn btn-outline-secondary" style="width: fit-content;margin-bottom:40px" >
+              Volver a consultas
+              </button>
+   </div>
+<iframe id="publicacion" class="animate__animated animate__fadeIn animate"  style="display:none;"src=""  frameborder="0"  width="100%" onload='resizeIframe(this)'>
 </iframe>
 </div>
   </div>
