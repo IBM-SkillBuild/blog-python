@@ -220,6 +220,8 @@ function play(){
   var myPlayer=videojs('pv_jNlXozfh');
    myPlayer.ready(function() {
       myPlayer.requestFullscreen();
+      var portrait = (window.orientation % 180 == 0);
+    $("body > div").css("-webkit-transform", !portrait ? "rotate(-90deg)" : "");
    });
   
     
