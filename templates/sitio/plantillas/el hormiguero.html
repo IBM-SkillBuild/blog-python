@@ -224,7 +224,13 @@ function play(){
    myPlayer.ready(function() {
       myPlayer.requestFullscreen();
       if (myPlayer.requestFullscreen) {
-        $("body > div").css("-webkit-transform", !portrait ? "rotate(-180deg)" : "");
+        if (screen.lockOrientation) {
+  screen.lockOrientation('portrait');
+  //Registra evento evento para cambio de orientación
+  screen.addEventListener("orientationchange", function () {
+      console.log("Orientación cambiada ha: " + screen.orientation);
+  });
+}
       }
    });
   
