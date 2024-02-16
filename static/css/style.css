@@ -746,16 +746,11 @@ a.scroll-top svg {
   padding-bottom: 190px !important;
 }
 
-.videorotate {
-  position: absolute;
-  transform: rotate(90deg);
-
-  transform-origin: bottom left;
-  width: 100vh;
-  height: 100vw;
-  margin-top: -100vw;
-  object-fit: cover;
-
-  z-index: 4;
-  visibility: visible;
+.avisopantalla {
+ position: absolute;
+   top: 50%;
+   left: 50%;
+   height: 30%;
+   width: 50%;
+   margin: -15% 0 0 -25%;
 }
