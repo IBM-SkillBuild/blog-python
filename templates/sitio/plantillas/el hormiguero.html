@@ -191,6 +191,7 @@
     <script src="https://releases.flowplayer.org/7.2.4/flowplayer.min.js"></script>
      <script src="https://releases.flowplayer.org/hlsjs/flowplayer.hlsjs.min.js"></script>
     <script>
+      var full=false
       $(window).scroll(function () {
          scroll = window.scrollY;
   if ($(this).scrollTop() > 300) {
@@ -230,14 +231,7 @@ function play(){
   var myPlayer=videojs('pv_jNlXozfh');
    myPlayer.ready(function() {
       myPlayer.requestFullscreen();
-      if (window.orientation == 90 || window.orientation == -90) {
-    console.log("no hacer nada")
-} else {
-     myPlayer.zoomrotate({
-        rotate: 90,
-        zoom: 1.5
-    });
-}
+    
      
          
      
@@ -252,12 +246,40 @@ function play(){
 }
 
 
+document.addEventListener('fullscreenchange', function(e){ 
+ var myPlayer=videojs('pv_jNlXozfh');
 
+  if (window.matchMedia("(orientation: portrait)").matches) {
+   
+   
+   
+    if(myPlayer.isFullscreen()){
+       myPlayer.zoomrotate({
+        rotate: 90,
+        zoom: 1.5
+    });
+    }else{
+        myPlayer.zoomrotate({
+        rotate: -360,
+        zoom: 1.5
+    });
+    }
 
-
-function fully(){
-  alert("funciona")
+    
+    
 }
+
+if (window.matchMedia("(orientation: landscape)").matches) {
+    myPlayer.zoomrotate({
+        rotate: 0,
+        zoom: 1.5
+    });
+}
+   
+})
+
+
+
     </script>  
     
   </body>
