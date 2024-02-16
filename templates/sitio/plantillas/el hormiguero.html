@@ -140,7 +140,7 @@
     </div>
          <div id="livecam" style="display:none" class="livecam" style="text-align:center; margin:30px">
     <link href="https://static.publit.io/css/player.min.css" rel="stylesheet" />
-    <video style="position:relative" id="pv_jNlXozfh" class="video-js vjs-skin-colors-blue vjs-big-play-centered" controls preload="auto" poster="" oncontextmenu="return false;" controlslist="nodownload" playsinline>
+    <video onfullscreenchange="fully()"style="position:relative" id="pv_jNlXozfh" class="video-js vjs-skin-colors-blue vjs-big-play-centered" controls preload="auto" poster="" oncontextmenu="return false;" controlslist="nodownload" playsinline>
       <source src="https://fast-channels.atresmedia.com/648ef5882bfab0e4627e0d61/648ef5882bfab0e4627e0d61.m3u8" type="application/x-mpegURL">
       
     <script src="https://static.publit.io/js/player.min.js"></script>
@@ -204,6 +204,9 @@ $('a.scroll-top').click(function (event) {
 $( elem ).ready(function() {
    
     $('.vjs-big-play-button').hide()
+   
+
+
  
 });
 
@@ -220,6 +223,9 @@ function play(){
   var myPlayer=videojs('pv_jNlXozfh');
    myPlayer.ready(function() {
       myPlayer.requestFullscreen();
+      if (myPlayer.requestFullscreen) {
+        $("body > div").css("-webkit-transform", !portrait ? "rotate(-180deg)" : "");
+      }
    });
   
     
@@ -228,6 +234,10 @@ function play(){
 
 
 
+}
+
+function fully(){
+  alert("funciona")
 }
     </script>  
     
