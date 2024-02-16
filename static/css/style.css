@@ -745,3 +745,17 @@ a.scroll-top svg {
   /*   z-index: 999 !important; */
   padding-bottom: 190px !important;
 }
+
+.videorotate {
+  position: absolute;
+  transform: rotate(90deg);
+
+  transform-origin: bottom left;
+  width: 100vh;
+  height: 100vw;
+  margin-top: -100vw;
+  object-fit: cover;
+
+  z-index: 4;
+  visibility: visible;
+}

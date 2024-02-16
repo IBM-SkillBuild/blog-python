@@ -221,17 +221,10 @@ function play(){
    let fondo = document.querySelector("body");
    $(fondo).css('background-image', 'none')
   var myPlayer=videojs('pv_jNlXozfh');
+  $(myPlayer).addClass("videorotate");
    myPlayer.ready(function() {
       myPlayer.requestFullscreen();
-      if (myPlayer.requestFullscreen) {
-        if (screen.lockOrientation) {
-  screen.lockOrientation('portrait');
-  //Registra evento evento para cambio de orientación
-  screen.addEventListener("orientationchange", function () {
-      console.log("Orientación cambiada ha: " + screen.orientation);
-  });
-}
-      }
+     
    });
   
     
