@@ -24,6 +24,8 @@
       href="https://releases.flowplayer.org/7.2.4/skin/skin.css"
       rel="stylesheet"
     />
+
+    <script src="/static/js/videojs-rotate-player-plugin.min.js"></script>
    
     <style>
       h1 {
@@ -255,12 +257,8 @@ document.addEventListener('fullscreenchange', function(e){
    
    
     if(myPlayer.isFullscreen()){
-      window.screen.lockOrientation('portrait') 
+      myPlayer.rotatePlayerPlugin();
     
-
-    }else{
-    
-      window.screen.lockOrientation('landscape') 
 
     }
 
