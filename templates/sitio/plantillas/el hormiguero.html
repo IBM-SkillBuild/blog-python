@@ -231,6 +231,7 @@ function play(){
   var myPlayer=videojs('pv_jNlXozfh');
    myPlayer.ready(function() {
       myPlayer.requestFullscreen();
+     
     
      
          
@@ -254,15 +255,15 @@ document.addEventListener('fullscreenchange', function(e){
    
    
     if(myPlayer.isFullscreen()){
-       myPlayer.zoomrotate({
-        rotate: 90,
-        zoom: 1.5
-    });
+      document.querySelector('html').style.transform 
+                    = 'rotate(90deg)'; 
+    
+
     }else{
-        myPlayer.zoomrotate({
-        rotate: -360,
-        zoom: 1.5
-    });
+    
+      document.querySelector('html').style.transform 
+                    = 'rotate(-90deg)'; 
+
     }
 
     
