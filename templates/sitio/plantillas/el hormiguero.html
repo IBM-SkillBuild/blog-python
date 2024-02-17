@@ -255,14 +255,12 @@ document.addEventListener('fullscreenchange', function(e){
    
    
     if(myPlayer.isFullscreen()){
-      document.querySelector('html').style.transform 
-                    = 'rotate(90deg)'; 
+      window.screen.lockOrientation('portrait') 
     
 
     }else{
     
-      document.querySelector('html').style.transform 
-                    = 'rotate(-90deg)'; 
+      window.screen.lockOrientation('landscape') 
 
     }
 
