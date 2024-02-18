@@ -75,11 +75,13 @@
 
   <body>
    
-    <main class="main">
-      <div class="container-fluid">
-
-        <iframe  class="responsive-iframe" id="exampleportal" src="https://ibm-skillbuild.github.io/"></iframe>
+     <main class="main">
+      <div class="container-fluid" style="text-align: center;margin-top:60px">
+<h1>Jekyll Edu blog</h1>
+       
       </div>
+              <img src="/static/img/jekyll.png" class="img-fluid rounded mx-auto d-block" style="margin-top:60px " alt="...">
+
      
     </main>
     
@@ -98,6 +100,9 @@
     <script src="https://cdn.jsdelivr.net/npm/bs5-lightbox@1.8.3/dist/index.bundle.min.js"></script>
    
     <script>
+      $( document ).ready(function() {
+          window.open("https://ibm-skillbuild.github.io/#blog", '_blank');
+      });
       $(window).scroll(function () {
   if ($(this).scrollTop() > 300) {
     $('a.scroll-top').fadeIn('slow');

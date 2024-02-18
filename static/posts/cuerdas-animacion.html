@@ -4,7 +4,6 @@
     <title>Title</title>
     <!-- Required meta tags -->
     <meta charset="utf-8" />
-    <meta content='never' name='referrer'/>
     <meta
       name="viewport"
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
@@ -25,6 +24,8 @@
       href="https://releases.flowplayer.org/7.2.4/skin/skin.css"
       rel="stylesheet"
     />
+
+   
    
     <style>
       h1 {
@@ -38,11 +39,12 @@
       
       body {
         background-color: transparent;
-         background-image: url(https://www.premiosgoya.com/wp-content/uploads/2020/01/cuerdas_s-770796540-large.jpg);
-	                       
+	       background-image: url(https://www.premiosgoya.com/wp-content/uploads/2020/01/cuerdas_s-770796540-large.jpg);
+         margin-top:-6vh;                    
          background-repeat:   no-repeat;
          background-attachment: fixed;
          background-position: center;
+         
         font-family: 'Montserrat';
         font-weight: bold;
         background-color: black;
@@ -63,15 +65,15 @@
       #livecam {
         margin:0 auto;
         text-align:center;
-        width:60%;
+        width:60%
             
       }
-     
       .aviso{
         display: none
        
       }
       #btn-play{
+        margin-top:40px;
         padding:20px;
         padding-left:60px;
         padding-right:60px;
@@ -80,7 +82,7 @@
       
      .video-js {
     position: relative !important;
-   border:solid 2px white
+   
     margin:0 auto !important
     
 }
@@ -105,11 +107,8 @@
         margin:0 auto;
         text-align:center;
         width:100%
-      
             
       }
-
-      
 
      
           .video-js {
@@ -120,7 +119,7 @@
     
 }
 }
- 
+
 
     </style>
   </head>
@@ -128,6 +127,7 @@
   <body>
     
     <main class="main">
+     
        
       <div class="container-fluid"></div>
       <div class="row">
@@ -137,50 +137,32 @@
           <h4 style="text-align: center;color:yellow ">
       <strong>(Cortometraje)</strong> 
         </h4>
+       
 
         <div class="aviso">
-          <p  style="border:solid 3px white;background-color:black;width:fit-content;padding:1vh;color:yellow;text-align:center;"> Touch video and select full screen</p>
+          <p  style="border:solid 3px white;background-color:black;width:fit-content;padding:1vh;color:yellow;text-align:center;">Recuerda Girar tu dispositivo en tabletas y moviles</p>
        </div>
 
-             <div style="text-align:center; margin-bottom:10px;margin-top:30px">
+             <div style="text-align:center; margin-bottom:40px">
       <a href="#">  <button id="btn-play" onclick="play()" type="button" class="btn btn-dark" data-mdb-ripple-init>P L A Y</button></a>
       
     </div>
-         <div id="livecam" style="display:none" class="livecam embed-responsive embed-responsive-16by9" style="text-align:center; margin:30px">
-    <link href="https://static.publit.io/css/player.min.css" rel="stylesheet" />
-<div  class=" col-12 col-md-12 offset-md-2 col-lg-8 offset-lg-2">
-   <div class="ratio ratio-16x9 text-center mt-4 mb-4 ">
-    <iframe allowfullscreen class="embed-responsive-item" style="max-width: 100%;height: 100%;" src="https://res.cloudinary.com/dquxfl0fe/video/upload/v1683651261/cuerdas_vno3nb.mp4"  frameborder="0" ></iframe>
-</div> 
-</div>
-    <h3 style="text-align: center; margin-top: 60px;color:white ">
-     Designed by E.Cabrera
-        </h3>   
-<script src="https://static.publit.io/js/player.min.js"></script>
+         <div id="livecam" style="display:none" class="livecam" style="text-align:center; margin:30px">
+   
+          <link href="https://static.publit.io/css/player.min.css" rel="stylesheet" />
+    <video style="position:relative" id="pv_jNlXozfh" class="video-js vjs-skin-colors-blue vjs-big-play-centered" controls preload="auto" poster="" oncontextmenu="return false;" controlslist="nodownload" playsinline>
+            <source src="https://res.cloudinary.com/dquxfl0fe/video/upload/v1683651261/cuerdas_vno3nb.mp4" type='video/mp4'>
+
+ 
+   <script type="module">import videojsRotatezoom from 'https://cdn.skypack.dev/videojs-rotatezoom';</script>
+   
+   <script src="https://static.publit.io/js/player.min.js"></script>
     <script src="https://firebasestorage.googleapis.com/v0/b/casamireasa.appspot.com/o/live.js?alt=media&token=fe11efb2-f591-4e81-a343-5d785c7a4100"></script>
  
 
   <script type="text/javascript" src="https://firebasestorage.googleapis.com/v0/b/casamireasa.appspot.com/o/oporeno5g.js?alt=media&token=e2892207-0a49-407e-9c1e-e1ad251c3813">
   </script>
-<script>
-function play(){
  
-  setTimeout(function(){
-   $('#btn-play').fadeOut(300)
-   $('#livecam').fadeIn(6000)
-   let fondo = document.querySelector("body");
-   $(fondo).css('background-image', 'none')
-  
-   });
-  
-    
-}, 500);
- 
-
-
-
-
-</script>
 </div>
 
 
@@ -197,6 +179,7 @@ function play(){
        <path d='M0 0h24v24H0z' fill='none'/>
     </svg>
 </a>
+ 
     </main>
     
     <script
@@ -212,9 +195,16 @@ function play(){
     ></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bs5-lightbox@1.8.3/dist/index.bundle.min.js"></script>
-    <script src="https://releases.flowplayer.org/7.2.4/flowplayer.min.js"></script>
-     <script src="https://releases.flowplayer.org/hlsjs/flowplayer.hlsjs.min.js"></script>
+   
+   
+    
+     <script src="
+https://cdn.jsdelivr.net/npm/videojs-landscape-fullscreen@11.1111.0/dist/videojs-landscape-fullscreen.min.js
+"></script>
     <script>
+      var player = videojs('pv_jNlXozfh');
+      player.landscapeFullscreen();
+
       $(window).scroll(function () {
          scroll = window.scrollY;
   if ($(this).scrollTop() > 300) {
@@ -235,6 +225,9 @@ $('a.scroll-top').click(function (event) {
 $( elem ).ready(function() {
    
     $('.vjs-big-play-button').hide()
+   
+
+
  
 });
 
@@ -248,9 +241,14 @@ function play(){
    $('#livecam').fadeIn(6000)
    let fondo = document.querySelector("body");
    $(fondo).css('background-image', 'none')
-  var myPlayer=videojs('vjs_video_3');
+  var myPlayer=videojs('pv_jNlXozfh');
    myPlayer.ready(function() {
       myPlayer.requestFullscreen();
+     
+    
+     
+         
+     
    });
   
     
@@ -260,6 +258,27 @@ function play(){
 
 
 }
+
+document.addEventListener('fullscreenchange', function(e){ 
+ var myPlayer=videojs('pv_jNlXozfh');
+ screen.orientation.unlock()
+ 
+if (window.matchMedia("(orientation: landscape)").matches) {
+    if(myPlayer.isFullscreen()){
+       screen.orientationLock('portrait')
+    }else{
+      screen.orientationLock('portrait')
+    
+    }
+}
+   
+})
+
+var Player=videojs('pv_jNlXozfh');
+$('Player').on('fullscreenchange webkitfullscreenchange mozfullscreenchange', function() {
+  screen.orientationLock('portrait')
+});
+
     </script>  
     
   </body>

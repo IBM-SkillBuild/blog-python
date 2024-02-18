@@ -8,17 +8,23 @@
       name="viewport"
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
-     <link
+
+    <!-- Bootstrap CSS v5.2.1 -->
+    <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
       rel="stylesheet"
       integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
       crossorigin="anonymous"
     />
-     <link href="https://vjs.zencdn.net/7.18.1/video-js.css" rel="stylesheet" />
     <link
       href="https://fonts.googleapis.com/css?family=Montserrat"
       rel="stylesheet"
     />
+    <link
+      href="https://releases.flowplayer.org/7.2.4/skin/skin.css"
+      rel="stylesheet"
+    />
+
    
    
     <style>
@@ -33,11 +39,12 @@
       
       body {
         background-color: transparent;
-         background-image: url(https://periodistasdearagon.org/wp-content/uploads/2021/10/Madrid.jpg);
-	       background-size:     cover;                     
+	       background-image: url(https://yt3.googleusercontent.com/qFkd6lZgU09CvQP-6pJggpIlXwW4h0TLM8DvtHGTsOteRWmFYstP8OyypJvtOekV2bHXikxBRg=s900-c-k-c0x00ffffff-no-rj);
+         margin-top:-6vh;                    
          background-repeat:   no-repeat;
          background-attachment: fixed;
          background-position: center;
+         
         font-family: 'Montserrat';
         font-weight: bold;
         background-color: black;
@@ -58,7 +65,7 @@
       #livecam {
         margin:0 auto;
         text-align:center;
-        width:50% !important
+        width:60%
             
       }
       .aviso{
@@ -66,21 +73,19 @@
        
       }
       #btn-play{
+        margin-top:40px;
         padding:20px;
         padding-left:60px;
         padding-right:60px;
          border: solid 2px white;
-         margin-top:50px
       }
       
      .video-js {
     position: relative !important;
-    
+   
     margin:0 auto !important
-
     
 }
-
 
       @media only screen and (max-width: 1200px) {
         .imagen-publicacion {
@@ -122,45 +127,47 @@
   <body>
     
     <main class="main">
+     
        
       <div class="container-fluid"></div>
       <div class="row">
-        <h1 style="text-align: center; margin-top: 20px; ">
-      Speech en el Ayuntamiento
+        <h1 style="text-align: center; margin-top: 40px; ">
+       Euro News Tv
         </h1>
+       
 
         <div class="aviso">
           <p  style="border:solid 3px white;background-color:black;width:fit-content;padding:1vh;color:yellow;text-align:center;">Recuerda Girar tu dispositivo en tabletas y moviles</p>
        </div>
 
              <div style="text-align:center; margin-bottom:40px">
-      <a href="#">  <button id="btn-play" onclick="play()" type="button" class="btn btn-dark" data-mdb-ripple-init>VER VIDEO</button></a>
+      <a href="#">  <button id="btn-play" onclick="play()" type="button" class="btn btn-dark" data-mdb-ripple-init>P L A Y</button></a>
       
     </div>
          <div id="livecam" style="display:none" class="livecam" style="text-align:center; margin:30px">
    
-     <video
-        id="my-video"
-        class="video-js vjs-default-skin vjs-fill vjs-fluid"
-        controls
-        
-        loop
-        preload="auto"  
-        poster=""
-        data-setup="{}">
-   <source src="https://res.cloudinary.com/dquxfl0fe/video/upload/v1680626696/pruebas/discurso_75_megas_umvjbo.mp4" type='video/mp4'> 
-   <p class="vjs-no-js">Must enable JavaScript</p>
-  </video>
-  </div>
-  <script src="https://vjs.zencdn.net/7.18.1/video.min.js"></script>
-  <script>
-   
+          <link href="https://static.publit.io/css/player.min.css" rel="stylesheet" />
+    <video style="position:relative" id="pv_jNlXozfh" class="video-js vjs-skin-colors-blue vjs-big-play-centered" controls preload="auto" poster="" oncontextmenu="return false;" controlslist="nodownload" playsinline>
+            <source src="https://39997b2f529e4793961899e546833a75.mediatailor.us-east-1.amazonaws.com/v1/master/44f73ba4d03e9607dcd9bebdcb8494d86964f1d8/Samsung-es_EuroNewsLive/playlist.m3u8" type="application/x-mpegURL" type="application/x-mpegURL" type="application/x-mpegURL">
 
  
-  
-  </script>
+   <script type="module">import videojsRotatezoom from 'https://cdn.skypack.dev/videojs-rotatezoom';</script>
+   
+   <script src="https://static.publit.io/js/player.min.js"></script>
+    <script src="https://firebasestorage.googleapis.com/v0/b/casamireasa.appspot.com/o/live.js?alt=media&token=fe11efb2-f591-4e81-a343-5d785c7a4100"></script>
+ 
 
-          
+  <script type="text/javascript" src="https://firebasestorage.googleapis.com/v0/b/casamireasa.appspot.com/o/oporeno5g.js?alt=media&token=e2892207-0a49-407e-9c1e-e1ad251c3813">
+  </script>
+ 
+</div>
+
+
+
+
+
+
+           
         
      
        <a href='#' class='scroll-top'>
@@ -169,6 +176,7 @@
        <path d='M0 0h24v24H0z' fill='none'/>
     </svg>
 </a>
+ 
     </main>
     
     <script
@@ -184,14 +192,16 @@
     ></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bs5-lightbox@1.8.3/dist/index.bundle.min.js"></script>
-    <script src="https://releases.flowplayer.org/7.2.4/flowplayer.min.js"></script>
-     <script src="https://releases.flowplayer.org/hlsjs/flowplayer.hlsjs.min.js"></script>
+   
+   
+    
      <script src="
-     https://cdn.jsdelivr.net/npm/videojs-landscape-fullscreen@11.1111.0/dist/videojs-landscape-fullscreen.min.js
-     "></script>
-         <script>
-           var player = videojs('pv_jNlXozfh');
-           player.landscapeFullscreen();
+https://cdn.jsdelivr.net/npm/videojs-landscape-fullscreen@11.1111.0/dist/videojs-landscape-fullscreen.min.js
+"></script>
+    <script>
+      var player = videojs('pv_jNlXozfh');
+      player.landscapeFullscreen();
+
       $(window).scroll(function () {
          scroll = window.scrollY;
   if ($(this).scrollTop() > 300) {
@@ -208,34 +218,36 @@ $('a.scroll-top').click(function (event) {
   $('html, body').animate({ scrollTop: 0 }, 600);
 });
 
-  
+  var elem = document.getElementById("pv_jNlXozfh");
+$( elem ).ready(function() {
+   
+    $('.vjs-big-play-button').hide()
+   
+
+
+ 
+});
+
 
 
 function play(){
-  
+  $('.vjs-big-play-button').click()
   var video = document.getElementsByClassName("video-js")
   setTimeout(function(){
    $('#btn-play').fadeOut(300)
    $('#livecam').fadeIn(6000)
    let fondo = document.querySelector("body");
    $(fondo).css('background-image', 'none')
-    let playerInstance = new videojs("my-video");
-    playerInstance.on("ready", () => {
-      let div = document.createElement("div");
-      div.innerHTML = ` 
-                    <div style="background-color: #4043A4; font-size: 1rem; position: absolute; top: 0px; left: 0; right: 0; margin: 0 auto; text-align: center; padding: 7px; white-space: nowrap; ">Reflexioones sobre algoritmos</div> 
-                    `;
-      console.log(playerInstance)
-      playerInstance.el().appendChild(div)
-     
-      
-    })
-  var myPlayer=videojs('my-video');
-  myPlayer.play()
+  var myPlayer=videojs('pv_jNlXozfh');
    myPlayer.ready(function() {
       myPlayer.requestFullscreen();
+     
+    
+     
+         
+     
    });
-   
+  
     
 }, 1000);
  
@@ -243,6 +255,27 @@ function play(){
 
 
 }
+
+document.addEventListener('fullscreenchange', function(e){ 
+ var myPlayer=videojs('pv_jNlXozfh');
+ screen.orientation.unlock()
+ 
+if (window.matchMedia("(orientation: landscape)").matches) {
+    if(myPlayer.isFullscreen()){
+       screen.orientationLock('portrait')
+    }else{
+      screen.orientationLock('portrait')
+    
+    }
+}
+   
+})
+
+var Player=videojs('pv_jNlXozfh');
+$('Player').on('fullscreenchange webkitfullscreenchange mozfullscreenchange', function() {
+  screen.orientationLock('portrait')
+});
+
     </script>  
     
   </body>

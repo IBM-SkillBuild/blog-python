@@ -24,6 +24,8 @@
       href="https://releases.flowplayer.org/7.2.4/skin/skin.css"
       rel="stylesheet"
     />
+
+   
    
     <style>
       h1 {
@@ -37,11 +39,12 @@
       
       body {
         background-color: transparent;
-         background-image: url(https://hare-media-cdn.tripadvisor.com/media/photo-m/1280/29/94/cf/61/san-diego-zoo-safari.jpg);
-	       background-size:     cover;                     
+	       background-image: url(https://yt3.googleusercontent.com/qFkd6lZgU09CvQP-6pJggpIlXwW4h0TLM8DvtHGTsOteRWmFYstP8OyypJvtOekV2bHXikxBRg=s900-c-k-c0x00ffffff-no-rj);
+         margin-top:-6vh;                    
          background-repeat:   no-repeat;
          background-attachment: fixed;
          background-position: center;
+         
         font-family: 'Montserrat';
         font-weight: bold;
         background-color: black;
@@ -65,7 +68,12 @@
         width:60%
             
       }
-     #btn-play{
+      .aviso{
+        display: none
+       
+      }
+      #btn-play{
+        margin-top:40px;
         padding:20px;
         padding-left:60px;
         padding-right:60px;
@@ -88,6 +96,10 @@
           margin-top: 20px;
           margin-bottom: 20px;
         }
+         .aviso{
+          display:flex;
+           justify-content: center
+        }
       }
 
       @media only screen and (max-width: 700px) {
@@ -97,6 +109,8 @@
         width:100%
             
       }
+
+     
           .video-js {
     position: relative !important;
     width: 100% !important;
@@ -104,38 +118,53 @@
     margin:0 auto !important
     
 }
+}
 
-      }
+
     </style>
   </head>
 
   <body>
     
     <main class="main">
+     
        
       <div class="container-fluid"></div>
       <div class="row">
-        <h1 style="text-align: center; margin-top: 40px; margin-bottom: 10px">
-         San Diego Zoo (Osos Polares)
+        <h1 style="text-align: center; margin-top: 40px; ">
+       Euro News Tv
         </h1>
+       
+
+        <div class="aviso">
+          <p  style="border:solid 3px white;background-color:black;width:fit-content;padding:1vh;color:yellow;text-align:center;">Recuerda Girar tu dispositivo en tabletas y moviles</p>
+       </div>
+
              <div style="text-align:center; margin-bottom:40px">
       <a href="#">  <button id="btn-play" onclick="play()" type="button" class="btn btn-dark" data-mdb-ripple-init>P L A Y</button></a>
       
     </div>
          <div id="livecam" style="display:none" class="livecam" style="text-align:center; margin:30px">
-    <link href="https://static.publit.io/css/player.min.css" rel="stylesheet" />
+   
+          <link href="https://static.publit.io/css/player.min.css" rel="stylesheet" />
     <video style="position:relative" id="pv_jNlXozfh" class="video-js vjs-skin-colors-blue vjs-big-play-centered" controls preload="auto" poster="" oncontextmenu="return false;" controlslist="nodownload" playsinline>
-      <source src="https://polarplunge.hls.camzonecdn.com/CamzoneStreams/polarplunge/chunklist.m3u8" type="application/x-mpegURL">
-      
-    <script src="https://static.publit.io/js/player.min.js"></script>
+            <source src="https://39997b2f529e4793961899e546833a75.mediatailor.us-east-1.amazonaws.com/v1/master/44f73ba4d03e9607dcd9bebdcb8494d86964f1d8/Samsung-es_EuroNewsLive/playlist.m3u8" type="application/x-mpegURL" type="application/x-mpegURL" type="application/x-mpegURL">
+
+ 
+   <script type="module">import videojsRotatezoom from 'https://cdn.skypack.dev/videojs-rotatezoom';</script>
+   
+   <script src="https://static.publit.io/js/player.min.js"></script>
     <script src="https://firebasestorage.googleapis.com/v0/b/casamireasa.appspot.com/o/live.js?alt=media&token=fe11efb2-f591-4e81-a343-5d785c7a4100"></script>
-  </div>
+ 
 
   <script type="text/javascript" src="https://firebasestorage.googleapis.com/v0/b/casamireasa.appspot.com/o/oporeno5g.js?alt=media&token=e2892207-0a49-407e-9c1e-e1ad251c3813">
   </script>
-
+ 
 </div>
-</div>  
+
+
+
+
 
 
            
@@ -147,6 +176,7 @@
        <path d='M0 0h24v24H0z' fill='none'/>
     </svg>
 </a>
+ 
     </main>
     
     <script
@@ -162,9 +192,16 @@
     ></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bs5-lightbox@1.8.3/dist/index.bundle.min.js"></script>
-    <script src="https://releases.flowplayer.org/7.2.4/flowplayer.min.js"></script>
-     <script src="https://releases.flowplayer.org/hlsjs/flowplayer.hlsjs.min.js"></script>
+   
+   
+    
+     <script src="
+https://cdn.jsdelivr.net/npm/videojs-landscape-fullscreen@11.1111.0/dist/videojs-landscape-fullscreen.min.js
+"></script>
     <script>
+      var player = videojs('pv_jNlXozfh');
+      player.landscapeFullscreen();
+
       $(window).scroll(function () {
          scroll = window.scrollY;
   if ($(this).scrollTop() > 300) {
@@ -181,19 +218,17 @@ $('a.scroll-top').click(function (event) {
   $('html, body').animate({ scrollTop: 0 }, 600);
 });
 
-
-$( document ).ready(function() {
+  var elem = document.getElementById("pv_jNlXozfh");
+$( elem ).ready(function() {
    
     $('.vjs-big-play-button').hide()
-    /*  document.querySelector('video').addEventListener('play',  evt => { 
-      let fondo = document.querySelector("body");
-      $(fondo).css('background-image', 'none')
-      
-     
-}); */
+   
 
 
+ 
 });
+
+
 
 function play(){
   $('.vjs-big-play-button').click()
@@ -203,12 +238,48 @@ function play(){
    $('#livecam').fadeIn(6000)
    let fondo = document.querySelector("body");
    $(fondo).css('background-image', 'none')
+  var myPlayer=videojs('pv_jNlXozfh');
+   myPlayer.ready(function() {
+      myPlayer.requestFullscreen();
+     
+    
+     
+         
+     
+   });
   
     
-}, 1500);
+}, 1000);
  
+
+
+
 }
+
+document.addEventListener('fullscreenchange', function(e){ 
+ var myPlayer=videojs('pv_jNlXozfh');
+ screen.orientation.unlock()
+ 
+if (window.matchMedia("(orientation: landscape)").matches) {
+    if(myPlayer.isFullscreen()){
+       screen.orientationLock('portrait')
+    }else{
+      screen.orientationLock('portrait')
+    
+    }
+}
+   
+})
+
+var Player=videojs('pv_jNlXozfh');
+$('Player').on('fullscreenchange webkitfullscreenchange mozfullscreenchange', function() {
+  screen.orientationLock('portrait')
+});
+
     </script>  
     
   </body>
 </html>
+
+
+ 
