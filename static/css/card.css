@@ -104,7 +104,7 @@ a.panel-button {
     } 
 } 
 
-@media screen and (max-device-width: 768px) and (orientation: landscape) {
+@media screen and (max-device-width: 700px) and (orientation: landscape) {
     .card {
         margin-top: 20px;
         margin-bottom: 20px;
