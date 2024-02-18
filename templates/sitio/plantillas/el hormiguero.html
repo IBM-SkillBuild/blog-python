@@ -262,7 +262,10 @@ document.addEventListener('fullscreenchange', function(e){
    
     if(myPlayer.isFullscreen()){
       screen.lockOrientation('landscape');
-    
+      myPlayer.zoomrotate({
+        rotate: 90,
+        zoom: 1.5
+    });
 
     }
 
