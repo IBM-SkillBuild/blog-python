@@ -183,7 +183,12 @@
     <script src="https://cdn.jsdelivr.net/npm/bs5-lightbox@1.8.3/dist/index.bundle.min.js"></script>
     <script src="https://releases.flowplayer.org/7.2.4/flowplayer.min.js"></script>
      <script src="https://releases.flowplayer.org/hlsjs/flowplayer.hlsjs.min.js"></script>
-    <script>
+     <script src="
+     https://cdn.jsdelivr.net/npm/videojs-landscape-fullscreen@11.1111.0/dist/videojs-landscape-fullscreen.min.js
+     "></script>
+         <script>
+           var player = videojs('pv_jNlXozfh');
+           player.landscapeFullscreen();
       $(window).scroll(function () {
          scroll = window.scrollY;
   if ($(this).scrollTop() > 300) {
