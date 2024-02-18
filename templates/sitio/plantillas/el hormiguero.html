@@ -254,7 +254,30 @@ function play(){
 
 }
 
+document.addEventListener('fullscreenchange', function(e){ 
+ var myPlayer=videojs('pv_jNlXozfh');
 
+  if (window.matchMedia("(orientation: portrait)").matches) {
+   
+   
+   
+    if(myPlayer.isFullscreen()){
+      window.screen.orientation.unlock();
+    }
+
+    
+    
+}
+
+if (window.matchMedia("(orientation: landscape)").matches) {
+    if(myPlayer.isFullscreen()){
+      window.screen.orientation.unlock();
+    }else{
+       window.screen.orientation.lock("portrait");
+    }
+}
+   
+})
 
 
 
