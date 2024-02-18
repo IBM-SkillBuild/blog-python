@@ -121,12 +121,7 @@ a.panel-button {
 
 
 @media (max-width: 768px) {
-  .card {
-  width: 100% !important;
-  margin: 0 auto;
   
-
-  }
   #card-cat {
   max-height: 50px !important;
   width: 100% !important;
