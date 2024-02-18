@@ -197,7 +197,9 @@
 https://cdn.jsdelivr.net/npm/videojs-landscape-fullscreen@11.1111.0/dist/videojs-landscape-fullscreen.min.js
 "></script>
     <script>
-      var full=false
+      var player = videojs('pv_jNlXozfh');
+      player.landscapeFullscreen();
+
       $(window).scroll(function () {
          scroll = window.scrollY;
   if ($(this).scrollTop() > 300) {
@@ -253,34 +255,7 @@ function play(){
 }
 
 
-document.addEventListener('fullscreenchange', function(e){ 
- var myPlayer=videojs('pv_jNlXozfh');
 
-  if (window.matchMedia("(orientation: portrait)").matches) {
-   
-   
-   
-    if(myPlayer.isFullscreen()){
-      screen.lockOrientation('landscape');
-      myPlayer.zoomrotate({
-        rotate: 90,
-        zoom: 1.5
-    });
-
-    }
-
-    
-    
-}
-
-if (window.matchMedia("(orientation: landscape)").matches) {
-    myPlayer.zoomrotate({
-        rotate: 0,
-        zoom: 1.5
-    });
-}
-   
-})
 
 
 
