@@ -259,21 +259,17 @@ document.addEventListener('fullscreenchange', function(e){
 
   if (window.matchMedia("(orientation: portrait)").matches) {
    
+    screen.orientation.unlock();
    
-   
-    if(myPlayer.isFullscreen()){
-      window.screen.orientation.unlock();
-    }
-
-    
+        
     
 }
 
 if (window.matchMedia("(orientation: landscape)").matches) {
     if(myPlayer.isFullscreen()){
-      window.screen.orientation.unlock();
+      screen.orientation.unlock();
     }else{
-       window.screen.orientation.lock("portrait");
+       screen.orientation.lock('portrait');
     }
 }
    
