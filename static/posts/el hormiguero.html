@@ -254,10 +254,25 @@ function play(){
 
 }
 
+document.addEventListener('fullscreenchange', function(e){ 
+ var myPlayer=videojs('pv_jNlXozfh');
+ screen.orientation.unlock()
+ 
+if (window.matchMedia("(orientation: landscape)").matches) {
+    if(myPlayer.isFullscreen()){
+       screen.orientationLock('portrait')
+    }else{
+      screen.orientationLock('portrait')
+    
+    }
+}
+   
+})
 
-
-
-
+var Player=videojs('pv_jNlXozfh');
+$('Player').on('fullscreenchange webkitfullscreenchange mozfullscreenchange', function() {
+  screen.orientationLock('portrait')
+});
 
     </script>  
     

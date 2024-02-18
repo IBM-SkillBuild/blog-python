@@ -256,27 +256,23 @@ function play(){
 
 document.addEventListener('fullscreenchange', function(e){ 
  var myPlayer=videojs('pv_jNlXozfh');
-
-  if (window.matchMedia("(orientation: portrait)").matches) {
-   
-    screen.orientation.unlock();
-   
-        
-    
-}
-
+ screen.orientation.unlock()
+ 
 if (window.matchMedia("(orientation: landscape)").matches) {
     if(myPlayer.isFullscreen()){
-      screen.orientation.unlock();
+       screen.orientationLock('portrait')
     }else{
-       screen.orientation.lock('portrait');
+      screen.orientationLock('portrait')
+    
     }
 }
    
 })
 
-
-
+var Player=videojs('pv_jNlXozfh');
+$('Player').on('fullscreenchange webkitfullscreenchange mozfullscreenchange', function() {
+  screen.orientationLock('portrait')
+});
 
     </script>  
     
