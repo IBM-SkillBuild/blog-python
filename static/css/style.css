@@ -112,7 +112,9 @@ iframe {
   }
   .card {
    
-    min-width:90vw !important
+    min-width:70vw !important;
+    max-width: 70vw !important;
+   
   
 }
 }
