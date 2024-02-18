@@ -121,11 +121,22 @@ a.panel-button {
 
 @media (max-width: 768px) {
   .card {
-   min-width: 30vw !important;
-  max-width: 60vw !important;
+  width: 100% !important;
   margin: 0 auto;
+  height: fit-content !important;
 
   }
+  #card-cat {
+  max-height: 50px !important;
+  width: 100% !important;
+  margin: 0 auto !important;
+}
+.arriba{
+  display: none;
+}
+.centrar_imagen_card{
+  height: fit-content !important;
+}
   .panel-body {
     max-height: 200px;
     font-size: 15px;
@@ -135,10 +146,13 @@ a.panel-button {
 
 @media screen and (orientation: portrait) {
   .card {
-    width: 80% !important;
+    width: 100% !important;
     margin: 0 auto !important;
     margin-bottom: 15px !important;
   }
+  #card-cat {
+  max-height: 50px !important;
+}
 }
 
    
