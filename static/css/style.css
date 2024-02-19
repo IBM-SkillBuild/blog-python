@@ -115,6 +115,7 @@ iframe {
     min-width:70vw !important;
     max-width: 70vw !important;
    
+   
   
 }
 }
@@ -126,10 +127,12 @@ iframe {
   }
   .card {
    
-    min-width: 90% !important;
+    min-width: 70% !important;
+    max-width: 70% !important;
     margin: 0 auto;
     border: solid 2px black;
-
+     min-height: 80vh !important;
+    
     position: relative;
     bottom: 0;
     overflow: hidden;
