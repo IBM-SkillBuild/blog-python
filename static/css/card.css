@@ -105,13 +105,19 @@ a.panel-button {
 } 
 
 
-@media screen and (max-device-width: 700px) and (orientation: landscape) {
+@media screen and (max-device-width: 768px) and (orientation: landscape) {
     .card {
         margin-top: 20px;
         margin-bottom: 20px;
-        min-width: 60% !important;
-        max-width: 60% !important;
-        min-height: 70vh !important;
+        min-width: 70% !important;
+        max-width: 70% !important;
+        min-height: 80vh !important;
+         margin: 0 auto;
+    border: solid 2px black;
+   
+    position: relative;
+    bottom: 0;
+    overflow: hidden;
         
     } 
 } 
@@ -139,7 +145,46 @@ a.panel-button {
   }
 } 
 
-@media screen and (orientation: portrait) {
+
+
+
+ @media screen and (max-device-width: 768px) and (orientation: portrait) {
+    .card {
+        margin-top: 20px;
+        margin-bottom: 20px;
+        min-width: 100% !important;
+        max-width: 100% !important;
+        min-height: 30vh !important;
+        max-height: 30vh !important;
+         margin: 0 auto;
+    border: solid 2px black;
+   
+    position: relative;
+    bottom: 0;
+    overflow: hidden;
+        
+    } 
+} 
+
+@media screen and (max-device-width: 991px) and (orientation: portrait) {
+    .card {
+        margin-top: 20px;
+        margin-bottom: 20px;
+        min-width: 70% !important;
+        max-width: 70% !important;
+        min-height: 30vh !important;
+        max-height: 60vh !important;
+         margin: 0 auto;
+    border: solid 2px black;
+   
+    position: relative;
+    bottom: 0;
+    overflow: hidden;
+        
+    } 
+} 
+
+@media screen and (max-device-width: 1100px) and (orientation: portrait)  {
   .card {
     width: 100% !important;
     margin: 0 auto !important;
@@ -149,5 +194,3 @@ a.panel-button {
   max-height: 50px !important;
 }
 }
-
-   
