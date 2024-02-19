@@ -189,6 +189,7 @@ a.panel-button {
     width: 100% !important;
     margin: 0 auto !important;
     margin-bottom: 15px !important;
+    min-height: 50vh !important;
   }
   #card-cat {
   max-height: 50px !important;
