@@ -3,8 +3,9 @@
 <div class="ancho-total">
  {% if publicaciones %}
         {% if  publicaciones|length > 1 %}
-    
+       {% if count  %}
        <button class="info info-total">Total: {{count}} publicaciones</button>
+       {% endif %}
        {%else%}
        <div style="text-align: center;">
         <a href="/publicaciones">
@@ -76,7 +77,7 @@
 
              {% elif post[5] !="" %}
              <div  class="container-fluid ancho-movil" style="text-align: center;">
-               <iframe id="publicacion" class="animate__animated animate__fadeIn animate"  onclick="publicacion('/post/{{post[5]}}')" src="/post/{{post[5]}}"  width="100%" onload='resizeIframe(this)' frameborder="0" ></iframe>
+               <iframe id="publicacion" class="animate__animated animate__fadeIn animate__delay-6s"  onclick="publicacion('/post/{{post[5]}}')" src="/post/{{post[5]}}"  width="100%" onload='resizeIframe(this)' frameborder="0" ></iframe>
              </div>  
             {% endif %}
           {% endfor %}
