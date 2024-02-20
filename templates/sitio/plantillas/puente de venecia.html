@@ -37,7 +37,7 @@
       
       body {
         background-color: transparent;
-         background-image: url(https://i.pinimg.com/736x/24/d4/39/24d439707cb8eaa03501bce7d604f0b2.jpg);
+         background-image: url(https://dynamic-media-cdn.tripadvisor.com/media/photo-o/17/bb/2c/b6/ponte-delle-guglie.jpg?w=1200&h=-1&s=1);
 	       background-size:     cover;                     
          background-repeat:   no-repeat;
          background-attachment: fixed;
@@ -47,6 +47,7 @@
         background-color: black;
         
       }
+
 
       html::-webkit-scrollbar {
         display: none;
@@ -78,7 +79,8 @@
       
      .video-js {
     position: relative !important;
-   
+   width: 60% !important;
+    height: 300px;
     margin:0 auto !important
     
 }
@@ -110,7 +112,7 @@
           .video-js {
     position: relative !important;
     width: 100% !important;
-    height: auto !important;
+    height: 300px;
     margin:0 auto !important
     
 }
@@ -127,27 +129,36 @@
       <div class="container-fluid"></div>
       <div class="row">
         <h1 style="text-align: center; margin-top: 20px; ">
-        Piazza della Rotonda, the fountain and the Obelisk of Ramses II
+        Puente de las Agujas (Venecia) 
         </h1>
+         
 
         <div class="aviso">
           <p  style="border:solid 3px white;background-color:black;width:fit-content;padding:1vh;color:yellow;text-align:center;">Recuerda Girar tu dispositivo en tabletas y moviles</p>
        </div>
 
-             <div style="text-align:center; margin-bottom:40px">
+             <div style="text-align:center; margin-bottom:20px;margin-top:20px">
       <a href="#">  <button id="btn-play" onclick="play()" type="button" class="btn btn-dark" data-mdb-ripple-init>P L A Y</button></a>
-      
+       
     </div>
          <div id="livecam" style="display:none" class="livecam" style="text-align:center; margin:30px">
     <link href="https://static.publit.io/css/player.min.css" rel="stylesheet" />
-    <video style="position:relative" id="pv_jNlXozfh" class="video-js vjs-skin-colors-blue vjs-big-play-centered" controls preload="auto" poster="" oncontextmenu="return false;" controlslist="nodownload" playsinline>
-      <source src="https://livecdn-de-earthtv-com.global.ssl.fastly.net/edge2/cdnedge/H1d0HWSABMI/chunklist.m3u8?token=EAIYzgM4jYGsXECgOEgF.CgtpYml6YXN0eWxlcxABMgtIMWQwSFZlQUJNQToLSDFkMEhXU0FCTUk.oBMPg3lMwFoGQwPqsfkCG54QHVNR9nkMlRfWbxAIeFg_ocWcSYTl84PvSZM8oiFIwb8VSKitYheEErS48OaONA&domain=ibiza-style.com" type="application/x-mpegURL">
-      
-    <script src="https://static.publit.io/js/player.min.js"></script>
-    <script src="https://firebasestorage.googleapis.com/v0/b/casamireasa.appspot.com/o/live.js?alt=media&token=fe11efb2-f591-4e81-a343-5d785c7a4100"></script>
- 
+   <video
+    id="pv_jNlXozfh"
+    class="video-js vjs-skin-colors-blue vjs-big-play-centered"
+    controls
+   type="video/mp4"
+    data-setup='{ "techOrder": ["youtube", "html5"],
+     "sources": [{ "type": "video/youtube", "src": "https://www.youtube.com/watch?v=HpZAez2oYsA&pp=ygUPd2ViY2FtIGRpcmVjdG8g"}] }'
+  >
+  </video>
+     
+   
+    <script src="https://vjs.zencdn.net/7.17.0/video.min.js"></script>
+  <script src="
+https://cdn.jsdelivr.net/npm/videojs-youtube@3.0.1/dist/Youtube.min.js
+"></script>
 
-  <script type="text/javascript" src="https://firebasestorage.googleapis.com/v0/b/casamireasa.appspot.com/o/oporeno5g.js?alt=media&token=e2892207-0a49-407e-9c1e-e1ad251c3813">
   </script>
 
 </div>
@@ -183,8 +194,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bs5-lightbox@1.8.3/dist/index.bundle.min.js"></script>
     <script src="https://releases.flowplayer.org/7.2.4/flowplayer.min.js"></script>
      <script src="https://releases.flowplayer.org/hlsjs/flowplayer.hlsjs.min.js"></script>
-     <script src="
-     https://cdn.jsdelivr.net/npm/videojs-landscape-fullscreen@11.1111.0/dist/videojs-landscape-fullscreen.min.js
+     <script src="https://cdn.jsdelivr.net/npm/videojs-landscape-fullscreen@11.1111.0/dist/videojs-landscape-fullscreen.min.js
      "></script>
          <script>
            var player = videojs('pv_jNlXozfh');
@@ -222,7 +232,8 @@ function play(){
    $('#livecam').fadeIn(6000)
    let fondo = document.querySelector("body");
    $(fondo).css('background-image', 'none')
-  var myPlayer=videojs('pv_jNlXozfh');
+  var myPlayer=videojs('pv_jNlXozfh', {liveui: true});
+ 
    myPlayer.ready(function() {
       myPlayer.requestFullscreen();
    });
