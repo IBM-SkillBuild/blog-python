@@ -183,6 +183,10 @@ def ultima_publicacion():
 
 @app.route("/publicaciones_portitulo/<titulo>",methods = ['POST', 'GET'])
 def publicaciones_portitulo(titulo):
+   per_page = 3
+   start_index = 0
+   titulo=titulo.lower()
+   titulo = "'%"+ titulo+ "%'"
    mis_valores.footer = True
    db = psycopg2.connect(
        host=mis_valores.HOST,
@@ -192,14 +196,16 @@ def publicaciones_portitulo(titulo):
        sslmode='require')
    cursor = db.cursor()
    try:
-    cursor.execute("SELECT * FROM publicaciones WHERE nombre=%s", (titulo,))
+    sql = "SELECT * FROM publicaciones WHERE lower(categoria) LIKE " + \
+        titulo + " OR lower(nombre) LIKE " + titulo + " ORDER BY id DESC "
+    cursor.execute(sql)
     publicaciones = cursor.fetchall()
    except:
     publicaciones=""  
    finally:
          cursor.close()  
    
-   return render_template("/sitio/publicaciones.html", valores=mis_valores, publicaciones=publicaciones)
+   return render_template("/sitio/publicaciones.html", valores=mis_valores, publicaciones=publicaciones,pagination=False)
 
 
 @app.route("/about")
