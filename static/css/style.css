@@ -4,12 +4,11 @@
   }
   #card-cat {
     display: inline-block;
-    
   }
-   .card {
-   max-width: 60vw !important;
-   margin: 3px;
-  } 
+  .card {
+    max-width: 60vw !important;
+    margin: 3px;
+  }
 }
 
 .texto-entrada {
@@ -26,14 +25,14 @@ iframe {
   margin-left: 0 !important;
   padding-left: 0 !important;
 }
- .card {
+.card {
   background-color: chocolate;
-  min-width: 20vw !important;
+  min-width: 30vw !important;
   max-width: 100vw !important;
-  
+  min-height: 70vh !important;
   margin: 0 auto;
   margin-bottom: 1vh;
-} 
+}
 
 .card-img-top {
   height: 75vh;
@@ -111,13 +110,10 @@ iframe {
     transform: scale(0.8);
   }
   .card {
-   
-    min-width:70vw !important;
+    min-width: 70vw !important;
     max-width: 70vw !important;
-   
-   
-  
-}
+    min-height: 60vh;
+  }
 }
 @media only screen and (max-width: 900px) {
   #foto_about {
@@ -126,11 +122,11 @@ iframe {
     display: flex !important;
   }
   .card {
-   
-    min-width: 90% !important;
+    max-width: 60% !important;
+    min-height: 60%;
     margin: 0 auto;
     border: solid 2px black;
-    
+
     position: relative;
     bottom: 0;
     overflow: hidden;
@@ -269,15 +265,16 @@ html::-webkit-scrollbar {
   z-index: 1 !important;
 }
 
- .card {
+.card {
   background-color: whitesmoke;
- 
+
   opacity: 0.7;
-  min-width: 80vw;
- 
+  min-width: 60vw;
+  max-width: 60%;
+
   animation: fadeIn;
   animation-duration: 2s;
-} 
+}
 .card:hover {
   opacity: 1;
   transition: opacity 0.4s ease-out;
@@ -748,4 +745,3 @@ a.scroll-top svg {
   /*   z-index: 999 !important; */
   padding-bottom: 190px !important;
 }
-
