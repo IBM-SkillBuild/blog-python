@@ -52,7 +52,9 @@ iframe {
 #owner {
   display: none;
 }
-
+.update-form{
+  min-height: 70% !important;
+}
 #no-table table,
 #no-table thead,
 #no-table tbody,
@@ -736,7 +738,7 @@ a.scroll-top svg {
 }
 
 #categorias {
-  min-width: 200px;
+  min-width: 80%;
 }
 
 .ancho-movil {

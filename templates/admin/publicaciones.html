@@ -3,12 +3,12 @@
 <main>
   <div class="container margin-sup">
     <div class="row">
-      <div class="col-md-5">
-        <div class="card text-white bg-primary mb-3">
+      <div class="col-md-5" >
+        <div class="card text-white bg-primary mb-3" style="min-height:70vh !important">
           <div class="card-header">
             Datos del nuevo Post
           </div>
-          <div class="card-body">
+          <div class="card-body" >
             <form action="/admin/publicaciones/guardar" method="post" enctype="multipart/form-data">
               <div class="mb-3">
                 <label for="name_libro" class="form-label">Nombre del Post</label>
@@ -24,7 +24,7 @@
                 <input type="file" class="form-control" name="html_publicacion" id="html_publicacion"
                   placeholder="Ingresa Archivo html">
               </div>
-              <select id="categorias" class="categorias form-control"  multiple="multiple">
+              <select id="categorias" class="categorias form-control"   multiple="multiple">
                                                              
                </select>
           <input type="hidden" name="tags" id="tags"></input>

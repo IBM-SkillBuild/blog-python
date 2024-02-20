@@ -8,13 +8,13 @@
    
      <div class="container margin-sup">
       <div class="row">
-        <div class="col-md-5">
-          <div class="card text-white bg-primary mb-3">
+        <div class="col-md-5" >
+          <div class="card text-white bg-primary mb-3" style="min-height:70vh !important">
             <div class="card-header">
               Editar datos de este post 
             </div>
-            <div class="card-body">
-             <form id="update-form" action="/admin/publicaciones/update" method="post" enctype="multipart/form-data">
+            <div class="card-body" >
+             <form id="update-form"  action="/admin/publicaciones/update" method="post" enctype="multipart/form-data">
                   <div class="mb-3">
                     <input type="text" style="display: none;" class="form-control" value="{{post[0]}}" name="id_post" id="id_post">
 
