@@ -45,6 +45,19 @@ cursor.execute("CREATE TABLE IF NOT EXISTS publicaciones(
 #cursor.close()
 #db.close() 
 
+#cursor = db.cursor()
+#cursor.execute("DROP TABLE IF EXISTS usuarios  ")
+#cursor.execute("CREATE TABLE usuarios(id serial PRIMARY KEY, nombre varchar(250), pass varchar(250));")
+#sql = "INSERT INTO usuarios(nombre, pass) VALUES ( %s,%s);"
+#datos = ("Edugoyo", "Edugoyo.1968")
+#cursor.execute(sql,datos)
+#db.commit()
+#cursor.close()
+   
+
+
+
+
 #rutas
 @app.route("/")
 
@@ -442,6 +455,28 @@ def update_categorias(dato):
    
     
     return True
+  
+  
+  
+@app.route("/usuarios/",methods = ['POST', 'GET'])
+def usuarios():
+   
+   db = psycopg2.connect(
+       host=mis_valores.HOST,
+       database=mis_valores.DB,
+       user=mis_valores.USER,
+       password=mis_valores.PASSWORD,
+       sslmode='require')
+   cursor = db.cursor()
+   try:
+    sql = "SELECT * FROM usuarios"
+    cursor.execute(sql)
+    usuario = cursor.fetchall()
+   except:
+    usuario=""  
+   finally:
+         cursor.close()  
+   return jsonify(usuario)
   
 # inicio app derarrollo
 if __name__=="__main__":
