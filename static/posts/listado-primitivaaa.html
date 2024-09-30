@@ -1,0 +1,121 @@
+<style>
+   .red{
+      color: red;
+      background-color: yellow;
+   }
+   .green{
+      color:green;
+      background-color: black;
+   }
+   .padre-flex-center{
+	display: flex;
+	flex-wrap: wrap;
+	justify-content:center;
+	align-items: center;
+}
+
+.padre-flex{
+	display: flex;
+	flex-wrap: wrap;
+    justify-content: flex-start;
+	
+}
+
+.flex-grande{
+	flex-basis: 0;
+	flex-grow: 999;
+	width: 30%;
+     margin: 2em;
+    justify-content: center;
+    margin-right: 2em;
+
+	
+}
+.flex-pequeño{
+	flex-basis: 50rem;
+	flex-grow: 1;
+  	border-radius: 2em;
+	margin:2em;
+	text-align: center;
+    margin: 3em;
+    padding: 3em;
+	
+	 }
+
+</style>
+<div class="padre-flex-center">
+<div class="uk-flex flex-grande" >
+   {% for i in range(1,50) %}
+   <div class="red" id="{{i}}" onclick="elegir('{{i}}')" style=" margin: 0.2em; font-size: 2em; width: 1.5em;height: 1.5em;" > {{i}}</div>
+   
+   {% endfor %} 
+</div>
+</div>
+<div>
+{% if primitiva %}
+
+<h1>el 1 sale {{contador}} veces en {{num_sorteos}} ultimos sorteos</h1>
+<dl class="uk-description-list" style="border: 2px solid black;margin-bottom: 03em;"></dl>
+   {% for sorteo in primitiva %}
+   {% set numeros= sorteo['combinacion'][0:27].split(' - ') %}
+ 
+   <div style="border: 2px solid black;margin-bottom: 03em;">
+    <dt>{{sorteo['fecha_sorteo']}}</dt>
+    {% if sorteo['sale'] %}
+    <dd id="sale" style="color:red">{{sorteo['dia_semana']}}- {{sorteo['sale']}}</dd>
+    {% else %}
+    <dd id="sale" style="color:rgb(15, 0, 0)">{{sorteo['dia_semana']}}- {{sorteo['sale']}}</dd>
+    {% endif %}
+    <dd>{{numeros}}</dd>
+    </div>
+   {% endfor %}
+</dl>
+{% else %}
+<h1>no hay datos</h1>
+{% endif %}
+</div>
+
+<input id="resultados" 
+style="margin: 20px;display:none"
+name="lista"
+hx-get="/primitiva/{{value}}"
+        hx-target="#app"
+        hx-trigger="click"
+        hx-swap="innerHTML swap:1s  settle:1s"
+        hx-indicator="#spinner"
+></input>
+
+
+  <script>
+   contador=0
+   lista=[]
+   function elegir(id){
+     
+   idd="#"+id
+   if (contador==6 & $(idd).hasClass("red")){
+      alert('ya tienes 6 numeros '+ lista)
+
+   
+   }
+   if ( $(idd).hasClass("green")){
+      document.getElementById(id).classList.remove("green");
+      document.getElementById(id).classList.add("red");
+      contador -=1
+      lista = lista.filter(item => item != id);
+    
+     }else{
+     if (contador<6){
+     if ( $(idd).hasClass("red")){
+      document.getElementById(id).classList.remove("red");
+      document.getElementById(id).classList.add("green");
+      contador +=1
+      lista.push(id)
+      document.getElementById('resultados').value=lista
+      $('#resultados').trigger('click');
+     
+      
+     }
+   }
+   }}
+       
+    </script>

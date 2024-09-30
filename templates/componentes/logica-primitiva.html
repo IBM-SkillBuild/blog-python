@@ -1,0 +1,159 @@
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<link rel="stylesheet" href="//cdn.datatables.net/2.1.7/css/dataTables.dataTables.min.css">
+<script src="//cdn.datatables.net/2.1.7/js/dataTables.min.js"></script>
+
+<style>
+   #spinner{
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  top:0px;
+  
+}
+</style>
+
+
+{% if primitiva %}
+
+
+
+
+{% if lista|length > 1 %}
+<ul uk-accordion style="width: 100%;margin-top: -2em;">
+<li>
+  <a class="uk-accordion-title" href>información sobre combinación {{lista}}</a>
+  <div class="uk-accordion-content" style="border: 2px solid black;background-color: bisque;padding: 2em;width: 100%;margin: 0 auto;">
+     <h1>Esta combinación {{lista}} ha aparecido {{veces_grupo}} veces en {{num_sorteos}} sorteos</h1>
+     <ul>
+     {% for item in contador_de_grupos %}
+     <li>ocasión: {{item}}</li>
+     {% endfor %}
+      </ul>
+</div>
+    </li>
+</ul>
+{% endif %}
+
+
+<ul uk-accordion ="multiple: false" >
+{% for i in range(0,lista|length) %}
+
+{% if lista[i] !="" %}
+{% set mimunero= lista[i] | int %}
+{% set veces_consecutivo= consecutivos[i-1] | length %}
+<li > 
+  <a class="uk-accordion-title" href>información del numero {{lista[i]}}</a>
+  <div class="uk-accordion-content" style="border: 2px solid black;background-color: bisque;padding: 2em;width:100%;margin: 0 auto;">
+    lo hemos visto {{veces_consecutivo}} veces en sorteos consecutivos
+    <h4>el numero {{lista[i]}} ha salido {{contador[i]}}  veces en los {{num_sorteos}} ultimos sorteos</h4>
+    <h5>la última vez salió hace {{contador_de_ausencias[i]}} sorteos</h5>
+    <h5>en {{num_sorteos}} sorteos, nunca ha jugado con {{enemigos[i]}}</h5>
+    <h5>{{sugerencias[i]}}</h5>
+     <button onclick="conservar('{{lista[i]}}')">CONSERVAR</button>
+    <button style="background-color: red;color: yellow;" onclick="quitarnumero('{{lista[i]}}','{{sugerencias[i]}}')">MARCAR COMO NO DESEADO</button>
+  </div>
+
+</li>
+
+
+{% endif %}
+{% endfor %}
+<li>
+  <a class="uk-accordion-title">Más información y opciones</a>
+  <div id="tabla" class="uk-accordion-content" style="border: 2px solid black;background-color: bisque;padding: 2em;width:100%;margin: 0 auto;">
+    <button id="mayorymenor" 
+
+    hx-get="/tabla"
+    hx-target="#tabla"
+    hx-trigger="click"
+    hx-swap="innerHTML swap:1s  settle:1s"
+    hx-indicator="#spinner"
+>ver los que mas salen</button>
+<p style="margin-top: 1em; color: rgb(8, 0, 0);">Solo ha habido una única combinación repetida entre 1985-2024  -hablamos de 3380 sorteos y de casi 30 años-</p>
+<p  style="margin-top: 1em; color: rgb(8, 0, 0);">(13-21-24-26-32-34)</p>
+
+
+  </div>
+  </li>
+</ul>
+
+
+<!-- <dl class="uk-description-list" style="border: 2px solid black;margin-bottom: 03em;"></dl>
+   {% for sorteo in primitiva %}
+   {% set numeros= sorteo['combinacion'][0:27].split(' - ') %}
+ 
+   <div style="border: 2px solid black;margin-bottom: 03em;">
+    <dt>{{sorteo['fecha_sorteo']}}</dt>
+    {% if sorteo['sale'] %}
+    <dd id="sale" style="color:red">{{sorteo['dia_semana']}}- {{sorteo['sale']}}</dd>
+    {% else %}
+    <dd id="sale" style="color:rgb(15, 0, 0)">{{sorteo['dia_semana']}}- {{sorteo['sale']}}</dd>
+    {% endif %}
+    <dd>{{numeros}}</dd>
+    </div>
+   {% endfor %}
+</dl> -->
+{% else %}
+<h1>no hay datos</h1>
+{% endif %}
+
+<div id="spinner" class="htmx-indicator">
+  <img
+    id="spinner-img"
+    src="https://d14bodb4yrsx8y.cloudfront.net/assets/img/loader.63e3fe2.gif"
+  />
+</div>
+<!-- <div id="tabla"  class="uk-container" style="height: 40vh;overflow: hidden;"></div>
+ -->
+<script>
+$(document).ready(function(){
+  $(window).scroll(function () {
+        if ($(this).scrollTop() > 300) {
+          $("a.scroll-top").fadeIn("slow");
+          $(".device-menu").css("display", "block");
+        } else {
+          $("a.scroll-top").fadeOut("slow");
+        }
+      });
+      $("a.scroll-top").click(function (event) {
+        event.preventDefault();
+        $("html, body").animate({ scrollTop: 0 }, 600);
+      });
+      window.scrollTo({top: 0, behavior: 'smooth'});
+     
+});
+    
+
+   function quitarnumero(id,sugerencia){
+    idd="#"+id
+    if ( $(idd).hasClass("white")){
+      document.getElementById(id).classList.remove("white");
+      document.getElementById(id).classList.remove("black");
+      document.getElementById(id).classList.add("red");
+     
+
+      
+      contador -=1
+      lista = lista.filter(item => item != id);
+      document.getElementById('resultados').value=lista
+      $('#resultados').trigger('click');
+    }
+    
+   }
+
+   function conservar(id){
+    $('#resultados').trigger('click');
+    $('#upedu').trigger('click');
+    window.scrollTo({top: 0, behavior: 'smooth'});
+   
+    
+   
+   }
+
+
+   
+ 
+
+      
+      </script>

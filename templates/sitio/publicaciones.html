@@ -1,4 +1,5 @@
 {% include "sitio/header-sitio.html" %}
+
 <div style="width:100%;overflow-x:hidden">
 <div class="ancho-total">
  {% if publicaciones %}
@@ -62,7 +63,7 @@
           {% set categorias = post[4].split(',') %}
                  {% for cat in categorias %}  
                
-                 <button id="{{cat}}" onclick="buscar_tag(this.id)"class="info-tags " ">{{cat}}</button>   
+                 <button id="{{cat}}" onclick="buscar_tag(this.id)"class="info-tags " >{{cat}}</button>   
                
                   {% endfor %}  
                     </div>
@@ -116,7 +117,7 @@
    
     {% endif %}
        {% include "sitio/footer.html"%}
-        <a href='#' class='scroll-top'>
+        <a id="upedu" href='#' class='scroll-top'>
     <svg height='30' viewBox='0 0 24 24' width='30' xmlns='http://www.w3.org/2000/svg'>
        <path d='M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z'/>
        <path d='M0 0h24v24H0z' fill='none'/>
@@ -134,8 +135,11 @@
 </aside>
 
 </div>
+
     </main>
+
  </div>
+ 
  {% include "sitio/footer.html"%}
   
  

@@ -1,0 +1,231 @@
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+<style>
+   .black{
+      color: rgb(0, 0, 0);
+      background-color: yellow;
+   }
+   .white{
+      color:rgb(255, 255, 255);
+      background-color: black;
+   }
+   .red{
+      color: red;
+      background-color: orange;
+   }
+   .padre-flex-center{
+	display: flex;
+	flex-wrap: wrap;
+	justify-content:flex-start;
+   justify-items: flex-start;
+	align-items: flex-start;
+}
+
+.padre-flex{
+	display: flex;
+	flex-wrap: wrap;
+    justify-content: flex-start;
+	
+}
+
+.flex-grande{
+	flex-basis: 0;
+	flex-grow: 999;
+	padding: 1.5em;
+     margin: 2em;
+    justify-content: center;
+    margin-right: 2em;
+    border-radius: 1em;
+    background-color: rgb(26, 187, 139);
+    height: fit-content;
+    z-index: 1;
+
+	
+}
+.flex-pequeño{
+	flex-basis: 40rem;
+	flex-grow: 1;
+  	
+	margin:2em;
+	text-align: center;
+    margin: 3em;
+    padding: 3em;
+    background-color: rgb(26, 187, 139);
+	
+	 }
+
+   #spinner{
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  top:0px;
+  
+}
+.caja-numero{
+   cursor: pointer; margin: 0.2em; font-size: 2em; width: 1.5em;height: 1.5em;
+}
+@media only screen and (max-width: 700px) {
+   .flex-grande{
+      margin: 0 auto;
+      padding: 0;
+      margin-right: 0;
+      justify-content: center;
+      justify-items:center;
+      text-align: center;
+      width: 100%;
+   }
+   .flex-pequeño{
+      margin: 0 auto;
+      width: 100%;
+   }
+   .caja-numero{
+       margin: 0.3em; font-size: 1.4em; width: 1.3em;height: 1.3em;
+   }
+}
+
+</style>
+
+
+   
+
+
+<div class="padre-flex-center" >
+ 
+   <div class="flex-grande" >
+<div id="numeros" class="uk-flex" style="flex-wrap: wrap;;text-align: center; max-height: 40%; ">
+   {% for i in range(1,50) %}
+     {% if i in [1,2,3,4,5,6,7,8,9] %}
+     <div class="black caja-numero" id="0{{i}}" onclick="elegir('0{{i}}')"  > 0{{i}}</div>
+
+   {% else %}
+   <div class="black caja-numero" id="{{i}}" onclick="elegir('{{i}}')"  > {{i}}</div>
+   {% endif %}
+   {% endfor %} 
+   
+  
+</div>
+<p style="color: white;">resultados último sorteo {{ultima_semana}}</p>
+<button style="margin:auto;color:white; background-color: rgb(2, 92, 72);margin-bottom: 2em;" onclick="marcar_semana()"> marcar / desmarcar apariciones de la última semana como no deseados</button>
+</div>
+<div id="peq"  class="flex-pequeño"  style="margin-top: 1em;" >
+   <div id="logica" style="margin-top: 1em;">
+    
+   PULSE UN NUMERO Y ESPERE A QUE SE REALICEN LAS ESTADISTICAS (últimos 115 sorteos)
+ 
+
+
+
+</div>
+</div>
+</div>
+
+
+
+
+<input id="resultados" 
+style="margin: 20px;display:none"
+name="lista"
+hx-get="/logica/{{value}}"
+        hx-target="#logica"
+        hx-trigger="click"
+        hx-swap="innerHTML swap:1s  settle:1s"
+        hx-indicator="#spinner"
+></input>
+<div id="spinner" class="htmx-indicator">
+   <img
+     id="spinner-img"
+     src="https://d14bodb4yrsx8y.cloudfront.net/assets/img/loader.63e3fe2.gif"
+   />
+ </div>
+
+  <script>
+   
+   contador=0
+   lista=[]
+   lista_no_deseados=[]
+   function elegir(id){
+     
+   idd="#"+id
+   if (contador==6 & $(idd).hasClass("black")){
+      alert('ya tienes 6 numeros '+ lista)
+
+   
+   }
+   if ( $(idd).hasClass("white")){
+      document.getElementById(id).classList.remove("white");
+      document.getElementById(id).classList.add("black");
+      contador -=1
+      lista = lista.filter(item => item != id);
+      document.getElementById('resultados').value=lista
+      $('#resultados').trigger('click');
+    
+     }else{
+     if (contador<6){
+     if ( $(idd).hasClass("black") || $(idd).hasClass("red")  ){
+      document.getElementById(id).classList.remove("black");
+      document.getElementById(id).classList.remove("red");
+     
+      document.getElementById(id).classList.add("white");
+      contador +=1
+      lista.push(id)
+      document.getElementById('resultados').value=lista
+      $('#resultados').trigger('click');
+     
+      
+     }
+   }
+   }}
+       function no_deseados(id){
+         
+         document.getElementById(id).classList.add("red");
+       }
+      
+       function marcar_semana(){
+         var lista = JSON.parse('{{ ultima_semana | tojson | safe }}');
+        
+       
+         for (let id of lista) {
+            idd="#"+id
+            if ( $(idd).hasClass("red")){
+             document.getElementById(id).classList.remove("red")
+             document.getElementById(id).classList.add("black")
+          }else{
+           
+            document.getElementById(id).classList.add("red")
+          
+          }
+          
+         }
+      }
+       
+            
+
+       $(document).ready(function(){
+         document.getElementById('imagen-primitiva').style.display="none"
+       
+      $(window).scroll(function () {
+        if ($(this).scrollTop() > 300) {
+          $("a.scroll-top").fadeIn("slow");
+          $(".device-menu").css("display", "block");
+        } else {
+          $("a.scroll-top").fadeOut("slow");
+        }
+      });
+      $("a.scroll-top").click(function (event) {
+        event.preventDefault();
+        $("html, body").animate({ scrollTop: 0 }, 600);
+      });
+      
+      window.scrollTo({top: 0, behavior: 'smooth'});
+   
+    
+
+});
+
+
+
+      
+   
+    </script>

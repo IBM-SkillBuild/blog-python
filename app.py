@@ -6,6 +6,7 @@ from valores import Valores
 import psycopg2
 from datetime import datetime
 import pickle
+import requests
 
 
 
@@ -251,7 +252,7 @@ def admin_publicaciones():
        publicaciones="" 
      finally:
          cursor.close()
-     
+    
      return render_template("/admin/publicaciones.html", publicaciones=publicaciones)
   return redirect("/login")
 
@@ -477,9 +478,158 @@ def usuarios():
    finally:
          cursor.close()  
    return jsonify(usuario)
+ 
+ 
+ 
+@app.route("/primitiva/", methods=['GET'])
+def primitiva():
+         
+
+          date = datetime.now()
+          fecha_hoy = date.strftime('%Y%m%d')
+          num_sorteos=0
+          lista=request.args.get('lista')
+          
+        
+          contador=0     
+          url = f"https://www.loteriasyapuestas.es/servicios/buscadorSorteos?game_id=LAPR&celebrados=true&fechaInicioInclusiva=20230923&fechaFinInclusiva={fecha_hoy}"
+          data = requests.get(url)
+          datos = data.json()
+          num_sorteos=len(datos)
+          ultima_semana=datos[0]['combinacion'][0:27].split(" - ")
+          for sorteo in datos:
+            try:
+              if ( str(lista) in sorteo['combinacion'][0:27] ):
+                contador +=1 
+                sorteo["sale"]="sale el uno"  
+            except:
+              pass
+          return render_template("/componentes/listado-primitiva.html",primitiva=datos,contador=contador,num_sorteos=num_sorteos,lista=lista,ultima_semana=ultima_semana)        
+        
+       
+@app.route("/logica/", methods=['GET'])
+def logica():
+         
+          
+          date = datetime.now()
+          fecha_hoy = date.strftime('%Y%m%d')
+          num_sorteos=0
+          lista=request.args.get('lista')
+          lista=lista.split(",")
+          lista.sort()  
+          ok=""
+          numeros_de_la_primitiva=['01','02','03','04','05','06','07','08','09','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30','31','32','33','34','35','36','37','38','39','40','41','42','43','44','45','46','47','48','49']
+          contador_de_grupos=[]
+          contador_de_ausencias=[0,0,0,0,0,0]
+          contador=[0,0,0,0,0,0]    
+          numeros=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+          amigos=[[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],]
+          enemigos=[[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],]
+          consecutivos=[[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],]
+          lista_contador_de_consecutivos=[[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],]
+
+          veces_grupo="0"
+          sugerencias=[" "," "," "," "," "," "]
+          url = f"https://www.loteriasyapuestas.es/servicios/buscadorSorteos?game_id=LAPR&celebrados=true&fechaInicioInclusiva=20230923&fechaFinInclusiva={fecha_hoy}"
+          data = requests.get(url)
+          datos = data.json()
+          num_sorteos=len(datos)
+          
+          for sorteo in datos:
+             combinaciones= sorteo['combinacion'][0:27].split(" - ")
+             for i in combinaciones:
+               numeros[int(i)] +=1
+          
+                 
+                  
+                   
+          for sorteo in datos:
+            combinaciones= sorteo['combinacion'][0:27].split(" - ")
+            for i in range(0,len(lista)): 
+              if  str(lista[i]) in combinaciones :
+               
+                for item in combinaciones:
+                  amigos[i].append(item)
+                conjunto=set(amigos[i])  
+                amigos[i]= [*conjunto]
+                amigos[i].sort()
+                enemigos[i] = [element for element in numeros_de_la_primitiva if element not in amigos[i]]
+               
+                contador[i]=contador[i]+1
+               
+              if contador[i]==0:
+                  contador_de_ausencias[i]=contador_de_ausencias[i]+1
+             
+              sorteo["sale"]=f"sale numero {lista[i]}"  
+             
+              if contador[i]<15:
+                 sugerencias[i]="Ha salido poco. Le doy muchas posibilidades"
+              else:
+                 sugerencias[i]="Hay mejores candidatos. A Este le doy pocas posibilidades"
+              if contador_de_ausencias[i]>10:
+                sugerencias[i]="Yo le doy muchas posibilidades"   
+              elif contador_de_ausencias[i]>15:
+                sugerencias[i]="Está deseando salir. Yo le doy muchas posibilidades" 
+              else:
+                 sugerencias[i]="Diría que tienes pocas posibilidades" 
+              if contador[i]<7 | contador_de_ausencias[i]>20:
+                sugerencias[i]=sugerencias[i]+" YO LO USARIA"  
+              if contador_de_ausencias[i]<6:
+                sugerencias[i]="Demasiado reciente. NO LO USARIA"   
+             
+          
+            
+         
+          contador_de_consecutivos=0
+          for sorteo in datos:  
+               combinaciones= sorteo['combinacion'][0:27].split(" - ")
+               contador_de_consecutivos +=1
+              
+               for item in lista:
+                 i=int(item)
+                 if item in combinaciones:
+                 
+                  lista_contador_de_consecutivos[i].append(contador_de_consecutivos)
+                  if len(lista_contador_de_consecutivos[i])>1:
+                    if lista_contador_de_consecutivos[i][-1] - lista_contador_de_consecutivos[i][-2]==1:
+                      consecutivos[i].append(sorteo['fecha_sorteo'])
+                  ok="se ha encontrado"
+                 else:
+                  ok="no se ha encontrado" 
+                  break
+                 
+               if ok=="se ha encontrado":
+                 contador_de_grupos.append(sorteo['fecha_sorteo'])
+                 veces_grupo=len(contador_de_grupos)  
+            
+          return render_template("/componentes/logica-primitiva.html",primitiva=datos,
+                                 contador=contador,num_sorteos=num_sorteos,
+                                 lista=lista,combinaciones=combinaciones,
+                                 contador_de_ausencias=contador_de_ausencias,
+                                 ok=ok, contador_de_grupos=contador_de_grupos,
+                                 sugerencias=sugerencias,veces=numeros, veces_grupo=veces_grupo,
+                                 amigos=amigos,enemigos=enemigos,consecutivos=consecutivos)        
+@app.route("/tabla/", methods=['GET'])
+def tabla():
+    date = datetime.now()
+    fecha_hoy = date.strftime('%Y%m%d')
+    url = f"https://www.loteriasyapuestas.es/servicios/buscadorSorteos?game_id=LAPR&celebrados=true&fechaInicioInclusiva=20230923&fechaFinInclusiva={fecha_hoy}"
+    data = requests.get(url)
+    datos = data.json()
+    numeros=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+
+    for sorteo in datos:
+             combinaciones= sorteo['combinacion'][0:27].split(" - ")
+             for i in combinaciones:
+               numeros[int(i)] +=1
+          
+    return render_template("/componentes/tabla.html",veces=numeros)      
+                  
+           
+
   
 # inicio app derarrollo
 if __name__=="__main__":
   # app.run(debug=True) NO NECESARIO 
   # -- SE LEE DESDE ARCHIVO CONFIG-- (cambiar para produccion a otra clase)
-  app.run(debug=True)
+  app.run(debug=True,port=3000)

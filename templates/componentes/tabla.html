@@ -1,0 +1,72 @@
+<link rel="stylesheet" href="//cdn.datatables.net/2.1.7/css/dataTables.dataTables.min.css">
+<script src="//cdn.datatables.net/2.1.7/js/dataTables.min.js"></script>
+<script>
+    $(document).ready(function(){
+        new DataTable('#myTable', {
+    paging: false,
+    scrollCollapse: true,
+    scrollY: '200px'
+});
+});
+  
+</script>
+<style>
+    .flex-center{
+        
+        margin: o auto;
+        display: flex;
+        flex-wrap: wrap;
+        text-align: center;
+        justify-content: center;
+        
+ 
+    }
+    table{
+        margin: auto;
+        color: black;
+        margin-left: 2em;
+    }
+    .titulo{
+        color:red;
+        margin-bottom: 0.3em;
+    }
+    
+    
+    
+</style>
+<div class="flex-center">
+
+    <table id="myTable" > 
+        <thead> 
+        <tr> 
+            <th>Numeros primitiva</th> 
+            <th>Cantidad de veces que han salido en {{sorteos}} sorteos</th> 
+          
+        </tr> 
+        </thead> 
+        <tbody> 
+            {% for i in range(1,veces|length) %}
+         {% if i < 10 %}
+         {% set i="0"+i | string() %}
+         {% set i= i | int() %}
+         {% endif %}
+        <tr> 
+            <td>  {{i}}</td>
+            <td> {{veces[i]}} </td>
+            
+        </tr> 
+        {% endfor %}
+       
+       
+      
+        </tbody> 
+        </table> 
+
+
+
+
+
+
+
+   
+
