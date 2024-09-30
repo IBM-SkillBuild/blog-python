@@ -50,7 +50,7 @@
     <h5>la última vez salió hace {{contador_de_ausencias[i]}} sorteos</h5>
     <h5>en {{num_sorteos}} sorteos, nunca ha jugado con {{enemigos[i]}}</h5>
     <h5>{{sugerencias[i]}}</h5>
-     <button onclick="conservar('{{lista[i]}}')">CONSERVAR</button>
+     <button  style="margin-bottom: 1em;" onclick="conservar('{{lista[i]}}')">CONSERVAR</button>
     <button style="background-color: red;color: yellow;" onclick="quitarnumero('{{lista[i]}}','{{sugerencias[i]}}')">MARCAR COMO NO DESEADO</button>
   </div>
 
@@ -138,6 +138,7 @@ $(document).ready(function(){
       lista = lista.filter(item => item != id);
       document.getElementById('resultados').value=lista
       $('#resultados').trigger('click');
+      window.scrollTo({top: 0, behavior: 'smooth'});
     }
     
    }
