@@ -16,7 +16,7 @@ class ConfigPro():
   SECRET_KEY="MyApp"
   UPLOAD_FOLDER = 'static/uploads'
   UPLOAD_POST = 'static/posts'
-  
+  UPLOAD_AUDIO= 'static/audio'
  
   
   

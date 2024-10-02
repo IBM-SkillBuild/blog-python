@@ -5,7 +5,8 @@
      
 
 setTimeout(function(){
-    document.getElementById('audio').setAttribute("src", "../../static/audio/{{source}}");
+    document.getElementById('audio').setAttribute("src", "/static/audio/{{source}}"
+    );
     document.getElementById('audio').style.display="block"
     document.getElementById('audio').play()
     document.getElementById('caja-buscar').focus()
