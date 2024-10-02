@@ -80,12 +80,7 @@ class SpeechifyAPI:
         nombre_de_archivo=str(uuid.uuid4())+dia+'.mp3'
         archivo=  os.getcwd()+ '\\static\\audio/'+ nombre_de_archivo
      
-        dir = os.getcwd()+ '\\static\\audio/'
-        lista_ficheros = os.listdir(dir)
-        for fichero in lista_ficheros:
-            if not fichero.endswith(f"{dia}.mp3"):
-                os.remove(dir+ fichero)
-     
+        
      
         with open(archivo, "wb") as f:
             f.write(audio_stream_bytes)
