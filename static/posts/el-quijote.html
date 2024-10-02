@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Don Quijote de la Mancha</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    <!-- Bootstrap CSS v5.2.1 -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Montserrat"
+      rel="stylesheet"
+    />
+    <!-- UIkit CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.21.13/dist/css/uikit.min.css" />
+
+    <!-- UIkit JS -->
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.21.13/dist/js/uikit.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.21.13/dist/js/uikit-icons.min.js"></script>
+
+    <script src="https://unpkg.com/htmx.org@2.0.2" integrity="sha384-Y7hw+L/jvKeWIRRkqWYfPcvVxHzVzn5REgzbawhxAuQGwX1XWe70vji+VSeHOThJ" crossorigin="anonymous"></script>
+    <!--    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/style_publicaciones.css' ) }}">
+ -->
+    <style>
+      .responsive-iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;}
+
+  .info{
+ 
+ width:fit-content;
+ min-width: 200px;
+ height: fit-content;
+  align-items: center;
+  cursor: pointer;
+	background-color: rgb(228, 228, 233);
+	
+  
+	border-radius: 50px;
+	box-shadow: 6px 6px 10px rgba(0, 0, 0, 0.2),
+		-6px -6px 10px rgba(255, 255, 255, 0.6);
+	
+	
+	
+}
+.htmx-swapping {
+        opacity: 0;
+        transition: opacity 1s ease;
+      }
+
+      .htmx-settling {
+        opacity: 0;
+        animation: ease fadeIn 1s both;
+      }
+      h1 {
+        font-weight: bolder;
+      }
+      h5 {
+        margin-top: 25px;
+        margin-bottom: 25px;
+      }
+      html,
+      body {
+        background-color: transparent;
+        font-family: 'Montserrat';
+        font-weight: bold;
+        color: black;
+      }
+
+      html::-webkit-scrollbar {
+        display: none;
+      }
+      .spinner{
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  bottom: 2em
+ 
+  
+}
+      .imagen-publicacion {
+        border: solid 4px whitesmoke;
+        display: block;
+        margin: auto;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        width: 90%;
+      }
+
+      @media only screen and (max-width: 1200px) {
+        .imagen-publicacion {
+          width: 90%;
+          display: block;
+          margin-left: auto;
+          margin-right: auto;
+          margin-top: 20px;
+          margin-bottom: 20px;
+        }
+        
+      }
+    </style>
+  </head>
+
+  <body>
+   
+  </div>
+    <main id="main" class="main">
+         
+      <div class="container-fluid" style="text-align: center;margin-top:-0.5em;margin-bottom: 1em;">
+         <h1>Don Quijote de la Mancha</h1>
+         <form>
+          <input id="caja-buscar"  onkeypress="return event.keyCode != 13;" class="uk-input" placeholder="busca palabra o frase" autofocus autocomplete="off" type="text" style="width: 30%;"
+          name="buscador"
+          hx-post="/frase_quijote/"
+          hx-target="#quijote"
+          hx-trigger="keyup changed delay:800ms"
+          hx-swap="innerHTML swap:1s  settle:1s"
+          hx-indicator="#my_spinner" 
+      
+          >
+          <img onclick="wiki()" src="../../../static/img/Wikipedia-logo_(inverse).png" style="width: 3em;cursor: pointer;" alt="">
+          <button style="display: none;" type="submit"></button>
+         </form>
+
+        
+        <div id="quijote"></div>  
+         
+        
+       <!--  <button class="info " style="margin:20px" onclick="blog()">Ver Blog</button>
+        <button class="info " style="margin:20px" onclick="oficial()">Página oficial</button>   -->
+      </div>
+      
+
+              <div id="my_spinner" class="htmx-indicator spinner">
+                <img id="spinner-img" style="width: 4em;" src="https://www.freeiconspng.com/uploads/spinner-icon-0.gif"/>   
+              </div> 
+        
+     
+    </main>
+    
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+      integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+      crossorigin="anonymous"
+    ></script>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+      integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bs5-lightbox@1.8.3/dist/index.bundle.min.js"></script>
+   
+    <script>
+   
+      $(window).scroll(function () {
+  if ($(this).scrollTop() > 300) {
+    $('a.scroll-top').fadeIn('slow');
+     $('.device-menu').css('display', 'block');
+  } else {
+    $('a.scroll-top').fadeOut('slow');
+   
+  }
+});
+$('a.scroll-top').click(function (event) {
+  event.preventDefault();
+  $('html, body').animate({ scrollTop: 0 }, 600);
+  document.getElementById('main').scrollIntoView();
+});
+
+
+function blog(){
+   window.open('https://ibm-skillbuild.github.io/2023/La-Cruz-de-todos/', '_blank');
+}
+function oficial(){
+   window.open('https://lacruzdetodos.netlify.app/', '_blank');
+}
+
+
+function wiki(){
+  selected= document.getElementById('caja-buscar').value
+  url="https://es.wikipedia.org/wiki/".concat(selected)
+  window.open(url, '_blank');
+}
+
+
+
+$(document).ready(function(){
+  
+ 
+  document.getElementById('caja-buscar').focus()
+  $("form").keypress(function(e) {
+        if (e.which == 13) {
+            return false;
+        }
+    });
+
+});
+
+
+    </script>  
+
+    
+  </body>
+</html>

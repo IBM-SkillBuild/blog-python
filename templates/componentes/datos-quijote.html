@@ -1,0 +1,76 @@
+a<style>
+    #texto{
+        width: 50%;margin: auto; margin-top: 1em; text-align: justify;
+    }
+  @media only screen and (max-width: 700px) {
+    #texto{
+       width: 90%;
+        }
+    }
+</style>
+{% if posiciones %}
+<div>
+    hemos encontrado {{posiciones|length}} ocurrencias de tu busqueda
+   
+ <div class="padre-flex-center">
+ <button
+          hx-get="/anterior/"
+          hx-target="#quijote"
+          hx-trigger="click"
+          hx-swap="innerHTML swap:1s  settle:1s"
+          hx-indicator="#my_spinner" 
+          hx-include="#registro_anterior"
+ >anterior</button>
+ <button
+ hx-get="/tts/"
+ hx-target="#zona-audio"
+ hx-trigger="click"
+ hx-swap="innerHTML swap:1s  settle:1s"
+ hx-indicator="#my_spinner" 
+ hx-include="#registro"
+ 
+ >Audio TTS</button>   
+ <button
+          hx-get="/siguiente/"
+          hx-target="#quijote"
+          hx-trigger="click"
+          hx-swap="innerHTML swap:1s  settle:1s"
+          hx-indicator="#my_spinner" 
+          hx-include="#registro_siguiente"
+        
+ >siguiente</button>
+ <input type="hidden" id="registro" name="registro" value='{{registro}}'>
+ <input type="hidden" id="registro_anterior" name="registro_anterior" value='{{registro-1}}'>
+ <input type="hidden" id="registro_siguiente" name="registro_siguiente" value='{{registro+1}}'>
+</div>
+
+
+
+<p id="texto">{{listado_ocurrencias[registro][0]}}</p>
+
+<div id="zona-audio"></div> 
+{% else %}
+<h2>No se ha encontrado ocurrencia</h2>
+{% endif %}
+
+<script>
+    $(document).ready(function(){
+        document.getElementById('caja-buscar').focus()
+        setTimeout(function(){
+    marcar()
+}, 1000);   
+        
+    
+});
+    
+
+
+
+
+function marcar(){
+   
+    caja=document.getElementById('caja-buscar').value
+    document.getElementById('texto').innerHTML= document.getElementById('texto').innerText.replace(caja,  `<strong style='color:red;text-decoration: underline;'>${caja}</strong>`);   
+}
+</script>
+

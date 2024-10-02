@@ -90,7 +90,7 @@
 
    
 
-
+<div id="primero" style="display: none;">para hacer scroll-up</div>
 <div class="padre-flex-center" >
  
    <div class="flex-grande" >
@@ -140,14 +140,19 @@ hx-get="/logica/{{value}}"
    />
  </div>
 
+ <div id="ultimo" style="display: none;">para hacer scroll-down</div>
+
   <script>
    
    contador=0
    lista=[]
    lista_no_deseados=[]
+
+
    function elegir(id){
-     
    idd="#"+id
+   var element = document.getElementById('ultimo')
+     element.scrollIntoView();
    if (contador==6 & $(idd).hasClass("black")){
       alert('ya tienes 6 numeros '+ lista)
 
@@ -176,6 +181,7 @@ hx-get="/logica/{{value}}"
       
      }
    }
+   
    }}
        function no_deseados(id){
          
@@ -218,8 +224,8 @@ hx-get="/logica/{{value}}"
         $("html, body").animate({ scrollTop: 0 }, 600);
       });
       
-      window.scrollTo({top: 0, behavior: 'smooth'});
-   
+      var element = document.getElementById('primero')
+      element.scrollIntoView();
     
 
 });

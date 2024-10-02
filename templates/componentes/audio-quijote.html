@@ -1,0 +1,30 @@
+
+
+<script>
+    $(document).ready(function(){
+     
+
+setTimeout(function(){
+    document.getElementById('audio').setAttribute("src", "../../static/audio/{{source}}");
+    document.getElementById('audio').style.display="block"
+    document.getElementById('audio').play()
+    document.getElementById('caja-buscar').focus()
+    marcar()
+}, 1000);
+})
+
+
+
+</script> 
+
+
+   
+
+
+<div class="padre-flex-center">
+<audio  style="display: none;  margin: 0 auto; margin-top: 0.5em;" id="audio" controls></audio>
+    <source  src="">
+    </audio>
+ </div>
+
+

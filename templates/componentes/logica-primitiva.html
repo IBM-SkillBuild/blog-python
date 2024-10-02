@@ -127,6 +127,7 @@ $(document).ready(function(){
 
    function quitarnumero(id,sugerencia){
     idd="#"+id
+    
     if ( $(idd).hasClass("white")){
       document.getElementById(id).classList.remove("white");
       document.getElementById(id).classList.remove("black");
@@ -138,15 +139,26 @@ $(document).ready(function(){
       lista = lista.filter(item => item != id);
       document.getElementById('resultados').value=lista
       $('#resultados').trigger('click');
-      window.scrollTo({top: 0, behavior: 'smooth'});
+      setTimeout(function(){
+        var element = document.getElementById('primero')
+        element.scrollIntoView();
+}, 2000);
+     
+     
     }
     
    }
 
    function conservar(id){
+   
+   
     $('#resultados').trigger('click');
     $('#upedu').trigger('click');
-    window.scrollTo({top: 0, behavior: 'smooth'});
+   
+    setTimeout(function(){
+        var element = document.getElementById('primero')
+        element.scrollIntoView();
+}, 2000);
    
     
    

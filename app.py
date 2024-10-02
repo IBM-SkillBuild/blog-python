@@ -7,6 +7,10 @@ import psycopg2
 from datetime import datetime
 import pickle
 import requests
+from speechify.speechify import  SpeechifyAPI
+import uuid
+
+
 
 
 
@@ -624,10 +628,94 @@ def tabla():
                numeros[int(i)] +=1
           
     return render_template("/componentes/tabla.html",veces=numeros)      
-                  
-           
 
+listado_ocurrencias=[]    
+posiciones=[]              
+@app.route("/frase_quijote/", methods=['POST'])
+def frase_quijote():
+    busqueda= request.form['buscador']
+    busqueda=busqueda.lower()
+    if  busqueda=="":
+       return render_template("/componentes/datos-quijote.html",
+                             listado_ocurrencias=listado_ocurrencias,
+                             posiciones=posiciones,registro=0)   
+    inicio=0
+    fin=0
+    encontrado=""
+        
+    with open('./static/txt/quijote.txt', 'r', encoding="utf8") as archivo:
+       quijote = archivo.read()
+       quijote=quijote.lower()
+    
+    
+    posicion = 0
+    posiciones.clear()
+    listado_ocurrencias.clear()
+    while posicion != -1:
+      posicion = quijote.find(busqueda,posicion)
+      if posicion != -1:
+        posiciones.append(posicion)
+        posicion += 1
+     
+    
+    contador=0
+    for item in posiciones:
+        
+        encontrado=item
+    
+ 
+        for i in range(encontrado-1, 0, -1):
+            if quijote[i]=="." :
+              inicio=i+1
+              break
+          
+        for i in range(encontrado+1,len(quijote),1):
+            if quijote[i]=="." :
+              fin=i+1
+              break
+            
+        paragraph=quijote[inicio:fin]    
+       
+        listado_ocurrencias.append([paragraph,contador])
+        contador +=1
+        
+       
+        
+    return render_template("/componentes/datos-quijote.html",
+                             listado_ocurrencias=listado_ocurrencias,
+                             posiciones=posiciones,registro=0)             
+
+@app.route("/tts/", methods=['GET'])
+def tts():
+     registro = request.args.get('registro')
+     registro=int(registro)
+    
+     # Create an instance of the Speechify API
+     speechify_api = SpeechifyAPI() 
+     audio_file = speechify_api.generate_audio_files(listado_ocurrencias[registro][0], "juan", "azure", "es-CR")     
+     return render_template("/componentes/audio-quijote.html",
+                            source=audio_file,texto=listado_ocurrencias[registro][0])        
   
+@app.route("/anterior/", methods=['GET'])
+def anterior():
+   registro=int(request.args.get('registro_anterior'))
+   if registro ==-1:registro=len(posiciones)-1
+  
+   return render_template("/componentes/datos-quijote.html",
+                             listado_ocurrencias=listado_ocurrencias,
+                             posiciones=posiciones,registro=registro)     
+  
+@app.route("/siguiente/", methods=['GET'])
+def siguiente():
+   registro=int(request.args.get('registro_siguiente'))
+   if registro>len(posiciones)-1:registro=0
+   
+   return render_template("/componentes/datos-quijote.html",
+                             listado_ocurrencias=listado_ocurrencias,
+                             posiciones=posiciones,registro=registro)     
+  
+
+      
 # inicio app derarrollo
 if __name__=="__main__":
   # app.run(debug=True) NO NECESARIO 
