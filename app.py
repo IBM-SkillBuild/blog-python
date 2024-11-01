@@ -678,7 +678,7 @@ def frase_quijote():
        
         listado_ocurrencias.append([paragraph,contador])
         contador +=1
-        
+       
        
         
     return render_template("/componentes/datos-quijote.html",
