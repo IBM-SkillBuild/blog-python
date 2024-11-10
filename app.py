@@ -694,7 +694,31 @@ def tts():
      speechify_api = SpeechifyAPI() 
      audio_file = speechify_api.generate_audio_files(listado_ocurrencias[registro][0], "juan", "azure", "es-CR")     
      return render_template("/componentes/audio-quijote.html",
-                            source=audio_file,texto=listado_ocurrencias[registro][0])        
+                            source=audio_file,texto=listado_ocurrencias[registro][0])       
+     
+@app.route("/crear_audio/<text>", methods=['GET'])
+def crear_audio(text):
+       
+     # Create an instance of the Speechify API
+     speechify_api = SpeechifyAPI() 
+     audio_file = speechify_api.generate_audio_files(text, "juan", "azure", "es-CR")     
+     return  "https://blog-edu-tech.koyeb.app/static/audio/"+audio_file 
+
+UPLOAD_PATH = 'static/audio/'
+
+@app.route('/borrar_audio', methods=['GET'])
+def borrar_audio(): 
+  for filename in os.listdir(UPLOAD_PATH):
+    file_path = os.path.join(UPLOAD_PATH, filename)
+    try:
+      if os.path.isfile(file_path) or os.path.islink(file_path): os.unlink(file_path)
+      print(f"{file_path} borrado exitosamente.")
+    
+    except Exception as e: print(f"No se pudo borrar {file_path}. Razón: {e}")
+   
+  return jsonify({"message": "Todos los archivos han sido borrados"}), 200
+  
+  
   
 @app.route("/anterior/", methods=['GET'])
 def anterior():
