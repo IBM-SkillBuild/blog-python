@@ -8,7 +8,7 @@ from datetime import datetime
 import pickle
 import requests
 from speechify.speechify import  SpeechifyAPI
-import uuid
+from flask_cors import CORS
 
 
 
@@ -16,6 +16,7 @@ import uuid
 
 # instancias
 app=Flask(__name__)
+CORS(app)
 mis_valores=Valores()
 #configurar parametros App y conexion BBDD en desarrollo 
 # (para produccion hay que cambiar a otra clase de archivo config)
