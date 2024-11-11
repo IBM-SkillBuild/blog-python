@@ -16,7 +16,7 @@ from flask_cors import CORS
 
 # instancias
 app=Flask(__name__)
-CORS(app)
+CORS(app, resources={r"/*": {"origins": "*", "methods": ["GET", "POST"]}})
 mis_valores=Valores()
 #configurar parametros App y conexion BBDD en desarrollo 
 # (para produccion hay que cambiar a otra clase de archivo config)
