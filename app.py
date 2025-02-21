@@ -1,6 +1,6 @@
 import os
 from flask import Flask
-from flask import render_template, redirect, request, session, send_from_directory,jsonify
+from flask import render_template, redirect, request, session, send_from_directory,jsonify,make_response, send_file
 from flask_paginate import Pagination #Importando paquete de paginación
 from valores import Valores
 import psycopg2
@@ -10,6 +10,7 @@ import requests
 from speechify.speechify import  SpeechifyAPI
 from flask_cors import CORS
 import random
+from io import BytesIO
 
 
 
@@ -74,7 +75,9 @@ def index():
   mis_valores.footer=True
   return render_template("/sitio/index.html",valores=mis_valores)
 
-
+@app.route("/doc")
+def documentacion():
+   return render_template("/sitio/api.html")
 
 
 @app.route("/todas_las_categorias", methods=['POST', 'GET'])

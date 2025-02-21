@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentación de API</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+        a{
+            text-decoration: none;
+            color: #16eead;
+            margin-bottom: 2em;
+            font-size: 12px;
+            display: block;
+        }
+        a:hover{
+            text-decoration: underline;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #444;
+        }
+        .code-box {
+            background: #282c34;
+            color: #abb2bf;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: "Courier New", monospace;
+            overflow-x: auto;
+        }
+        .code-box-peque {
+            background: #282c34;
+            color: #abb2bf;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: "Courier New", monospace;
+            overflow-x: auto;
+            margin-bottom: 2em;
+        }
+        .code-box pre {
+            margin: 0;
+        }
+        .run-button {
+            margin-top: 10px;
+            padding: 10px 20px;
+            background: #28a745;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .run-button:hover {
+            background: #218838;
+        }
+        .output-box {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f1f1f1;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+        .explanation {
+            margin-top: 20px;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+        img{
+            border-radius: 50%;
+            text-align: center;
+            width: 80px;
+        }
+        footer {
+            background-color: #6b6a6a; /* Color de fondo del footer */
+            color: #fff; /* Color del texto */
+            text-align: center; /* Centra el texto horizontalmente */
+            padding: 1px 0; /* Espaciado interno (arriba/abajo) */
+            margin-top: auto; /* Empuja el footer hacia abajo */
+            border-radius: 5px;
+            max-width: 800px;
+            margin: 0 auto;
+            margin-top: 4em;
+         
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Documentación de API</h1>
+        <div class="code-box-peque">
+             <h2>ruta foto user random (mujer y hombre)</h2>
+             <a href="https://chatbot-back-o14j.onrender.com/foto-mujer">https://chatbot-back-o14j.onrender.com/foto-mujer</a>
+             <a href="https://chatbot-back-o14j.onrender.com/foto-hombre">https://chatbot-back-o14j.onrender.com/foto-hombre</a>
+
+            </div>
+        <div class="code-box">
+           
+            <pre><code id="fotos">
+<span style="color: #16eead">
+&lt;!------------------------ MODO DE USO EN HTML foto random mujer ------------------&gt;  </span>
+&lt;!DOCTYPE html&gt;
+&lt;html lang="es"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;Api Edu&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div style="display: flex; flex-direction:column;justify-content: center;align-items:center"&gt;
+  
+    <span style="color: #16eead">
+        &lt;img src="https://chatbot-back-o14j.onrender.com/foto-mujer" alt=""&gt;
+    </span>
+    &lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+            </code></pre>
+        </div>
+        <button class="run-button" onclick="runCode('fotos')">Run HTML</button>
+        <div class="output-box" id="output-box">
+            <!-- Aquí se mostrará el resultado del código ejecutado -->
+        </div>
+       
+    </div>
+
+    
+    <script src="https://cdn.jsdelivr.net/npm/fluidscroll@2.0.0" integrity="sha384-ZvfwaJZFftLPOaPS13spccPYdWRcrfz/GDgUYAf7b6I2OBXY74KiAC6WVg0XF3Qq" crossorigin="anonymous"></script>
+    <script>
+        function runCode(id) {
+            fluidScroll({yPos: '+40%'});
+            const code = document.getElementById(id).innerText;
+            const outputBox = document.getElementById('output-box');
+            outputBox.innerHTML = code; // Ejecuta el código HTML
+           
+            
+        }
+
+
+
+        
+    </script>
+    <footer id="footer">
+        <p>&copy; 2025 Api Edu. Todos los derechos reservados.</p>
+    </footer>
+</body>
+</html>
