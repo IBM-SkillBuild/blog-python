@@ -1,2 +1,2 @@
 # blog-python
-Blog  Python Edu
+Blog  Python Edu.
