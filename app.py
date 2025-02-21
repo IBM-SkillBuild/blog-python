@@ -739,6 +739,74 @@ def siguiente():
                              listado_ocurrencias=listado_ocurrencias,
                              posiciones=posiciones,registro=registro)     
   
+@app.route('/foto-mujer')
+def get_foto_female():
+    # URL de la API
+    num_foto = random.randint(1, 99)
+    url = f'https://randomuser.me/api/portraits/med/women/{num_foto}.jpg'
+
+    # Hacer la solicitud GET
+    response = requests.get(url)
+
+    # Verificar que la solicitud fue exitosa
+    if response.status_code == 200:
+        # Crear un archivo en memoria
+        img = BytesIO(response.content)
+        img.seek(0)
+        
+        # Crear una respuesta personalizada para añadir los encabezados
+        response = make_response(send_file(img, mimetype='image/jpeg'))
+        response.headers['Cache-Control'] = 'no-store, no-cache, must-revalidate, post-check=0, pre-check=0'
+        response.headers['Pragma'] = 'no-cache'
+        response.headers['Expires'] = '0'
+        return response
+    else:
+        filepath = os.path.join(os.getcwd(), 'foto-mujer.jpeg')
+        response = make_response(send_file(filepath, mimetype='image/jpeg'))
+        response.headers['Cache-Control'] = 'no-store, no-cache, must-revalidate, post-check=0, pre-check=0'
+        response.headers['Pragma'] = 'no-cache'
+        response.headers['Expires'] = '0'
+        return response
+
+@app.route('/foto-hombre')
+def get_foto_male():
+    # URL de la API
+    num_foto = random.randint(1, 100)
+    url = f'https://randomuser.me/api/portraits/med/men/{num_foto}.jpg'
+
+    # Hacer la solicitud GET
+    response = requests.get(url)
+
+    # Verificar que la solicitud fue exitosa
+    if response.status_code == 200:
+        # Crear un archivo en memoria
+        img = BytesIO(response.content)
+        img.seek(0)
+        
+        # Crear una respuesta personalizada para añadir los encabezados
+        response = make_response(send_file(img, mimetype='image/jpeg'))
+        response.headers['Cache-Control'] = 'no-store, no-cache, must-revalidate, post-check=0, pre-check=0'
+        response.headers['Pragma'] = 'no-cache'
+        response.headers['Expires'] = '0'
+        return response
+    else:
+        filepath = os.path.join(os.getcwd(), 'foto-hombre.jpeg')
+        response = make_response(send_file(filepath, mimetype='image/jpeg'))
+        response.headers['Cache-Control'] = 'no-store, no-cache, must-revalidate, post-check=0, pre-check=0'
+        response.headers['Pragma'] = 'no-cache'
+        response.headers['Expires'] = '0'
+        return 
+    
+@app.route('/widget-hora-madrid')
+def widget():
+    return """
+    <table>
+    <tr><td style="text-align: center;"><canvas id="canvas_tt67b8c1c981673" width="175" height="175"></canvas></td></tr>
+    <tr><td style="text-align: center; font-weight: bold"><a href="" style="text-decoration: none" class="clock24" id="tz24-1740161481-c1141-eyJzaXplIjoiMTc1IiwiYmdjb2xvciI6IjAwOTlGRiIsImxhbmciOiJlcyIsInR5cGUiOiJhIiwiY2FudmFzX2lkIjoiY2FudmFzX3R0NjdiOGMxYzk4MTY3MyJ9" title="Madrid Hora" target="_blank" rel="nofollow"></a></td></tr>
+</table>
+<script type="text/javascript" src="//w.24timezones.com/l.js" async></script>
+  
+    """
 
       
 # inicio app derarrollo
