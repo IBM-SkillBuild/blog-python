@@ -10,21 +10,21 @@ class Valores():
   
   # koyeb
   
-  """ HOST = "ep-noisy-silence-21789047.eu-central-1.aws.neon.tech"
+  HOST = "ep-noisy-silence-21789047.eu-central-1.aws.neon.tech"
   PORT = 3306
   USER = "koyeb-adm"
   PASSWORD = "RIghWyKm4Tt5"
   DB = "koyebdb"
-  URL="https://blog-edu-tech.koyeb.app" """
+  URL="https://blog-edu-tech.koyeb.app"
   
   
   # elefhant sql
 
-  HOST = "kandula.db.elephantsql.com"
+  """ HOST = "kandula.db.elephantsql.com"
   PORT = 3306
   USER = "telsafdd"
   PASSWORD = "gbgMJqP64hVtYzePuHyOucywfeMhQPpg"
   DB = "telsafdd"
   URL = "https://blog-edu-tech.koyeb.app"
-
+ """
  
