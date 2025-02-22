@@ -78,6 +78,22 @@ def index():
 @app.route("/doc")
 def documentacion():
    return render_template("/sitio/api.html")
+ 
+@app.route("/mostrar_api_audio")
+def mostrar_api_audio():
+   return render_template("/sitio/api-audio.html")
+ 
+@app.route("/mostrar_api_foto_user_hombre")
+def mostrar_api_foto_user_hombre():
+   return render_template("/sitio/api-foto-user-hombre.html")
+ 
+@app.route("/mostrar_api_foto_user_mujer")
+def mostrar_api_foto_user_mujer():
+   return render_template("/sitio/api-foto-user-mujer.html") 
+
+@app.route("/mostrar_api_widget_hora_madrid")
+def mostrar_api_widget_hora_madrid():
+   return render_template("/sitio/api-widget-hora-madrid.html") 
 
 
 @app.route("/todas_las_categorias", methods=['POST', 'GET'])
