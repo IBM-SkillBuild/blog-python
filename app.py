@@ -17,6 +17,7 @@ from io import BytesIO
 
 
 
+
 # instancias
 app=Flask(__name__)
 CORS(app, resources={r"/*": {"origins": "*", "methods": ["GET", "POST"]}})
@@ -731,8 +732,23 @@ def generar_audio(text):
        
      # Create an instance of the Speechify API
      speechify_api = SpeechifyAPI() 
-     audio_file = speechify_api.generate_audio_files(text, "juan", "azure", "es-CR")     
-     return  "https://blog-edu-tech.koyeb.app/static/audio/"+audio_file     
+     audio_file = speechify_api.generate_audio_files(text, "juan", "azure", "es-CR")  
+     url_audio="http://127.0.0.1:3000/static/audio/"+audio_file     
+    
+     return f"""
+    <h1>xxxxxxxxxxxxxxxxxxxx</h1>
+    <audio id="audio" style="display:none" controls src=""></audio>
+    <script>
+        setTimeout(function(){{
+            var audioElement = document.getElementById('audio');
+            audioElement.style.display = "block";
+            audioElement.setAttribute("src", "{url_audio}");
+            audioElement.play();
+        }}, 3000);
+    </script>
+    """
+                               
+    
 
 UPLOAD_PATH = 'static/audio/'
 

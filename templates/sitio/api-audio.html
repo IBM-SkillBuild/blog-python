@@ -151,13 +151,14 @@
      
       <div class="code-box-peque">
         <h2>ruta para obtener url audio</h2>
-        <a href="https://blog-edu-tech.koyeb.app/crear_audio/Este texto se convertirá en audio" target="_blank"
+        <a href="https://blog-edu-tech.koyeb.app/generar_audio/Este texto se convertirá en audio" target="_blank"
           >https://blog-edu-tech.koyeb.app/generar_audio/Este texto se convertirá en audio</a
         >
-       
+        
       </div>
       <div class="code-box">
         <span class="language-tag">Código HTML </span>
+        
         <button class="copy-button" onclick="copyCode('foto-mujer')">Copy</button>
         <pre><code id="audio">
 <span style="color: #16eead">
@@ -172,22 +173,30 @@
 
 &lt;body&gt;
     &lt;div style="display:grid;place-content:center"&gt;
-         <span style="color: #16eead;">&lt;audio src="https://blog-edu-tech.koyeb.app/generar_audio/Este texto se convertirá en audio" controls  &gt; </span>
-
+   
+      &lt;div 
+        hx-get="https://blog-edu-tech.koyeb.app/generar_audio/Este texto se convertirá en audio" 
+        hx-trigger="load" 
+        hx-swap="innerHTML"&gt;
+      
+      &lt;/div&gt;
+     
        
     &lt;/div&gt;
+    &lt;script src="https://unpkg.com/htmx.org"&gt;&lt;/script&gt;
 &lt;/body&gt;
 &lt;/html&gt;
             </code></pre>
       </div>
       <button class="run-button" onclick="runCode('audio','output-box-audio')">Run HTML Generar Audio</button>
       <div class="output-box" id="output-box-audio">
+      
+   
         <!-- Aquí se mostrará el resultado del código ejecutado -->
       </div>
       
-     
     </main>
-
+   
     <script
       src="https://cdn.jsdelivr.net/npm/fluidscroll@2.0.0"
       integrity="sha384-ZvfwaJZFftLPOaPS13spccPYdWRcrfz/GDgUYAf7b6I2OBXY74KiAC6WVg0XF3Qq"
