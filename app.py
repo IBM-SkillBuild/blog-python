@@ -718,6 +718,8 @@ def tts():
      audio_file = speechify_api.generate_audio_files(listado_ocurrencias[registro][0], "juan", "azure", "es-CR")     
      return render_template("/componentes/audio-quijote.html",
                             source=audio_file,texto=listado_ocurrencias[registro][0])       
+ 
+UPLOAD_PATH = 'static/audio/'
      
 @app.route("/crear_audio/<text>", methods=['GET'])
 def crear_audio(text):
@@ -733,7 +735,7 @@ def generar_audio(text):
      # Create an instance of the Speechify API
      speechify_api = SpeechifyAPI() 
      audio_file = speechify_api.generate_audio_files(text, "juan", "azure", "es-CR")  
-     url_audio="http://127.0.0.1:3000/static/audio/"+audio_file     
+     url_audio=os.path.join(UPLOAD_PATH, audio_file)     
     
      return f"""
     <h1>xxxxxxxxxxxxxxxxxxxx</h1>
@@ -750,7 +752,7 @@ def generar_audio(text):
                                
     
 
-UPLOAD_PATH = 'static/audio/'
+
 
 @app.route('/borrar_audio', methods=['GET'])
 def borrar_audio(): 
