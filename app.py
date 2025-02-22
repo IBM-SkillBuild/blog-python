@@ -725,6 +725,14 @@ def crear_audio(text):
      speechify_api = SpeechifyAPI() 
      audio_file = speechify_api.generate_audio_files(text, "juan", "azure", "es-CR")     
      return  jsonify({"audio_url": "https://blog-edu-tech.koyeb.app/static/audio/"+audio_file}),200 
+   
+@app.route("/generar_audio/<text>", methods=['GET'])
+def generar_audio(text):
+       
+     # Create an instance of the Speechify API
+     speechify_api = SpeechifyAPI() 
+     audio_file = speechify_api.generate_audio_files(text, "juan", "azure", "es-CR")     
+     return  "https://blog-edu-tech.koyeb.app/static/audio/"+audio_file,200     
 
 UPLOAD_PATH = 'static/audio/'
 
