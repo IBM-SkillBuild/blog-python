@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Documentación de API Edu</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+        background-color: #f9f9f9;
+        color: #333;
+      }
+      a {
+        text-decoration: none;
+        color: #16eead;
+        margin-bottom: 2em;
+        font-size: 18px;
+        display: block;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+      .container {
+        max-width: 1024px;
+        margin: 0 auto;
+        background: #797878;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+      h1 {
+        color: #fcf9f9;
+        font-size: 20px;
+       
+      }
+      .code-box {
+        background: #282c34;
+        color: #abb2bf;
+        padding: 15px;
+        border-radius: 5px;
+        font-family: "Courier New", monospace;
+        overflow-x: auto;
+        position: relative;
+      }
+      .code-box-peque {
+        background: #282c34;
+        color: #abb2bf;
+        padding: 15px;
+        border-radius: 5px;
+        font-family: "Courier New", monospace;
+        overflow-x: auto;
+        margin-bottom: 2em;
+      }
+      .code-box pre {
+        margin: 0;
+      }
+      .run-button {
+        margin-top: 10px;
+        padding: 10px 20px;
+        background: #28a745;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+      }
+      .run-button:hover {
+        background: #218838;
+      }
+      .output-box {
+        margin-top: 20px;
+        padding: 15px;
+        background: #054b14;
+        border-radius: 5px;
+        border: 1px solid #ddd;
+        margin-bottom: 3em;
+        min-height: 100px;
+       
+      }
+      .explanation {
+        margin-top: 20px;
+        font-size: 14px;
+        line-height: 1.6;
+      }
+      .img-user {
+       
+        border-radius: 50%;
+        text-align: center;
+        margin-top: 0.6em;
+        width: 80px;
+        opacity: 0; 
+        transition: opacity 1s  ease-in-out; 
+        animation: fadeIn 1s ease-in-out forwards;
+      }
+     @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+      footer {
+        background-color: #6b6a6a;
+        color: #fff;
+        text-align: center;
+        padding: 10px 0;
+        padding-top: 15px;
+        margin-top: auto;
+        border-radius: 5px;
+        max-width: 1024px;
+        margin: 0 auto;
+        margin-top: 4em;
+        min-height: 3em;
+      }
+      .copy-button {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background: #444;
+        color: #fff;
+        border: none;
+        padding: 5px 10px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 12px;
+      }
+      .copy-button:hover {
+        background: #555;
+      }
+      .language-tag {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        background: #444;
+        color: #fff;
+        border: none;
+        padding: 5px 10px;
+        border-radius: 5px;
+        font-size: 12px;
+      }
+    </style>
+  </head>
+  <body>
+    <main class="container">
+      <div style="display:flex; justify-content:space-between; align-items:center;">
+         <h1>API Obtener foto user mujer</h1>
+    <img onclick="window.location.href='api.html'" style="line-height: 20px; width: 50px; cursor: pointer;" src="https://img.icons8.com/?size=100&id=59809&format=png&color=000000" alt="">
+        </div>
+     
+      <div class="code-box-peque">
+        <h2>rutas para obtener foto user random (mujer)</h2>
+        <a href="https://blog-edu-tech.koyeb.app/foto-mujer" target="_blank"
+          >https://blog-edu-tech.koyeb.app/foto-mujer</a
+        >
+       
+      </div>
+      <div class="code-box">
+        <span class="language-tag">Código HTML </span>
+        <button class="copy-button" onclick="copyCode('foto-mujer')">Copy</button>
+        <pre><code id="foto-mujer">
+<span style="color: #16eead">
+&lt;!------------------------ MODO DE USO EN HTML foto random mujer ------------------&gt;  </span>
+&lt;!DOCTYPE html&gt;
+&lt;html lang="es"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;Api Edu&lt;/title&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+    &lt;div style="display:grid;place-content:center"&gt;
+         <span style="color: #16eead;">&lt;img class="img-user" src="https://blog-edu-tech.koyeb.app/foto-mujer" alt=""&gt; </span>
+    &lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+            </code></pre>
+      </div>
+      <button class="run-button" onclick="runCode('foto-mujer','output-box-mujer')">Run HTML Foto Random Mujer</button>
+      <div class="output-box" id="output-box-mujer">
+        <!-- Aquí se mostrará el resultado del código ejecutado -->
+      </div>
+      
+     
+    </main>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/fluidscroll@2.0.0"
+      integrity="sha384-ZvfwaJZFftLPOaPS13spccPYdWRcrfz/GDgUYAf7b6I2OBXY74KiAC6WVg0XF3Qq"
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      function runCode(id, box) {
+        const code = document.getElementById(id).innerText;
+        const outputBox = document.getElementById(box);
+        outputBox.innerHTML = code; // Ejecuta el código HTML
+        fluidScroll({yPos: 'end', duration: 1200});
+      }
+
+      function copyCode(id) {
+        const code = document.getElementById(id).innerText;
+        navigator.clipboard.writeText(code).then(() => {
+          alert("Código copiado al portapapeles");
+        });
+      }
+    </script>
+    <footer id="footer" >
+      <span >&copy; 2025 Api Edu. Todos los derechos reservados.</span>
+      <img onclick="window.location.href='api.html'" style="float: right;margin-right: 1em; width: 30px;border-radius: 50%; border: 1px solid black; cursor: pointer;" src="https://img.icons8.com/?size=100&id=59809&format=png&color=000000" alt="">
+
+    </footer>
+  </body>
+</html>

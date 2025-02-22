@@ -3,156 +3,240 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Documentación de API</title>
+    <title>Documentación de la API</title>
     <style>
+        /* Estilos generales */
         body {
             font-family: Arial, sans-serif;
-            margin: 20px;
-            background-color: #f9f9f9;
-            color: #333;
+            margin: 0;
+            padding: 0;
+            background-color: #2d2d2d; /* Fondo claro */
+            color:  #16eead
+            
         }
-        a{
-            text-decoration: none;
-            color: #16eead;
-            margin-bottom: 2em;
-            font-size: 12px;
-            display: block;
-        }
-        a:hover{
-            text-decoration: underline;
-        }
+
+        /* Contenedor principal */
         .container {
-            max-width: 800px;
+            max-width: 1200px;
             margin: 0 auto;
-            background: #fff;
             padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            color: #16eead
         }
-        h1 {
-            color: #444;
+
+        /* Encabezado */
+        header {
+            background-color: #086348; /* Azul vibrante */
+            color: white;
+            padding: 40px 0;
+            text-align: center;
         }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+            color: #ffffff;
+        }
+
+        header p {
+            margin: 10px 0 0;
+            font-size: 1.2rem;
+            color: #e0e0e0;
+        }
+
+        /* Secciones */
+        section {
+            margin: 40px 0;
+        }
+
+        section h2 {
+            color:  #086348;
+            border-bottom: 2px solid #0d6efd; /* Línea divisoria azul */
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        /* Código de ejemplo */
         .code-box {
-            background: #282c34;
-            color: #abb2bf;
+            background-color: #2d2d2d; /* Fondo oscuro para el código */
+            color: #e0e0e0; /* Texto claro */
             padding: 15px;
             border-radius: 5px;
             font-family: "Courier New", monospace;
             overflow-x: auto;
+            margin-bottom: 20px;
         }
-        .code-box-peque {
-            background: #282c34;
-            color: #abb2bf;
-            padding: 15px;
-            border-radius: 5px;
-            font-family: "Courier New", monospace;
-            overflow-x: auto;
-            margin-bottom: 2em;
-        }
+
         .code-box pre {
             margin: 0;
         }
-        .run-button {
-            margin-top: 10px;
-            padding: 10px 20px;
-            background: #28a745;
-            color: #fff;
-            border: none;
+
+        /* Tabla de endpoints */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        table th, table td {
+            padding: 10px;
+            border: 1px solid #ddd; /* Bordes grises */
+            text-align: left;
+        }
+
+        table th {
+            background-color: #086348;
+            color:   #16eead
+        }
+
+        
+
+        table tr:hover {
+            background-color:black /* Fondo gris claro al pasar el mouse */
+        }
+
+        /* Botón */
+        .btn {
+            background-color: #086348;
+            color: white; /* Texto blanco */
+            border: 1px solid  #086348;
+            padding: 8px 12px;
             border-radius: 5px;
             cursor: pointer;
-            font-size: 16px;
-        }
-        .run-button:hover {
-            background: #218838;
-        }
-        .output-box {
-            margin-top: 20px;
-            padding: 15px;
-            background: #f1f1f1;
-            border-radius: 5px;
-            border: 1px solid #ddd;
-        }
-        .explanation {
-            margin-top: 20px;
             font-size: 14px;
-            line-height: 1.6;
+            transition: background-color 0.3s ease;
         }
-        img{
-            border-radius: 50%;
-            text-align: center;
-            width: 80px;
-        }
-        footer {
-            background-color: #6b6a6a; /* Color de fondo del footer */
-            color: #fff; /* Color del texto */
-            text-align: center; /* Centra el texto horizontalmente */
-            padding: 1px 0; /* Espaciado interno (arriba/abajo) */
-            margin-top: auto; /* Empuja el footer hacia abajo */
+
+        .btn:hover {
+            background-color: black; /* Azul más oscuro al pasar el mouse */
+            border: 1px solid white;
             border-radius: 5px;
-            max-width: 800px;
-            margin: 0 auto;
-            margin-top: 4em;
-         
+            color: #16eead
+        }
+
+        /* Pie de página */
+        footer {
+            background-color: #086348;
+            color: white; /* Texto blanco */
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 40px;
+        }
+
+        footer a {
+            color: #ffffff; /* Enlace blanco */
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2rem;
+            }
+
+            header p {
+                font-size: 1rem;
+            }
+
+            .container {
+                padding: 10px;
+            }
+
+            table {
+                display: block;
+                overflow-x: auto;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Documentación de API</h1>
-        <div class="code-box-peque">
-             <h2>ruta foto user random (mujer y hombre)</h2>
-             <a href="https://chatbot-back-o14j.onrender.com/foto-mujer">https://chatbot-back-o14j.onrender.com/foto-mujer</a>
-             <a href="https://chatbot-back-o14j.onrender.com/foto-hombre">https://chatbot-back-o14j.onrender.com/foto-hombre</a>
+    <!-- Encabezado -->
+    <header>
+        <div class="container">
+            <h1>Documentación de la API</h1>
+            <p>Bienvenido a la documentación oficial de nuestra API.</p>
+        </div>
+    </header>
 
-            </div>
-        <div class="code-box">
-           
-            <pre><code id="fotos">
-<span style="color: #16eead">
-&lt;!------------------------ MODO DE USO EN HTML foto random mujer ------------------&gt;  </span>
-&lt;!DOCTYPE html&gt;
-&lt;html lang="es"&gt;
-&lt;head&gt;
-    &lt;meta charset="UTF-8"&gt;
-    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
-    &lt;title&gt;Api Edu&lt;/title&gt;
-&lt;/head&gt;
-&lt;body&gt;
-&lt;div style="display: flex; flex-direction:column;justify-content: center;align-items:center"&gt;
-  
-    <span style="color: #16eead">
-        &lt;img src="https://chatbot-back-o14j.onrender.com/foto-mujer" alt=""&gt;
-    </span>
-    &lt;/div&gt;
-&lt;/body&gt;
-&lt;/html&gt;
-            </code></pre>
-        </div>
-        <button class="run-button" onclick="runCode('fotos')">Run HTML</button>
-        <div class="output-box" id="output-box">
-            <!-- Aquí se mostrará el resultado del código ejecutado -->
-        </div>
+    <!-- Contenido principal -->
+    <div class="container">
+        <!-- Introducción -->
+        <section>
+            <h2>Introducción</h2>
+            <p>
+                Esta API te permite interactuar con nuestro servicio para obtener datos en tiempo real,
+                realizar operaciones y mucho más. A continuación, encontrarás una lista de endpoints
+                disponibles y ejemplos de uso.
+            </p>
+        </section>
+
+        <!-- Endpoints -->
+        <section>
+            <h2>Endpoints</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Método</th>
+                        <th>Endpoint</th>
+                        <th>Descripción</th>
+                        <th>Acción</th>
+                        <th>Acción</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>GET</td>
+                        <td>https://blog-edu-tech.koyeb.app/foto-mujer</td>
+                        <td>Obtiene una foto aleatoria de una mujer.</td>
+                        <td><button class="btn" onclick="copiarEndpoint('https://blog-edu-tech.koyeb.app/foto-mujer')">Copiar</button></td>
+                        <td><button   onclick="window.location.href='api-foto-user-mujer.html';" class="btn">Ejemplos</button></td>
+
+                    </tr>
+                    <tr>
+                        <td>GET</td>
+                        <td>https://blog-edu-tech.koyeb.app/foto-hombre</td>
+                        <td>Obtiene una foto aleatoria de un hombre.</td>
+                        <td><button class="btn" onclick="copiarEndpoint('https://blog-edu-tech.koyeb.app/foto-hombre')">Copiar</button></td>
+                        <td><button   onclick="window.location.href='api-foto-user-hombre.html';" class="btn">Ejemplos</button></td>
+
+                    </tr>
+                    <tr>
+                        <td>POST</td>
+                        <td>https://blog-edu-tech.koyeb.app/crear_audio/ "texto"</td>
+                        <td>Convierte texto en audio.</td>
+                        <td><button class="btn" onclick="copiarEndpoint('/https://blog-edu-tech.koyeb.app/crear_audio/Esta es una prueba de audio')">Copiar</button></td>
+                        <td><button   onclick="window.location.href='api-audio.html';" class="btn">Ejemplos</button></td>
+
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
        
     </div>
 
-    
-    <script src="https://cdn.jsdelivr.net/npm/fluidscroll@2.0.0" integrity="sha384-ZvfwaJZFftLPOaPS13spccPYdWRcrfz/GDgUYAf7b6I2OBXY74KiAC6WVg0XF3Qq" crossorigin="anonymous"></script>
-    <script>
-        function runCode(id) {
-            fluidScroll({yPos: '+40%'});
-            const code = document.getElementById(id).innerText;
-            const outputBox = document.getElementById('output-box');
-            outputBox.innerHTML = code; // Ejecuta el código HTML
-           
-            
-        }
-
-
-
-        
-    </script>
-    <footer id="footer">
-        <p>&copy; 2025 Api Edu. Todos los derechos reservados.</p>
+    <!-- Pie de página -->
+    <footer>
+        <div class="container">
+            <p>© 2025 API Doc. Creado por <a href="https://www.linkedin.com/in/e-cabrera-blazquez/" target="_blank">Eduardo Cabrera</a>.</p>
+        </div>
     </footer>
+
+    <!-- Script para copiar endpoints -->
+    <script>
+        function copiarEndpoint(endpoint) {
+            // Copiar el endpoint al portapapeles
+            navigator.clipboard.writeText(endpoint)
+                .then(() => {
+                    alert(`Endpoint copiado: ${endpoint}`);
+                })
+                .catch(() => {
+                    alert("Error al copiar el endpoint.");
+                });
+        }
+    </script>
 </body>
 </html>
