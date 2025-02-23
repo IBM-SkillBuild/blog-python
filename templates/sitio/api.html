@@ -1,325 +1,470 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Documentación de la API</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta property="og:title" content="Documentación de la API Edu" />
+    <meta
+      property="og:description"
+      content="Endpoints para varias utilidades"
+    />
+    <meta
+      property="og:image"
+      content="{{ url_for('static', filename='img/foto-publicacion.png') }}"
+    />
+    <meta property="og:image:width" content="300">
+    <meta property="og:image:height" content="300">
+    <meta property="og:url" content="https://blog-edu-tech.koyeb.app/doc" />
+    <meta property="og:type" content="website" />
+    <title>Documentación de la API Edu</title>
     <style>
-        /* Estilos generales */
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #2d2d2d;
-            color: #16eead;
-            line-height: 1.6;
+      /* Estilos generales */
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #2d2d2d;
+        color: #16eead;
+        line-height: 1.6;
+      }
+
+      .container {
+        max-width: 1200px;
+        width: 90%;
+        margin: 0 auto;
+        padding: 2%;
+      }
+
+      /* Encabezado */
+      header {
+        background-color: #086348;
+        color: white;
+        padding: 4% 0;
+        text-align: center;
+      }
+
+      header h1 {
+        margin: 0;
+        font-size: clamp(1.8rem, 5vw, 2.5rem);
+        color: #ffffff;
+      }
+
+      header p {
+        margin: 1% 0 0;
+        font-size: clamp(1rem, 3vw, 1.2rem);
+        color: #e0e0e0;
+      }
+
+      /* Secciones */
+      section {
+        margin: 5% 0;
+      }
+
+      section h2 {
+        color: #086348;
+        border-bottom: 2px solid #0d6efd;
+        padding-bottom: 1%;
+        margin-bottom: 3%;
+        font-size: clamp(1.5rem, 4vw, 2rem);
+      }
+
+      /* Código de ejemplo con Flexbox */
+      .code-box {
+        background-color: #2d2d2d;
+        color: #e0e0e0;
+        padding: 2%;
+        border-radius: 5px;
+        font-family: "Courier New", monospace;
+        margin-bottom: 3%;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        align-items: center;
+        overflow-x: hidden; /* Evita scroll horizontal */
+      }
+
+      .code-box pre {
+        margin: 0;
+        font-size: clamp(0.9rem, 2.5vw, 1rem);
+        flex: 1 1 100%;
+        white-space: pre-wrap; /* Permite que el texto se ajuste al ancho */
+        word-wrap: break-word; /* Rompe palabras largas si es necesario */
+      }
+
+      .code-box .emoji {
+        font-size: clamp(1.5rem, 5vw, 2.3rem);
+        flex: 0 0 auto;
+      }
+
+      /* Tabla de endpoints */
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 3%;
+      }
+
+      table th,
+      table td {
+        padding: 1.5%;
+        border: 1px solid #ddd;
+        text-align: left;
+        font-size: clamp(0.85rem, 2.2vw, 1rem);
+      }
+
+      table th {
+        background-color: #086348;
+        color: #16eead;
+      }
+
+      /* Ajustes para columnas específicas en formato horizontal */
+      th:nth-child(1),
+      td:nth-child(1) {
+        /* Columna "Método" */
+        min-width: 80px;
+      }
+
+      th:nth-child(4),
+      td:nth-child(4),
+      th:nth-child(5),
+      td:nth-child(5) {
+        /* Columnas "Acción" */
+        min-width: 100px;
+        text-align: center; /* Centramos los botones en horizontal */
+        vertical-align: middle; /* Centramos verticalmente */
+      }
+
+      table tr:hover {
+        background-color: black;
+      }
+
+      /* Estilos responsivos para la tabla */
+      @media (max-width: 768px) {
+        table,
+        thead,
+        tbody,
+        th,
+        td,
+        tr {
+          display: block;
         }
 
-        .container {
-            max-width: 1200px;
-            width: 90%;
-            margin: 0 auto;
-            padding: 2%;
+        thead {
+          display: none; /* Ocultamos encabezados en móvil */
         }
 
-        /* Encabezado */
-        header {
-            background-color: #086348;
-            color: white;
-            padding: 4% 0;
-            text-align: center;
+        tr {
+          margin-bottom: 2%;
+          border: 1px solid #ddd;
+          background-color: #2d2d2d;
         }
 
-        header h1 {
-            margin: 0;
-            font-size: clamp(1.8rem, 5vw, 2.5rem);
-            color: #ffffff;
+        td {
+          display: flex;
+          flex-direction: column;
+          border: none;
+          padding: 1.5%;
+          text-align: left;
+          min-width: 0;
         }
 
-        header p {
-            margin: 1% 0 0;
-            font-size: clamp(1rem, 3vw, 1.2rem);
-            color: #e0e0e0;
+        td:before {
+          content: attr(data-label);
+          font-weight: bold;
+          color: #086348;
+          margin-bottom: 0.5rem;
         }
 
-        /* Secciones */
-        section {
-            margin: 5% 0;
+        td:nth-child(4),
+        td:nth-child(5) {
+          /* Columnas "Acción" en vertical */
+          align-items: center; /* Centramos los botones en vertical */
         }
 
-        section h2 {
-            color: #086348;
-            border-bottom: 2px solid #0d6efd;
-            padding-bottom: 1%;
-            margin-bottom: 3%;
-            font-size: clamp(1.5rem, 4vw, 2rem);
+        td:last-child {
+          border-bottom: 1px solid #ddd;
         }
+      }
 
-        /* Código de ejemplo con Flexbox */
+      /* Botón */
+      .btn {
+        background-color: #086348;
+        color: white;
+        border: 1px solid #086348;
+        padding: 0.6rem 0.6rem; /* Más padding para un aspecto más robusto */
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: clamp(0.8rem, 2vw, 0.9rem);
+        transition: background-color 0.3s ease;
+        white-space: nowrap;
+        text-align: center;
+        overflow: hidden;
+      }
+
+      .btn:hover {
+        background-color: black;
+        border: 1px solid white;
+        color: #16eead;
+      }
+
+      /* Pie de página */
+      footer {
+        background-color: #086348;
+        color: white;
+        text-align: center;
+        padding: 2% 0;
+        margin-top: 5%;
+      }
+
+      footer a {
+        color: #ffffff;
+        text-decoration: none;
+      }
+
+      footer a:hover {
+        text-decoration: underline;
+      }
+
+      /* Ajustes adicionales para móviles */
+      @media (max-width: 768px) {
         .code-box {
-            background-color: #2d2d2d;
-            color: #e0e0e0;
-            padding: 2%;
-            border-radius: 5px;
-            font-family: "Courier New", monospace;
-            margin-bottom: 3%;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1rem;
-            align-items: center;
-            overflow-x: hidden; /* Evita scroll horizontal */
+          flex-direction: column;
+          text-align: center;
         }
 
         .code-box pre {
-            margin: 0;
-            font-size: clamp(0.9rem, 2.5vw, 1rem);
-            flex: 1 1 100%;
-            white-space: pre-wrap; /* Permite que el texto se ajuste al ancho */
-            word-wrap: break-word; /* Rompe palabras largas si es necesario */
+          flex: 1 1 100%;
         }
 
-        .code-box .emoji {
-            font-size: clamp(1.5rem, 5vw, 2.3rem);
-            flex: 0 0 auto;
-        }
-
-        /* Tabla de endpoints */
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 3%;
-        }
-
-        table th, table td {
-            padding: 1.5%;
-            border: 1px solid #ddd;
-            text-align: left;
-            font-size: clamp(0.85rem, 2.2vw, 1rem);
-        }
-
-        table th {
-            background-color: #086348;
-            color: #16eead;
-        }
-
-        /* Ajustes para columnas específicas en formato horizontal */
-        th:nth-child(1), td:nth-child(1) { /* Columna "Método" */
-            min-width: 80px;
-        }
-
-        th:nth-child(4), td:nth-child(4), 
-        th:nth-child(5), td:nth-child(5) { /* Columnas "Acción" */
-            min-width: 100px;
-            text-align: center; /* Centramos los botones en horizontal */
-            vertical-align: middle; /* Centramos verticalmente */
-        }
-
-        table tr:hover {
-            background-color: black;
-        }
-
-        /* Estilos responsivos para la tabla */
-        @media (max-width: 768px) {
-            table, thead, tbody, th, td, tr {
-                display: block;
-            }
-
-            thead {
-                display: none; /* Ocultamos encabezados en móvil */
-            }
-
-            tr {
-                margin-bottom: 2%;
-                border: 1px solid #ddd;
-                background-color: #2d2d2d;
-            }
-
-            td {
-                display: flex;
-                flex-direction: column;
-                border: none;
-                padding: 1.5%;
-                text-align: left;
-                min-width: 0;
-            }
-
-            td:before {
-                content: attr(data-label);
-                font-weight: bold;
-                color: #086348;
-                margin-bottom: 0.5rem;
-            }
-
-            td:nth-child(4), td:nth-child(5) { /* Columnas "Acción" en vertical */
-                align-items: center; /* Centramos los botones en vertical */
-            }
-
-            td:last-child {
-                border-bottom: 1px solid #ddd;
-            }
-        }
-
-        /* Botón */
         .btn {
-            background-color: #086348;
-            color: white;
-            border: 1px solid #086348;
-            padding: 0.6rem 0.6rem; /* Más padding para un aspecto más robusto */
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: clamp(0.8rem, 2vw, 0.9rem);
-            transition: background-color 0.3s ease;
-            white-space: nowrap;
-            text-align: center;
-            overflow: hidden;
+          width: 100%;
+          margin: 1% 0;
+          text-align: left;
         }
-
-        .btn:hover {
-            background-color: black;
-            border: 1px solid white;
-            color: #16eead;
-        }
-
-        /* Pie de página */
-        footer {
-            background-color: #086348;
-            color: white;
-            text-align: center;
-            padding: 2% 0;
-            margin-top: 5%;
-        }
-
-        footer a {
-            color: #ffffff;
-            text-decoration: none;
-        }
-
-        footer a:hover {
-            text-decoration: underline;
-        }
-
-        /* Ajustes adicionales para móviles */
-        @media (max-width: 768px) {
-            .code-box {
-                flex-direction: column;
-                text-align: center;
-            }
-
-            .code-box pre {
-                flex: 1 1 100%;
-            }
-
-            .btn {
-                width: 100%;
-                margin: 1% 0;
-                text-align: left;
-            }
-        }
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <!-- Encabezado -->
     <header>
-        <div class="container">
-            <h1>Documentación de API Edu</h1>
-            <div  style="display: flex; justify-content: center; align-items: center; gap:1em" >
-            <a style="margin-top: 0.9em;" href="https://websmultimedia.com/contador-de-visitas-gratis" title="Contador De Visitas Gratis"> 
-                <img style="border: 0px solid; display: inline;" alt="contador de visitas" src="https://websmultimedia.com/contador-de-visitas.php?id=20086"></a> 
-            <p>visitantes</p>
-            </div>
-                <p >Bienvenido. Irémos añadiendo nuevos end-points con sencillas utilidades</p>
+      <div class="container">
+        <h1>Documentación de API Edu</h1>
+        <div
+          style="
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1em;
+          "
+        >
+          <a
+            style="margin-top: 0.9em"
+            href="https://websmultimedia.com/contador-de-visitas-gratis"
+            title="Contador De Visitas Gratis"
+          >
+            <img
+              style="border: 0px solid; display: inline"
+              alt="contador de visitas"
+              src="https://websmultimedia.com/contador-de-visitas.php?id=20086"
+          /></a>
+          <p>visitantes</p>
         </div>
+        <p>
+          Bienvenido. Irémos añadiendo nuevos end-points con sencillas
+          utilidades
+        </p>
+      </div>
     </header>
 
     <!-- Contenido principal -->
     <div class="container">
-        <!-- Introducción -->
-        <section style="margin-top: 5%;">
-            <h2>Introducción</h2>
-            <div class="code-box">
-              
-Esta API te permite interactuar con nuestro servicio para obtener datos, imagenes aleatorias de usuario,
-conversión sencilla de Text to speech, o el uso de widgets. Pronto irémos añadiendo más funcionalidades.
-              
-                <span class="emoji" style="vertical-align: middle;">🔓</span>
-                <form style="margin-top: 0.6em;" action="https://www.paypal.com/donate" method="post" target="_top">
-                    <input type="hidden" name="hosted_button_id" value="UQHQ6A3JM2V48" />
-                    <input type="image" src="https://www.paypalobjects.com/es_ES/ES/i/btn/btn_donate_SM.gif" border="0" name="submit" title="Api Edu - Te agradezco si me invitas a un café." alt="Botón Donar con PayPal" />
-                    <img alt="" border="0" src="https://www.paypal.com/es_ES/i/scr/pixel.gif" width="1" height="1" />
-                    </form>
-                    
-               
-<div style="margin-top: 0.6em;">En la siguiente tabla encontrarás una lista de endpoints disponibles y sus ejemplos de uso.</div>
-                
-            </div>
-        </section>
+      <!-- Introducción -->
+      <section style="margin-top: 5%">
+        <h2>Introducción</h2>
+        <div class="code-box">
+          Esta API te permite interactuar con nuestro servicio para obtener
+          datos, imagenes aleatorias de usuario, conversión sencilla de Text to
+          speech, o el uso de widgets. Pronto irémos añadiendo más
+          funcionalidades.
 
-        <!-- Endpoints -->
-        <section>
-            <h2>Endpoints</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Método</th>
-                        <th>Endpoint</th>
-                        <th>Descripción</th>
-                        <th>Acción</th>
-                        <th>Acción</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td data-label="Método">GET</td>
-                        <td data-label="Endpoint">https://blog-edu-tech.koyeb.app/foto-mujer</td>
-                        <td data-label="Descripción">Obtiene una foto aleatoria de una mujer.</td>
-                        <td data-label="Acción"><button class="btn" onclick="copiarEndpoint('https://blog-edu-tech.koyeb.app/foto-mujer')">Copiar</button></td>
-                        <td data-label="Acción"><button onclick="window.location.href='/mostrar_api_foto_user_mujer'" class="btn">Ejemplo</button></td>
-                    </tr>
-                    <tr>
-                        <td data-label="Método">GET</td>
-                        <td data-label="Endpoint">https://blog-edu-tech.koyeb.app/foto-hombre</td>
-                        <td data-label="Descripción">Obtiene una foto aleatoria de un hombre.</td>
-                        <td data-label="Acción"><button class="btn" onclick="copiarEndpoint('https://blog-edu-tech.koyeb.app/foto-hombre')">Copiar</button></td>
-                        <td data-label="Acción"><button onclick="window.location.href='/mostrar_api_foto_user_hombre'" class="btn">Ejemplo</button></td>
-                    </tr>
-                    <tr>
-                        <td data-label="Método">POST</td>
-                        <td data-label="Endpoint">https://blog-edu-tech.koyeb.app/generar_audio/ "texto"</td>
-                        <td data-label="Descripción">Convierte texto en audio.</td>
-                        <td data-label="Acción"><button class="btn" onclick="copiarEndpoint('https://blog-edu-tech.koyeb.app/generar_audio/Esta es una prueba de audio')">Copiar</button></td>
-                        <td data-label="Acción"><button onclick="window.location.href='/mostrar_api_audio'" class="btn">Ejemplo</button></td>
-                    </tr>
-                    <tr>
-                        <td data-label="Método">GET</td>
-                        <td data-label="Endpoint">https://blog-edu-tech.koyeb.app/widget-hora-madrid</td>
-                        <td data-label="Descripción">Obtiene una Widget de reloj analógico hora de Madrid.</td>
-                        <td data-label="Acción"><button class="btn" onclick="copiarEndpoint('https://blog-edu-tech.koyeb.app/widget-hora-madrid')">Copiar</button></td>
-                        <td data-label="Acción"><button onclick="window.location.href='/mostrar_api_widget_hora_madrid'" class="btn">Ejemplo</button></td>
-                    </tr>
-                </tbody>
-            </table>
-        </section>
+          <span class="emoji" style="vertical-align: middle">🔓</span>
+          <form
+            style="margin-top: 0.6em"
+            action="https://www.paypal.com/donate"
+            method="post"
+            target="_top"
+          >
+            <input
+              type="hidden"
+              name="hosted_button_id"
+              value="UQHQ6A3JM2V48"
+            />
+            <input
+              type="image"
+              src="https://www.paypalobjects.com/es_ES/ES/i/btn/btn_donate_SM.gif"
+              border="0"
+              name="submit"
+              title="Api Edu - Te agradezco si me invitas a un café."
+              alt="Botón Donar con PayPal"
+            />
+            <img
+              alt=""
+              border="0"
+              src="https://www.paypal.com/es_ES/i/scr/pixel.gif"
+              width="1"
+              height="1"
+            />
+          </form>
+
+          <div style="margin-top: 0.6em">
+            En la siguiente tabla encontrarás una lista de endpoints disponibles
+            y sus ejemplos de uso.
+          </div>
+        </div>
+      </section>
+
+      <!-- Endpoints -->
+      <section>
+        <h2>Endpoints</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Método</th>
+              <th>Endpoint</th>
+              <th>Descripción</th>
+              <th>Acción</th>
+              <th>Acción</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td data-label="Método">GET</td>
+              <td data-label="Endpoint">
+                https://blog-edu-tech.koyeb.app/foto-mujer
+              </td>
+              <td data-label="Descripción">
+                Obtiene una foto aleatoria de una mujer.
+              </td>
+              <td data-label="Acción">
+                <button
+                  class="btn"
+                  onclick="copiarEndpoint('https://blog-edu-tech.koyeb.app/foto-mujer')"
+                >
+                  Copiar
+                </button>
+              </td>
+              <td data-label="Acción">
+                <button
+                  onclick="window.location.href='/mostrar_api_foto_user_mujer'"
+                  class="btn"
+                >
+                  Ejemplo
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td data-label="Método">GET</td>
+              <td data-label="Endpoint">
+                https://blog-edu-tech.koyeb.app/foto-hombre
+              </td>
+              <td data-label="Descripción">
+                Obtiene una foto aleatoria de un hombre.
+              </td>
+              <td data-label="Acción">
+                <button
+                  class="btn"
+                  onclick="copiarEndpoint('https://blog-edu-tech.koyeb.app/foto-hombre')"
+                >
+                  Copiar
+                </button>
+              </td>
+              <td data-label="Acción">
+                <button
+                  onclick="window.location.href='/mostrar_api_foto_user_hombre'"
+                  class="btn"
+                >
+                  Ejemplo
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td data-label="Método">POST</td>
+              <td data-label="Endpoint">
+                https://blog-edu-tech.koyeb.app/generar_audio/ "texto"
+              </td>
+              <td data-label="Descripción">Convierte texto en audio.</td>
+              <td data-label="Acción">
+                <button
+                  class="btn"
+                  onclick="copiarEndpoint('https://blog-edu-tech.koyeb.app/generar_audio/Esta es una prueba de audio')"
+                >
+                  Copiar
+                </button>
+              </td>
+              <td data-label="Acción">
+                <button
+                  onclick="window.location.href='/mostrar_api_audio'"
+                  class="btn"
+                >
+                  Ejemplo
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td data-label="Método">GET</td>
+              <td data-label="Endpoint">
+                https://blog-edu-tech.koyeb.app/widget-hora-madrid
+              </td>
+              <td data-label="Descripción">
+                Obtiene una Widget de reloj analógico hora de Madrid.
+              </td>
+              <td data-label="Acción">
+                <button
+                  class="btn"
+                  onclick="copiarEndpoint('https://blog-edu-tech.koyeb.app/widget-hora-madrid')"
+                >
+                  Copiar
+                </button>
+              </td>
+              <td data-label="Acción">
+                <button
+                  onclick="window.location.href='/mostrar_api_widget_hora_madrid'"
+                  class="btn"
+                >
+                  Ejemplo
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
     </div>
 
     <!-- Pie de página -->
     <footer>
-        <div class="container">
-            <p>© 2025 API Doc. Creado por <a href="https://www.linkedin.com/in/e-cabrera-blazquez/" target="_blank">Eduardo Cabrera</a>.</p>
-        </div>
+      <div class="container">
+        <p>
+          © 2025 API Doc. Creado por
+          <a
+            href="https://www.linkedin.com/in/e-cabrera-blazquez/"
+            target="_blank"
+            >Eduardo Cabrera</a
+          >.
+        </p>
+      </div>
     </footer>
 
     <!-- Script para copiar endpoints -->
     <script>
-        function copiarEndpoint(endpoint) {
-            navigator.clipboard.writeText(endpoint)
-                .then(() => {
-                    alert(`Endpoint copiado: ${endpoint}`);
-                })
-                .catch(() => {
-                    alert("Error al copiar el endpoint.");
-                });
-        }
+      function copiarEndpoint(endpoint) {
+        navigator.clipboard
+          .writeText(endpoint)
+          .then(() => {
+            alert(`Endpoint copiado: ${endpoint}`);
+          })
+          .catch(() => {
+            alert("Error al copiar el endpoint.");
+          });
+      }
     </script>
-   
-</body>
+  </body>
 </html>
