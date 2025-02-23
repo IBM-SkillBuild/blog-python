@@ -188,19 +188,19 @@
 &lt;/html&gt;
             </code></pre>
       </div>
-      <button class="run-button" onclick="runCode('audio','output-box-audio')">Run HTML Generar Audio</button>
+      <button class="run-button" 
+          hx-get="https://blog-edu-tech.koyeb.app/generar_audio/Este texto se convertirá en audio" 
+          hx-trigger="click" 
+          hx-swap="innerHTML"
+          hx-target="#output-box-audio"
+          hx-on::before-request="limpiar_zona()"
+          hx-on::after-request="fluidScroll({yPos: 'end', duration: 1200})">
+          Run HTML Generar Audio</button>
       
       <div class="output-box" id="output-box-audio">
-      
-       <div id="ejecución" style="display:none;color: whitesmoke;">
-        <p>Espere. Este proceso depende de la longitud del texto a convertir</p>
-        <div 
-        hx-get="https://blog-edu-tech.koyeb.app/generar_audio/Este texto se convertirá en audio" 
-        hx-trigger="load" 
-        hx-swap="innerHTML"
-        hx-target="#output-box-audio">
-      
-      </div>
+         
+        <p style="color:whitesmoke"> Este proceso depende de la longitud del texto a convertir</p>
+       
        </div>
        
       </div>
@@ -213,11 +213,11 @@
       crossorigin="anonymous"
     ></script>
     <script>
-      function runCode(id, box) {
-       
-        document.getElementById('ejecucion').style.display = 'block';
+      function limpiar_zona() {
+        document.getElementById('output-box-audio').innerHTML='';
       
-        fluidScroll({yPos: 'end', duration: 1200});
+      
+       
       }
 
       function copyCode(id) {
