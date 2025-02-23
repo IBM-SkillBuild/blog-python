@@ -1,13 +1,29 @@
 
 
-<script src="https://unpkg.com/htmx.org"></script>
-    <div style="display:grid;place-content:center"
-    
-      hx-get="https://blog-edu-tech.koyeb.app/generar_audio/'texto enviado'" 
-      hx-trigger="load" 
-      hx-swap="innerHTML">
+<!------------------------ MODO DE USO EN HTML Text to Speech ------------------>  
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Api Edu</title>
+</head>
+
+<body>
+    <div style="display:grid;place-content:center">
+   
+      <div 
+        hx-get="https://blog-edu-tech.koyeb.app/generar_audio/Este texto se convertirá en audio" 
+        hx-trigger="load" 
+        hx-swap="innerHTML">
+        <script src="https://unpkg.com/htmx.org"></script>
+      </div>
      
-  </div>
+       
+    </div>
+   
+</body>
+</html>
 
   
  

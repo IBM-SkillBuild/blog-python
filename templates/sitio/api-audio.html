@@ -189,14 +189,21 @@
             </code></pre>
       </div>
       <button class="run-button" onclick="runCode('audio','output-box-audio')">Run HTML Generar Audio</button>
+      <div 
+        hx-get="https://blog-edu-tech.koyeb.app/generar_audio/Este texto se convertirá en audio" 
+        hx-trigger="load" 
+        hx-swap="innerHTML"
+        hx-target="#output-box-audio">
+      
+      </div>
       <div class="output-box" id="output-box-audio">
       
-   
+       
         <!-- Aquí se mostrará el resultado del código ejecutado -->
       </div>
       
     </main>
-   
+    <script src="https://unpkg.com/htmx.org"></script>
     <script
       src="https://cdn.jsdelivr.net/npm/fluidscroll@2.0.0"
       integrity="sha384-ZvfwaJZFftLPOaPS13spccPYdWRcrfz/GDgUYAf7b6I2OBXY74KiAC6WVg0XF3Qq"
