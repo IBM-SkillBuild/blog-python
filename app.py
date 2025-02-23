@@ -95,7 +95,7 @@ def mostrar_api_foto_user_mujer():
 
 @app.route("/mostrar_api_widget_hora_madrid")
 def mostrar_api_widget_hora_madrid():
-   return render_template("/sitio/api-widget-hora-madrid.html") 
+   return render_template("/sitio/api-clock.html") 
 
 
 @app.route("/todas_las_categorias", methods=['POST', 'GET'])
@@ -759,7 +759,7 @@ def generar_audio(text):
     
     # Devolver HTML con el audio listo para reproducirse
     return f"""
-    <h1>Audio Generado</h1>
+    <h1>Audio Generado by Edu</h1>
     <audio id="audio" controls src="{url_audio}" autoplay></audio>
     """
                                

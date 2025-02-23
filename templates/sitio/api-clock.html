@@ -145,14 +145,14 @@
   <body>
     <main class="container">
       <div style="display:flex; justify-content:space-between; align-items:center;">
-         <h1>API Text to Speech (3000 caracteres)</h1>
+         <h1>API Clock (Widget de terceros)</h1>
     <img onclick="window.location.href='/doc'" style="line-height: 20px; width: 50px; cursor: pointer;" src="https://img.icons8.com/?size=100&id=59809&format=png&color=000000" alt="">
         </div>
      
       <div class="code-box-peque">
-        <h2>ruta para obtener url audio</h2>
-        <a href="https://blog-edu-tech.koyeb.app/generar_audio/Este texto se convertirá en audio" target="_blank"
-          >https://blog-edu-tech.koyeb.app/generar_audio/Este texto se convertirá en audio</a
+        <h2>ruta para obtener el reloj</h2>
+        <a href="https://blog-edu-tech.koyeb.app/mostrar_api_widget_hora_madrid" target="_blank"
+          >https://blog-edu-tech.koyeb.app/mostrar_api_widget_hora_madrid</a
         >
         
       </div>
@@ -195,7 +195,7 @@
           hx-target="#output-box-clock"
           hx-on::before-request="limpiar_zona()"
           hx-on::after-request="fluidScroll({yPos: 'end', duration: 1200})">
-          Run HTML Generar Audio</button>
+          Run HTML Traer Widget</button>
       
       <div class="output-box" id="output-box-clock"  style="display:grid;place-content:center">
          

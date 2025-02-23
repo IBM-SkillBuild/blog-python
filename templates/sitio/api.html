@@ -10,120 +10,187 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #2d2d2d; /* Fondo claro */
-            color:  #16eead
-            
+            background-color: #2d2d2d;
+            color: #16eead;
+            line-height: 1.6;
         }
 
-        /* Contenedor principal */
         .container {
             max-width: 1200px;
+            width: 90%;
             margin: 0 auto;
-            padding: 20px;
-            color: #16eead
+            padding: 2%;
         }
 
         /* Encabezado */
         header {
-            background-color: #086348; /* Azul vibrante */
+            background-color: #086348;
             color: white;
-            padding: 40px 0;
+            padding: 4% 0;
             text-align: center;
         }
 
         header h1 {
             margin: 0;
-            font-size: 2.5rem;
+            font-size: clamp(1.8rem, 5vw, 2.5rem);
             color: #ffffff;
         }
 
         header p {
-            margin: 10px 0 0;
-            font-size: 1.2rem;
+            margin: 1% 0 0;
+            font-size: clamp(1rem, 3vw, 1.2rem);
             color: #e0e0e0;
         }
 
         /* Secciones */
         section {
-            margin: 40px 0;
+            margin: 5% 0;
         }
 
         section h2 {
-            color:  #086348;
-            border-bottom: 2px solid #0d6efd; /* Línea divisoria azul */
-            padding-bottom: 10px;
-            margin-bottom: 20px;
+            color: #086348;
+            border-bottom: 2px solid #0d6efd;
+            padding-bottom: 1%;
+            margin-bottom: 3%;
+            font-size: clamp(1.5rem, 4vw, 2rem);
         }
 
-        /* Código de ejemplo */
+        /* Código de ejemplo con Flexbox */
         .code-box {
-            background-color: #2d2d2d; /* Fondo oscuro para el código */
-            color: #e0e0e0; /* Texto claro */
-            padding: 15px;
+            background-color: #2d2d2d;
+            color: #e0e0e0;
+            padding: 2%;
             border-radius: 5px;
             font-family: "Courier New", monospace;
-            overflow-x: auto;
-            margin-bottom: 20px;
+            margin-bottom: 3%;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            align-items: center;
+            overflow-x: hidden; /* Evita scroll horizontal */
         }
 
         .code-box pre {
             margin: 0;
+            font-size: clamp(0.9rem, 2.5vw, 1rem);
+            flex: 1 1 100%;
+            white-space: pre-wrap; /* Permite que el texto se ajuste al ancho */
+            word-wrap: break-word; /* Rompe palabras largas si es necesario */
+        }
+
+        .code-box .emoji {
+            font-size: clamp(1.5rem, 5vw, 2.3rem);
+            flex: 0 0 auto;
         }
 
         /* Tabla de endpoints */
         table {
             width: 100%;
             border-collapse: collapse;
-            margin-bottom: 20px;
+            margin-bottom: 3%;
         }
 
         table th, table td {
-            padding: 10px;
-            border: 1px solid #ddd; /* Bordes grises */
+            padding: 1.5%;
+            border: 1px solid #ddd;
             text-align: left;
+            font-size: clamp(0.85rem, 2.2vw, 1rem);
         }
 
         table th {
             background-color: #086348;
-            color:   #16eead
+            color: #16eead;
         }
 
-        
+        /* Ajustes para columnas específicas en formato horizontal */
+        th:nth-child(1), td:nth-child(1) { /* Columna "Método" */
+            min-width: 80px;
+        }
+
+        th:nth-child(4), td:nth-child(4), 
+        th:nth-child(5), td:nth-child(5) { /* Columnas "Acción" */
+            min-width: 100px;
+            text-align: center; /* Centramos los botones en horizontal */
+            vertical-align: middle; /* Centramos verticalmente */
+        }
 
         table tr:hover {
-            background-color:black /* Fondo gris claro al pasar el mouse */
+            background-color: black;
+        }
+
+        /* Estilos responsivos para la tabla */
+        @media (max-width: 768px) {
+            table, thead, tbody, th, td, tr {
+                display: block;
+            }
+
+            thead {
+                display: none; /* Ocultamos encabezados en móvil */
+            }
+
+            tr {
+                margin-bottom: 2%;
+                border: 1px solid #ddd;
+                background-color: #2d2d2d;
+            }
+
+            td {
+                display: flex;
+                flex-direction: column;
+                border: none;
+                padding: 1.5%;
+                text-align: left;
+                min-width: 0;
+            }
+
+            td:before {
+                content: attr(data-label);
+                font-weight: bold;
+                color: #086348;
+                margin-bottom: 0.5rem;
+            }
+
+            td:nth-child(4), td:nth-child(5) { /* Columnas "Acción" en vertical */
+                align-items: center; /* Centramos los botones en vertical */
+            }
+
+            td:last-child {
+                border-bottom: 1px solid #ddd;
+            }
         }
 
         /* Botón */
         .btn {
             background-color: #086348;
-            color: white; /* Texto blanco */
-            border: 1px solid  #086348;
-            padding: 8px 12px;
+            color: white;
+            border: 1px solid #086348;
+            padding: 0.6rem 0.6rem; /* Más padding para un aspecto más robusto */
             border-radius: 5px;
             cursor: pointer;
-            font-size: 14px;
+            font-size: clamp(0.8rem, 2vw, 0.9rem);
             transition: background-color 0.3s ease;
+            white-space: nowrap;
+            text-align: center;
+            overflow: hidden;
         }
 
         .btn:hover {
-            background-color: black; /* Azul más oscuro al pasar el mouse */
+            background-color: black;
             border: 1px solid white;
-            border-radius: 5px;
-            color: #16eead
+            color: #16eead;
         }
 
         /* Pie de página */
         footer {
             background-color: #086348;
-            color: white; /* Texto blanco */
+            color: white;
             text-align: center;
-            padding: 20px 0;
-            margin-top: 40px;
+            padding: 2% 0;
+            margin-top: 5%;
         }
 
         footer a {
-            color: #ffffff; /* Enlace blanco */
+            color: #ffffff;
             text-decoration: none;
         }
 
@@ -131,23 +198,21 @@
             text-decoration: underline;
         }
 
-        /* Responsive */
+        /* Ajustes adicionales para móviles */
         @media (max-width: 768px) {
-            header h1 {
-                font-size: 2rem;
+            .code-box {
+                flex-direction: column;
+                text-align: center;
             }
 
-            header p {
-                font-size: 1rem;
+            .code-box pre {
+                flex: 1 1 100%;
             }
 
-            .container {
-                padding: 10px;
-            }
-
-            table {
-                display: block;
-                overflow-x: auto;
+            .btn {
+                width: 100%;
+                margin: 1% 0;
+                text-align: left;
             }
         }
     </style>
@@ -156,21 +221,26 @@
     <!-- Encabezado -->
     <header>
         <div class="container">
-            <h1>Documentación de la API</h1>
-            <p>Bienvenido a la documentación oficial de nuestra API.</p>
+            <h1>Documentación de API Edu</h1>
+            <p>Bienvenido. Irémos añadiendo nuevos end-points con sencillas utilidades</p>
         </div>
     </header>
 
     <!-- Contenido principal -->
     <div class="container">
         <!-- Introducción -->
-        <section>
+        <section style="margin-top: 5%;">
             <h2>Introducción</h2>
-            <p>
-                Esta API te permite interactuar con nuestro servicio para obtener datos en tiempo real,
-                realizar operaciones y mucho más. A continuación, encontrarás una lista de endpoints
-                disponibles y ejemplos de uso.
-            </p>
+            <div class="code-box">
+              
+Esta API te permite interactuar con nuestro servicio para obtener datos, imagenes aleatorias de usuario,
+conversión sencilla de Text to speech, o el uso de widgets. Pronto irémos añadiendo más funcionalidades.
+              
+                <span class="emoji">🔓</span>
+               
+En la siguiente tabla encontrarás una lista de endpoints disponibles y sus ejemplos de uso.
+                
+            </div>
         </section>
 
         <!-- Endpoints -->
@@ -188,42 +258,36 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td>GET</td>
-                        <td>https://blog-edu-tech.koyeb.app/foto-mujer</td>
-                        <td>Obtiene una foto aleatoria de una mujer.</td>
-                        <td><button class="btn" onclick="copiarEndpoint('https://blog-edu-tech.koyeb.app/foto-mujer')">Copiar</button></td>
-                        <td><button   onclick="window.location.href='/mostrar_api_foto_user_mujer'" class="btn">Ejemplos</button></td>
-
+                        <td data-label="Método">GET</td>
+                        <td data-label="Endpoint">https://blog-edu-tech.koyeb.app/foto-mujer</td>
+                        <td data-label="Descripción">Obtiene una foto aleatoria de una mujer.</td>
+                        <td data-label="Acción"><button class="btn" onclick="copiarEndpoint('https://blog-edu-tech.koyeb.app/foto-mujer')">Copiar</button></td>
+                        <td data-label="Acción"><button onclick="window.location.href='/mostrar_api_foto_user_mujer'" class="btn">Ejemplo</button></td>
                     </tr>
                     <tr>
-                        <td>GET</td>
-                        <td>https://blog-edu-tech.koyeb.app/foto-hombre</td>
-                        <td>Obtiene una foto aleatoria de un hombre.</td>
-                        <td><button class="btn" onclick="copiarEndpoint('https://blog-edu-tech.koyeb.app/foto-hombre')">Copiar</button></td>
-                        <td><button   onclick="window.location.href='/mostrar_api_foto_user_hombre'"class="btn">Ejemplos</button></td>
-
+                        <td data-label="Método">GET</td>
+                        <td data-label="Endpoint">https://blog-edu-tech.koyeb.app/foto-hombre</td>
+                        <td data-label="Descripción">Obtiene una foto aleatoria de un hombre.</td>
+                        <td data-label="Acción"><button class="btn" onclick="copiarEndpoint('https://blog-edu-tech.koyeb.app/foto-hombre')">Copiar</button></td>
+                        <td data-label="Acción"><button onclick="window.location.href='/mostrar_api_foto_user_hombre'" class="btn">Ejemplo</button></td>
                     </tr>
                     <tr>
-                        <td>POST</td>
-                        <td>https://blog-edu-tech.koyeb.app/generar_audio/ "texto"</td>
-                        <td>Convierte texto en audio.</td>
-                        <td><button class="btn" onclick="copiarEndpoint('https://blog-edu-tech.koyeb.app/generar_audio/Esta es una prueba de audio')">Copiar</button></td>
-                        <td><button  onclick="window.location.href='/mostrar_api_audio'" class="btn">Ejemplos</button></td>
-
+                        <td data-label="Método">POST</td>
+                        <td data-label="Endpoint">https://blog-edu-tech.koyeb.app/generar_audio/ "texto"</td>
+                        <td data-label="Descripción">Convierte texto en audio.</td>
+                        <td data-label="Acción"><button class="btn" onclick="copiarEndpoint('https://blog-edu-tech.koyeb.app/generar_audio/Esta es una prueba de audio')">Copiar</button></td>
+                        <td data-label="Acción"><button onclick="window.location.href='/mostrar_api_audio'" class="btn">Ejemplo</button></td>
                     </tr>
                     <tr>
-                        <td>GET</td>
-                        <td>https://blog-edu-tech.koyeb.app/widget-hora-madrid</td>
-                        <td>Obtiene una Widget de relog analógico hora de Madrid.</td>
-                        <td><button class="btn" onclick="copiarEndpoint('https://blog-edu-tech.koyeb.app/widget-hora-madrid')">Copiar</button></td>
-                        <td><button   onclick="window.location.href='/mostrar_api_widget_hora_madrid'" class="btn">Ejemplos</button></td>
-
+                        <td data-label="Método">GET</td>
+                        <td data-label="Endpoint">https://blog-edu-tech.koyeb.app/widget-hora-madrid</td>
+                        <td data-label="Descripción">Obtiene una Widget de reloj analógico hora de Madrid.</td>
+                        <td data-label="Acción"><button class="btn" onclick="copiarEndpoint('https://blog-edu-tech.koyeb.app/widget-hora-madrid')">Copiar</button></td>
+                        <td data-label="Acción"><button onclick="window.location.href='/mostrar_api_widget_hora_madrid'" class="btn">Ejemplo</button></td>
                     </tr>
                 </tbody>
             </table>
         </section>
-
-       
     </div>
 
     <!-- Pie de página -->
@@ -236,7 +300,6 @@
     <!-- Script para copiar endpoints -->
     <script>
         function copiarEndpoint(endpoint) {
-            // Copiar el endpoint al portapapeles
             navigator.clipboard.writeText(endpoint)
                 .then(() => {
                     alert(`Endpoint copiado: ${endpoint}`);
