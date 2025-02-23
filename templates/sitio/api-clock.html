@@ -159,10 +159,10 @@
       <div class="code-box">
         <span class="language-tag">Código HTML </span>
         
-        <button class="copy-button" onclick="copyCode('audio')">Copy</button>
-        <pre><code id="audio">
+        <button class="copy-button" onclick="copyCode('clock')">Copy</button>
+        <pre><code id="clock">
 <span style="color: #16eead">
-&lt;!------------------------ MODO DE USO EN HTML Text to Speech ------------------&gt;  </span>
+&lt;!------------------------ MODO DE USO EN HTML Clock Widwet ------------------&gt;  </span>
 &lt;!DOCTYPE html&gt;
 &lt;html lang="es"&gt;
 &lt;head&gt;
@@ -175,31 +175,31 @@
     &lt;div style="display:grid;place-content:center"&gt;
    
     <span style="color: #16eead"> &lt;div 
-        hx-get="https://blog-edu-tech.koyeb.app/generar_audio/Este texto se convertirá en audio" 
-        hx-trigger="load" 
-        hx-swap="innerHTML"&gt;
-        &lt;script src="https://unpkg.com/htmx.org"&gt;&lt;/script&gt;
-      &lt;/div&gt; </span>
+      hx-get="https://blog-edu-tech.koyeb.app/widget-hora-madrid"
+      hx-trigger="load" 
+      hx-swap="innerHTML"&gt;
+      &lt;script src="https://unpkg.com/htmx.org"&gt;&lt;/script&gt;
+    &lt;/div&gt; </span>
      
        
     &lt;/div&gt;
-    
+    &lt;script src="https://unpkg.com/htmx.org"&gt;&lt;/script&gt;
 &lt;/body&gt;
 &lt;/html&gt;
             </code></pre>
       </div>
       <button class="run-button" 
-          hx-get="https://blog-edu-tech.koyeb.app/generar_audio/Este texto se convertirá en audio" 
-          hx-trigger="click" 
+           hx-get="https://blog-edu-tech.koyeb.app/widget-hora-madrid"  
+           hx-trigger="click" 
           hx-swap="innerHTML"
-          hx-target="#output-box-audio"
+          hx-target="#output-box-clock"
           hx-on::before-request="limpiar_zona()"
           hx-on::after-request="fluidScroll({yPos: 'end', duration: 1200})">
           Run HTML Generar Audio</button>
       
-      <div class="output-box" id="output-box-audio"  style="display:grid;place-content:center">
+      <div class="output-box" id="output-box-clock"  style="display:grid;place-content:center">
          
-        <p style="color:whitesmoke"> Este proceso depende de la longitud del texto a convertir</p>
+        <p style="color:whitesmoke"> Este Widget es de terceros.</p>
        
        </div>
        
@@ -234,3 +234,5 @@
     </footer>
   </body>
 </html>
+
+
