@@ -735,7 +735,7 @@ def generar_audio(text):
      # Create an instance of the Speechify API
      speechify_api = SpeechifyAPI() 
      audio_file = speechify_api.generate_audio_files(text, "juan", "azure", "es-CR")  
-     url_audio="https://blog-edu-tech.koyeb.app//static/audio/"+audio_file     
+     url_audio="https://blog-edu-tech.koyeb.app/static/audio/"+audio_file     
     
      return f"""
     <h1>xxxxxxxxxxxxxxxxxxxx</h1>
