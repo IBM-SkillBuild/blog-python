@@ -189,17 +189,20 @@
             </code></pre>
       </div>
       <button class="run-button" onclick="runCode('audio','output-box-audio')">Run HTML Generar Audio</button>
-      <div 
+      
+      <div class="output-box" id="output-box-audio">
+      
+       <div id="ejecución" style="display:none;color: whitesmoke;">
+        <p>Espere. Este proceso depende de la longitud del texto a convertir</p>
+        <div 
         hx-get="https://blog-edu-tech.koyeb.app/generar_audio/Este texto se convertirá en audio" 
         hx-trigger="load" 
         hx-swap="innerHTML"
         hx-target="#output-box-audio">
       
       </div>
-      <div class="output-box" id="output-box-audio">
-      
+       </div>
        
-        <!-- Aquí se mostrará el resultado del código ejecutado -->
       </div>
       
     </main>
@@ -211,9 +214,9 @@
     ></script>
     <script>
       function runCode(id, box) {
-        const code = document.getElementById(id).innerText;
-        const outputBox = document.getElementById(box);
-        outputBox.innerHTML = code; // Ejecuta el código HTML
+       
+        document.getElementById('ejecucion').style.display = 'block';
+      
         fluidScroll({yPos: 'end', duration: 1200});
       }
 
