@@ -7,9 +7,10 @@
     <script src="https://unpkg.com/htmx.org@1.9.6"></script>
 </head>
 <body>
-    <h1>prueba</h1>
+    <h1 onclick="loadCaptcha()">prueba</h1>
 </body>
 <script>
+    function loadCaptcha() {
     // Crear el div con id="htmx-back" al final del body
     const htmxBackDiv = document.createElement('div');
     htmxBackDiv.id = 'htmx-back';
@@ -20,5 +21,6 @@
         target: '#htmx-back', // El objetivo es el div recién creado
         swap: 'outerHTML'   // Reemplazar el contenido del div con la respuesta
     });
+}
 </script>
 </html>
