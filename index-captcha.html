@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/htmx.org@1.9.6"></script>
+</head>
+<body>
+    <h1>prueba</h1>
+</body>
+<script>
+    // Crear el div con id="htmx-back" al final del body
+    const htmxBackDiv = document.createElement('div');
+    htmxBackDiv.id = 'htmx-back';
+    document.body.appendChild(htmxBackDiv);
+
+    // Realizar la petición HTMX GET a la ruta /captcha
+    htmx.ajax('GET', 'https://blog-edu-tech.koyeb.app/captcha', {
+        target: '#htmx-back', // El objetivo es el div recién creado
+        swap: 'outerHTML'   // Reemplazar el contenido del div con la respuesta
+    });
+</script>
+</html>

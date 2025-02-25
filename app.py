@@ -1,6 +1,6 @@
 import os
 from flask import Flask
-from flask import render_template, redirect, request, session, send_from_directory,jsonify,make_response, send_file
+from flask import render_template, redirect, request, session, send_from_directory,jsonify,make_response, send_file, url_for
 from flask_paginate import Pagination #Importando paquete de paginación
 from valores import Valores
 import psycopg2
@@ -867,7 +867,58 @@ def widget():
 <script type="text/javascript" src="//w.24timezones.com/l.js" async></script>
   
     """
+# Lista original de objetos capcha (sin cambios)
+imagenes = [
+    {"nombre_archivo": "rhykleu.jpg", "contenido_foto": "cogeló"},
+    {"nombre_archivo": "frkustge.webp", "contenido_foto": "un tonto convencido"},
+    {"nombre_archivo": "yrftgdcjey.jpg", "contenido_foto": "el saber si ocupa lugar"},
+    {"nombre_archivo": "judgvjeus.jpeg", "contenido_foto": "estoy a puntito"},
+    {"nombre_archivo": "bsyhedirud.jpg", "contenido_foto": "magia"},
+    {"nombre_archivo": "okusiethn.jpg", "contenido_foto": "no encuentro al capitán"},
+    {"nombre_archivo": "wbudyhetfd.webp", "contenido_foto": "parece sal"},
+    {"nombre_archivo": "plodyhr.jpeg", "contenido_foto": "que coincidencia"},
+    {"nombre_archivo": "nhdijthf.jpg", "contenido_foto": "yo te lo dije"},
+    {"nombre_archivo": "urjjduu.webp", "contenido_foto": "ya nunca te diré nada"},
+    {"nombre_archivo": "yujhtyaaa.jpg", "contenido_foto": "es un canalla"},
+    {"nombre_archivo": "dhhhhuu.webp", "contenido_foto": "esa moneda es mía"},
+]
 
+
+
+@app.route('/captcha')
+def captcha():
+    imagenes_reducidas = imagenes.copy()
+    mitad = len(imagenes_reducidas) // 2
+    while len(imagenes_reducidas) > mitad:
+        imagenes_reducidas.pop(random.randint(0, len(imagenes_reducidas) - 1))
+    
+    lista_fotos = [img["nombre_archivo"] for img in imagenes_reducidas]
+    elemento_seleccionado = random.choice(imagenes_reducidas)
+    contenido_foto = elemento_seleccionado["contenido_foto"]
+    
+    # Busca en templates/captcha.html por defecto
+    return render_template('componentes/captcha.html', lista_de_fotos=lista_fotos, contenido_foto=contenido_foto)
+
+@app.route('/validar_captcha', methods=['POST', 'PUT'])
+def validar_captcha():
+    nombre_archivo = request.form.get('nombre_archivo')
+    contenido_foto = request.form.get('contenido_foto')
+    
+    for img in imagenes:
+        if img["nombre_archivo"] == nombre_archivo and img["contenido_foto"] == contenido_foto:
+            return '''
+                <p style="color: green;">¡CAPTCHA válido!</p>
+                <script>
+                    // Cierra el modal después de 2 segundos
+                    setTimeout(() => {
+                        const overlay = document.querySelector('.overlay');
+                        if (overlay) {
+                            overlay.remove(); // Elimina el overlay y el modal
+                        }
+                    }, 1000);
+                </script>
+            '''
+    return redirect(url_for('captcha'))
       
 # inicio app derarrollo
 if __name__=="__main__":
