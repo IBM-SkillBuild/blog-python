@@ -1,14 +1,57 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Prueba de Capcha</title>
+    <style>
+        .grid{
+            display: grid; place-items: center; height: 100vh;margin-top: -5em;
+            
+        }
+        .row{
+            display: flex; flex-direction: column;
+        }
+
+    .boton {
+    background-color: #007bff; /* Azul vibrante */
+    color: white; /* Texto blanco */
+    padding: 10px 20px; /* Espaciado interno */
+    border: none; /* Sin borde por defecto */
+    border-radius: 5px; /* Bordes redondeados */
+    cursor: pointer; /* Mano al pasar el ratón */
+    font-size: 16px; /* Tamaño de fuente */
+    font-weight: bold; /* Negrita */
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Transiciones suaves */
+}
+
+/* Efecto al pasar el ratón (hover) */
+.boton:hover {
+    background-color: #0056b3; /* Azul más oscuro */
+    transform: scale(1.05); /* Ligero aumento de tamaño */
+}
+
+/* Efecto al hacer clic (active) */
+.boton:active {
+    background-color: #004085; /* Azul aún más oscuro */
+    transform: scale(0.95); /* Ligera reducción */
+}
+
+/* Estado deshabilitado (opcional) */
+.boton:disabled {
+    background-color: #cccccc; /* Gris claro */
+    cursor: not-allowed; /* Cursor de "no permitido" */
+    opacity: 0.7; /* Semi-transparente */
+}
+    </style>
 </head>
-<body>
-    <button  onclick="loadCaptcha()">fsdfsdfsdf</button>
-    <div>Hola</div>
-    <div>
+<body onload="loadCaptcha()">
+    <div class="grid" >
+        <div class="row">
+            <h1>Hola soy edu ?</h1>
+            <h2>este es un proyecto con html y css</h2>
+        <div>
+    </div>
         
     </div>
     <script src="https://res.cloudinary.com/dquxfl0fe/raw/upload/v1740476831/htmx-captcha_g36q19.js"></script>

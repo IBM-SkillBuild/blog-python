@@ -914,7 +914,8 @@ def validar_captcha():
                             overlay.remove();
                         }
                         // Opcional: Redirigir a la página deseada después de validar
-                        window.location.href = "https://blog-edu-tech.koyeb.app";
+                        //document.getElementById('htmx-back').innerHTML = '';
+                        //window.location.href = "https://blog-edu-tech.koyeb.app";
                     }, 1000);
                 </script>
             '''

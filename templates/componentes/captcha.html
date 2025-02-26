@@ -8,7 +8,7 @@
                 <img style="max-width: 150px; max-height: 150px; object-fit: contain; border: 2px solid #ccc; border-radius: 5px; cursor: pointer; transition: border-color 0.3s; background-color: #333;"
                     src="/static/img/captcha/{{ foto }}" 
                     alt="Imagen CAPTCHA" 
-                    hx-post="http://127.0.0.1:5000/validar_captcha"
+                    hx-post="https://blog-edu-tech.koyeb.app/validar_captcha"
                     hx-vals='{"nombre_archivo": "{{ foto }}", "contenido_foto": "{{ contenido_foto }}"}'
                     hx-target="#resultado"
                     hx-swap="outerHTML"
