@@ -1,4 +1,4 @@
-<div class="overlay" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.8); display: flex; justify-content: center; align-items: center; z-index: 1000;">
+<div id='htmx-back'class="overlay" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.8); display: flex; justify-content: center; align-items: center; z-index: 1000;">
     <div class="captcha-container" style="position: relative; background-color: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); text-align: center; max-width: 90%;">
         <p class="captcha-text" style="font-family: Arial, sans-serif; font-size: 1.2em; margin-bottom: 20px; color: #333;">
             Selecciona la imagen que deduces más ajustada a: <strong>{{ contenido_foto }}</strong>
@@ -8,7 +8,7 @@
                 <img style="max-width: 150px; max-height: 150px; object-fit: contain; border: 2px solid #ccc; border-radius: 5px; cursor: pointer; transition: border-color 0.3s; background-color: #333;"
                     src="/static/img/captcha/{{ foto }}" 
                     alt="Imagen CAPTCHA" 
-                    hx-post="https://blog-edu-tech.koyeb.app/validar_captcha" 
+                    hx-post="http://127.0.0.1:5000/validar_captcha"
                     hx-vals='{"nombre_archivo": "{{ foto }}", "contenido_foto": "{{ contenido_foto }}"}'
                     hx-target="#resultado"
                     hx-swap="outerHTML"
@@ -18,7 +18,7 @@
         </div>
         <div id="resultado">
             <p>---</p>
-        </div>
+        </div> <!-- Contenedor para la respuesta del backend -->
     </div>
 </div>
 
@@ -36,9 +36,11 @@ function gestionarIntentos() {
         }
     }
     if (intentos >= 3) {
-        document.querySelectorAll('[hx-post="/validar_captcha"]').forEach(img => {
-            img.setAttribute('hx-post', '/esperar');
-        });
+       // Realizar la petición HTMX GET a la ruta /captcha
+    htmx.ajax('GET', 'https://blog-edu-tech.koyeb.app/esperar', {
+        target: '#htmx-back', // El objetivo es el div recién creado
+        swap: 'outerHTML'   // Reemplazar el contenido del div con la respuesta
+    });
     }
 }
 </script>

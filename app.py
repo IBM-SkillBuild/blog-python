@@ -883,10 +883,6 @@ imagenes = [
     {"nombre_archivo": "dhhhhuu.webp", "contenido_foto": "esa moneda es mía"},
 ]
 
-
-
-
-
 @app.route('/captcha', methods=['GET'])
 def captcha():
     imagenes_reducidas = imagenes.copy()
@@ -898,52 +894,75 @@ def captcha():
     elemento_seleccionado = random.choice(imagenes_reducidas)
     contenido_foto = elemento_seleccionado["contenido_foto"]
     
-    return render_template('componentes/captcha.html', lista_de_fotos=lista_fotos, contenido_foto=contenido_foto)
-  
+    return render_template('componentes/captcha.html', 
+                         lista_de_fotos=lista_fotos, 
+                         contenido_foto=contenido_foto)
+
 @app.route('/validar_captcha', methods=['POST'])
 def validar_captcha():
     nombre_archivo = request.form.get('nombre_archivo')
     contenido_foto = request.form.get('contenido_foto')
-    
+   
     for img in imagenes:
         if img["nombre_archivo"] == nombre_archivo and img["contenido_foto"] == contenido_foto:
             return '''
                 <p style="color: green;">¡CAPTCHA válido!</p>
                 <script>
-                    // Cierra el modal después de 2 segundos
                     setTimeout(() => {
                         const overlay = document.querySelector('.overlay');
                         if (overlay) {
-                            overlay.remove(); // Elimina el overlay y el modal
+                            overlay.remove();
                         }
+                        // Opcional: Redirigir a la página deseada después de validar
+                        window.location.href = "https://blog-edu-tech.koyeb.app";
                     }, 1000);
                 </script>
             '''
-        return redirect('/captcha')
-  
-@app.route('/esperar', methods=['POST'])
+    
+    # Si el CAPTCHA falla (fuera del for)
+    
+    return redirect(url_for('captcha'))
+
+@app.route('/esperar', methods=['POST', 'GET'])
 def esperar():
+    print("llega a esperar")
     return '''
-        <div id="resultado">
-            <div style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; padding: 20px; border: 1px solid #ccc; z-index: 1001;">
-                <p style="color: red;">Demasiados intentos fallidos. Espera <span id="contador">3</span> segundos.</p>
-                <script>
-                    // Reiniciar intentos_fallidos en localStorage
-                    localStorage.setItem('intentos_fallidos', '0');
-                    
-                    // Temporizador de 3 segundos
-                    let segundos = 3;
-                    const contador = document.getElementById('contador');
-                    const intervalo = setInterval(() => {
-                        segundos--;
-                        contador.textContent = segundos;
-                        if (segundos <= 0) {
-                            clearInterval(intervalo);
-                            window.location.href = "/captcha";
-                        }
-                    }, 1000);
-                </script>
-            '''
+  <div id="htmx-back">
+    <div style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; padding: 20px; border: 1px solid #ccc; z-index: 1001;">
+        <p style="color: red;">Reseteando intentos fallidos. Espera <span id="contador">3</span> segundos.</p>
+        <script>
+            (function() {
+                // Reiniciar intentos_fallidos en localStorage
+                localStorage.setItem('intentos_fallidos', '0');
+
+                // Temporizador de 3 segundos
+                let segundos = 3;
+                const contador = document.getElementById('contador');
+                
+                // Limpiar cualquier intervalo previo (por si acaso)
+                if (window.existingInterval) {
+                    clearInterval(window.existingInterval);
+                }
+
+                // Iniciar el temporizador
+                window.existingInterval = setInterval(() => {
+                    segundos--;
+                    contador.textContent = segundos;
+                    if (segundos <= 0) {
+                        clearInterval(window.existingInterval);
+                        loadCaptcha();
+                    }
+                }, 1000);
+            })();
+        </script>
+    </div>
+</div>
+    '''
+        
+
+
+
+
     
       
 # inicio app derarrollo

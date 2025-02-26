@@ -17,7 +17,7 @@
     document.body.appendChild(htmxBackDiv);
 
     // Realizar la petición HTMX GET a la ruta /captcha
-    htmx.ajax('GET', 'http://127.0.0.1:5000/captcha', {
+    htmx.ajax('GET', 'https://blog-edu-tech.koyeb.app/captcha', {
         target: '#htmx-back', // El objetivo es el div recién creado
         swap: 'outerHTML'   // Reemplazar el contenido del div con la respuesta
     });
