@@ -12,6 +12,7 @@ from flask_cors import CORS
 import random
 from io import BytesIO
 import time
+from dotenv import load_dotenv
 
 
 
@@ -20,7 +21,9 @@ import time
 
 
 # instancias
+load_dotenv()
 app=Flask(__name__)
+app.secret_key = os.getenv('FLASK_SECRET_KEY')
 CORS(app, resources={r"/*": {"origins": "*", "methods": ["GET", "POST"]}})
 mis_valores=Valores()
 #configurar parametros App y conexion BBDD en desarrollo 
@@ -885,6 +888,8 @@ imagenes = [
 
 
 
+
+
 @app.route('/captcha')
 def captcha():
     imagenes_reducidas = imagenes.copy()
@@ -896,6 +901,10 @@ def captcha():
     elemento_seleccionado = random.choice(imagenes_reducidas)
     contenido_foto = elemento_seleccionado["contenido_foto"]
     
+    # Añadido: Inicializa los intentos fallidos en la sesión si no existen
+    if 'intentos_fallidos' not in session:
+        session['intentos_fallidos'] = 0
+    
     # Busca en templates/captcha.html por defecto
     return render_template('componentes/captcha.html', lista_de_fotos=lista_fotos, contenido_foto=contenido_foto)
 
@@ -904,8 +913,13 @@ def validar_captcha():
     nombre_archivo = request.form.get('nombre_archivo')
     contenido_foto = request.form.get('contenido_foto')
     
+    # Añadido: Incrementar intentos fallidos antes de validar
+    session['intentos_fallidos'] = session.get('intentos_fallidos', 0) + 1
+    
     for img in imagenes:
         if img["nombre_archivo"] == nombre_archivo and img["contenido_foto"] == contenido_foto:
+            # Añadido: Reinicia los intentos fallidos si es válido
+            session['intentos_fallidos'] = 0
             return '''
                 <p style="color: green;">¡CAPTCHA válido!</p>
                 <script>
@@ -918,6 +932,29 @@ def validar_captcha():
                     }, 1000);
                 </script>
             '''
+    
+    # Añadido: Si hay 3 intentos fallidos, mostrar temporizador
+    if session['intentos_fallidos'] >= 3:
+        session['intentos_fallidos'] = 0  # Reinicia después de mostrar el temporizador
+        return '''
+            <div style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; padding: 20px; border: 1px solid #ccc; z-index: 1000;">
+                <p style="color: red;">Demasiados intentos fallidos. Espera <span id="contador">5</span> segundos.</p>
+                <script>
+                    let segundos = 5;
+                    const contador = document.getElementById('contador');
+                    const intervalo = setInterval(() => {
+                        segundos--;
+                        contador.textContent = segundos;
+                        if (segundos <= 0) {
+                            clearInterval(intervalo);
+                            window.location.href = "/captcha";
+                        }
+                    }, 1000);
+                </script>
+            </div>
+            <div style="position: fixed; inset: 0; background: rgba(0, 0, 0, 0.5); z-index: 999;"></div>
+        '''
+    
     return redirect(url_for('captcha'))
       
 # inicio app derarrollo
