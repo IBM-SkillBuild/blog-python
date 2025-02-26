@@ -908,21 +908,18 @@ def validar_captcha():
     for img in imagenes:
         if img["nombre_archivo"] == nombre_archivo and img["contenido_foto"] == contenido_foto:
             return '''
-                <div id="resultado">
-                    <p style="color: green;">¡CAPTCHA válido!</p>
-                    <script>
-                        setTimeout(() => {
-                            document.querySelector('.overlay').remove();
-                        }, 1000);
-                    </script>
-                </div>
+                <p style="color: green;">¡CAPTCHA válido!</p>
+                <script>
+                    // Cierra el modal después de 2 segundos
+                    setTimeout(() => {
+                        const overlay = document.querySelector('.overlay');
+                        if (overlay) {
+                            overlay.remove(); // Elimina el overlay y el modal
+                        }
+                    }, 1000);
+                </script>
             '''
-    
-    return '''
-        <div id="resultado">
-            <p style="color: red;">Incorrecto</p>
-        </div>
-    '''
+        return redirect('/captcha')
   
 @app.route('/esperar', methods=['POST'])
 def esperar():
@@ -946,14 +943,11 @@ def esperar():
                         }
                     }, 1000);
                 </script>
-            </div>
-        </div>
-    '''
-  
-  
+            '''
+    
       
 # inicio app derarrollo
 if __name__=="__main__":
   # app.run(debug=True) NO NECESARIO 
   # -- SE LEE DESDE ARCHIVO CONFIG-- (cambiar para produccion a otra clase)
-  app.run(debug=True,port=3000)
+  app.run(debug=True,port=5000)
