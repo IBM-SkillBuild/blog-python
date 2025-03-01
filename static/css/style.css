@@ -7,7 +7,7 @@
   }
   .card {
     max-width: 60vw !important;
-    min-width: 40vw;
+    min-width: 60vw; 
     margin: 3px;
     
   }
