@@ -46,7 +46,7 @@
         {% for post in publicaciones %}
           {% if  publicaciones|length > 1 %}
          
-        <div class="col-md-4 "  >
+        <div class="col-md-6 "  >
          <div class="card"  style="margin-bottom:5vh">
             
 
@@ -139,7 +139,14 @@
     </main>
 
  </div>
- 
+ <script>
+  window.addEventListener('load', function() {
+    if (sessionStorage.getItem('captcha') != '1') {
+      sessionStorage.setItem('captcha', '1');
+    loadCaptcha();
+    
+  }})
+</script>
  {% include "sitio/footer.html"%}
   
  
