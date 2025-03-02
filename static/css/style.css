@@ -2,6 +2,7 @@
   #contenedor {
     min-width: 95%;
   }
+  
   #card-cat {
     display: inline-block;
   }
@@ -108,6 +109,9 @@ iframe {
 }
 
 @media only screen and (max-width: 700px) {
+  #tiempo{
+    margin-left: 7em;
+  }
   #blog {
     display: flex;
     -webkit-transform: scale(0.8);
@@ -120,6 +124,9 @@ iframe {
   }
 }
 @media only screen and (max-width: 900px) {
+  #tiempo{
+    margin-left: 5em;
+  }
   #foto_about {
     width: 13vw !important;
     top: 0vh !important;

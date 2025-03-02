@@ -1,3 +1,4 @@
+
 {% include "sitio/header-sitio.html" %}
 <main>
   <img
@@ -7,8 +8,10 @@
     src="{{url_for('static', filename='/img/blog.png')}}"
     alt="El Blog de Eduardo Cabrera"
   />
+  <!-- weather widget start --><span id="tiempo"><img  style="border-radius: 5px;" src="https://w.bookcdn.com/weather/picture/21_18119_1_4_34495e_250_2c3e50_ffffff_ffffff_1_2071c9_ffffff_0_6.png?scode=124&domid=582&anc_id=11822"  alt="hotelmix.es"/></span><!-- weather widget end -->
   <div class="container-fluid py-5 presentacion" style="max-width: 60vw">
-    <h2 class="display-5 fw-bold">Compartiendo mis cosas {{mensaje}}</h2>
+    <h2 class="display-5 fw-bold" style="color: rgb(27, 27, 77);">Compartiendo mis cosas {{mensaje}}</h2>
+    
     <p class="col-md-12 texto-entrada">
       He creado un proyecto sencillo y minimalista. Tanto el servidor web (alojado en un data center de Frankfurt), como el servidor de BBDD, pertenecen a un plan gratuito. Disfuten del contenido, pero no esperen que la velocidad sea la seña de identidad para este proyecto.
     </p>
@@ -20,6 +23,7 @@
       style="margin-top: 5vh"
     >
       ver todas las publicaciones {{valores.saludo}}
+      
     </a>
   </div>
 </main>
