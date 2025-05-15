@@ -30,40 +30,38 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 todas_las_categorias=""
 
 
-"""db = psycopg2.connect(
+db = psycopg2.connect(
         host=mis_valores.HOST,
         database=mis_valores.DB,
         user=mis_valores.USER,
         password=mis_valores.PASSWORD,
-        sslmode= 'require')"""
+        sslmode= 'require')
 
-#cursor = db.cursor()
-"""cursor.execute("DROP TABLE IF EXISTS publicaciones   ")
+cursor = db.cursor()
+cursor.execute("DROP TABLE IF EXISTS publicaciones   ")
 
-cursor.execute("CREATE TABLE IF NOT EXISTS publicaciones(
-            id    SERIAL PRIMARY KEY,
-           nombre varchar (250),
-           imagen varchar (250) ,
-           descripcion varchar (250) ,
-           categoria varchar (250) ,
-           archivo varchar (250) ,
-           fecha date ,
-           habilitado boolean);
- ")"""
+cursor.execute("CREATE TABLE IF NOT EXISTS publicaciones("
+              "id SERIAL PRIMARY KEY,"
+              "nombre varchar(250),"
+              "imagen varchar(250),"
+              "descripcion varchar(250),"
+              "categoria varchar(250),"
+              "archivo varchar(250),"
+              "fecha date,"
+              "habilitado boolean)")
  
 
-#db.commit()
-#cursor.close()
-#db.close() 
+db.commit()
 
-#cursor = db.cursor()
-#cursor.execute("DROP TABLE IF EXISTS usuarios  ")
-#cursor.execute("CREATE TABLE usuarios(id serial PRIMARY KEY, nombre varchar(250), pass varchar(250));")
-#sql = "INSERT INTO usuarios(nombre, pass) VALUES ( %s,%s);"
-#datos = ("Edugoyo", "Edugoyo.1968")
-#cursor.execute(sql,datos)
-#db.commit()
-#cursor.close()
+
+cursor = db.cursor()
+cursor.execute("DROP TABLE IF EXISTS usuarios  ")
+cursor.execute("CREATE TABLE usuarios(id serial PRIMARY KEY, nombre varchar(250), pass varchar(250));")
+sql = "INSERT INTO usuarios(nombre, pass) VALUES ( %s,%s);"
+datos = ("Edugoyo", "Edugoyo.1968")
+cursor.execute(sql,datos)
+db.commit()
+cursor.close()
    
 
 
@@ -971,3 +969,6 @@ if __name__=="__main__":
   # app.run(debug=True) NO NECESARIO 
   # -- SE LEE DESDE ARCHIVO CONFIG-- (cambiar para produccion a otra clase)
   app.run(debug=True,port=5000)
+  
+#   exponer puerto en url cloudflared 
+#   cloudflared-windows-amd64.exe tunnel --url http://localhost:5000

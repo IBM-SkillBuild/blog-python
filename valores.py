@@ -10,12 +10,12 @@ class Valores():
   
   # koyeb
   
-  HOST = "ep-noisy-silence-21789047.eu-central-1.aws.neon.tech"
+  """ HOST = "ep-noisy-silence-21789047.eu-central-1.aws.neon.tech"
   PORT = 3306
   USER = "koyeb-adm"
   PASSWORD = "RIghWyKm4Tt5"
   DB = "koyebdb"
-  URL="https://blog-edu-tech.koyeb.app"
+  URL="https://blog-edu-tech.koyeb.app" """
   
   
   # elefhant sql
@@ -28,3 +28,12 @@ class Valores():
   URL = "https://blog-edu-tech.koyeb.app"
  """
  
+ # neon database
+  
+  
+  HOST = "ep-patient-snowflake-a2py2i6g-pooler.eu-central-1.aws.neon.tech"
+  PORT = 3306
+  USER = "neondb_owner"
+  PASSWORD = "npg_DiKU1Ct2FhzG"
+  DB = "neondb"
+  URL="https://blog-edu-tech.koyeb.app"
