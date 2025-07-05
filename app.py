@@ -26,15 +26,22 @@ app=Flask(__name__)
 # CORS(app, resources={r"/*": {"origins": "*", "methods": ["GET", "POST"]}})
 # Configura el límite de tamaño del cuerpo
 app.config['MAX_CONTENT_LENGTH'] = 10 * 1024 * 1024  # 10 MB
-# Para producción, especifica los dominios permitidos:
-CORS(app, origins=[
-    "https://blog-edu-tech.koyeb.app",
-    "http://localhost:3000",
-    "http://localhost:5000", 
-    "http://127.0.0.1:5000",
-    "https://htmx-website.netlify.app",
-], methods=["GET", "POST", "OPTIONS"], 
-     allow_headers=["Content-Type", "Authorization"])
+
+# Configuración CORS mejorada y más segura
+CORS(app, 
+     origins=[
+         "https://blog-edu-tech.koyeb.app",
+         "http://localhost:3000",
+         "http://localhost:5000", 
+         "http://127.0.0.1:5000",
+         "https://htmx-website.netlify.app",
+     ], 
+     methods=["GET", "POST", "OPTIONS"], 
+     allow_headers=["Content-Type", "Authorization"],
+     supports_credentials=True,  # Permite cookies si las necesitas
+     max_age=3600,  # Cache preflight requests por 1 hora
+     expose_headers=["Content-Length", "Content-Type"]  # Headers que el frontend puede leer
+)
 mis_valores=Valores()
 #configurar parametros App y conexion BBDD en desarrollo 
 # (para produccion hay que cambiar a otra clase de archivo config)
