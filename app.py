@@ -467,6 +467,10 @@ def dividir_texto(texto, longitud_aproximada=3000):
     """
     Divide el texto en trozos de longitud aproximada, respetando los puntos.
     """
+    if not texto or len(texto.strip()) == 0:
+        return []
+    
+    texto = texto.strip()
     trozos = []
     inicio = 0
     
@@ -484,11 +488,43 @@ def dividir_texto(texto, longitud_aproximada=3000):
                 siguiente_punto = texto.find('.', fin)
                 if siguiente_punto != -1:
                     fin = siguiente_punto + 1
+                else:
+                    # Si no hay puntos, buscar el último espacio
+                    ultimo_espacio = texto.rfind(' ', inicio, fin)
+                    if ultimo_espacio != -1:
+                        fin = ultimo_espacio + 1
         
-        trozos.append(texto[inicio:fin].strip())
+        trozo = texto[inicio:fin].strip()
+        if trozo:  # Solo agregar trozos no vacíos
+            trozos.append(trozo)
+        
         inicio = fin
+        
+        # Prevenir bucle infinito
+        if inicio >= len(texto):
+            break
+    
+    # Si no se pudo dividir, devolver el texto completo
+    if not trozos:
+        trozos = [texto]
+    
+    print(f"Texto dividido en {len(trozos)} trozos:")
+    for i, trozo in enumerate(trozos, 1):
+        print(f"  Trozo {i}: {len(trozo)} caracteres")
     
     return trozos
+
+def limpiar_archivos_temporales(archivos):
+    """
+    Limpia archivos temporales de manera segura
+    """
+    for archivo in archivos:
+        if os.path.exists(archivo):
+            try:
+                os.remove(archivo)
+                print(f"Archivo temporal eliminado: {archivo}")
+            except Exception as e:
+                print(f"Error eliminando archivo temporal {archivo}: {str(e)}")
 
 def update_categorias(dato):
    
@@ -809,39 +845,70 @@ def generar_audio_voces():
     if not text:
         return jsonify({"success": False, "error": "El parámetro 'text' es obligatorio"}), 400
     
+    print(f"Procesando texto de {len(text)} caracteres con voz: {voz}, proveedor: {proveedor}, idioma: {idioma}")
+    
     # Crear una instancia de la API Speechify
     speechify_api = SpeechifyAPI()
     
     try:
         # Dividir el texto en trozos si es muy largo
         trozos = dividir_texto(text)
+        print(f"Texto dividido en {len(trozos)} trozos")
+        
         archivos_temporales = []
+        timestamp = int(time.time())
         
         # Generar archivos de audio para cada trozo
         for contador, trozo in enumerate(trozos, 1):
             try:
+                print(f"Generando audio para trozo {contador}/{len(trozos)} ({len(trozo)} caracteres)")
+                
                 audio_file = speechify_api.generate_audio_files(trozo, voz, proveedor, idioma)
+                print(f"Archivo generado: {audio_file}")
                 
                 # Renombrar el archivo generado con un identificador único
-                nombre_temporal = f"audio-{contador}-{int(time.time())}.mp3"
+                nombre_temporal = f"audio-{contador}-{timestamp}.mp3"
                 ruta_temporal = os.path.join(os.getcwd(), "static/audio", nombre_temporal)
                 
                 # Renombrar el archivo original
                 ruta_original = os.path.join(os.getcwd(), "static/audio", audio_file)
-                if os.path.exists(ruta_original):
-                    os.rename(ruta_original, ruta_temporal)
-                    archivos_temporales.append(ruta_temporal)
+                
+                # Esperar a que el archivo exista (máximo 30 segundos)
+                max_wait = 30
+                wait_interval = 0.5
+                elapsed = 0
+                
+                while not os.path.exists(ruta_original) and elapsed < max_wait:
+                    time.sleep(wait_interval)
+                    elapsed += wait_interval
+                
+                if not os.path.exists(ruta_original):
+                    raise Exception(f"El archivo {audio_file} no se generó después de {max_wait} segundos")
+                
+                # Verificar que el archivo no esté vacío
+                if os.path.getsize(ruta_original) == 0:
+                    raise Exception(f"El archivo {audio_file} está vacío")
+                
+                os.rename(ruta_original, ruta_temporal)
+                archivos_temporales.append(ruta_temporal)
+                print(f"Trozo {contador} procesado exitosamente")
                 
             except Exception as e:
+                print(f"Error en trozo {contador}: {str(e)}")
                 # Limpiar archivos temporales en caso de error
-                for archivo in archivos_temporales:
-                    if os.path.exists(archivo):
-                        os.remove(archivo)
-                return jsonify({"success": False, "error": f"Error al generar audio del trozo {contador}: {str(e)}"}), 500
+                limpiar_archivos_temporales(archivos_temporales)
+                return jsonify({
+                    "success": False, 
+                    "error": f"Error al generar audio del trozo {contador}: {str(e)}",
+                    "trozo_fallido": contador,
+                    "total_trozos": len(trozos)
+                }), 500
+        
+        print(f"Todos los trozos generados. Archivos temporales: {len(archivos_temporales)}")
         
         # Si solo hay un trozo, devolver directamente
         if len(archivos_temporales) == 1:
-            nombre_final = archivos_temporales[0].split('/')[-1]
+            nombre_final = os.path.basename(archivos_temporales[0])
             url_audio = f"https://blog-edu-tech.koyeb.app/static/audio/{nombre_final}"
             
             return jsonify({
@@ -850,7 +917,7 @@ def generar_audio_voces():
                 "filename": nombre_final,
                 "trozos_generados": len(trozos),
                 "params": {
-                    "text": text,
+                    "text": text[:100] + "..." if len(text) > 100 else text,
                     "voz": voz,
                     "proveedor": proveedor,
                     "idioma": idioma
@@ -859,29 +926,55 @@ def generar_audio_voces():
         
         # Si hay múltiples trozos, concatenarlos
         try:
+            print("Iniciando concatenación de audio...")
+            
             # Crear clips de audio y concatenarlos
-            clips = [AudioFileClip(archivo) for archivo in archivos_temporales]
+            clips = []
+            for archivo in archivos_temporales:
+                try:
+                    clip = AudioFileClip(archivo)
+                    clips.append(clip)
+                    print(f"Clip cargado: {archivo}")
+                except Exception as e:
+                    print(f"Error cargando clip {archivo}: {str(e)}")
+                    raise e
+            
+            if not clips:
+                raise Exception("No se pudieron cargar ningún clip de audio")
+            
             audio_final = concatenate_audioclips(clips)
+            print("Audio concatenado exitosamente")
             
             # Generar nombre único para el archivo final
-            nombre_final = f"audio-final-{int(time.time())}.mp3"
+            nombre_final = f"audio-final-{timestamp}.mp3"
             ruta_final = os.path.join(os.getcwd(), "static/audio", nombre_final)
             
             # Guardar el audio final
             audio_final.write_audiofile(ruta_final, verbose=False, logger=None)
+            print(f"Audio final guardado: {ruta_final}")
+            
+            # Verificar que el archivo final existe y no está vacío
+            if not os.path.exists(ruta_final) or os.path.getsize(ruta_final) == 0:
+                raise Exception("El archivo final no se generó correctamente")
             
             # Limpiar archivos temporales
-            for archivo in archivos_temporales:
-                if os.path.exists(archivo):
-                    os.remove(archivo)
+            limpiar_archivos_temporales(archivos_temporales)
             
             # Cerrar los clips para liberar memoria
             for clip in clips:
-                clip.close()
-            audio_final.close()
+                try:
+                    clip.close()
+                except:
+                    pass
+            try:
+                audio_final.close()
+            except:
+                pass
             
             # Construir la URL del archivo final
             url_audio = f"https://blog-edu-tech.koyeb.app/static/audio/{nombre_final}"
+            
+            print("Proceso completado exitosamente")
             
             return jsonify({
                 "success": True,
@@ -889,7 +982,7 @@ def generar_audio_voces():
                 "filename": nombre_final,
                 "trozos_generados": len(trozos),
                 "params": {
-                    "text": text,
+                    "text": text[:100] + "..." if len(text) > 100 else text,
                     "voz": voz,
                     "proveedor": proveedor,
                     "idioma": idioma
@@ -897,13 +990,18 @@ def generar_audio_voces():
             })
             
         except Exception as e:
+            print(f"Error en concatenación: {str(e)}")
             # Limpiar archivos temporales en caso de error
-            for archivo in archivos_temporales:
-                if os.path.exists(archivo):
-                    os.remove(archivo)
-            return jsonify({"success": False, "error": f"Error al concatenar audio: {str(e)}"}), 500
+            limpiar_archivos_temporales(archivos_temporales)
+            return jsonify({
+                "success": False, 
+                "error": f"Error al concatenar audio: {str(e)}",
+                "archivos_generados": len(archivos_temporales),
+                "total_trozos": len(trozos)
+            }), 500
             
     except Exception as e:
+        print(f"Error general: {str(e)}")
         return jsonify({"success": False, "error": f"Error general: {str(e)}"}), 500
 
 @app.route("/generar_audio_voces_get", methods=['GET'])
