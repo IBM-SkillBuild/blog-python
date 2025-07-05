@@ -792,8 +792,126 @@ def generar_audio(text):
     """
                                
     
-@app.route("/generar_audio_voces", methods=['GET'])
+@app.route("/generar_audio_voces", methods=['POST'])
 def generar_audio_voces():
+    # Obtener parámetros del body de la petición
+    data = request.get_json()
+    
+    if not data:
+        return jsonify({"success": False, "error": "Se requiere un JSON en el body de la petición"}), 400
+    
+    text = data.get('text', '')
+    voz = data.get('voz', 'juan')  # Valor por defecto
+    proveedor = data.get('proveedor', 'azure')  # Valor por defecto
+    idioma = data.get('idioma', 'es-CR')  # Valor por defecto
+    
+    # Validar que el texto no esté vacío
+    if not text:
+        return jsonify({"success": False, "error": "El parámetro 'text' es obligatorio"}), 400
+    
+    # Crear una instancia de la API Speechify
+    speechify_api = SpeechifyAPI()
+    
+    try:
+        # Dividir el texto en trozos si es muy largo
+        trozos = dividir_texto(text)
+        archivos_temporales = []
+        
+        # Generar archivos de audio para cada trozo
+        for contador, trozo in enumerate(trozos, 1):
+            try:
+                audio_file = speechify_api.generate_audio_files(trozo, voz, proveedor, idioma)
+                
+                # Renombrar el archivo generado con un identificador único
+                nombre_temporal = f"audio-{contador}-{int(time.time())}.mp3"
+                ruta_temporal = os.path.join(os.getcwd(), "static/audio", nombre_temporal)
+                
+                # Renombrar el archivo original
+                ruta_original = os.path.join(os.getcwd(), "static/audio", audio_file)
+                if os.path.exists(ruta_original):
+                    os.rename(ruta_original, ruta_temporal)
+                    archivos_temporales.append(ruta_temporal)
+                
+            except Exception as e:
+                # Limpiar archivos temporales en caso de error
+                for archivo in archivos_temporales:
+                    if os.path.exists(archivo):
+                        os.remove(archivo)
+                return jsonify({"success": False, "error": f"Error al generar audio del trozo {contador}: {str(e)}"}), 500
+        
+        # Si solo hay un trozo, devolver directamente
+        if len(archivos_temporales) == 1:
+            nombre_final = archivos_temporales[0].split('/')[-1]
+            url_audio = f"https://blog-edu-tech.koyeb.app/static/audio/{nombre_final}"
+            
+            return jsonify({
+                "success": True,
+                "audio_url": url_audio,
+                "filename": nombre_final,
+                "trozos_generados": len(trozos),
+                "params": {
+                    "text": text,
+                    "voz": voz,
+                    "proveedor": proveedor,
+                    "idioma": idioma
+                }
+            })
+        
+        # Si hay múltiples trozos, concatenarlos
+        try:
+            # Crear clips de audio y concatenarlos
+            clips = [AudioFileClip(archivo) for archivo in archivos_temporales]
+            audio_final = concatenate_audioclips(clips)
+            
+            # Generar nombre único para el archivo final
+            nombre_final = f"audio-final-{int(time.time())}.mp3"
+            ruta_final = os.path.join(os.getcwd(), "static/audio", nombre_final)
+            
+            # Guardar el audio final
+            audio_final.write_audiofile(ruta_final, verbose=False, logger=None)
+            
+            # Limpiar archivos temporales
+            for archivo in archivos_temporales:
+                if os.path.exists(archivo):
+                    os.remove(archivo)
+            
+            # Cerrar los clips para liberar memoria
+            for clip in clips:
+                clip.close()
+            audio_final.close()
+            
+            # Construir la URL del archivo final
+            url_audio = f"https://blog-edu-tech.koyeb.app/static/audio/{nombre_final}"
+            
+            return jsonify({
+                "success": True,
+                "audio_url": url_audio,
+                "filename": nombre_final,
+                "trozos_generados": len(trozos),
+                "params": {
+                    "text": text,
+                    "voz": voz,
+                    "proveedor": proveedor,
+                    "idioma": idioma
+                }
+            })
+            
+        except Exception as e:
+            # Limpiar archivos temporales en caso de error
+            for archivo in archivos_temporales:
+                if os.path.exists(archivo):
+                    os.remove(archivo)
+            return jsonify({"success": False, "error": f"Error al concatenar audio: {str(e)}"}), 500
+            
+    except Exception as e:
+        return jsonify({"success": False, "error": f"Error general: {str(e)}"}), 500
+
+@app.route("/generar_audio_voces_get", methods=['GET'])
+def generar_audio_voces_get():
+    """
+    Versión GET con limitaciones de longitud para compatibilidad.
+    Para textos largos, usar la versión POST.
+    """
     # Obtener parámetros de la URL
     text = request.args.get('text', '')
     voz = request.args.get('voz', 'juan')  # Valor por defecto
@@ -803,6 +921,15 @@ def generar_audio_voces():
     # Validar que el texto no esté vacío
     if not text:
         return jsonify({"success": False, "error": "El parámetro 'text' es obligatorio"}), 400
+    
+    # Limitar la longitud para GET (máximo 2000 caracteres)
+    if len(text) > 2000:
+        return jsonify({
+            "success": False, 
+            "error": "Para textos largos (>2000 caracteres), usar POST en /generar_audio_voces",
+            "texto_recibido": len(text),
+            "limite": 2000
+        }), 400
     
     # Crear una instancia de la API Speechify
     speechify_api = SpeechifyAPI()
