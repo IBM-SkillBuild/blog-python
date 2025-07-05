@@ -24,7 +24,8 @@ from moviepy.editor import concatenate_audioclips, AudioFileClip
 app=Flask(__name__)
 # Configuración CORS más específica para producción
 # CORS(app, resources={r"/*": {"origins": "*", "methods": ["GET", "POST"]}})
-
+# Configura el límite de tamaño del cuerpo
+app.config['MAX_CONTENT_LENGTH'] = 10 * 1024 * 1024  # 10 MB
 # Para producción, especifica los dominios permitidos:
 CORS(app, origins=[
     "https://blog-edu-tech.koyeb.app",
