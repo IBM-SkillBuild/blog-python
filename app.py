@@ -27,12 +27,13 @@ app=Flask(__name__)
 
 # Para producción, especifica los dominios permitidos:
 CORS(app, origins=[
-    "https://blog-edu-tech.koyeb.app",  # Tu dominio actual
-    "http://localhost:3000",            # Para desarrollo local
-    "http://localhost:5000",            # Para desarrollo local
-    "https://htmx-website.netlify.app/",  # Tu frontend si lo tienes
-  
-], methods=["GET", "POST"])
+    "https://blog-edu-tech.koyeb.app",
+    "http://localhost:3000",
+    "http://localhost:5000", 
+    "http://127.0.0.1:5000",
+    "https://htmx-website.netlify.app",
+], methods=["GET", "POST", "OPTIONS"], 
+     allow_headers=["Content-Type", "Authorization"])
 mis_valores=Valores()
 #configurar parametros App y conexion BBDD en desarrollo 
 # (para produccion hay que cambiar a otra clase de archivo config)
