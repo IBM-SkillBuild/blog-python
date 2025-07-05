@@ -22,7 +22,17 @@ from moviepy.editor import concatenate_audioclips, AudioFileClip
 
 # instancias
 app=Flask(__name__)
-CORS(app, resources={r"/*": {"origins": "*", "methods": ["GET", "POST"]}})
+# Configuración CORS más específica para producción
+# CORS(app, resources={r"/*": {"origins": "*", "methods": ["GET", "POST"]}})
+
+# Para producción, especifica los dominios permitidos:
+CORS(app, origins=[
+    "https://blog-edu-tech.koyeb.app",  # Tu dominio actual
+    "http://localhost:3000",            # Para desarrollo local
+    "http://localhost:5000",            # Para desarrollo local
+    "https://htmx-website.netlify.app/",  # Tu frontend si lo tienes
+  
+], methods=["GET", "POST"])
 mis_valores=Valores()
 #configurar parametros App y conexion BBDD en desarrollo 
 # (para produccion hay que cambiar a otra clase de archivo config)
