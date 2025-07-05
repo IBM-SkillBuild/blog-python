@@ -526,6 +526,50 @@ def limpiar_archivos_temporales(archivos):
             except Exception as e:
                 print(f"Error eliminando archivo temporal {archivo}: {str(e)}")
 
+def limpiar_archivos_antiguos():
+    """
+    Elimina archivos MP3 con más de una hora de antigüedad
+    """
+    import time
+    from datetime import datetime, timedelta
+    
+    audio_dir = os.path.join(os.getcwd(), "static/audio")
+    if not os.path.exists(audio_dir):
+        return
+    
+    # Calcular el tiempo límite (1 hora atrás)
+    tiempo_limite = datetime.now() - timedelta(hours=1)
+    archivos_eliminados = 0
+    espacio_liberado = 0
+    
+    try:
+        for filename in os.listdir(audio_dir):
+            if filename.lower().endswith('.mp3'):
+                file_path = os.path.join(audio_dir, filename)
+                
+                # Obtener la fecha de modificación del archivo
+                mod_time = datetime.fromtimestamp(os.path.getmtime(file_path))
+                
+                # Si el archivo es más antiguo que 1 hora, eliminarlo
+                if mod_time < tiempo_limite:
+                    try:
+                        # Obtener el tamaño antes de eliminar
+                        file_size = os.path.getsize(file_path)
+                        os.remove(file_path)
+                        archivos_eliminados += 1
+                        espacio_liberado += file_size
+                        print(f"Archivo antiguo eliminado: {filename} (modificado: {mod_time.strftime('%Y-%m-%d %H:%M:%S')})")
+                    except Exception as e:
+                        print(f"Error eliminando archivo antiguo {filename}: {str(e)}")
+        
+        if archivos_eliminados > 0:
+            print(f"Limpieza completada: {archivos_eliminados} archivos eliminados, {espacio_liberado / (1024*1024):.2f} MB liberados")
+        else:
+            print("No se encontraron archivos antiguos para eliminar")
+            
+    except Exception as e:
+        print(f"Error durante la limpieza de archivos antiguos: {str(e)}")
+
 def update_categorias(dato):
    
     
@@ -830,6 +874,10 @@ def generar_audio(text):
     
 @app.route("/generar_audio_voces", methods=['POST'])
 def generar_audio_voces():
+    # Limpiar archivos antiguos antes de procesar
+    print("Iniciando limpieza automática de archivos antiguos...")
+    limpiar_archivos_antiguos()
+    
     # Obtener parámetros del body de la petición
     data = request.get_json()
     
@@ -855,67 +903,31 @@ def generar_audio_voces():
         trozos = dividir_texto(text)
         print(f"Texto dividido en {len(trozos)} trozos")
         
-        archivos_temporales = []
-        timestamp = int(time.time())
-        
-        # Generar archivos de audio para cada trozo
-        for contador, trozo in enumerate(trozos, 1):
-            try:
-                print(f"Generando audio para trozo {contador}/{len(trozos)} ({len(trozo)} caracteres)")
-                
-                audio_file = speechify_api.generate_audio_files(trozo, voz, proveedor, idioma)
-                print(f"Archivo generado: {audio_file}")
-                
-                # Renombrar el archivo generado con un identificador único
-                nombre_temporal = f"audio-{contador}-{timestamp}.mp3"
-                ruta_temporal = os.path.join(os.getcwd(), "static/audio", nombre_temporal)
-                
-                # Renombrar el archivo original
-                ruta_original = os.path.join(os.getcwd(), "static/audio", audio_file)
-                
-                # Esperar a que el archivo exista (máximo 30 segundos)
-                max_wait = 30
-                wait_interval = 0.5
-                elapsed = 0
-                
-                while not os.path.exists(ruta_original) and elapsed < max_wait:
-                    time.sleep(wait_interval)
-                    elapsed += wait_interval
-                
-                if not os.path.exists(ruta_original):
-                    raise Exception(f"El archivo {audio_file} no se generó después de {max_wait} segundos")
-                
-                # Verificar que el archivo no esté vacío
-                if os.path.getsize(ruta_original) == 0:
-                    raise Exception(f"El archivo {audio_file} está vacío")
-                
-                os.rename(ruta_original, ruta_temporal)
-                archivos_temporales.append(ruta_temporal)
-                print(f"Trozo {contador} procesado exitosamente")
-                
-            except Exception as e:
-                print(f"Error en trozo {contador}: {str(e)}")
-                # Limpiar archivos temporales en caso de error
-                limpiar_archivos_temporales(archivos_temporales)
-                return jsonify({
-                    "success": False, 
-                    "error": f"Error al generar audio del trozo {contador}: {str(e)}",
-                    "trozo_fallido": contador,
-                    "total_trozos": len(trozos)
-                }), 500
-        
-        print(f"Todos los trozos generados. Archivos temporales: {len(archivos_temporales)}")
-        
-        # Si solo hay un trozo, devolver directamente
-        if len(archivos_temporales) == 1:
-            nombre_final = os.path.basename(archivos_temporales[0])
-            url_audio = f"https://blog-edu-tech.koyeb.app/static/audio/{nombre_final}"
+        # Si solo hay un trozo, procesar directamente
+        if len(trozos) == 1:
+            print("Procesando texto único sin división")
+            audio_file = speechify_api.generate_audio_files(text, voz, proveedor, idioma)
+            
+            # Esperar a que el archivo exista
+            ruta_audio = os.path.join(os.getcwd(), "static/audio", audio_file)
+            max_wait = 30
+            wait_interval = 0.5
+            elapsed = 0
+            
+            while not os.path.exists(ruta_audio) and elapsed < max_wait:
+                time.sleep(wait_interval)
+                elapsed += wait_interval
+            
+            if not os.path.exists(ruta_audio):
+                return jsonify({"success": False, "error": f"El archivo de audio no se generó después de {max_wait} segundos"}), 500
+            
+            url_audio = f"https://blog-edu-tech.koyeb.app/static/audio/{audio_file}"
             
             return jsonify({
                 "success": True,
                 "audio_url": url_audio,
-                "filename": nombre_final,
-                "trozos_generados": len(trozos),
+                "filename": audio_file,
+                "trozos_generados": 1,
                 "params": {
                     "text": text[:100] + "..." if len(text) > 100 else text,
                     "voz": voz,
@@ -924,81 +936,142 @@ def generar_audio_voces():
                 }
             })
         
-        # Si hay múltiples trozos, concatenarlos
+        # Si hay múltiples trozos, procesar en memoria
+        print("Procesando múltiples trozos en memoria")
+        clips_en_memoria = []
+        archivos_temporales = []
+        
         try:
-            print("Iniciando concatenación de audio...")
-            
-            # Crear clips de audio y concatenarlos
-            clips = []
-            for archivo in archivos_temporales:
+            # Generar audio para cada trozo y cargarlo en memoria
+            for contador, trozo in enumerate(trozos, 1):
                 try:
-                    clip = AudioFileClip(archivo)
-                    clips.append(clip)
-                    print(f"Clip cargado: {archivo}")
+                    print(f"Generando audio para trozo {contador}/{len(trozos)} ({len(trozo)} caracteres)")
+                    
+                    # Generar el archivo de audio
+                    audio_file = speechify_api.generate_audio_files(trozo, voz, proveedor, idioma)
+                    ruta_audio = os.path.join(os.getcwd(), "static/audio", audio_file)
+                    
+                    # Esperar a que el archivo exista
+                    max_wait = 30
+                    wait_interval = 0.5
+                    elapsed = 0
+                    
+                    while not os.path.exists(ruta_audio) and elapsed < max_wait:
+                        time.sleep(wait_interval)
+                        elapsed += wait_interval
+                    
+                    if not os.path.exists(ruta_audio):
+                        raise Exception(f"El archivo {audio_file} no se generó después de {max_wait} segundos")
+                    
+                    # Verificar que el archivo no esté vacío
+                    if os.path.getsize(ruta_audio) == 0:
+                        raise Exception(f"El archivo {audio_file} está vacío")
+                    
+                    # Cargar el clip en memoria inmediatamente
+                    clip = AudioFileClip(ruta_audio)
+                    clips_en_memoria.append(clip)
+                    archivos_temporales.append(ruta_audio)
+                    
+                    print(f"Trozo {contador} cargado en memoria exitosamente")
+                    
                 except Exception as e:
-                    print(f"Error cargando clip {archivo}: {str(e)}")
-                    raise e
+                    print(f"Error en trozo {contador}: {str(e)}")
+                    # Limpiar clips en memoria
+                    for clip in clips_en_memoria:
+                        try:
+                            clip.close()
+                        except:
+                            pass
+                    # Limpiar archivos temporales
+                    limpiar_archivos_temporales(archivos_temporales)
+                    return jsonify({
+                        "success": False, 
+                        "error": f"Error al generar audio del trozo {contador}: {str(e)}",
+                        "trozo_fallido": contador,
+                        "total_trozos": len(trozos)
+                    }), 500
             
-            if not clips:
-                raise Exception("No se pudieron cargar ningún clip de audio")
+            print(f"Todos los trozos cargados en memoria. Clips: {len(clips_en_memoria)}")
             
-            audio_final = concatenate_audioclips(clips)
-            print("Audio concatenado exitosamente")
-            
-            # Generar nombre único para el archivo final
-            nombre_final = f"audio-final-{timestamp}.mp3"
-            ruta_final = os.path.join(os.getcwd(), "static/audio", nombre_final)
-            
-            # Guardar el audio final
-            audio_final.write_audiofile(ruta_final, verbose=False, logger=None)
-            print(f"Audio final guardado: {ruta_final}")
-            
-            # Verificar que el archivo final existe y no está vacío
-            if not os.path.exists(ruta_final) or os.path.getsize(ruta_final) == 0:
-                raise Exception("El archivo final no se generó correctamente")
-            
-            # Limpiar archivos temporales
-            limpiar_archivos_temporales(archivos_temporales)
-            
-            # Cerrar los clips para liberar memoria
-            for clip in clips:
+            # Concatenar clips en memoria
+            try:
+                print("Concatenando clips en memoria...")
+                audio_final = concatenate_audioclips(clips_en_memoria)
+                print("Audio concatenado exitosamente")
+                
+                # Generar nombre único para el archivo final
+                timestamp = int(time.time())
+                nombre_final = f"audio-final-{timestamp}.mp3"
+                ruta_final = os.path.join(os.getcwd(), "static/audio", nombre_final)
+                
+                # Guardar el audio final
+                audio_final.write_audiofile(ruta_final, verbose=False, logger=None)
+                print(f"Audio final guardado: {ruta_final}")
+                
+                # Verificar que el archivo final existe y no está vacío
+                if not os.path.exists(ruta_final) or os.path.getsize(ruta_final) == 0:
+                    raise Exception("El archivo final no se generó correctamente")
+                
+                # Limpiar archivos temporales
+                limpiar_archivos_temporales(archivos_temporales)
+                
+                # Cerrar los clips para liberar memoria
+                for clip in clips_en_memoria:
+                    try:
+                        clip.close()
+                    except:
+                        pass
+                try:
+                    audio_final.close()
+                except:
+                    pass
+                
+                # Construir la URL del archivo final
+                url_audio = f"https://blog-edu-tech.koyeb.app/static/audio/{nombre_final}"
+                
+                print("Proceso completado exitosamente")
+                
+                return jsonify({
+                    "success": True,
+                    "audio_url": url_audio,
+                    "filename": nombre_final,
+                    "trozos_generados": len(trozos),
+                    "params": {
+                        "text": text[:100] + "..." if len(text) > 100 else text,
+                        "voz": voz,
+                        "proveedor": proveedor,
+                        "idioma": idioma
+                    }
+                })
+                
+            except Exception as e:
+                print(f"Error en concatenación: {str(e)}")
+                # Limpiar clips en memoria
+                for clip in clips_en_memoria:
+                    try:
+                        clip.close()
+                    except:
+                        pass
+                # Limpiar archivos temporales
+                limpiar_archivos_temporales(archivos_temporales)
+                return jsonify({
+                    "success": False, 
+                    "error": f"Error al concatenar audio: {str(e)}",
+                    "archivos_generados": len(archivos_temporales),
+                    "total_trozos": len(trozos)
+                }), 500
+                
+        except Exception as e:
+            print(f"Error general en procesamiento: {str(e)}")
+            # Limpiar clips en memoria
+            for clip in clips_en_memoria:
                 try:
                     clip.close()
                 except:
                     pass
-            try:
-                audio_final.close()
-            except:
-                pass
-            
-            # Construir la URL del archivo final
-            url_audio = f"https://blog-edu-tech.koyeb.app/static/audio/{nombre_final}"
-            
-            print("Proceso completado exitosamente")
-            
-            return jsonify({
-                "success": True,
-                "audio_url": url_audio,
-                "filename": nombre_final,
-                "trozos_generados": len(trozos),
-                "params": {
-                    "text": text[:100] + "..." if len(text) > 100 else text,
-                    "voz": voz,
-                    "proveedor": proveedor,
-                    "idioma": idioma
-                }
-            })
-            
-        except Exception as e:
-            print(f"Error en concatenación: {str(e)}")
-            # Limpiar archivos temporales en caso de error
+            # Limpiar archivos temporales
             limpiar_archivos_temporales(archivos_temporales)
-            return jsonify({
-                "success": False, 
-                "error": f"Error al concatenar audio: {str(e)}",
-                "archivos_generados": len(archivos_temporales),
-                "total_trozos": len(trozos)
-            }), 500
+            return jsonify({"success": False, "error": f"Error general: {str(e)}"}), 500
             
     except Exception as e:
         print(f"Error general: {str(e)}")
@@ -1142,6 +1215,24 @@ def borrar_audio():
     except Exception as e: print(f"No se pudo borrar {file_path}. Razón: {e}")
    
   return jsonify({"message": "Todos los archivos han sido borrados"}), 200
+
+@app.route('/limpiar_archivos_antiguos', methods=['GET'])
+def limpiar_archivos_antiguos_route():
+    """
+    Ruta para limpiar manualmente archivos MP3 con más de una hora de antigüedad
+    """
+    try:
+        limpiar_archivos_antiguos()
+        return jsonify({
+            "success": True,
+            "message": "Limpieza de archivos antiguos completada",
+            "timestamp": datetime.now().isoformat()
+        }), 200
+    except Exception as e:
+        return jsonify({
+            "success": False,
+            "error": f"Error durante la limpieza: {str(e)}"
+        }), 500
   
   
   
